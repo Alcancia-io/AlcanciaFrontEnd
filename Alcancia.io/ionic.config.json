@@ -1,0 +1,7 @@
+{
+  "name": "Alcancia.io",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
