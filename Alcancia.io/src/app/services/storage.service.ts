@@ -1,8 +1,6 @@
 import { Storage } from '@ionic/storage-angular';
 import { Injectable } from '@angular/core';
 
-const INTRO_KEY = 'intro-seen';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -16,13 +14,13 @@ export class StorageService {
      this.storage.create();
   }
 
-  getIntroData(){
-    return this.storage.get(INTRO_KEY) || [];
+  getIntroData(theKey){
+    return this.storage.get(theKey) || [];
   }
 
-  async addIntroData(item){
-    const storedData = await this.storage.get(INTRO_KEY) || [];
-    storedData.push(item);
-    return this.storage.set(INTRO_KEY, storedData);
+  async addIntroData(theItem, theKey){
+    const storedData = await this.storage.get(theKey) || [];
+    storedData.push(theItem);
+    return this.storage.set(theKey, storedData);
   }
 }
