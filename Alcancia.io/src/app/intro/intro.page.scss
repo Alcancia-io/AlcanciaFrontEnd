@@ -1,0 +1,31 @@
+.heading{
+    margin-top: 10vh;
+    text-align: center;
+
+    h1{
+      font-size: 1.5em;
+    }
+
+    p{
+      font-size: 1.0em;
+      color:#707070;
+      padding-top: 3px;
+      margin: 6px;
+    }
+}
+
+.start-now{
+  margin-top: 45px;
+  text-align: center;
+
+  ion-button{
+    width: 85%;
+    height: 50px;
+    --background:#FECE2F;
+  }
+
+  .start-now-btn{
+    text-transform: none;
+    font-size: 1.0em;
+  }
+}

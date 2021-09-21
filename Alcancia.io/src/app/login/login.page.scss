@@ -1,0 +1,46 @@
+.content{
+  position: relative;
+  top: 45px;
+  height: 75%;
+}
+
+.greetings-message{
+  position: absolute;
+  font-size: 40px;
+  left: 35px;
+}
+
+.login-form{
+  position: absolute;
+  top: 35%;
+  left: 10%;
+  text-align: left;
+  width: 80%;
+}
+.email-input input{
+  position: absolute;
+  max-height: auto;
+  height: 50%;
+}
+
+.grid-content{
+  position: absolute;
+  top: 100%;
+  text-align: left;
+  .forgotpassword-btn{
+    display: inline-block;
+    vertical-align: top;
+    color: #000000;
+  }
+
+  .submit-btn{
+    --background:#FECE2F;
+      padding-top: 5%;
+      margin-right: 10px;
+      text-transform: none;
+      --border-radius: 20px;
+      width: 75%;
+      height: 150%;
+  }
+}
+
