@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "alcancia": {
+      "hosting": {
+        "app": [
+          "alcancia"
+        ]
+      }
+    }
+  }
+}

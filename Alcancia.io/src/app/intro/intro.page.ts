@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { INTRO_KEY } from 'src/app/guards/intro.guard';
 import { Router } from '@angular/router';
-import { Storage } from '@capacitor/storage';
 import { StorageService } from '../services/storage.service';
  
 @Component({
@@ -26,7 +25,7 @@ export class IntroPage implements OnInit {
   }
  
   async start() {
-    await this.storageService.addIntroData({key: INTRO_KEY, value: 'true'}, INTRO_KEY);
+    await this.storageService.addData({key: INTRO_KEY, value: 'true'}, INTRO_KEY);
     this.router.navigateByUrl('/login', { replaceUrl:true });
   }
 }

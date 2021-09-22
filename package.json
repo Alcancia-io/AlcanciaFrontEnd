@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@angular/fire": "^9.0.2",
+    "firebase": "^9.0.2"
+  }
+}

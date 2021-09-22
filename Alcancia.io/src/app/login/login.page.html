@@ -11,8 +11,8 @@
   <div class="content">
     <div class="greetings-message">
       <p>
-        Que gusto verte <br>
-        <b>Juandi</b>,
+        Que gusto verte
+        <b>{{aUsername}}</b>,
       </p>
     </div>
     <form (ngSubmit)="login()" [formGroup]="credentials">
@@ -32,7 +32,7 @@
           </ion-col>
           <ion-col>
             <!-- [disabled]="!credentials.valid" -->
-            <ion-button class="submit-btn" type="submit" expand="block"  >
+            <ion-button class="submit-btn" type="submit" (click)="login()" expand="block"  >
               <img src="/assets/arrow-alcui.png" alt="arrow-alcui">
             </ion-button>
           </ion-col>

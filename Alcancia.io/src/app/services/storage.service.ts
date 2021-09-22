@@ -14,11 +14,11 @@ export class StorageService {
      this.storage.create();
   }
 
-  getIntroData(theKey){
+  getData(theKey){
     return this.storage.get(theKey) || [];
   }
 
-  async addIntroData(theItem, theKey){
+  async addData(theItem, theKey){
     const storedData = await this.storage.get(theKey) || [];
     storedData.push(theItem);
     return this.storage.set(theKey, storedData);

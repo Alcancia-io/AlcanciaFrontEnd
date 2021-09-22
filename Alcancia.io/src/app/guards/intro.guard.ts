@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanLoad, Router } from '@angular/router';
-import { Storage } from '@capacitor/storage';
+
+//local storage
 import { StorageService } from '../services/storage.service';
- 
 export const INTRO_KEY = 'intro-seen';
  
 @Injectable({
@@ -15,7 +15,7 @@ export class IntroGuard implements CanLoad {
  }
  
  async canLoad(): Promise<boolean> {
-      const hasSeenIntro = await this.storageService.getIntroData(INTRO_KEY);      
+      const hasSeenIntro = await this.storageService.getData(INTRO_KEY);      
       if (hasSeenIntro && (hasSeenIntro[0].value === 'true')) {
         return true;
       } else {
