@@ -1,0 +1,33 @@
+ion-content{
+  position: absolute;
+  width: 100%;
+}
+
+.welcome-msg{
+  position: relative;
+  text-align: left;
+  font-size: 25px;
+}
+.button-action{
+  position: relative;
+  text-align: left;
+}
+
+.perfile-pic{
+  text-align: center;
+  position: relative;
+  width: 36px;
+  height: 36px;
+  left: 90%;
+  bottom: 5%;
+  right: 20%;
+  border-radius: 50%;
+  background-color:#FECE2F;
+
+}
+
+ion-item{
+  position: relative;
+  width: 90%;
+  padding-top: 5%;
+}
