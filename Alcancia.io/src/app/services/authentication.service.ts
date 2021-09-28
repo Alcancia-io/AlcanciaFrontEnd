@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { switchMap } from 'rxjs/operators';
 import { loadingController } from '@ionic/core';
-//import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/compat/firestore';
 
 const TOKEN_KEY = 'the-token';
 
@@ -23,12 +23,14 @@ interface User {
 })
 export class AuthenticationService {
 
+  userCollection: AngularFirestoreCollection<any>;
+  collection: any;
   user$: Observable<User>;
   user:User;
 
   constructor(
     private fireAuth: AngularFireAuth,
-    //private afs: AngularFirestoreModule,
+    private afs: AngularFirestore,
     private router: Router,
     private loadingCtrl: LoadingController,
     private toastr: ToastController
@@ -36,7 +38,7 @@ export class AuthenticationService {
     this.user$ = this.fireAuth.authState.pipe(
       switchMap( user => {
         if (user) {
-          //this.afs.doc(`users/${user.uid}`).valueChanges();
+          return this.afs.doc(`users/${user.uid}`).valueChanges();
         } else {
           return of(null);
         }
@@ -62,6 +64,9 @@ export class AuthenticationService {
           loading.dismiss();
           this.router.navigate(['/main-screen']);
         }
+      }).catch((error) =>{
+        loading.dismiss();
+        this.toast(error.message,'danger');
       });
   } // end of login
 

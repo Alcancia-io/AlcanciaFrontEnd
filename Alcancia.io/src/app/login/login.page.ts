@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { AuthenticationService } from '../services/authentication.service';
 
 //Local storage
 import { StorageService } from '../services/storage.service';
 import { USER_NAME } from 'src/app/guards/auth.guard';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { StringLike } from '@firebase/util';
+import { loadingController } from '@ionic/core';
 
 @Component({
   selector: 'app-login',
@@ -15,23 +18,23 @@ import { USER_NAME } from 'src/app/guards/auth.guard';
 })
 
 export class LoginPage implements OnInit {
-  credentials: FormGroup;
-  aUsername: string = '';
+
+  email: string;
+  password: string;
+  aUsername: string;
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthenticationService,
     private alertController: AlertController,
     private router: Router,
     private loadingController: LoadingController,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private toastr:  ToastController
   ) { }
 
   ngOnInit() {
     this.getUsername();
-    this.credentials = this.formBuilder.group({
-      email: [Validators.required, Validators.email],
-      password: [Validators.required, Validators.minLength(8)]
-    });
   }
 
   async getUsername(){
@@ -41,26 +44,47 @@ export class LoginPage implements OnInit {
     }
   }
 
+  forgot() {
+    this.router.navigate(['/forgot-password']);
+  }
+
+  singupPage() {
+    this.router.navigate(['/signup']);
+  }
+
+  async toast(message, status) {
+
+   const toast = await this.toastr.create({
+      message: message,
+      position: 'top',
+      color: status,
+      duration: 2000
+   });
+
+   toast.present();
+  }
+
   async login(){
-    const loading = await this.loadingController.create();
-    await loading.present();
+    if (this.email && this.password) {
+      const loading = await loadingController.create({
+          message: 'Iniciando Seccion...',
+          spinner: 'crescent',
+          showBackdrop: true
+      });
 
-    // this.authService.signUp(this.credentials).then(
-    //   async (res) => {
-    //     console.log(res);
-    //     await loading.dismiss();
-    //     this.router.navigateByUrl('/main-screen', {replaceUrl: true});
-    //   }, async (res) => {
-    //     await loading.dismiss();
-    //     const alert = await this.alertController.create({
-    //       header: 'Error de inicio de sesion',
-    //       message: 'res.error.error',
-    //       buttons: ['OK'],
-    //     });
+      loading.present();
 
-    //     await alert.present();
-    //   }
-    // )
+      this.authService.login(this.email, this.password)
+          .then(() => {
+            loading.dismiss();
+          })
+          .catch((error) => {
+            loading.dismiss();
+            this.toast(error.message, 'danger');
+          });
+    } else {
+      this.toast('Porfavor ingresar tu correo y contraseña', 'danger');
+    }
   }
 
 }

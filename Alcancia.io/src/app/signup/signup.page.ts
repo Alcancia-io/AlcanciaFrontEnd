@@ -88,4 +88,7 @@ export class SignupPage implements OnInit {
     toast.present();
   }//end of toast
 
+  loginPage() {
+    this.router.navigate(['/login']);
+  }
 }

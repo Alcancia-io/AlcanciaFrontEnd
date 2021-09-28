@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 
 //firebase
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import {  AngularFireAuthModule } from "@angular/fire/compat/auth";
 
 //env
