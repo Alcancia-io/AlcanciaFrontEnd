@@ -167,7 +167,7 @@
       /* harmony import */
 
 
-      var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! tslib */
       61855);
       /* harmony import */
@@ -185,31 +185,31 @@
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+      var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/core */
       42741);
       /* harmony import */
 
 
-      var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/fire/compat/auth */
       83027);
       /* harmony import */
 
 
-      var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/fire/compat/firestore */
       42045);
       /* harmony import */
 
 
-      var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/router */
       29535);
       /* harmony import */
 
 
-      var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @ionic/angular */
       34595);
       /* harmony import */
@@ -227,13 +227,7 @@
       /* harmony import */
 
 
-      var _models_userModel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! ../models/userModel */
-      54462);
-      /* harmony import */
-
-
-      var _services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _services_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ../services/user.service */
       11000);
 
@@ -256,7 +250,7 @@
         }, {
           key: "signup",
           value: function signup() {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
               var _this = this;
 
               var loading;
@@ -280,12 +274,12 @@
                       loading = _context.sent;
                       loading.present();
                       this.fireAuth.createUserWithEmailAndPassword(this.email, this.password).then(function (resp) {
-                        _this.user = new _models_userModel__WEBPACK_IMPORTED_MODULE_4__.UserModel();
-                        _this.user.email = _this.email;
-                        _this.user.name = _this.name;
-                        _this.user.lastname = 'null';
-
-                        _this.addUserData(_this.user);
+                        _this.afs.collection('users').doc(resp.user.uid).set({
+                          'userId': resp.user.uid,
+                          'name': _this.name,
+                          'email': _this.email,
+                          'createdAt': Date.now()
+                        });
 
                         resp.user.sendEmailVerification();
                       }).then(function () {
@@ -322,7 +316,7 @@
         }, {
           key: "addUserData",
           value: function addUserData(theUser) {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
               return regeneratorRuntime.wrap(function _callee2$(_context2) {
                 while (1) {
                   switch (_context2.prev = _context2.next) {
@@ -350,7 +344,7 @@
         }, {
           key: "toast",
           value: function toast(message, status) {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
               var toast;
               return regeneratorRuntime.wrap(function _callee3$(_context3) {
                 while (1) {
@@ -389,23 +383,23 @@
 
       _SignupPage.ctorParameters = function () {
         return [{
-          type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__.AngularFirestore
+          type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_6__.AngularFirestore
         }, {
-          type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_8__.AngularFireAuth
+          type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_7__.AngularFireAuth
         }, {
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.LoadingController
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.LoadingController
         }, {
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.ToastController
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.ToastController
         }, {
-          type: _angular_router__WEBPACK_IMPORTED_MODULE_10__.Router
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_9__.Router
         }, {
           type: _services_storage_service__WEBPACK_IMPORTED_MODULE_2__.StorageService
         }, {
-          type: _services_user_service__WEBPACK_IMPORTED_MODULE_5__.UserService
+          type: _services_user_service__WEBPACK_IMPORTED_MODULE_4__.UserService
         }];
       };
 
-      _SignupPage = (0, tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
+      _SignupPage = (0, tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
         selector: 'app-signup',
         template: _raw_loader_signup_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_signup_page_scss__WEBPACK_IMPORTED_MODULE_1__["default"]]
