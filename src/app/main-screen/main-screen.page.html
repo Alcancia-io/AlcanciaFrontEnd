@@ -3,15 +3,14 @@
     <img src="/assets/taxi-robot.png" alt="taxi-money-care" >
     <ion-card-header>
       <ion-card-subtitle>En construcción</ion-card-subtitle>
-      <div *ngIf="aUsername; else elseBlock "><ion-card-title>Hola <b>{{aUsername}},</b></ion-card-title></div>
-      <ng-template #elseBlock><ion-card-title>¡Hola!</ion-card-title></ng-template>
+      <ion-card-title>Hola <b *ngIf="aUsername" >, {{aUsername}}</b></ion-card-title>
     </ion-card-header>
     <ion-card-content>
 
     ¡Gracias por registrarte a Alcancía! En unos días estaremos en contacto contigo para darte mas información de nuestra beta. ¡Estamos locos porque formes parte de este proyecto!
      
     </ion-card-content> 
-  
+    <!-- <ion-button  (click)="getUser()">Logout</ion-button>  -->
 <!--
   <ion-grid>
     <ion-row>
@@ -35,5 +34,5 @@
     </ion-row>
   </ion-grid>
 
-<!-- <ion-button  (click)="logout()">Logout</ion-button> -->
-</ion-content>
+
+</ion-content>-->

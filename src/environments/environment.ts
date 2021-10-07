@@ -16,9 +16,8 @@ export const environment = {
 
 };
 
-export const alcanciaBackendUrl = {
-  url: ""
-}
+export const ALCANCIA_SERVER_URL = "http://localhost:8000";
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
