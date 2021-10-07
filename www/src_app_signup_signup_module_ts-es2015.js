@@ -95,19 +95,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SignupPage": function() { return /* binding */ SignupPage; }
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 61855);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 61855);
 /* harmony import */ var _raw_loader_signup_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./signup.page.html */ 21355);
 /* harmony import */ var _signup_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./signup.page.scss */ 74194);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 42741);
-/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/compat/auth */ 83027);
-/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 42045);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/router */ 29535);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 34595);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 42741);
+/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/compat/auth */ 83027);
+/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 42045);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ 29535);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 34595);
 /* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/storage.service */ 60010);
 /* harmony import */ var src_app_guards_auth_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/guards/auth.guard */ 47316);
-/* harmony import */ var _models_userModel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../models/userModel */ 54462);
-/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/user.service */ 11000);
-
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/user.service */ 11000);
 
 
 
@@ -132,7 +130,7 @@ let SignupPage = class SignupPage {
     ngOnInit() {
     }
     signup() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             if (this.name && this.email && this.password) {
                 const loading = yield this.loadingCtrl.create({
                     message: 'Loading...',
@@ -141,11 +139,12 @@ let SignupPage = class SignupPage {
                 });
                 loading.present();
                 this.fireAuth.createUserWithEmailAndPassword(this.email, this.password).then((resp) => {
-                    this.user = new _models_userModel__WEBPACK_IMPORTED_MODULE_4__.UserModel();
-                    this.user.email = this.email;
-                    this.user.name = this.name;
-                    this.user.lastname = 'null';
-                    this.addUserData(this.user);
+                    this.afs.collection('users').doc(resp.user.uid).set({
+                        'userId': resp.user.uid,
+                        'name': this.name,
+                        'email': this.email,
+                        'createdAt': Date.now()
+                    });
                     resp.user.sendEmailVerification();
                 }).then(() => {
                     loading.dismiss();
@@ -164,7 +163,7 @@ let SignupPage = class SignupPage {
         });
     } //end of signup
     addUserData(theUser) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             yield this.userService.addUserData(theUser);
         });
     }
@@ -177,7 +176,7 @@ let SignupPage = class SignupPage {
         }
     }
     toast(message, status) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             const toast = yield this.toastr.create({
                 message: message,
                 position: 'top',
@@ -192,16 +191,16 @@ let SignupPage = class SignupPage {
     }
 };
 SignupPage.ctorParameters = () => [
-    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__.AngularFirestore },
-    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_8__.AngularFireAuth },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.LoadingController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.ToastController },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_10__.Router },
+    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_6__.AngularFirestore },
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_7__.AngularFireAuth },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.LoadingController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.ToastController },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__.Router },
     { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_2__.StorageService },
-    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_5__.UserService }
+    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_4__.UserService }
 ];
-SignupPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
+SignupPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
         selector: 'app-signup',
         template: _raw_loader_signup_page_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_signup_page_scss__WEBPACK_IMPORTED_MODULE_1__.default]
