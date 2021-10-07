@@ -46,11 +46,14 @@ export class SignupPage implements OnInit {
       loading.present();
 
       this.fireAuth.createUserWithEmailAndPassword(this.email, this.password).then((resp) => {
-          this.user = new UserModel();
-          this.user.email = this.email;
-          this.user.name = this.name;
-          this.user.lastname = 'null';
-          this.addUserData(this.user);
+
+        this.afs.collection('users').doc(resp.user.uid).set({
+          'userId': resp.user.uid,
+          'name': this.name,
+          'email': this.email,
+          'createdAt': Date.now()
+        });
+        
           resp.user.sendEmailVerification();
         }).then(() => {
           loading.dismiss();
