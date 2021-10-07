@@ -95,16 +95,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SignupPage": function() { return /* binding */ SignupPage; }
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 61855);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 61855);
 /* harmony import */ var _raw_loader_signup_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./signup.page.html */ 21355);
 /* harmony import */ var _signup_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./signup.page.scss */ 74194);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 42741);
-/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/compat/auth */ 83027);
-/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 42045);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 29535);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 34595);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 42741);
+/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/compat/auth */ 83027);
+/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 42045);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/router */ 29535);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 34595);
 /* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/storage.service */ 60010);
 /* harmony import */ var src_app_guards_auth_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/guards/auth.guard */ 47316);
+/* harmony import */ var _models_userModel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../models/userModel */ 54462);
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/user.service */ 11000);
+
+
 
 
 
@@ -116,18 +120,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SignupPage = class SignupPage {
-    constructor(afs, fireAuth, loadingCtrl, toastr, router, storageService) {
+    constructor(afs, fireAuth, loadingCtrl, toastr, router, storageService, userService) {
         this.afs = afs;
         this.fireAuth = fireAuth;
         this.loadingCtrl = loadingCtrl;
         this.toastr = toastr;
         this.router = router;
         this.storageService = storageService;
+        this.userService = userService;
     }
     ngOnInit() {
     }
     signup() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             if (this.name && this.email && this.password) {
                 const loading = yield this.loadingCtrl.create({
                     message: 'Loading...',
@@ -136,12 +141,11 @@ let SignupPage = class SignupPage {
                 });
                 loading.present();
                 this.fireAuth.createUserWithEmailAndPassword(this.email, this.password).then((resp) => {
-                    this.afs.collection('users').doc(resp.user.uid).set({
-                        'userId': resp.user.uid,
-                        'name': this.name,
-                        'email': this.email,
-                        'createdAt': Date.now()
-                    });
+                    this.user = new _models_userModel__WEBPACK_IMPORTED_MODULE_4__.UserModel();
+                    this.user.email = this.email;
+                    this.user.name = this.name;
+                    this.user.lastname = 'null';
+                    this.addUserData(this.user);
                     resp.user.sendEmailVerification();
                 }).then(() => {
                     loading.dismiss();
@@ -159,6 +163,11 @@ let SignupPage = class SignupPage {
             }
         });
     } //end of signup
+    addUserData(theUser) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.userService.addUserData(theUser);
+        });
+    }
     checkPassword() {
         if (this.password == this.confirmPassword) {
             this.passwordMatch = true;
@@ -168,7 +177,7 @@ let SignupPage = class SignupPage {
         }
     }
     toast(message, status) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             const toast = yield this.toastr.create({
                 message: message,
                 position: 'top',
@@ -183,15 +192,16 @@ let SignupPage = class SignupPage {
     }
 };
 SignupPage.ctorParameters = () => [
-    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_5__.AngularFirestore },
-    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_6__.AngularFireAuth },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.LoadingController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.ToastController },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__.Router },
-    { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_2__.StorageService }
+    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__.AngularFirestore },
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_8__.AngularFireAuth },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.LoadingController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.ToastController },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_10__.Router },
+    { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_2__.StorageService },
+    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_5__.UserService }
 ];
-SignupPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
+SignupPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
         selector: 'app-signup',
         template: _raw_loader_signup_page_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_signup_page_scss__WEBPACK_IMPORTED_MODULE_1__.default]
@@ -222,7 +232,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content class=\"ion-padding\">\n        <ion-grid>\n          <ion-row >\n            <ion-col size=\"auto\">\n              <div class=\"button-action\">\n                <ion-button fill=\"clear\" color=\"dark\" size=\"small\" (click)=\"loginPage()\">\n                  <b><p>Login</p></b>\n                </ion-button>\n                <ion-button fill=\"clear\" color=\"dark\" size=\"small\" >\n                  <b><p>Regístrate</p></b>\n                </ion-button>\n                <div class=\"perfile-pic\"></div>\n              </div>\n            </ion-col>\n            <ion-col size=\"auto\">\n              <ion-card-header class=\"welcome-msg\">\n                <div>\n                  <!-- class=\"welcome-msg\" -->\n                  Hola <b>Usuario,</b> <br>\n                  <small>Ingresa la información que se le pide en los campos debajo.</small>\n                </div>\n              </ion-card-header>\n            </ion-col>\n            <ion-col size=\"auto\">\n              <ion-card-content>\n                 <ion-list>\n                  <ion-item>\n                    <ion-input position=\"floating\" placeholder=\"Nombre\" type=\"text\" [(ngModel)]=\"name\"></ion-input>\n                  </ion-item>\n                  <ion-item>\n                    <ion-input position=\"floating\" placeholder=\"Correo electrónico\" type=\"text\" [(ngModel)]=\"email\"></ion-input>\n                  </ion-item>\n                  <ion-item>\n                    <ion-input position=\"floating\" placeholder=\"Contraseña\" type=\"password\" [(ngModel)]=\"password\"></ion-input>\n                  </ion-item>\n\n                  <ion-item>\n                    <ion-input position=\"floating\" placeholder=\"Repite tu contraseña\" type=\"password\" [(ngModel)]=\"confirmPassword\" (ionChange)=\"checkPassword()\"></ion-input>\n                  </ion-item>\n                </ion-list>\n              </ion-card-content>\n            </ion-col>\n            <ion-col size=\"auto\">\n              <div>\n                <ion-text *ngIf=\"password && !passwordMatch\" color=\"danger\" >La constraseña no coninsiden!</ion-text>\n                <app-arrow-button class=\"arrow-btn\" expand=\"block\" shape=\"round\" color=\"warning\" (click)=\"signup()\"></app-arrow-button>\n              </div>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n\n\n\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content class=\"ion-padding\">\n        <ion-grid>\n          <ion-row >\n            <ion-col size=\"auto\">\n              <div class=\"button-action\">\n                <ion-button fill=\"clear\" color=\"dark\" size=\"small\" (click)=\"loginPage()\">\n                  <b><p>Login</p></b>\n                </ion-button>\n                <ion-button fill=\"clear\" color=\"dark\" size=\"small\" >\n                  <b><p>Regístrate</p></b>\n                </ion-button>\n                <div class=\"perfile-pic\"></div>\n              </div>\n            </ion-col>\n            <ion-col size=\"auto\">\n              <ion-card-header class=\"welcome-msg\">\n                <div>\n                  <!-- class=\"welcome-msg\" -->\n                  Hola <b>Usuario,</b> <br>\n                  <small>Ingresa la información que se le pide en los campos debajo.</small>\n                </div>\n              </ion-card-header>\n            </ion-col>\n            <ion-col size=\"auto\">\n              <ion-card-content>\n                 <ion-list>\n                  <ion-item>\n                    <ion-input position=\"floating\" placeholder=\"Nombre\" type=\"text\" [(ngModel)]=\"name\"></ion-input>\n                  </ion-item>\n                  <ion-item>\n                    <ion-input position=\"floating\" placeholder=\"Correo electrónico\" type=\"text\" [(ngModel)]=\"email\"></ion-input>\n                  </ion-item>\n                  <ion-item>\n                    <ion-input position=\"floating\" placeholder=\"Contraseña\" type=\"password\" [(ngModel)]=\"password\"></ion-input>\n                  </ion-item>\n\n                  <ion-item>\n                    <ion-input position=\"floating\" placeholder=\"Repite tu contraseña\" type=\"password\" [(ngModel)]=\"confirmPassword\" (ionChange)=\"checkPassword()\"></ion-input>\n                  </ion-item>\n                </ion-list>\n              </ion-card-content>\n            </ion-col>\n            <ion-col size=\"auto\">\n              <div>\n                <ion-text *ngIf=\"password && !passwordMatch\" color=\"danger\" >La constraseña no coincide!</ion-text>\n                <app-arrow-button class=\"arrow-btn\" expand=\"block\" shape=\"round\" color=\"warning\" (click)=\"signup()\"></app-arrow-button>\n              </div>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n\n\n\n</ion-content>\n");
 
 /***/ })
 

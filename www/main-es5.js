@@ -82,7 +82,7 @@
         _createClass(UniversalAppInterceptor, [{
           key: "intercept",
           value: function intercept(req, next) {
-            var token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjM1MDM0MmIwMjU1MDAyYWI3NWUwNTM0YzU4MmVjYzY2Y2YwZTE3ZDIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYWxjYW5jaWEiLCJhdWQiOiJhbGNhbmNpYSIsImF1dGhfdGltZSI6MTYzMzM5OTk4MCwidXNlcl9pZCI6IkU0Y2tPd2RoNnpibE5tdU9YVzNlQmxKSjJJbTEiLCJzdWIiOiJFNGNrT3dkaDZ6YmxObXVPWFczZUJsSkoySW0xIiwiaWF0IjoxNjMzMzk5OTgwLCJleHAiOjE2MzM0MDM1ODAsImVtYWlsIjoic2ViYXN0aWFucmVzdGl0dXlvQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbInNlYmFzdGlhbnJlc3RpdHV5b0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.IP3UU9JFZgiV7Tn1vCIuhb_970m4-7npQp_UN-hhYB_rxA3f72seCgVffVwRaxmfl77fVhjxgDtaKmvhj9u0tYmnbi9gv-0w78VWHwJ681mb4egQrljagPxFUtybOGR3D-FP-cYwOowKW60iY1D3ugX7GPs66L69F-4dSegkLgoVGbisn_ML6BNOba4yJ0No8CTDYii99sWuYV5M3u6ljTmPXZlxsAi5PHC_vOnfjE8CnhmgA4uFv1RA9hFlVKCSff7IcZuAy-Yjc2MZ5w8PjzG349-arX5yxY4VTFUA8lbKCT6FlGrf6_3-1YZdASuJ_SGiaVtN6azLAHw7r9Q9Og';
+            var token = this.tokenService.getToken();
             req = req.clone({
               setHeaders: {
                 Authorization: "Bearer ".concat(token)
@@ -190,9 +190,9 @@
       }, {
         path: 'main-screen',
         loadChildren: function loadChildren() {
-          return __webpack_require__.e(
+          return Promise.all(
           /*! import() */
-          "src_app_main-screen_main-screen_module_ts").then(__webpack_require__.bind(__webpack_require__,
+          [__webpack_require__.e("common"), __webpack_require__.e("src_app_main-screen_main-screen_module_ts")]).then(__webpack_require__.bind(__webpack_require__,
           /*! ./main-screen/main-screen.module */
           57226)).then(function (m) {
             return m.MainScreenPageModule;
@@ -861,6 +861,33 @@
     },
 
     /***/
+    54462: function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+
+
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */
+        "UserModel": function UserModel() {
+          return (
+            /* binding */
+            _UserModel
+          );
+        }
+        /* harmony export */
+
+      });
+
+      var _UserModel = function _UserModel() {
+        _classCallCheck(this, _UserModel);
+      };
+      /***/
+
+    },
+
+    /***/
     85559: function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
@@ -980,49 +1007,49 @@
       /* harmony import */
 
 
-      var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! tslib */
       61855);
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/core */
       42741);
       /* harmony import */
 
 
-      var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/fire/compat/auth */
       83027);
       /* harmony import */
 
 
-      var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! rxjs */
       267);
       /* harmony import */
 
 
-      var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/router */
       29535);
       /* harmony import */
 
 
-      var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @ionic/angular */
       34595);
       /* harmony import */
 
 
-      var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! rxjs/operators */
       32812);
       /* harmony import */
 
 
-      var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/fire/compat/firestore */
       42045);
       /* harmony import */
@@ -1031,6 +1058,12 @@
       var _token_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! ./token.service */
       65987);
+      /* harmony import */
+
+
+      var _models_userModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! ../models/userModel */
+      54462);
 
       var _AuthenticationService = /*#__PURE__*/function () {
         function AuthenticationService(fireAuth, afs, router, loadingCtrl, toastr, tokenService) {
@@ -1045,11 +1078,11 @@
           this.toastr = toastr;
           this.tokenService = tokenService;
           this.AccessToken = "";
-          this.user$ = this.fireAuth.authState.pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.switchMap)(function (user) {
+          this.user$ = this.fireAuth.authState.pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.switchMap)(function (user) {
             if (user) {
               return _this3.afs.doc("users/".concat(user.uid)).valueChanges();
             } else {
-              return (0, rxjs__WEBPACK_IMPORTED_MODULE_2__.of)(null);
+              return (0, rxjs__WEBPACK_IMPORTED_MODULE_3__.of)(null);
             }
           }));
         } // end of constructor
@@ -1058,7 +1091,7 @@
         _createClass(AuthenticationService, [{
           key: "login",
           value: function login(email, password) {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
               var _this4 = this;
 
               var loading;
@@ -1077,7 +1110,7 @@
                       loading = _context3.sent;
                       loading.present();
                       this.fireAuth.signInWithEmailAndPassword(email, password).then(function (data) {
-                        return (0, tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(_this4, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                        return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(_this4, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
                           var _this5 = this;
 
                           return regeneratorRuntime.wrap(function _callee2$(_context2) {
@@ -1090,7 +1123,7 @@
                                   }
 
                                   loading.dismiss();
-                                  this.toast('Porfavor revisar tu correo!', 'danger');
+                                  this.toast('Porfavor verificar su correo!', 'danger');
                                   this.logout();
                                   _context2.next = 11;
                                   break;
@@ -1133,7 +1166,7 @@
         }, {
           key: "isUserloggedIn",
           value: function isUserloggedIn() {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
               return regeneratorRuntime.wrap(function _callee4$(_context4) {
                 while (1) {
                   switch (_context4.prev = _context4.next) {
@@ -1161,39 +1194,61 @@
             }));
           }
         }, {
-          key: "logout",
-          value: function logout() {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-              var _this6 = this;
-
+          key: "registerUser",
+          value: function registerUser(userModel) {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+              var usermodel;
               return regeneratorRuntime.wrap(function _callee5$(_context5) {
                 while (1) {
                   switch (_context5.prev = _context5.next) {
                     case 0:
-                      _context5.next = 2;
+                      usermodel = new _models_userModel__WEBPACK_IMPORTED_MODULE_1__.UserModel();
+                      usermodel.email = "";
+                      usermodel.name = "";
+                      usermodel.lastname = "";
+
+                    case 4:
+                    case "end":
+                      return _context5.stop();
+                  }
+                }
+              }, _callee5);
+            }));
+          }
+        }, {
+          key: "logout",
+          value: function logout() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+              var _this6 = this;
+
+              return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                while (1) {
+                  switch (_context6.prev = _context6.next) {
+                    case 0:
+                      _context6.next = 2;
                       return this.fireAuth.signOut().then(function () {
                         _this6.router.navigate(['/login']);
                       });
 
                     case 2:
                     case "end":
-                      return _context5.stop();
+                      return _context6.stop();
                   }
                 }
-              }, _callee5, this);
+              }, _callee6, this);
             }));
           } // end of logout
 
         }, {
           key: "toast",
           value: function toast(message, status) {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
               var toast;
-              return regeneratorRuntime.wrap(function _callee6$(_context6) {
+              return regeneratorRuntime.wrap(function _callee7$(_context7) {
                 while (1) {
-                  switch (_context6.prev = _context6.next) {
+                  switch (_context7.prev = _context7.next) {
                     case 0:
-                      _context6.next = 2;
+                      _context7.next = 2;
                       return this.toastr.create({
                         message: message,
                         position: 'top',
@@ -1202,15 +1257,15 @@
                       });
 
                     case 2:
-                      toast = _context6.sent;
+                      toast = _context7.sent;
                       toast.present();
 
                     case 4:
                     case "end":
-                      return _context6.stop();
+                      return _context7.stop();
                   }
                 }
-              }, _callee6, this);
+              }, _callee7, this);
             }));
           } // end of toast
 
@@ -1221,21 +1276,21 @@
 
       _AuthenticationService.ctorParameters = function () {
         return [{
-          type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_4__.AngularFireAuth
+          type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_5__.AngularFireAuth
         }, {
-          type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_5__.AngularFirestore
+          type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_6__.AngularFirestore
         }, {
-          type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router
         }, {
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.LoadingController
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.LoadingController
         }, {
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.ToastController
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.ToastController
         }, {
           type: _token_service__WEBPACK_IMPORTED_MODULE_0__.TokenService
         }];
       };
 
-      _AuthenticationService = (0, tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_8__.Injectable)({
+      _AuthenticationService = (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_9__.Injectable)({
         providedIn: 'root'
       })], _AuthenticationService);
       /***/
@@ -1295,42 +1350,8 @@
         }, {
           key: "getData",
           value: function getData(theKey) {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
-              var status;
-              return regeneratorRuntime.wrap(function _callee7$(_context7) {
-                while (1) {
-                  switch (_context7.prev = _context7.next) {
-                    case 0:
-                      _context7.next = 2;
-                      return this.storage.get(theKey);
-
-                    case 2:
-                      _context7.t0 = _context7.sent;
-
-                      if (_context7.t0) {
-                        _context7.next = 5;
-                        break;
-                      }
-
-                      _context7.t0 = [];
-
-                    case 5:
-                      status = _context7.t0;
-                      return _context7.abrupt("return", status);
-
-                    case 7:
-                    case "end":
-                      return _context7.stop();
-                  }
-                }
-              }, _callee7, this);
-            }));
-          }
-        }, {
-          key: "addData",
-          value: function addData(theItem, theKey) {
             return (0, tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
-              var storedData;
+              var status;
               return regeneratorRuntime.wrap(function _callee8$(_context8) {
                 while (1) {
                   switch (_context8.prev = _context8.next) {
@@ -1349,20 +1370,54 @@
                       _context8.t0 = [];
 
                     case 5:
-                      storedData = _context8.t0;
-                      storedData.push(theItem);
-                      _context8.next = 9;
-                      return this.storage.set(theKey, storedData);
+                      status = _context8.t0;
+                      return _context8.abrupt("return", status);
 
-                    case 9:
-                      return _context8.abrupt("return", _context8.sent);
-
-                    case 10:
+                    case 7:
                     case "end":
                       return _context8.stop();
                   }
                 }
               }, _callee8, this);
+            }));
+          }
+        }, {
+          key: "addData",
+          value: function addData(theItem, theKey) {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+              var storedData;
+              return regeneratorRuntime.wrap(function _callee9$(_context9) {
+                while (1) {
+                  switch (_context9.prev = _context9.next) {
+                    case 0:
+                      _context9.next = 2;
+                      return this.storage.get(theKey);
+
+                    case 2:
+                      _context9.t0 = _context9.sent;
+
+                      if (_context9.t0) {
+                        _context9.next = 5;
+                        break;
+                      }
+
+                      _context9.t0 = [];
+
+                    case 5:
+                      storedData = _context9.t0;
+                      storedData.push(theItem);
+                      _context9.next = 9;
+                      return this.storage.set(theKey, storedData);
+
+                    case 9:
+                      return _context9.abrupt("return", _context9.sent);
+
+                    case 10:
+                    case "end":
+                      return _context9.stop();
+                  }
+                }
+              }, _callee9, this);
             }));
           }
         }]);
@@ -1444,7 +1499,7 @@
         }, {
           key: "getToken",
           value: function getToken() {
-            this.appCookie.get(TOKEN_KEY);
+            return this.appCookie.get(TOKEN_KEY);
           }
         }, {
           key: "isTokenExpired",
@@ -1460,21 +1515,21 @@
         }, {
           key: "isUserAuthenticated",
           value: function isUserAuthenticated() {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
               var currentUser;
-              return regeneratorRuntime.wrap(function _callee9$(_context9) {
+              return regeneratorRuntime.wrap(function _callee10$(_context10) {
                 while (1) {
-                  switch (_context9.prev = _context9.next) {
+                  switch (_context10.prev = _context10.next) {
                     case 0:
                       currentUser = this.fireAuth.currentUser;
                       console.log(currentUser);
 
                     case 2:
                     case "end":
-                      return _context9.stop();
+                      return _context10.stop();
                   }
                 }
-              }, _callee9, this);
+              }, _callee10, this);
             }));
           }
         }]);
@@ -1512,10 +1567,10 @@
         },
 
         /* harmony export */
-        "alcanciaBackendUrl": function alcanciaBackendUrl() {
+        "ALCANCIA_SERVER_URL": function ALCANCIA_SERVER_URL() {
           return (
             /* binding */
-            _alcanciaBackendUrl
+            _ALCANCIA_SERVER_URL
           );
         }
         /* harmony export */
@@ -1537,9 +1592,7 @@
           measurementId: "G-SE488C3P75"
         }
       };
-      var _alcanciaBackendUrl = {
-        url: ""
-      };
+      var _ALCANCIA_SERVER_URL = "http://localhost:8000";
       /*
        * For easier debugging in development mode, you can import the following file
        * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
