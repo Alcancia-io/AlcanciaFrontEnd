@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { StorageService } from '../services/storage.service';
 import { USER_NAME } from 'src/app/guards/auth.guard';
+import { UserModel } from '../models/userModel';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +19,7 @@ export class SignupPage implements OnInit {
   email: string;
   password: string;
   confirmPassword: string;
-
+  user: UserModel;
   passwordMatch: boolean;
 
   constructor(
@@ -26,7 +28,8 @@ export class SignupPage implements OnInit {
     private loadingCtrl: LoadingController,
     private toastr: ToastController,
     private router: Router,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -43,17 +46,12 @@ export class SignupPage implements OnInit {
       loading.present();
 
       this.fireAuth.createUserWithEmailAndPassword(this.email, this.password).then((resp) => {
-
-          this.afs.collection('users').doc(resp.user.uid).set({
-            'userId': resp.user.uid,
-            'name': this.name,
-            'email': this.email,
-            'createdAt': Date.now()
-          });
-
+          this.user = new UserModel();
+          this.user.email = this.email;
+          this.user.name = this.name;
+          this.user.lastname = 'null';
+          this.addUserData(this.user);
           resp.user.sendEmailVerification();
-
-
         }).then(() => {
           loading.dismiss();
           this.storageService.addData({key: USER_NAME, value: `${this.name}`}, USER_NAME);
@@ -68,6 +66,10 @@ export class SignupPage implements OnInit {
         this.toast('Favor completar los campos!', 'danger');
       }
   }//end of signup
+
+  async addUserData(theUser: UserModel){
+    await this.userService.addUserData(theUser);
+  }
 
   checkPassword() {
     if(this.password == this.confirmPassword) {

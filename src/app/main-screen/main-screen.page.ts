@@ -39,14 +39,7 @@ export class MainScreenPage implements OnInit {
   }
 
   async getUser(){
-    const userModel = new UserModel();
-    userModel.email = 'sebastianrestituyo@gmail.com';
-    userModel.lastname = 'Restituyo';
-    userModel.name = 'sebastian';
-
-    await this.userService.getUser(userModel).then(data => console.log('user data from the Main-scree' + data));
-
-
+    await this.userService.getUser().then(data => console.log('user data from the Main-screen' + data));
   }
 
 }

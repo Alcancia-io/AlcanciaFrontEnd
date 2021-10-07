@@ -14,7 +14,7 @@ export class TokenService {
     }
 
     getToken(){
-      this.appCookie.get(TOKEN_KEY);
+      return this.appCookie.get(TOKEN_KEY);
     }
 
     isTokenExpired(): boolean{

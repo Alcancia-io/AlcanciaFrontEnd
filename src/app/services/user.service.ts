@@ -15,8 +15,12 @@ export class UserService {
     ){  }
 
 
-    async getUser(theUser: UserModel){
+    async getUser(){
       return await this.userRepository.getUser();
+    }
+
+    async addUserData(theUser: UserModel){
+      return await this.userRepository.addUserData(theUser);
     }
 }
 

@@ -9,6 +9,7 @@ import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/comp
 import { TokenService } from './token.service';
 
 import { LoginModel } from '../models/login';
+import { UserModel } from '../models/userModel';
 
 interface User {
   provider?: string;
@@ -63,15 +64,11 @@ export class AuthenticationService {
       .then(async (data) => {
         if (!data.user.emailVerified) {
           loading.dismiss();
-          this.toast('Porfavor revisar tu correo!', 'danger');
+          this.toast('Porfavor verificar su correo!', 'danger');
           this.logout();
         } else {
-
           (await this.fireAuth.currentUser).getIdToken()
-            .then((token) => this.tokenService.setToken(token))
-
-
-
+            .then((token) => this.tokenService.setToken(token));
           loading.dismiss();
           this.router.navigate(['/main-screen']);
         }
@@ -95,6 +92,13 @@ export class AuthenticationService {
     return false;
   }
 
+  async registerUser(userModel){
+    const usermodel = new UserModel;
+
+    usermodel.email = "";
+    usermodel.name = "";
+    usermodel.lastname = "";
+  }
 
   async logout() {
    await this.fireAuth.signOut()
