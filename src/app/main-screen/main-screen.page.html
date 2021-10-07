@@ -2,7 +2,7 @@
   
     <img src="/assets/taxi-robot.png" alt="taxi-money-care" >
     <ion-card-header>
-      <ion-card-title>Hola <b>{{aUsername}}<b *ngIf="aUsername" >,</b></b></ion-card-title>
+      <ion-card-title>Hola<b *ngIf="!aUsername" >,</b> <b *ngIf="aUsername"> {{aUsername}},</b></ion-card-title>
     </ion-card-header>
     <ion-card-content>
       ¡Gracias por registrarte a Alcancía! 
