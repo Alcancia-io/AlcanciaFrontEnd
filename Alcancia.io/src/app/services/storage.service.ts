@@ -14,13 +14,14 @@ export class StorageService {
      this.storage.create();
   }
 
-  getData(theKey){
-    return this.storage.get(theKey) || [];
+  async getData(theKey){
+    let status = await this.storage.get(theKey) || [];
+    return status;
   }
 
   async addData(theItem, theKey){
     const storedData = await this.storage.get(theKey) || [];
     storedData.push(theItem);
-    return this.storage.set(theKey, storedData);
+    return await this.storage.set(theKey, storedData);
   }
 }

@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
 
   async getUsername(){
     const username =  await this.storageService.getData(USER_NAME); 
-    if (username && username[0]) {
+    if (username.length > 0 && username[0]) {
       this.aUsername = username[0].value;
     }
   }

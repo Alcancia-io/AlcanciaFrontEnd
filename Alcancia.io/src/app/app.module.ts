@@ -6,7 +6,7 @@ import { AngularDelegate, IonicModule, IonicRouteStrategy } from '@ionic/angular
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { FormsModule } from '@angular/forms';
 
@@ -23,6 +23,9 @@ import { AuthenticationService } from './services/authentication.service';
 
 // guards
 import { AuthGuard } from './guards/auth.guard';
+import { TokenService } from './services/token.service';
+import { AuthorizeGuard, NegateAuthorizeGuard } from './guards/authorize.guard';
+import { UniversalAppInterceptor } from './UniversalAppInterceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -42,8 +45,11 @@ import { AuthGuard } from './guards/auth.guard';
   ],
   providers: [
     AuthenticationService,
+    TokenService,
     AuthGuard,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    AuthorizeGuard,
+    NegateAuthorizeGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: UniversalAppInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })

@@ -1,12 +1,15 @@
 ion-content{
   position: absolute;
-  width: 100%;
+  text-align: center;
 }
 
+ion-grid{
+  width: 100%;
+}
 .welcome-msg{
   position: relative;
   text-align: left;
-  font-size: 25px;
+  font-size: 30px;
 }
 .button-action{
   position: relative;
@@ -14,16 +17,12 @@ ion-content{
 }
 
 .perfile-pic{
-  text-align: center;
-  position: relative;
   width: 36px;
   height: 36px;
-  left: 90%;
-  bottom: 5%;
-  right: 20%;
   border-radius: 50%;
   background-color:#FECE2F;
-
+  float: right;
+  right: 5%;
 }
 
 ion-item{
@@ -31,3 +30,21 @@ ion-item{
   width: 90%;
   padding-top: 5%;
 }
+
+.arrow-btn{
+  float: right;
+  margin: 25px;
+}
+
+ion-row{
+  display: block;
+  margin: auto;
+  width: 50%;
+}
+
+@media only screen and (max-width: 960px) {
+  ion-row{
+    display: inline;
+  }
+}
+

@@ -1,46 +1,72 @@
-.content{
+ion-content{
+  text-align: center;
+  width: 100%;
+}
+
+.welcome-msg{
+  padding-top: 3%;
   position: relative;
-  top: 45px;
-  height: 75%;
-}
-
-.greetings-message{
-  position: absolute;
-  font-size: 40px;
-  left: 35px;
-}
-
-.login-form{
-  position: absolute;
-  top: 35%;
-  left: 10%;
   text-align: left;
-  width: 80%;
+  font-size: 30px;
 }
-.email-input input{
-  position: absolute;
-  max-height: auto;
-  height: 50%;
-}
-
-.grid-content{
-  position: absolute;
-  top: 100%;
+.sign-toolbard{
+  position: relative;
   text-align: left;
-  .forgotpassword-btn{
-    display: inline-block;
-    vertical-align: top;
-    color: #000000;
-  }
+}
 
-  .submit-btn{
-    --background:#FECE2F;
-      padding-top: 5%;
-      margin-right: 10px;
-      text-transform: none;
-      --border-radius: 20px;
-      width: 75%;
-      height: 150%;
+.perfile-pic{
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color:#FECE2F;
+  float: right;
+  right: 5%;
+}
+
+ion-item{
+  position: relative;
+  width: 90%;
+  padding-top: 5%;
+}
+
+.arrow-btn{
+  float: right;
+  bottom: 0;
+  margin: 25px;
+}
+
+.forgotpassword-btn{
+  color: #000000;
+  font-size: 16px;
+  float: left;
+}
+
+.action-content{
+  background: #FECE2F;
+  background-color: aliceblue;
+}
+
+action-buttons{
+  position: relative;
+  padding-top: 5%;
+}
+
+ion-row{
+  display: block;
+  margin: auto;
+  width: 50%;
+}
+
+@media only screen and (max-width: 960px) {
+  ion-content{
+    font-size: 16px;
+  }
+ .p{
+   font-size: 60px;
+ }
+  ion-row{
+    display: inline;
   }
 }
+
 

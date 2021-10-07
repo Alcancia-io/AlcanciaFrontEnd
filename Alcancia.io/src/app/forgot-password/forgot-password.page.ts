@@ -22,6 +22,14 @@ export class ForgotPasswordPage implements OnInit {
   ngOnInit() {
   }
 
+  loginPage(){
+    return this.router.navigate(['/login']);
+  }
+
+  singupPage(){
+    return this.router.navigate(['/signup']);
+  }
+
   async resetPassword() {
 
     if (this.email) {

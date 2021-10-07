@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
+import { StorageService } from '../services/storage.service';
+import { UserService } from '../services/user.service';
 
+import { USER_NAME } from 'src/app/guards/auth.guard';
+import { User } from '../models/user';
+import { UserModel } from '../models/userModel';
 @Component({
   selector: 'app-main-screen',
   templateUrl: './main-screen.page.html',
@@ -9,16 +14,39 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class MainScreenPage implements OnInit {
 
+  aUsername: string;
+
   constructor(
     private authService: AuthenticationService,
-    private router: Router
+    private storageService: StorageService,
+    private router: Router,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
+    this.getUserName();
+     
   }
 
-  logout() {
-    this.authService.logout();
+  async getUserName(){
+    const username =  await this.storageService.getData(USER_NAME); 
+    if (username.length > 0 && username[0]) {
+      this.aUsername = username[0].value;
+    }
+  }
+  async logout() {
+    await this.authService.logout();
+  }
+
+  async getUser(){
+    const userModel = new UserModel();
+    userModel.email = 'sebastianrestituyo@gmail.com';
+    userModel.lastname = 'Restituyo';
+    userModel.name = 'sebastian';
+
+    await this.userService.getUser(userModel).then(data => console.log('user data from the Main-scree' + data));
+
+
   }
 
 }
