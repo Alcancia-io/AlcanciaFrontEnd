@@ -803,6 +803,233 @@
     },
 
     /***/
+    66359: function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+
+
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */
+        "UserRepository": function UserRepository() {
+          return (
+            /* binding */
+            _UserRepository
+          );
+        }
+        /* harmony export */
+
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! tslib */
+      61855);
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @angular/core */
+      42741);
+      /* harmony import */
+
+
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/common/http */
+      31887);
+      /* harmony import */
+
+
+      var _models_userModel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! ../models/userModel */
+      54462);
+      /* harmony import */
+
+
+      var src_environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! src/environments/environment */
+      24766);
+
+      var username = new _models_userModel__WEBPACK_IMPORTED_MODULE_0__.UserModel();
+
+      var _UserRepository = /*#__PURE__*/function () {
+        function UserRepository(httpClientModule) {
+          _classCallCheck(this, UserRepository);
+
+          this.httpClientModule = httpClientModule;
+        }
+
+        _createClass(UserRepository, [{
+          key: "getUser",
+          value: function getUser() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+              return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                while (1) {
+                  switch (_context3.prev = _context3.next) {
+                    case 0:
+                      _context3.next = 2;
+                      return this.httpClientModule.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL + '/users').subscribe(function (data) {
+                        console.log('UserData:' + data);
+                      }, function (error) {
+                        console.log('ErrorMessage: ' + error);
+                      });
+
+                    case 2:
+                    case "end":
+                      return _context3.stop();
+                  }
+                }
+              }, _callee3, this);
+            }));
+          }
+        }, {
+          key: "addUserData",
+          value: function addUserData(theUser) {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+              return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                while (1) {
+                  switch (_context4.prev = _context4.next) {
+                    case 0:
+                      return _context4.abrupt("return", this.httpClientModule.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL + '/users', theUser).subscribe(function (user) {
+                        console.log('user created' + user);
+                      }, function (error) {
+                        console.log('ErrorMessage', error);
+                      }));
+
+                    case 1:
+                    case "end":
+                      return _context4.stop();
+                  }
+                }
+              }, _callee4, this);
+            }));
+          }
+        }]);
+
+        return UserRepository;
+      }();
+
+      _UserRepository.ctorParameters = function () {
+        return [{
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient
+        }];
+      };
+
+      _UserRepository = (0, tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_4__.Injectable)({
+        providedIn: 'root'
+      })], _UserRepository);
+      /***/
+    },
+
+    /***/
+    11000: function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+
+
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */
+        "UserService": function UserService() {
+          return (
+            /* binding */
+            _UserService
+          );
+        }
+        /* harmony export */
+
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! tslib */
+      61855);
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/core */
+      42741);
+      /* harmony import */
+
+
+      var _repository_user_repository__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! ../repository/user.repository */
+      66359);
+
+      var _UserService = /*#__PURE__*/function () {
+        function UserService(userRepository) {
+          _classCallCheck(this, UserService);
+
+          this.userRepository = userRepository;
+        }
+
+        _createClass(UserService, [{
+          key: "getUser",
+          value: function getUser() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+              return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                while (1) {
+                  switch (_context5.prev = _context5.next) {
+                    case 0:
+                      _context5.next = 2;
+                      return this.userRepository.getUser();
+
+                    case 2:
+                      return _context5.abrupt("return", _context5.sent);
+
+                    case 3:
+                    case "end":
+                      return _context5.stop();
+                  }
+                }
+              }, _callee5, this);
+            }));
+          }
+        }, {
+          key: "addUserData",
+          value: function addUserData(theUser) {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+              return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                while (1) {
+                  switch (_context6.prev = _context6.next) {
+                    case 0:
+                      _context6.next = 2;
+                      return this.userRepository.addUserData(theUser);
+
+                    case 2:
+                      return _context6.abrupt("return", _context6.sent);
+
+                    case 3:
+                    case "end":
+                      return _context6.stop();
+                  }
+                }
+              }, _callee6, this);
+            }));
+          }
+        }]);
+
+        return UserService;
+      }();
+
+      _UserService.ctorParameters = function () {
+        return [{
+          type: _repository_user_repository__WEBPACK_IMPORTED_MODULE_0__.UserRepository
+        }];
+      };
+
+      _UserService = (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
+        providedIn: 'root'
+      })], _UserService);
+      /***/
+    },
+
+    /***/
     11247: function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
