@@ -1,23 +1,17 @@
-<ion-content class="ion-padding" fullscreen>
-    <img src="/assets/taxi-robot.png" alt="taxi-money-care">
+<ion-content class="ion-padding" >
+  
+    <img src="/assets/taxi-robot.png" alt="taxi-money-care" >
     <ion-card-header>
       <ion-card-subtitle>En construcción</ion-card-subtitle>
-      <ion-card-title>Hola <b>{{aUsername}},</b></ion-card-title>
+      <div *ngIf="aUsername; else elseBlock "><ion-card-title>Hola <b>{{aUsername}},</b></ion-card-title></div>
+      <ng-template #elseBlock><ion-card-title>¡Hola!</ion-card-title></ng-template>
     </ion-card-header>
     <ion-card-content>
 
     ¡Gracias por registrarte a Alcancía! En unos días estaremos en contacto contigo para darte mas información de nuestra beta. ¡Estamos locos porque formes parte de este proyecto!
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
+     
     </ion-card-content> 
-
+  
 <!--
   <ion-grid>
     <ion-row>
