@@ -75,7 +75,7 @@ export class AuthenticationService {
       }).catch((error) =>{
         console.log(error);
         loading.dismiss();
-        this.toast(error.message,'danger');
+        this.toast('Correo electrónico o contraseña incorrecta','danger');
       });
   } // end of login
 

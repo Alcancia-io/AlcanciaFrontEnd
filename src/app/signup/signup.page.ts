@@ -58,7 +58,7 @@ export class SignupPage implements OnInit {
         }).then(() => {
           loading.dismiss();
           this.storageService.addData({key: USER_NAME, value: `${this.name}`}, USER_NAME);
-          this.toast('Usuario registrado correctamente!', 'success');
+          this.toast('Se envio un email de confirmacion a su correo electrónico', 'success');
           this.router.navigate(['/login']);
         })
         .catch((error) => {
@@ -87,7 +87,7 @@ export class SignupPage implements OnInit {
       message: message,
       position: 'top',
       color: status,
-      duration: 2000
+      duration: 5000
     });
 
     toast.present();

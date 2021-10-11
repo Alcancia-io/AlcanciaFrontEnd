@@ -1,45 +1,30 @@
-<ion-content class="ion-padding" >
-  
-    <img src="/assets/taxi-robot.png" alt="taxi-money-care" >
-    <ion-card-header>
-      <ion-card-title>Hola<b *ngIf="!aUsername" >,</b> <b *ngIf="aUsername"> {{aUsername}},</b></ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      ¡Gracias por registrarte a Alcancía! 
-      <br>
-      <br>
-      Juntos cambiaremos la forma en la que ahorramos en Latinoamérica.
-      <br>
-      <br>
-      ¡Pronto nos pondremos en contacto contigo!
-     <br>
-     <br>
-     <br>
-     <br>
-    </ion-card-content> 
-    <!-- <ion-button  (click)="getUser()">get user</ion-button>  -->
-<!--
+
+
+<ion-content class="ion-padding">
+  <div class="header">
+    <div class=image>
+        <img src="/assets/taxi-robot.png" width="300px" alt="taxi-money-care">
+    </div>
+  </div>
   <ion-grid>
     <ion-row>
-      <ion-col>
-        <ion-card>
-          <ion-card-header>
-            <div>
-              <h2 class="welcome-msg">Hola <b>{{aUsername}}</b><br> </h2>
-            </div>
-            <div class="image">
-
-            </div>
-          </ion-card-header>
-          <ion-card-content>
-            <div class="general-msg">
-
-            </div>
-        </ion-card-content>
-        </ion-card>
-      </ion-col>
+      <ion-card-header>
+        <div class="welcome-msg">
+          Hola <b><br>{{aUsername}}<b *ngIf="aUsername" >,</b></b>
+      </div>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          ¡Gracias por registrarte a Alcancía! 
+        </ion-list>
+        <ion-list>
+          Juntos cambiaremos la forma en la que ahorramos en Latinoamérica.
+        </ion-list>
+        <ion-list>
+          ¡Pronto nos pondremos en contacto contigo!
+        </ion-list>
+     </ion-card-content>
+     <a class="insta-content" href="https://instagram.com/yo.ahorro?utm_medium=copy_link"><img class="insta-icon" src="/assets/instagram-yellow.png" alt="insta-icon"></a>
     </ion-row>
   </ion-grid>
-
-
-</ion-content>-->
+</ion-content>
