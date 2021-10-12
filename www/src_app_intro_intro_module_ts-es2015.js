@@ -121,7 +121,7 @@ let IntroPage = class IntroPage {
     start() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             yield this.storageService.addData({ key: src_app_guards_intro_guard__WEBPACK_IMPORTED_MODULE_2__.INTRO_KEY, value: 'true' }, src_app_guards_intro_guard__WEBPACK_IMPORTED_MODULE_2__.INTRO_KEY);
-            this.router.navigateByUrl('/login', { replaceUrl: true });
+            this.router.navigateByUrl('/signup', { replaceUrl: true });
         });
     }
 };

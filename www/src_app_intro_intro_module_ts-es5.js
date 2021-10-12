@@ -238,7 +238,7 @@
                       }, src_app_guards_intro_guard__WEBPACK_IMPORTED_MODULE_2__.INTRO_KEY);
 
                     case 2:
-                      this.router.navigateByUrl('/login', {
+                      this.router.navigateByUrl('/signup', {
                         replaceUrl: true
                       });
 

@@ -161,7 +161,7 @@
           });
         },
         canLoad: [_guards_intro_guard__WEBPACK_IMPORTED_MODULE_0__.IntroGuard] //Checking if we should show the introduction or forward to inside.
-        //canActivate: [NegateAuthorizeGuard]
+        // canActivate: [NegateAuthorizeGuard]
 
       }, {
         path: 'signup',
@@ -1151,7 +1151,7 @@
                         console.log(error);
                         loading.dismiss();
 
-                        _this4.toast(error.message, 'danger');
+                        _this4.toast('Correo electrónico o contraseña incorrecta', 'danger');
                       });
 
                     case 5:

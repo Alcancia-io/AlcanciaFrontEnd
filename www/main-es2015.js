@@ -88,21 +88,21 @@ const routes = [
         path: 'login',
         loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_login_login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 77641)).then(m => m.LoginPageModule),
         canLoad: [_guards_intro_guard__WEBPACK_IMPORTED_MODULE_0__.IntroGuard], //Checking if we should show the introduction or forward to inside.
-        //canActivate: [NegateAuthorizeGuard]
+        // canActivate: [NegateAuthorizeGuard]
     },
     {
         path: 'signup',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_signup_signup_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./signup/signup.module */ 56650)).then(m => m.SignupPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_signup_signup_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./signup/signup.module */ 56650)).then(m => m.SignupPageModule),
         // canActivate: [NegateAuthorizeGuard]
     },
     {
         path: 'intro',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_intro_intro_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./intro/intro.module */ 45309)).then(m => m.IntroPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_intro_intro_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./intro/intro.module */ 45309)).then(m => m.IntroPageModule),
         // canActivate: [NegateAuthorizeGuard]
     },
     {
         path: 'main-screen',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_main-screen_main-screen_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./main-screen/main-screen.module */ 57226)).then(m => m.MainScreenPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_main-screen_main-screen_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./main-screen/main-screen.module */ 57226)).then(m => m.MainScreenPageModule),
         // canActivate: [AuthorizeGuard] //Securing all child pages.
     },
     {
@@ -112,7 +112,7 @@ const routes = [
     },
     {
         path: 'forgot-password',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_forgot-password_forgot-password_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./forgot-password/forgot-password.module */ 31129)).then(m => m.ForgotPasswordPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_forgot-password_forgot-password_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./forgot-password/forgot-password.module */ 31129)).then(m => m.ForgotPasswordPageModule),
         // canActivate: [NegateAuthorizeGuard]
     }
 ];
@@ -603,7 +603,7 @@ let AuthenticationService = class AuthenticationService {
             })).catch((error) => {
                 console.log(error);
                 loading.dismiss();
-                this.toast(error.message, 'danger');
+                this.toast('Correo electrónico o contraseña incorrecta', 'danger');
             });
         });
     } // end of login
