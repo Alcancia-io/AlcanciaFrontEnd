@@ -60,7 +60,7 @@ export class MainScreenPage implements OnInit {
           handler: (blah) => {
           }
         }, {
-          text: 'Okay',
+          text: 'Confirmar',
           handler: async () => {
             await this.authService.logout();
           }
