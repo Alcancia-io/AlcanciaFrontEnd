@@ -3,10 +3,10 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { StorageService } from '../services/storage.service';
+import { StorageService } from '../../services/storage.service';
 import { USER_NAME } from 'src/app/guards/auth.guard';
-import { UserModel } from '../models/userModel';
-import { UserService } from '../services/user.service';
+import { UserModel } from '../../models/userModel';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-signup',

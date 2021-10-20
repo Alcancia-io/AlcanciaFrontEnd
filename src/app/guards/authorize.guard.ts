@@ -28,36 +28,40 @@ export class AuthorizeGuard implements CanActivate {
         map(user => user ? true : false),
         tap( isLoggedIn => {
           if(isLoggedIn) {
-            if(this.tokenService.isTokenExpired()){
-              console.log('token is expired');
-              return this.router.navigate(['/login']);
-            } else {
-              console.log('is aunthenticated');
-              return true;
-            }
+
+          this.tokenService.updateToken().then(token => {
+                if (token) {
+                  return true;
+                } else{
+                  this.authenticationService.logout();
+                  this.router.navigateByUrl('/login', { replaceUrl:true });
+                  return false;
+                }
+              });
           } else {
-            console.log('is not aunthenticated');
-            return this.router.navigate(['/login']);
+             this.router.navigate(['/login'], { replaceUrl:true });
+             return false;
           }
         })
       );
     }
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class NegateAuthorizeGuard implements CanActivate {
-  constructor (private AuthorizeGuard: AuthorizeGuard, private router: Router){}
+  constructor (private tokenService: TokenService, private router: Router){}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<any> | Promise<any> | boolean {
-      let userNotAuth = !this.AuthorizeGuard.canActivate(next,state);
-      if (userNotAuth) {
-        console.log('user is not aunthenticated => proceed'+ userNotAuth);
+      return this.tokenService.updateToken().then(token =>{
+        if(token){
+          return this.router.navigate(['/main-screen']);
+        }
+
         return true;
-      } else {
-        console.log('user is aunthenticated...Redirecting');
-        return this.router.navigate(['/main-screen']);
-      }
+      })
   }
 }

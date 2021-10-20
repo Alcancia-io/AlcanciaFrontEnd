@@ -1,0 +1,24 @@
+ion-content{
+    width: 50%;
+    left: 25%;
+    top: 10%;
+    text-align: center;
+}
+
+.welcome-msg{
+    padding-left: 10%;
+    text-align: left;  
+    font-size: 20px; 
+}
+
+@media only screen and (max-width: 960px) {
+    ion-content{ 
+        width: 80%;
+        left: 10%;
+    }
+    .welcome-msg{
+        font-size: 20px;
+        padding-left: 15%;
+        text-align: left;   
+    }
+}

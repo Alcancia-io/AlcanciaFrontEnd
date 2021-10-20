@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController, ToastController } from '@ionic/angular';
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 //Local storage
-import { StorageService } from '../services/storage.service';
+import { StorageService } from '../../services/storage.service';
 import { USER_NAME } from 'src/app/guards/auth.guard';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { StringLike } from '@firebase/util';

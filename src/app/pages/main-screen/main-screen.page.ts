@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../services/authentication.service';
-import { StorageService } from '../services/storage.service';
-import { UserService } from '../services/user.service';
+import { AuthenticationService } from '../../services/authentication.service';
+import { StorageService } from '../../services/storage.service';
+import { UserService } from '../../services/user.service';
 
 import { USER_NAME } from 'src/app/guards/auth.guard';
-import { User } from '../models/user';
-import { UserModel } from '../models/userModel';
+import { User } from '../../models/user';
+import { UserModel } from '../../models/userModel';
 import { AlertController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
@@ -18,6 +18,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class MainScreenPage implements OnInit {
 
   aUsername: string;
+  aTotalInvestment: number;
 
   constructor(
     private authService: AuthenticationService,
@@ -29,16 +30,28 @@ export class MainScreenPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.aTotalInvestment = this.getTotalInverstment();
     this.getUserName();
-     
+    
   }
 
   async getUserName(){
     const username =  await this.storageService.getData(USER_NAME); 
     if (username.length > 0 && username[0]) {
-      this.aUsername = username[0].value;
+      console.log(username[0].value + ',');
+    }else{
+      await this.userService.getName().then(user => {
+        this.storageService.addData(USER_NAME, user.name);
+        this.aUsername = user.name;
+      });
     }
   }
+ 
+    getTotalInverstment(): number{
+     
+       return 2356.99;
+    }
+    
   async logout() {
     this.presentAlertConfirm();
     

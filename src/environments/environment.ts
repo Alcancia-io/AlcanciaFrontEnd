@@ -16,7 +16,7 @@ export const environment = {
 
 };
 
-export const ALCANCIA_SERVER_URL = "http://localhost:8000";
+export const ALCANCIA_SERVER_URL = "http://royerdonnetarenas.tech";
 
 /*
  * For easier debugging in development mode, you can import the following file

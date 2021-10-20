@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Subscription } from "rxjs";
 import { UserModel } from "../models/userModel";
 import { UserRepository } from "../repository/user.repository";
 
@@ -17,6 +18,11 @@ export class UserService {
 
     async getUser(){
       return await this.userRepository.getUser();
+    }
+
+    getName(){
+       const user = this.userRepository.getUser();
+       return user;
     }
 
     async addUserData(theUser: UserModel){

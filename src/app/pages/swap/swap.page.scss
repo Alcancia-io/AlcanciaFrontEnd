@@ -1,0 +1,54 @@
+ion-content{
+    top: 10%;
+    width: 50%;
+    left: 25%; 
+}
+
+ion-button{ 
+    --background:#FEDC56;
+}
+.welcome-msg{
+    padding-left: 5%;
+    font-size: 38px;
+}
+
+.ion-card-body{
+    border-radius: 25px;
+    --background:#FEDC56;
+}
+
+ion-card-content{ 
+    border-radius: 30px;
+}
+
+.card-tittle{
+    color: #FFF;
+    text-decoration: solid;
+    font-size: 18px;
+}
+
+span{
+    float: right;
+}
+
+.convert-btn{
+    border-radius: 25px;
+    color: #FEDC56;
+    --background: #FFF;
+    float: right;
+}
+
+.whattodo-btn{
+    color: #000;
+    border-bottom: #000;
+    --background: none;
+}
+
+
+
+@media only screen and (max-width: 960px) {
+    ion-content{ 
+        width: 80%;
+        left: 10%;
+    }
+}

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { INTRO_KEY } from 'src/app/guards/intro.guard';
 import { Router } from '@angular/router';
-import { StorageService } from '../services/storage.service';
+import { StorageService } from '../../services/storage.service';
  
 @Component({
   selector: 'app-intro',

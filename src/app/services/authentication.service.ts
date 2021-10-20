@@ -79,26 +79,13 @@ export class AuthenticationService {
       });
   } // end of login
 
-  async isUserloggedIn() {
-    await this.fireAuth.onAuthStateChanged((user) => {
-      console.log('service:' +user);
-      if (user && user.uid) {
-       return  true;
-      } else {
-        return  false;
-      }
-    });
+  // async registerUser(userModel){
+  //   const usermodel = new UserModel;
 
-    return false;
-  }
-
-  async registerUser(userModel){
-    const usermodel = new UserModel;
-
-    usermodel.email = "";
-    usermodel.name = "";
-    usermodel.lastname = "";
-  }
+  //   usermodel.email = "";
+  //   usermodel.name = "";
+  //   usermodel.lastname = "";
+  // }
 
   async logout() {
    await this.fireAuth.signOut()
