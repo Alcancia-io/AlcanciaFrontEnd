@@ -75,10 +75,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppRoutingModule": function() { return /* binding */ AppRoutingModule; }
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 61855);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 42741);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 29535);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 61855);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 42741);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 29535);
 /* harmony import */ var _guards_intro_guard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./guards/intro.guard */ 85160);
+/* harmony import */ var _guards_authorize_guard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./guards/authorize.guard */ 33874);
+
 
 
 
@@ -87,23 +89,23 @@ const routes = [
     {
         path: 'login',
         loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_login_login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 77641)).then(m => m.LoginPageModule),
-        canLoad: [_guards_intro_guard__WEBPACK_IMPORTED_MODULE_0__.IntroGuard], //Checking if we should show the introduction or forward to inside.
-        // canActivate: [NegateAuthorizeGuard]
+        canLoad: [_guards_intro_guard__WEBPACK_IMPORTED_MODULE_0__.IntroGuard],
+        canActivate: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_1__.NegateAuthorizeGuard]
     },
     {
         path: 'signup',
         loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_signup_signup_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./signup/signup.module */ 56650)).then(m => m.SignupPageModule),
-        // canActivate: [NegateAuthorizeGuard]
+        canActivate: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_1__.NegateAuthorizeGuard]
     },
     {
         path: 'intro',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_intro_intro_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./intro/intro.module */ 45309)).then(m => m.IntroPageModule),
-        // canActivate: [NegateAuthorizeGuard]
+        canActivate: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_1__.NegateAuthorizeGuard]
     },
     {
         path: 'main-screen',
         loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_main-screen_main-screen_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./main-screen/main-screen.module */ 57226)).then(m => m.MainScreenPageModule),
-        // canActivate: [AuthorizeGuard] //Securing all child pages.
+        canActivate: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_1__.AuthorizeGuard] //Securing all child pages.
     },
     {
         path: '',
@@ -113,17 +115,21 @@ const routes = [
     {
         path: 'forgot-password',
         loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_forgot-password_forgot-password_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./forgot-password/forgot-password.module */ 31129)).then(m => m.ForgotPasswordPageModule),
-        // canActivate: [NegateAuthorizeGuard]
+        canActivate: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_1__.NegateAuthorizeGuard]
+    },
+    {
+        path: 'whitepaper',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_whitepaper_whitepaper_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./whitepaper/whitepaper.module */ 9263)).then(m => m.WhitepaperPageModule)
     }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
-AppRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.NgModule)({
+AppRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.NgModule)({
         imports: [
-            _angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule.forRoot(routes, { preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_3__.PreloadAllModules })
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule.forRoot(routes, { preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_4__.PreloadAllModules })
         ],
-        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule]
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule]
     })
 ], AppRoutingModule);
 
@@ -348,18 +354,20 @@ let AuthorizeGuard = class AuthorizeGuard {
     canActivate(next, state) {
         return this.authenticationService.user$.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.take)(1), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(user => user ? true : false), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_5__.tap)(isLoggedIn => {
             if (isLoggedIn) {
-                if (this.tokenService.isTokenExpired()) {
-                    console.log('token is expired');
-                    return this.router.navigate(['/login']);
-                }
-                else {
-                    console.log('is aunthenticated');
-                    return true;
-                }
+                this.tokenService.updateToken().then(token => {
+                    if (token) {
+                        return true;
+                    }
+                    else {
+                        this.authenticationService.logout();
+                        this.router.navigateByUrl('/login', { replaceUrl: true });
+                        return false;
+                    }
+                });
             }
             else {
-                console.log('is not aunthenticated');
-                return this.router.navigate(['/login']);
+                this.router.navigate(['/login'], { replaceUrl: true });
+                return false;
             }
         }));
     }
@@ -378,28 +386,27 @@ AuthorizeGuard = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
 ], AuthorizeGuard);
 
 let NegateAuthorizeGuard = class NegateAuthorizeGuard {
-    constructor(AuthorizeGuard, router) {
-        this.AuthorizeGuard = AuthorizeGuard;
+    constructor(tokenService, router) {
+        this.tokenService = tokenService;
         this.router = router;
     }
     canActivate(next, state) {
-        let userNotAuth = !this.AuthorizeGuard.canActivate(next, state);
-        if (userNotAuth) {
-            console.log('user is not aunthenticated => proceed' + userNotAuth);
+        return this.tokenService.updateToken().then(token => {
+            if (token) {
+                return this.router.navigate(['/main-screen']);
+            }
             return true;
-        }
-        else {
-            console.log('user is aunthenticated...Redirecting');
-            return this.router.navigate(['/main-screen']);
-        }
+        });
     }
 };
 NegateAuthorizeGuard.ctorParameters = () => [
-    { type: AuthorizeGuard },
+    { type: _services_token_service__WEBPACK_IMPORTED_MODULE_0__.TokenService },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router }
 ];
 NegateAuthorizeGuard = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Injectable)()
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Injectable)({
+        providedIn: 'root'
+    })
 ], NegateAuthorizeGuard);
 
 
@@ -749,6 +756,21 @@ let TokenService = class TokenService {
     }
     getToken() {
         return this.appCookie.get(TOKEN_KEY);
+    }
+    updateToken() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return new Promise((resolve) => {
+                let subscription;
+                subscription = this.fireAuth.idToken
+                    .subscribe(token => {
+                    if (subscription) {
+                        subscription.unsubscribe();
+                    }
+                    const tokenUpdated = token ? true : false;
+                    resolve(tokenUpdated);
+                });
+            });
+        });
     }
     isTokenExpired() {
         let theToken = this.fireAuth.idToken;

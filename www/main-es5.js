@@ -127,19 +127,19 @@
       /* harmony import */
 
 
-      var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! tslib */
       61855);
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/core */
       42741);
       /* harmony import */
 
 
-      var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
       29535);
       /* harmony import */
@@ -148,6 +148,12 @@
       var _guards_intro_guard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! ./guards/intro.guard */
       85160);
+      /* harmony import */
+
+
+      var _guards_authorize_guard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! ./guards/authorize.guard */
+      33874);
 
       var routes = [{
         path: 'login',
@@ -160,9 +166,8 @@
             return m.LoginPageModule;
           });
         },
-        canLoad: [_guards_intro_guard__WEBPACK_IMPORTED_MODULE_0__.IntroGuard] //Checking if we should show the introduction or forward to inside.
-        // canActivate: [NegateAuthorizeGuard]
-
+        canLoad: [_guards_intro_guard__WEBPACK_IMPORTED_MODULE_0__.IntroGuard],
+        canActivate: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_1__.NegateAuthorizeGuard]
       }, {
         path: 'signup',
         loadChildren: function loadChildren() {
@@ -173,8 +178,8 @@
           56650)).then(function (m) {
             return m.SignupPageModule;
           });
-        } // canActivate: [NegateAuthorizeGuard]
-
+        },
+        canActivate: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_1__.NegateAuthorizeGuard]
       }, {
         path: 'intro',
         loadChildren: function loadChildren() {
@@ -185,8 +190,8 @@
           45309)).then(function (m) {
             return m.IntroPageModule;
           });
-        } // canActivate: [NegateAuthorizeGuard]
-
+        },
+        canActivate: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_1__.NegateAuthorizeGuard]
       }, {
         path: 'main-screen',
         loadChildren: function loadChildren() {
@@ -197,7 +202,8 @@
           57226)).then(function (m) {
             return m.MainScreenPageModule;
           });
-        } // canActivate: [AuthorizeGuard] //Securing all child pages.
+        },
+        canActivate: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_1__.AuthorizeGuard] //Securing all child pages.
 
       }, {
         path: '',
@@ -213,19 +219,30 @@
           31129)).then(function (m) {
             return m.ForgotPasswordPageModule;
           });
-        } // canActivate: [NegateAuthorizeGuard]
-
+        },
+        canActivate: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_1__.NegateAuthorizeGuard]
+      }, {
+        path: 'whitepaper',
+        loadChildren: function loadChildren() {
+          return __webpack_require__.e(
+          /*! import() */
+          "src_app_whitepaper_whitepaper_module_ts").then(__webpack_require__.bind(__webpack_require__,
+          /*! ./whitepaper/whitepaper.module */
+          9263)).then(function (m) {
+            return m.WhitepaperPageModule;
+          });
+        }
       }];
 
       var _AppRoutingModule = function AppRoutingModule() {
         _classCallCheck(this, AppRoutingModule);
       };
 
-      _AppRoutingModule = (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_2__.NgModule)({
-        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule.forRoot(routes, {
-          preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_3__.PreloadAllModules
+      _AppRoutingModule = (0, tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_3__.NgModule)({
+        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule.forRoot(routes, {
+          preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_4__.PreloadAllModules
         })],
-        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule]
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule]
       })], _AppRoutingModule);
       /***/
     },
@@ -668,16 +685,25 @@
               return user ? true : false;
             }), (0, rxjs_operators__WEBPACK_IMPORTED_MODULE_5__.tap)(function (isLoggedIn) {
               if (isLoggedIn) {
-                if (_this2.tokenService.isTokenExpired()) {
-                  console.log('token is expired');
-                  return _this2.router.navigate(['/login']);
-                } else {
-                  console.log('is aunthenticated');
-                  return true;
-                }
+                _this2.tokenService.updateToken().then(function (token) {
+                  if (token) {
+                    return true;
+                  } else {
+                    _this2.authenticationService.logout();
+
+                    _this2.router.navigateByUrl('/login', {
+                      replaceUrl: true
+                    });
+
+                    return false;
+                  }
+                });
               } else {
-                console.log('is not aunthenticated');
-                return _this2.router.navigate(['/login']);
+                _this2.router.navigate(['/login'], {
+                  replaceUrl: true
+                });
+
+                return false;
               }
             }));
           }
@@ -705,25 +731,25 @@
       })], _AuthorizeGuard);
 
       var _NegateAuthorizeGuard = /*#__PURE__*/function () {
-        function NegateAuthorizeGuard(AuthorizeGuard, router) {
+        function NegateAuthorizeGuard(tokenService, router) {
           _classCallCheck(this, NegateAuthorizeGuard);
 
-          this.AuthorizeGuard = AuthorizeGuard;
+          this.tokenService = tokenService;
           this.router = router;
         }
 
         _createClass(NegateAuthorizeGuard, [{
           key: "canActivate",
           value: function canActivate(next, state) {
-            var userNotAuth = !this.AuthorizeGuard.canActivate(next, state);
+            var _this3 = this;
 
-            if (userNotAuth) {
-              console.log('user is not aunthenticated => proceed' + userNotAuth);
+            return this.tokenService.updateToken().then(function (token) {
+              if (token) {
+                return _this3.router.navigate(['/main-screen']);
+              }
+
               return true;
-            } else {
-              console.log('user is aunthenticated...Redirecting');
-              return this.router.navigate(['/main-screen']);
-            }
+            });
           }
         }]);
 
@@ -732,13 +758,15 @@
 
       _NegateAuthorizeGuard.ctorParameters = function () {
         return [{
-          type: _AuthorizeGuard
+          type: _services_token_service__WEBPACK_IMPORTED_MODULE_0__.TokenService
         }, {
           type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router
         }];
       };
 
-      _NegateAuthorizeGuard = (0, tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_9__.Injectable)()], _NegateAuthorizeGuard);
+      _NegateAuthorizeGuard = (0, tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_9__.Injectable)({
+        providedIn: 'root'
+      })], _NegateAuthorizeGuard);
       /***/
     },
 
@@ -1067,7 +1095,7 @@
 
       var _AuthenticationService = /*#__PURE__*/function () {
         function AuthenticationService(fireAuth, afs, router, loadingCtrl, toastr, tokenService) {
-          var _this3 = this;
+          var _this4 = this;
 
           _classCallCheck(this, AuthenticationService);
 
@@ -1080,7 +1108,7 @@
           this.AccessToken = "";
           this.user$ = this.fireAuth.authState.pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.switchMap)(function (user) {
             if (user) {
-              return _this3.afs.doc("users/".concat(user.uid)).valueChanges();
+              return _this4.afs.doc("users/".concat(user.uid)).valueChanges();
             } else {
               return (0, rxjs__WEBPACK_IMPORTED_MODULE_3__.of)(null);
             }
@@ -1092,7 +1120,7 @@
           key: "login",
           value: function login(email, password) {
             return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-              var _this4 = this;
+              var _this5 = this;
 
               var loading;
               return regeneratorRuntime.wrap(function _callee3$(_context3) {
@@ -1110,8 +1138,8 @@
                       loading = _context3.sent;
                       loading.present();
                       this.fireAuth.signInWithEmailAndPassword(email, password).then(function (data) {
-                        return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(_this4, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                          var _this5 = this;
+                        return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(_this5, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                          var _this6 = this;
 
                           return regeneratorRuntime.wrap(function _callee2$(_context2) {
                             while (1) {
@@ -1134,7 +1162,7 @@
 
                                 case 8:
                                   _context2.sent.getIdToken().then(function (token) {
-                                    return _this5.tokenService.setToken(token);
+                                    return _this6.tokenService.setToken(token);
                                   });
 
                                   loading.dismiss();
@@ -1151,7 +1179,7 @@
                         console.log(error);
                         loading.dismiss();
 
-                        _this4.toast('Correo electrónico o contraseña incorrecta', 'danger');
+                        _this5.toast('Correo electrónico o contraseña incorrecta', 'danger');
                       });
 
                     case 5:
@@ -1219,7 +1247,7 @@
           key: "logout",
           value: function logout() {
             return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-              var _this6 = this;
+              var _this7 = this;
 
               return regeneratorRuntime.wrap(function _callee6$(_context6) {
                 while (1) {
@@ -1227,7 +1255,7 @@
                     case 0:
                       _context6.next = 2;
                       return this.fireAuth.signOut().then(function () {
-                        _this6.router.navigate(['/login']);
+                        _this7.router.navigate(['/login']);
                       });
 
                     case 2:
@@ -1502,6 +1530,36 @@
             return this.appCookie.get(TOKEN_KEY);
           }
         }, {
+          key: "updateToken",
+          value: function updateToken() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+              var _this8 = this;
+
+              return regeneratorRuntime.wrap(function _callee10$(_context10) {
+                while (1) {
+                  switch (_context10.prev = _context10.next) {
+                    case 0:
+                      return _context10.abrupt("return", new Promise(function (resolve) {
+                        var subscription;
+                        subscription = _this8.fireAuth.idToken.subscribe(function (token) {
+                          if (subscription) {
+                            subscription.unsubscribe();
+                          }
+
+                          var tokenUpdated = token ? true : false;
+                          resolve(tokenUpdated);
+                        });
+                      }));
+
+                    case 1:
+                    case "end":
+                      return _context10.stop();
+                  }
+                }
+              }, _callee10);
+            }));
+          }
+        }, {
           key: "isTokenExpired",
           value: function isTokenExpired() {
             var theToken = this.fireAuth.idToken;
@@ -1515,21 +1573,21 @@
         }, {
           key: "isUserAuthenticated",
           value: function isUserAuthenticated() {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
               var currentUser;
-              return regeneratorRuntime.wrap(function _callee10$(_context10) {
+              return regeneratorRuntime.wrap(function _callee11$(_context11) {
                 while (1) {
-                  switch (_context10.prev = _context10.next) {
+                  switch (_context11.prev = _context11.next) {
                     case 0:
                       currentUser = this.fireAuth.currentUser;
                       console.log(currentUser);
 
                     case 2:
                     case "end":
-                      return _context10.stop();
+                      return _context11.stop();
                   }
                 }
-              }, _callee10, this);
+              }, _callee11, this);
             }));
           }
         }]);

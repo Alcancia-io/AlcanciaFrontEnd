@@ -95,12 +95,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 61855);
 /* harmony import */ var _raw_loader_main_screen_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./main-screen.page.html */ 45281);
 /* harmony import */ var _main_screen_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main-screen.page.scss */ 71542);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 42741);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 29535);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 42741);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 29535);
 /* harmony import */ var _services_authentication_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/authentication.service */ 9356);
 /* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/storage.service */ 60010);
 /* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/user.service */ 11000);
 /* harmony import */ var src_app_guards_auth_guard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/guards/auth.guard */ 47316);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 34595);
+/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/compat/auth */ 83027);
+
+
 
 
 
@@ -111,11 +115,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let MainScreenPage = class MainScreenPage {
-    constructor(authService, storageService, router, userService) {
+    constructor(authService, afAuth, storageService, router, userService, alertController) {
         this.authService = authService;
+        this.afAuth = afAuth;
         this.storageService = storageService;
         this.router = router;
         this.userService = userService;
+        this.alertController = alertController;
     }
     ngOnInit() {
         this.getUserName();
@@ -130,7 +136,7 @@ let MainScreenPage = class MainScreenPage {
     }
     logout() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.authService.logout();
+            this.presentAlertConfirm();
         });
     }
     getUser() {
@@ -138,15 +144,41 @@ let MainScreenPage = class MainScreenPage {
             yield this.userService.getUser().then(data => console.log('user data from the Main-screen' + data));
         });
     }
+    presentAlertConfirm() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: 'Cerrar Sesión',
+                message: '¿Estas seguro de que quieres cerrar sesión?',
+                buttons: [
+                    {
+                        text: 'Cancelar',
+                        role: 'cancel',
+                        cssClass: 'secondary',
+                        handler: (blah) => {
+                        }
+                    },
+                    {
+                        text: 'Confirmar',
+                        handler: () => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+                            yield this.authService.logout();
+                        })
+                    }
+                ]
+            });
+            yield alert.present();
+        });
+    }
 };
 MainScreenPage.ctorParameters = () => [
     { type: _services_authentication_service__WEBPACK_IMPORTED_MODULE_2__.AuthenticationService },
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_7__.AngularFireAuth },
     { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_3__.StorageService },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
-    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_4__.UserService }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__.Router },
+    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_4__.UserService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.AlertController }
 ];
 MainScreenPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
         selector: 'app-main-screen',
         template: _raw_loader_main_screen_page_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_main_screen_page_scss__WEBPACK_IMPORTED_MODULE_1__.default]
@@ -177,7 +209,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n\n<ion-content class=\"ion-padding\">\n  <div class=\"header\">\n    <div class=image>\n        <img src=\"/assets/taxi-robot.png\" width=\"300px\" alt=\"taxi-money-care\">\n    </div>\n  </div>\n  <ion-grid>\n    <ion-row>\n      <ion-card-header>\n        <div class=\"welcome-msg\">\n          Hola <b><br>{{aUsername}}<b *ngIf=\"aUsername\" >,</b></b>\n      </div>\n      </ion-card-header>\n      <ion-card-content>\n        <ion-list>\n          ¡Gracias por registrarte a Alcancía! \n        </ion-list>\n        <ion-list>\n          Juntos cambiaremos la forma en la que ahorramos en Latinoamérica.\n        </ion-list>\n        <ion-list>\n          ¡Pronto nos pondremos en contacto contigo!\n        </ion-list>\n     </ion-card-content>\n     <a class=\"insta-content\" href=\"https://instagram.com/yo.ahorro?utm_medium=copy_link\"><img class=\"insta-icon\" src=\"/assets/instagram-yellow.png\" alt=\"insta-icon\"></a>\n    </ion-row>\n  </ion-grid>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("\n<ion-app>\n  <br>\n  <ion-header>\n    <ion-toolbar>\n      <ion-title size = \"large\">Alcancia.io</ion-title>\n      <ion-buttons slot=\"primary\" (click)=\"logout()\">\n        <ion-button>\n          <ion-icon name=\"log-out-outline\" color=\"warning\" ></ion-icon>\n        </ion-button>\n      </ion-buttons>\n    </ion-toolbar>\n  </ion-header>\n  <ion-content class=\"ion-padding\">\n    <div class=\"header\">\n      <div class=image>\n          <img src=\"/assets/taxi-robot.png\" width=\"300px\" alt=\"taxi-money-care\">\n      </div>\n    </div>\n    <ion-grid>\n      <ion-row>\n        <ion-card-header>\n          <div class=\"welcome-msg\">\n            Hola <b><br>{{aUsername}}<b *ngIf=\"aUsername\" >,</b></b>\n        </div>\n        </ion-card-header>\n        <ion-card-content>\n          <ion-list>\n            ¡Gracias por registrarte a Alcancía! \n          </ion-list>\n          <ion-list>\n            Juntos cambiaremos la forma en la que ahorramos en Latinoamérica.\n          </ion-list>\n          <ion-list>\n            ¡Pronto nos pondremos en contacto contigo!\n          </ion-list>\n      </ion-card-content>\n      <a class=\"insta-content\" href=\"https://instagram.com/yo.ahorro?utm_medium=copy_link\"><img class=\"insta-icon\" src=\"/assets/instagram-yellow.png\" alt=\"insta-icon\"></a>\n      </ion-row>\n    </ion-grid>\n  </ion-content>\n</ion-app>");
 
 /***/ })
 

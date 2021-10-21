@@ -179,13 +179,13 @@
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/core */
       42741);
       /* harmony import */
 
 
-      var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/router */
       29535);
       /* harmony import */
@@ -212,15 +212,29 @@
       var src_app_guards_auth_guard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! src/app/guards/auth.guard */
       47316);
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! @ionic/angular */
+      34595);
+      /* harmony import */
+
+
+      var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! @angular/fire/compat/auth */
+      83027);
 
       var _MainScreenPage = /*#__PURE__*/function () {
-        function MainScreenPage(authService, storageService, router, userService) {
+        function MainScreenPage(authService, afAuth, storageService, router, userService, alertController) {
           _classCallCheck(this, MainScreenPage);
 
           this.authService = authService;
+          this.afAuth = afAuth;
           this.storageService = storageService;
           this.router = router;
           this.userService = userService;
+          this.alertController = alertController;
         }
 
         _createClass(MainScreenPage, [{
@@ -263,10 +277,9 @@
                 while (1) {
                   switch (_context2.prev = _context2.next) {
                     case 0:
-                      _context2.next = 2;
-                      return this.authService.logout();
+                      this.presentAlertConfirm();
 
-                    case 2:
+                    case 1:
                     case "end":
                       return _context2.stop();
                   }
@@ -295,6 +308,61 @@
               }, _callee3, this);
             }));
           }
+        }, {
+          key: "presentAlertConfirm",
+          value: function presentAlertConfirm() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+              var _this = this;
+
+              var alert;
+              return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                while (1) {
+                  switch (_context5.prev = _context5.next) {
+                    case 0:
+                      _context5.next = 2;
+                      return this.alertController.create({
+                        header: 'Cerrar Sesión',
+                        message: '¿Estas seguro de que quieres cerrar sesión?',
+                        buttons: [{
+                          text: 'Cancelar',
+                          role: 'cancel',
+                          cssClass: 'secondary',
+                          handler: function handler(blah) {}
+                        }, {
+                          text: 'Confirmar',
+                          handler: function handler() {
+                            return (0, tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+                              return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                                while (1) {
+                                  switch (_context4.prev = _context4.next) {
+                                    case 0:
+                                      _context4.next = 2;
+                                      return this.authService.logout();
+
+                                    case 2:
+                                    case "end":
+                                      return _context4.stop();
+                                  }
+                                }
+                              }, _callee4, this);
+                            }));
+                          }
+                        }]
+                      });
+
+                    case 2:
+                      alert = _context5.sent;
+                      _context5.next = 5;
+                      return alert.present();
+
+                    case 5:
+                    case "end":
+                      return _context5.stop();
+                  }
+                }
+              }, _callee5, this);
+            }));
+          }
         }]);
 
         return MainScreenPage;
@@ -304,15 +372,19 @@
         return [{
           type: _services_authentication_service__WEBPACK_IMPORTED_MODULE_2__.AuthenticationService
         }, {
+          type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_7__.AngularFireAuth
+        }, {
           type: _services_storage_service__WEBPACK_IMPORTED_MODULE_3__.StorageService
         }, {
-          type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_8__.Router
         }, {
           type: _services_user_service__WEBPACK_IMPORTED_MODULE_4__.UserService
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.AlertController
         }];
       };
 
-      _MainScreenPage = (0, tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+      _MainScreenPage = (0, tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
         selector: 'app-main-screen',
         template: _raw_loader_main_screen_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_main_screen_page_scss__WEBPACK_IMPORTED_MODULE_1__["default"]]
@@ -340,7 +412,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "\n\n<ion-content class=\"ion-padding\">\n  <div class=\"header\">\n    <div class=image>\n        <img src=\"/assets/taxi-robot.png\" width=\"300px\" alt=\"taxi-money-care\">\n    </div>\n  </div>\n  <ion-grid>\n    <ion-row>\n      <ion-card-header>\n        <div class=\"welcome-msg\">\n          Hola <b><br>{{aUsername}}<b *ngIf=\"aUsername\" >,</b></b>\n      </div>\n      </ion-card-header>\n      <ion-card-content>\n        <ion-list>\n          ¡Gracias por registrarte a Alcancía! \n        </ion-list>\n        <ion-list>\n          Juntos cambiaremos la forma en la que ahorramos en Latinoamérica.\n        </ion-list>\n        <ion-list>\n          ¡Pronto nos pondremos en contacto contigo!\n        </ion-list>\n     </ion-card-content>\n     <a class=\"insta-content\" href=\"https://instagram.com/yo.ahorro?utm_medium=copy_link\"><img class=\"insta-icon\" src=\"/assets/instagram-yellow.png\" alt=\"insta-icon\"></a>\n    </ion-row>\n  </ion-grid>\n</ion-content>\n";
+      __webpack_exports__["default"] = "\n<ion-app>\n  <br>\n  <ion-header>\n    <ion-toolbar>\n      <ion-title size = \"large\">Alcancia.io</ion-title>\n      <ion-buttons slot=\"primary\" (click)=\"logout()\">\n        <ion-button>\n          <ion-icon name=\"log-out-outline\" color=\"warning\" ></ion-icon>\n        </ion-button>\n      </ion-buttons>\n    </ion-toolbar>\n  </ion-header>\n  <ion-content class=\"ion-padding\">\n    <div class=\"header\">\n      <div class=image>\n          <img src=\"/assets/taxi-robot.png\" width=\"300px\" alt=\"taxi-money-care\">\n      </div>\n    </div>\n    <ion-grid>\n      <ion-row>\n        <ion-card-header>\n          <div class=\"welcome-msg\">\n            Hola <b><br>{{aUsername}}<b *ngIf=\"aUsername\" >,</b></b>\n        </div>\n        </ion-card-header>\n        <ion-card-content>\n          <ion-list>\n            ¡Gracias por registrarte a Alcancía! \n          </ion-list>\n          <ion-list>\n            Juntos cambiaremos la forma en la que ahorramos en Latinoamérica.\n          </ion-list>\n          <ion-list>\n            ¡Pronto nos pondremos en contacto contigo!\n          </ion-list>\n      </ion-card-content>\n      <a class=\"insta-content\" href=\"https://instagram.com/yo.ahorro?utm_medium=copy_link\"><img class=\"insta-icon\" src=\"/assets/instagram-yellow.png\" alt=\"insta-icon\"></a>\n      </ion-row>\n    </ion-grid>\n  </ion-content>\n</ion-app>";
       /***/
     }
   }]);
