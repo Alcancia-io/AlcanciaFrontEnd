@@ -11,9 +11,13 @@ export class WhitepaperPage implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    var myPdfUrl = '../assets/whitepaper-alcancía.pdf'  
-    window.open(myPdfUrl); 
+    this.openInNewTab('https://firebasestorage.googleapis.com/v0/b/alcancia.appspot.com/o/Whitepaper%20-%20Alcanci%CC%81a.io.pdf?alt=media&token=45f0f4e5-e98f-4c29-be7d-f9f6ed1cac5b');
     this.router.navigate(['']);
   }
   
+  openInNewTab(href) {
+    Object.assign(document.createElement('a'), {
+      href: href,
+    }).click();
+  }
 }
