@@ -20,16 +20,15 @@ ion-grid{
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color:#FECE2F;
-  float: right;
-  right: 5%;
+  background-color:#3554C4;
+  float: right; 
 }
-
-ion-item{
-  position: relative;
-  width: 90%;
-  padding-top: 5%;
+ 
+ion-item{ --highlight-color-valid: #3554C4; }
+.item-content{
+  --ion-item-background:#121212; 
 }
+ 
 
 .arrow-btn{
   float: right;
@@ -41,6 +40,10 @@ ion-row{
   margin: auto;
   width: 50%;
 }
+
+.register{ 
+  border-bottom: solid 3.5px #3554C4;
+} 
 
 @media only screen and (max-width: 960px) {
   ion-row{

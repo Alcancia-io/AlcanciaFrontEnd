@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
-import { AuthenticationService } from '../../services/authentication.service';
+import { LoadingController, ToastController } from '@ionic/angular'; 
 
 @Component({
   selector: 'app-forgot-password',
@@ -43,7 +42,7 @@ export class ForgotPasswordPage implements OnInit {
 
       this.afAuth.sendPasswordResetEmail(this.email)
         .then(() => {
-          loading.dismiss();
+          loading.dismiss(); 
           this.toast('Porfavor revisar su correo electrónico!', 'success');
           this.router.navigate(['/login']);
         })

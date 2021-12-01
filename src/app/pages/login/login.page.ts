@@ -10,7 +10,6 @@ import { USER_NAME } from 'src/app/guards/auth.guard';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { StringLike } from '@firebase/util';
 import { loadingController } from '@ionic/core';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
