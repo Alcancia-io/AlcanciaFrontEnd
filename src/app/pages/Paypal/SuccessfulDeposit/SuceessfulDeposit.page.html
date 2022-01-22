@@ -1,0 +1,33 @@
+<ion-app>
+    <ion-content>
+        <br/>
+        <br/>
+        <section class="section"> 
+            <img class="checkmarkIcon" src="../../../../assets/checkmarkIcon.png" alt="taxi-money-care">
+        </section>      
+        <br/>
+        <br/>
+        <section  class="section">
+            <span class="sucessfull-span">¡Tú depósito ha sido confirmado!</span>
+        </section>
+
+        <section>
+            <ion-card fill="clear" class="bill-details-card"> 
+                <ion-item>
+                    <p class="title-deposite">Detalles del deposito: </p>
+                </ion-item> 
+                <div class="order-details">
+                    <p><b>ID Transación:</b> {{transactionId}}</p>
+                    <p><b>Nombre:</b> {{ Name}} </p>
+                    <p><b>Apellido:</b> {{ surname}} </p>
+                    <p><b>Fecha:</b> {{ Date}}</p>
+                    <p><b>Monto Total:</b> {{ TotalAmount}}</p>
+                    <p><b>Monto Neto:</b> {{ NetAmount}}</p>
+                    <p><b>Comisición de Paypal:</b> {{ PaypalFee}}</p> 
+                </div>
+                   
+            </ion-card>
+        </section> 
+        <ion-button class="arrow-btn" type="submit" expand="block" shape="round" (click)="backToMainMenu()"><img class="arrow-img" src="../../../../assets/arrow-alcui.png" alt="arrow-alcui"></ion-button>
+    </ion-content>
+</ion-app>

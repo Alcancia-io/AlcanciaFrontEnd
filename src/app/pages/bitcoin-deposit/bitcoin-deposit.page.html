@@ -6,22 +6,28 @@
     <br>
     <br>
     <br>
-    <br>
-    <ion-toolbar>
-      <ion-segment>  
-        <ion-segment-button value="something2">
-          <ion-button fill="clear">
-            <ion-icon name="copy-outline"></ion-icon> 
-          </ion-button>
-          <span>Copiar</span>
-        </ion-segment-button>
-        <ion-segment-button value="something2">
-          <ion-button fill="clear">
-            <ion-icon name="share-outline"></ion-icon>
-          </ion-button>
-          <span>Compartir</span>
-        </ion-segment-button> 
-      </ion-segment>
-    </ion-toolbar>
+    <br> 
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3"></ion-col>
+        <ion-col size="2">
+          <ion-fab>
+            <ion-fab-button (click)="copyToClipboard()">
+              <ion-icon name="copy-outline"></ion-icon> 
+            </ion-fab-button><br/>
+            <span>Copiar</span>   
+          </ion-fab> 
+        </ion-col>
+        <ion-col  size="3">
+          <ion-fab>
+            <ion-fab-button>
+              <ion-icon name="share-outline"></ion-icon>
+            </ion-fab-button><br/>
+            <span>Compartir</span>   
+          </ion-fab>         
+        </ion-col>
+      </ion-row>
+    </ion-grid> 
   </ion-content>
 </ion-app>

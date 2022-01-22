@@ -31,7 +31,7 @@ export class AuthenticationService {
   token: string;
   AccessToken:string = "";
   LoginModel: Observable<LoginModel>;
-
+ 
   constructor(
     private fireAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -70,7 +70,8 @@ export class AuthenticationService {
           (await this.fireAuth.currentUser).getIdToken()
             .then((token) => this.tokenService.setToken(token));
           loading.dismiss();
-          this.router.navigate(['/main-screen']);
+        
+          this.router.navigate(['/swap']);
         }
       }).catch((error) =>{
         console.log(error);
@@ -79,13 +80,6 @@ export class AuthenticationService {
       });
   } // end of login
 
-  // async registerUser(userModel){
-  //   const usermodel = new UserModel;
-
-  //   usermodel.email = "";
-  //   usermodel.name = "";
-  //   usermodel.lastname = "";
-  // }
 
   async logout() {
    await this.fireAuth.signOut()

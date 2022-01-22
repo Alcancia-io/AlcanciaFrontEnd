@@ -50,7 +50,9 @@ export class SignupPage implements OnInit {
         this.afs.collection('users').doc(resp.user.uid).set({
           'userId': resp.user.uid,
           'name': this.name,
-          'email': this.email,
+          'email': this.email,  
+          'swapScreenLoaded': false,
+          'balance': 0,
           'createdAt': Date.now()
         });
         

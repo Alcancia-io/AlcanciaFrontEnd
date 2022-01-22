@@ -6,6 +6,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { SwapPageRoutingModule } from './swap-routing.module';
 
+import { MainComponentsModule } from 'src/app/components/main-components.module';
+
 import { SwapPage } from './swap.page';
 
 @NgModule({
@@ -13,7 +15,8 @@ import { SwapPage } from './swap.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    SwapPageRoutingModule
+    SwapPageRoutingModule,
+    MainComponentsModule
   ],
   declarations: [SwapPage]
 })

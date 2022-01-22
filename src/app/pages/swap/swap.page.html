@@ -1,28 +1,45 @@
 <ion-app> 
   <ion-content> 
     <p class="welcome-msg">¡Empecemos!</p> 
+    <ion-card class="box-shadow">
+      <ion-card-content></ion-card-content>
+    </ion-card>
     <ion-card class="ion-card-body"> 
       <ion-card-content>
         <div class="card-tittle">
           <p>¿Cuánto deseas convertir hoy?</p>
-        </div>
-        <ion-card>
-          <ion-card-content>
-            <ion-button>SMXN</ion-button>
-            <span>20.0</span>
-          </ion-card-content>
-        </ion-card>
-        <ion-card>
-          <ion-card-content>
-            <ion-button>UST</ion-button>
-            <span>1.00</span>
-          </ion-card-content>
-        </ion-card> 
-        <ion-button class="convert-btn">Convertir</ion-button>
-        <br>
-        <br> 
+        </div>   
       </ion-card-content> 
+        <div class="form-content">
+          <ion-card class="ion-card-content"  >
+            <ion-select class="dropdown-content"  okText="Okay" cancelText="Cancelar" [(ngModel)]="FromCurrencyCode" (ionChange)="calculateExchange();">
+              <ion-select-option value="MXN">$MXN 🇲🇽</ion-select-option>  
+              <ion-select-option value="DOP">$DOP 🇩🇴</ion-select-option>  
+              <ion-select-option value="BTC">$BTC ₿</ion-select-option> 
+            </ion-select>  
+            <span class="currency-value" ><ion-input class="inputs-section" position="floating" placeholder="0" type="text"  [(ngModel)]="Amount" (ionChange)="calculateExchange  ();" ></ion-input></span>   
+          </ion-card>     
+        </div>
+            
+       <div class="elipse-arrow"><ion-icon name="arrow-down-outline"></ion-icon></div> 
+     
+     <ion-card class="ion-card-content">
+      <ion-select class="dropdown-content" value="brown" okText="Okay" cancelText="Dismiss" [(ngModel)]="ToCurrencyCode" (ionChange)="calculateExchange();">
+        <ion-select-option value="USD">$USDT</ion-select-option> 
+      </ion-select>  
+      <span class="currency-value">{{ExchangeTotal}}</span>   
+     </ion-card>
+               
+            <br/>
+            <br/>
+        <ion-button class="convert-btn" type="submit" (click)="createPaypalOrder()" shape="round">Convertir</ion-button>
+        <br>
+        <br>  
+        <br>  
+        <br>  
     </ion-card>
-    <ion-button fill="clear" class="whattodo-btn">¿Qué me toca hacer aca?</ion-button>
+    <br/>
+    <ion-button fill="clear" class="whattodo-btn"><p>¿Qué me toca hacer aca?</p></ion-button>
   </ion-content>
+ 
 </ion-app>

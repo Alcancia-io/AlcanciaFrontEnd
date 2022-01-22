@@ -7,15 +7,16 @@ const TOKEN_KEY = 'the-token';
 @Injectable()
 export class TokenService {
 
-    constructor(private appCookie: AppCookieService, private fireAuth: AngularFireAuth) {
+    constructor(private fireAuth: AngularFireAuth) {
     }
 
-    setToken(token: string) {
-      this.appCookie.set(TOKEN_KEY, token);
+    setToken(token: string) { 
+      // Save data to sessionStorage
+      sessionStorage.setItem(TOKEN_KEY, token ); 
     }
 
     getToken(){
-      return this.appCookie.get(TOKEN_KEY);
+      return  sessionStorage.getItem(TOKEN_KEY);  
     }
 
     async updateToken(): Promise<Boolean>{

@@ -15,8 +15,8 @@ export class StorageService {
   }
 
   async getData(theKey){
-    let status = await this.storage.get(theKey) || [];
-    return status;
+    let data = sessionStorage.getItem(theKey) || [];  
+    return data;
   }
 
   async addData(theItem, theKey){

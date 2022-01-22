@@ -38,20 +38,4 @@ export class UserRepository{
       }
     );
   }
-
-  // async createUser(){
-  //   await this.httpClientModule.post(url + '/users').subscribe(
-
-  //   )
-  // }
-
-
-
 }
-
-
-
-
-
-
-

@@ -6,11 +6,16 @@
   </ion-header>
   <ion-content class="ion-padding">
     <p>Bienvenido, {{aUsername}}</p>
-    <ion-card class="investment-card">
-      <ion-card-subtitle class="investment-card-subtitle">Inversión total</ion-card-subtitle>
-      <ion-card-content class="investment-total">2,537.99 $
-        <ion-button>Ver</ion-button>
-      </ion-card-content>
+    <ion-card class="investment-card"> 
+        <ion-card-tittle>
+          <h5 class="card-tittle">Inversión total</h5>
+        </ion-card-tittle> 
+        <div   style="width: 100px; float:left; margin:10px; padding-top: 25px;">
+         <span class="total-investment-value">2,537.99 $</span> 
+        </div> 
+        <div class="btn-container" style="width: 100px; float:right; margin:10px; padding-top: 25px;">
+          <ion-button class="details-btn">Ver</ion-button>
+        </div> 
     </ion-card>
   </ion-content>
   <ion-footer>

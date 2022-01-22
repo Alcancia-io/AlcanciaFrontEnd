@@ -9,8 +9,8 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
-    canLoad: [IntroGuard], //Checking if we should show the introduction or forward to inside.
-    canActivate: [NegateAuthorizeGuard]
+    // canLoad: [IntroGuard], //Checking if we should show the introduction or forward to inside.
+    // canActivate: [NegateAuthorizeGuard]
   },
   {
     path: 'signup',
@@ -39,14 +39,23 @@ const routes: Routes = [
   },
   {
     path: 'swap',
-    loadChildren: () => import('./pages/swap/swap.module').then( m => m.SwapPageModule),
-    canActivate: [AuthorizeGuard]
+    loadChildren: () => import('./pages/swap/swap.module').then( m => m.SwapPageModule) 
   },
   {
     path: 'bitcoin-deposit',
     loadChildren: () => import('./pages/bitcoin-deposit/bitcoin-deposit.module').then( m => m.BitcoinDepositPageModule),
     canActivate: [AuthorizeGuard]
+  },
+  {
+    path: 'paypalOrder/successfull',
+    loadChildren: () => import('./pages/Paypal/SuccessfulDeposit/SuccessfulDeposit-routing.module').then( m => m.SuccefulDepositRoutingModule),
+    // canActivate: [AuthorizeGuard]
+  }, 
+  {
+    path: 'paypalpaymentoptions',
+    loadChildren: () => import('./pages/paypalpaymentoptions/paypalpaymentoptions.module').then( m => m.PaypalpaymentoptionsPageModule)
   }
+
 ];
 
 @NgModule({

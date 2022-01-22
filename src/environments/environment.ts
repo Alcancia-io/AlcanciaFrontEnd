@@ -16,8 +16,8 @@ export const environment = {
 
 };
 
-export const ALCANCIA_SERVER_URL = "http://royerdonnetarenas.tech";
-
+export const ALCANCIA_SERVER_URL = "https://royerdonnetarenas.tech";
+export const EXCHANGE_RATE_URL = " https://v6.exchangerate-api.com/v6/460cee64dbd1d3e35cdfcc74";
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
