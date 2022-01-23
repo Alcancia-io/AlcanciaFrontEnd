@@ -1,21 +1,23 @@
-
-  <ion-toolbar>
-      <ion-segment>
-          <ion-segment-button value="home">
-            <ion-icon name="home-outline"></ion-icon>
-              <span>Home</span>
-          </ion-segment-button>
-          <ion-segment-button value="products">
-            <ion-icon name="search-outline"></ion-icon>
-              <span>Productos</span>
-          </ion-segment-button>
-          <ion-segment-button value="transactions">
-            <ion-icon name="swap-horizontal-outline"></ion-icon>
-              <span>Transacciones</span>
-          </ion-segment-button>
-          <ion-segment-button value="status">
-            <ion-icon name="trending-up-outline"></ion-icon>
+<ion-content>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="home">
+        <ion-icon name="home-outline"></ion-icon>
+        <span>Home</span>
+      </ion-tab-button>
+      <ion-tab-button >
+        <ion-icon  name="search-outline"></ion-icon>
+        <span [navPush]="products">Productos</span>
+      </ion-tab-button>
+      <ion-tab-button tab="transactions">
+        <ion-icon name="swap-horizontal-outline"></ion-icon>
+        <span>Transacciones</span>
+      </ion-tab-button>
+      <ion-tab-button tab="status">
+        <ion-icon name="trending-up-outline"></ion-icon>
               <span>Estado</span>
-          </ion-segment-button>
-      </ion-segment>
-  </ion-toolbar>
+      </ion-tab-button> 
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content> 
+  

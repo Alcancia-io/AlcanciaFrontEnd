@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PaypalService } from 'src/app/services/paypal.service';
-import {ConfirmOrder} from 'src/app/models/paypalOrder';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
+import {ConfirmOrder} from 'src/app/models/paypalOrder'; 
 
 
 @Component({
@@ -22,11 +21,7 @@ export class PaypalOrderPage implements OnInit {
 
     confirmToken.orderToken = token;
     this.paypalService.confirmOrder(confirmToken).then(response =>{
-        Swal.fire({
-            title: 'HURRAY!!',
-            text:   "Sweetalert2 is working fine.",
-            icon: 'success'
-          });
+         
     }); 
     
   }

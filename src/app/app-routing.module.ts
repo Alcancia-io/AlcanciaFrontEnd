@@ -25,7 +25,7 @@ const routes: Routes = [
   {
     path: 'main-screen',
     loadChildren: () => import('./pages/main-screen/main-screen.module').then( m => m.MainScreenPageModule),
-    canActivate: [AuthorizeGuard] //Securing all child pages.
+    // canActivate: [AuthorizeGuard] //Securing all child pages.
   },
   {
     path: '',
@@ -54,6 +54,14 @@ const routes: Routes = [
   {
     path: 'paypalpaymentoptions',
     loadChildren: () => import('./pages/paypalpaymentoptions/paypalpaymentoptions.module').then( m => m.PaypalpaymentoptionsPageModule)
+  },
+  {
+    path: 'main-screen/products',
+    loadChildren: () => import('./pages/products/products.module').then( m => m.ProductsPageModule)
+  },
+  {
+    path: 'main-screen/transactions',
+    loadChildren: () => import('./pages/transactions/transactions.module').then( m => m.TransactionsPageModule)
   }
 
 ];
