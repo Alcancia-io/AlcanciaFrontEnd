@@ -1,0 +1,32 @@
+<ion-header> 
+    <app-top-navigation-toolbar>Historial Transaciones</app-top-navigation-toolbar> 
+</ion-header>
+ 
+<!-- List of Text Items -->
+<ion-content>
+  <li style="list-style: none;" *ngFor="let transation  of transationHistory">
+    <ion-card>
+      <ion-item>
+        <ion-icon name="logo-paypal" slot="start"></ion-icon> 
+          <h3>{{transation.id}}  </h3>
+        <ion-label></ion-label>
+        <ion-button fill="outline" slot="end">Ver</ion-button>
+      </ion-item>
+      <ion-item>
+        Fecha: {{transation.create_time}} <br/>
+        Monto Total: {{transation.gross_amount}} $ <br/>
+        Monto Neto: {{transation.net_amount}} $
+      </ion-item>
+    
+      <ion-card-content>
+        {{transation.status}}
+      </ion-card-content>
+    </ion-card>
+  </li>
+</ion-content>
+<ion-footer>
+  <app-navigation-toolbar></app-navigation-toolbar>
+  <br>    <br>    <br>    <br> 
+</ion-footer>
+
+
