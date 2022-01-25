@@ -16,7 +16,7 @@ export class TokenService {
     }
 
     getToken(){
-      return  sessionStorage.getItem(TOKEN_KEY);  
+      return sessionStorage.getItem(TOKEN_KEY);  
     }
 
     async updateToken(): Promise<Boolean>{

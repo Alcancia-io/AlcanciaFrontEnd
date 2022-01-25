@@ -13,9 +13,7 @@ let currentUser: string;
   providedIn: 'root'
 })
 export class AuthorizeGuard implements CanActivate {
-  constructor(private authenticationService: AuthenticationService,
-              private appCookieService: AppCookieService,
-              private fireAuth: AngularFireAuth,
+  constructor(
               private tokenService: TokenService,
               private router: Router) {
   }
@@ -23,27 +21,12 @@ export class AuthorizeGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<any> | Promise<any> | boolean {
 
-      return this.authenticationService.user$.pipe(
-        take(1),
-        map(user => user ? true : false),
-        tap( isLoggedIn => {
-          if(isLoggedIn) {
-
-          this.tokenService.updateToken().then(token => {
-                if (token) {
-                  return true;
-                } else{
-                  this.authenticationService.logout();
-                  this.router.navigateByUrl('/login', { replaceUrl:true });
-                  return false;
-                }
-              });
-          } else {
-             this.router.navigate(['/login'], { replaceUrl:true });
-             return false;
-          }
-        })
-      );
+      const token = this.tokenService.getToken();
+      if(token) {
+        return true;
+      }else {
+        return this.router.navigate(['/login']);
+      }
     }
 }
 
@@ -56,12 +39,11 @@ export class NegateAuthorizeGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<any> | Promise<any> | boolean {
-      return this.tokenService.updateToken().then(token =>{
-        if(token){
-          return this.router.navigate(['/main-screen']);
-        }
-
+      const token = this.tokenService.getToken();
+      if(!token) {
         return true;
-      })
+      } else {
+        return this.router.navigate(['/main-screen']);
+      }
   }
 }

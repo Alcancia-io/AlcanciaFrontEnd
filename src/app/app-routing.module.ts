@@ -1,16 +1,16 @@
 import { AuthGuard } from './guards/auth.guard';
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes, CanActivate } from '@angular/router';
 import { IntroGuard } from './guards/intro.guard';
 import { AuthorizeGuard, NegateAuthorizeGuard } from './guards/authorize.guard';
-
+import { SwapGuard } from './guards/swap.guard';
 
 const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
     // canLoad: [IntroGuard], //Checking if we should show the introduction or forward to inside.
-    // canActivate: [NegateAuthorizeGuard]
+    canActivate: [NegateAuthorizeGuard]
   },
   {
     path: 'signup',
@@ -25,7 +25,7 @@ const routes: Routes = [
   {
     path: 'main-screen',
     loadChildren: () => import('./pages/main-screen/main-screen.module').then( m => m.MainScreenPageModule),
-    // canActivate: [AuthorizeGuard] //Securing all child pages.
+    canActivate: [AuthorizeGuard] //Securing all child pages.
   },
   {
     path: '',
@@ -39,7 +39,9 @@ const routes: Routes = [
   },
   {
     path: 'swap',
-    loadChildren: () => import('./pages/swap/swap.module').then( m => m.SwapPageModule) 
+    loadChildren: () => import('./pages/swap/swap.module').then( m => m.SwapPageModule),
+    canActivate: [AuthorizeGuard], 
+    canLoad: [SwapGuard]
   },
   {
     path: 'bitcoin-deposit',
@@ -49,19 +51,22 @@ const routes: Routes = [
   {
     path: 'paypalOrder/successfull',
     loadChildren: () => import('./pages/Paypal/SuccessfulDeposit/SuccessfulDeposit-routing.module').then( m => m.SuccefulDepositRoutingModule),
-    // canActivate: [AuthorizeGuard]
+    canActivate: [AuthorizeGuard]
   }, 
   {
     path: 'paypalpaymentoptions',
-    loadChildren: () => import('./pages/paypalpaymentoptions/paypalpaymentoptions.module').then( m => m.PaypalpaymentoptionsPageModule)
+    loadChildren: () => import('./pages/paypalpaymentoptions/paypalpaymentoptions.module').then( m => m.PaypalpaymentoptionsPageModule),
+    canActivate: [AuthorizeGuard]
   },
   {
     path: 'main-screen/products',
-    loadChildren: () => import('./pages/products/products.module').then( m => m.ProductsPageModule)
+    loadChildren: () => import('./pages/products/products.module').then( m => m.ProductsPageModule),
+    canActivate: [AuthorizeGuard]
   },
   {
     path: 'main-screen/transactions',
-    loadChildren: () => import('./pages/transactions/transactions.module').then( m => m.TransactionsPageModule)
+    loadChildren: () => import('./pages/transactions/transactions.module').then( m => m.TransactionsPageModule),
+    canActivate: [AuthorizeGuard]
   }
 
 ];

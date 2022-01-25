@@ -72,9 +72,9 @@ export class SignupPage implements OnInit {
       }
   }//end of signup
 
-  async addUserData(theUser: UserModel){
-    await this.userService.addUserData(theUser);
-  }
+  // async addUserData(theUser: UserModel){
+  //   await this.userService.addUserData(theUser);
+  // }
 
   checkPassword() {
     if(this.password == this.confirmPassword) {

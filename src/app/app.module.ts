@@ -25,6 +25,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { AuthGuard } from './guards/auth.guard';
 import { TokenService } from './services/token.service';
 import { AuthorizeGuard, NegateAuthorizeGuard } from './guards/authorize.guard';
+import { SwapGuard } from './guards/swap.guard';
 import { UniversalAppInterceptor } from './UniversalAppInterceptor';
 
 
@@ -50,6 +51,7 @@ import { UniversalAppInterceptor } from './UniversalAppInterceptor';
     AuthGuard,
     AuthorizeGuard,
     NegateAuthorizeGuard,
+    SwapGuard,
     { provide: HTTP_INTERCEPTORS, useClass: UniversalAppInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],

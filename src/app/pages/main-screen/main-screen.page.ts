@@ -18,7 +18,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class MainScreenPage implements OnInit {
 
   aUsername: string;
-  aTotalInvestment: number;
+  aTotalInvestment: number = 0;
 
   constructor(
     private authService: AuthenticationService,
@@ -29,28 +29,22 @@ export class MainScreenPage implements OnInit {
     private alertController: AlertController
   ) { }
 
-  ngOnInit() {
-    this.aTotalInvestment = this.getTotalInverstment();
-    this.getUserName();
-    
+  ngOnInit() { 
+    this.getUserData(); 
   }
 
-  async getUserName(){
+  async getUserData(){
     const username =  await this.storageService.getData(USER_NAME); 
-    if (username.length > 0 && username[0]) {
-      console.log(username[0].value + ',');
-    }else{
-      await this.userService.getName().then(user => {
-        this.storageService.addData(USER_NAME, user.name);
-        this.aUsername = user.name;
+     console.log(username[0]);
+      await this.userService.getUser().then(user => {
+        console.log(user);
+        // this.aUsername = user.name;
+        // this.aTotalInvestment = user.balance;
       });
-    }
+    
   }
  
-    getTotalInverstment(): number{
      
-       return 2356.99;
-    }
     
   async logout() {
     this.presentAlertConfirm();

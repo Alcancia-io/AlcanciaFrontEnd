@@ -7,27 +7,18 @@ import { UserRepository } from "../repository/user.repository";
   providedIn: 'root'
 })
 
-export class UserService {
-
-
-
+export class UserService { 
+  
   constructor(
     private userRepository: UserRepository
-    ){  }
-
+    ){  } 
 
     async getUser(){
       return await this.userRepository.getUser();
-    }
-
-    getName(){
-       const user = this.userRepository.getUser();
-       return user;
-    }
-
-    async addUserData(theUser: UserModel){
-      return await this.userRepository.addUserData(theUser);
-    }
+    } 
+    // async addUserData(theUser: UserModel){
+    //   return await this.userRepository.addUserData(theUser);
+    // }
 }
 
 
