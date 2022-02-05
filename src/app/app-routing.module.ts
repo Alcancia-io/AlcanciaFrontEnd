@@ -8,24 +8,24 @@ import { SwapGuard } from './guards/swap.guard';
 const routes: Routes = [
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
     // canLoad: [IntroGuard], //Checking if we should show the introduction or forward to inside.
-    canActivate: [NegateAuthorizeGuard]
+    // canActivate: [NegateAuthorizeGuard]
   },
   {
     path: 'signup',
-    loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule),
-    canActivate: [NegateAuthorizeGuard]
+    loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
+    // canActivate: [NegateAuthorizeGuard]
   },
   {
     path: 'intro',
-    loadChildren: () => import('./pages/intro/intro.module').then( m => m.IntroPageModule),
-    canActivate: [NegateAuthorizeGuard]
-  },
+    loadChildren: () => import('./pages/intro/intro.module').then( m => m.IntroPageModule)
+    // canActivate: [NegateAuthorizeGuard]
+  },  
   {
-    path: 'main-screen',
-    loadChildren: () => import('./pages/main-screen/main-screen.module').then( m => m.MainScreenPageModule),
-    canActivate: [AuthorizeGuard] //Securing all child pages.
+    path: 'forgot-password',
+    loadChildren: () => import('./pages/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+    // canActivate: [NegateAuthorizeGuard]
   },
   {
     path: '',
@@ -33,20 +33,15 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'forgot-password',
-    loadChildren: () => import('./pages/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule),
-    canActivate: [NegateAuthorizeGuard]
-  },
-  {
     path: 'swap',
     loadChildren: () => import('./pages/swap/swap.module').then( m => m.SwapPageModule),
-    canActivate: [AuthorizeGuard], 
+    // canActivate: [AuthorizeGuard], 
     canLoad: [SwapGuard]
   },
   {
     path: 'bitcoin-deposit',
-    loadChildren: () => import('./pages/bitcoin-deposit/bitcoin-deposit.module').then( m => m.BitcoinDepositPageModule),
-    canActivate: [AuthorizeGuard]
+    loadChildren: () => import('./pages/bitcoin-deposit/bitcoin-deposit.module').then( m => m.BitcoinDepositPageModule)
+    // canActivate: [AuthorizeGuard]
   },
   {
     path: 'paypalOrder/successfull',
@@ -56,17 +51,11 @@ const routes: Routes = [
   {
     path: 'paypalpaymentoptions',
     loadChildren: () => import('./pages/paypalpaymentoptions/paypalpaymentoptions.module').then( m => m.PaypalpaymentoptionsPageModule),
-    canActivate: [AuthorizeGuard]
+    // canActivate: [AuthorizeGuard]
   },
   {
-    path: 'main-screen/products',
-    loadChildren: () => import('./pages/products/products.module').then( m => m.ProductsPageModule),
-    canActivate: [AuthorizeGuard]
-  },
-  {
-    path: 'main-screen/transactions',
-    loadChildren: () => import('./pages/transactions/transactions.module').then( m => m.TransactionsPageModule),
-    canActivate: [AuthorizeGuard]
+    path: 'tabbar',
+    loadChildren: () => import('./pages/tab-bar/tab-bar.module').then(m => m.TabBarPageModule)
   }
 
 ];

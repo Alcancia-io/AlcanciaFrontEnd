@@ -12,12 +12,12 @@
       </ion-card-content> 
         <div class="form-content">
           <ion-card class="ion-card-content"  >
-            <ion-select class="dropdown-content"  okText="Okay" cancelText="Cancelar" [(ngModel)]="FromCurrencyCode" (ionChange)="calculateExchange();">
+            <ion-select class="dropdown-content"  value="brown" okText="Okay" cancelText="Cancelar" [(ngModel)]="FromCurrencyCode" (ionChange)="calculateExchange();">
               <ion-select-option value="MXN">$MXN 🇲🇽</ion-select-option>  
               <ion-select-option value="DOP">$DOP 🇩🇴</ion-select-option>  
               <ion-select-option value="BTC">$BTC ₿</ion-select-option> 
             </ion-select>  
-            <span class="currency-value" ><ion-input class="inputs-section" position="floating" placeholder="0" type="text"  [(ngModel)]="Amount" (ionChange)="calculateExchange  ();" ></ion-input></span>   
+            <span class="currency-value" ><ion-input class="inputs-section" position="floating" placeholder="0" type="text"  [(ngModel)]="Amount" (ionChange)="calculateExchange();" ></ion-input></span>   
           </ion-card>     
         </div>
             
@@ -25,7 +25,7 @@
      
      <ion-card class="ion-card-content">
       <ion-select class="dropdown-content" value="brown" okText="Okay" cancelText="Dismiss" [(ngModel)]="ToCurrencyCode" (ionChange)="calculateExchange();">
-        <ion-select-option value="USD">$USDT</ion-select-option> 
+        <ion-select-option value="USD" [selected]="ToCurrencyCode" >$USDT</ion-select-option>
       </ion-select>  
       <span class="currency-value">{{ExchangeTotal}}</span>   
      </ion-card>

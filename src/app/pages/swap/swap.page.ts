@@ -22,7 +22,7 @@ export class SwapPage implements OnInit {
 
   Amount: number;
   FromCurrencyCode: string;
-  ToCurrencyCode: string;
+  ToCurrencyCode: string = "USD";
   ExchangeTotal: string = '0';
   userModel;
   userData: User;
@@ -97,7 +97,7 @@ export class SwapPage implements OnInit {
         const result = this.Amount * response.conversion_rate; 
         this.originAmout = result.toString();
         const withFee = result * this.Fee;
-        const finalResult = result - withFee;
+        const finalResult = result;
         this.ExchangeTotal = Math.round(finalResult).toString();
       }).catch((error) => {
         console.log(error);

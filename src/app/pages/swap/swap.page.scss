@@ -12,6 +12,11 @@ ion-button{
     font-size: 38px;
 }
 
+.inputs-section{
+    width: 100px;
+    margin-left: 25px;
+}
+
 .box-shadow{ 
     width: 94%;
     height: 32.5%;
@@ -116,6 +121,31 @@ ion-select::part(icon) {
     ion-content{ 
         width: 80%;
         left: 10%;
+    }
+
+    .box-shadow{ 
+        width: 95%;
+        height: 33%;
+        background:  linear-gradient(#1B2A62, #355BC4);
+        border-radius: 25px;
+        position: absolute; 
+        left: 3%; 
+        filter: blur(0.1px);
+    }
+}
+
+@media only screen and (max-width: 390px) {
+    ion-content{ 
+        width: 80%;
+        left: 10%;
+    }
+
+    .dropdown-content{
+        width: 100px;
+    }
+    .inputs-section{
+        width: 100px;
+        margin-left: 35px;
     }
 
     .box-shadow{ 

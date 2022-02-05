@@ -18,7 +18,7 @@ export class SwapGuard implements CanLoad {
          this.user = this.userService.getUser();
         if(this.user.swapScreenLoaded && this.user.swapScreenLoaded === true)
         {
-            return this.router.navigate[('/main-screen')];
+            return this.router.navigate[('/tabbar')];
 
         }else {
             return true;

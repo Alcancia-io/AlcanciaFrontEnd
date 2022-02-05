@@ -5,7 +5,7 @@ import { AlertController, LoadingController, ToastController } from '@ionic/angu
 import { AuthenticationService } from '../../services/authentication.service';
 
 //Local storage
-import { StorageService } from '../../services/storage.service';
+import { AppCookieService } from '../../services/appcookie.service';
 import { USER_NAME } from 'src/app/guards/auth.guard';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { StringLike } from '@firebase/util';
@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
     private alertController: AlertController,
     private router: Router,
     private loadingController: LoadingController,
-    private storageService: StorageService,
+    private appCookie: AppCookieService,
     private toastr:  ToastController
   ) { }
 
@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
   }
 
   async getUsername(){
-    const username =  await this.storageService.getData(USER_NAME); 
+    const username =  await this.appCookie.get(USER_NAME); 
     if (username.length > 0 && username[0]) {
       this.aUsername = username[0].value;
     }

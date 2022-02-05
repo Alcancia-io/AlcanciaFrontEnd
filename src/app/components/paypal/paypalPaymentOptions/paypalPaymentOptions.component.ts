@@ -26,7 +26,7 @@ export class PaypalPaymentOptionsComponent implements OnInit {
     paypal
       .Buttons({
         createOrder: (data, actions) => {   
-           
+           console.log('aqui  servicio de Roger');
           const orderDetails = actions.order.create({
             purchase_units: [
               {

@@ -9,6 +9,7 @@ import { User } from '../../models/user';
 import { UserModel } from '../../models/userModel';
 import { AlertController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AppCookieService } from '../../services/appcookie.service';
 
 @Component({
   selector: 'app-main-screen',
@@ -17,7 +18,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 })
 export class MainScreenPage implements OnInit {
 
-  aUsername: string;
+  aUsername;
   aTotalInvestment: number = 0;
 
   constructor(
@@ -26,7 +27,8 @@ export class MainScreenPage implements OnInit {
     private storageService: StorageService,
     private router: Router,
     private userService: UserService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private appCookie: AppCookieService
   ) { }
 
   ngOnInit() { 
@@ -34,12 +36,12 @@ export class MainScreenPage implements OnInit {
   }
 
   async getUserData(){
-    const username =  await this.storageService.getData(USER_NAME); 
-     console.log(username[0]);
-      await this.userService.getUser().then(user => {
-        console.log(user);
-        // this.aUsername = user.name;
-        // this.aTotalInvestment = user.balance;
+   
+     this.aUsername = this.appCookie.get(USER_NAME);
+      
+      await this.userService.getUser().then(user => {  
+        const userData = user.data();
+        this.aTotalInvestment = userData.balance;
       });
     
   }

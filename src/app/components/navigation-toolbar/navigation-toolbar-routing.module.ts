@@ -1,11 +1,12 @@
 import { NavigationToolbarComponent } from './navigation-toolbar.component';
 import { Routes, RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core'; 
+import { MainScreenPage } from 'src/app/pages/main-screen/main-screen.page';
 
 const routes: Routes = [
     {
         path: 'tabs',
-        component: NavigationToolbarComponent,
+        component: MainScreenPage,
         children: [
             {
                 path: 'products',
@@ -13,6 +14,15 @@ const routes: Routes = [
                     {
                         path: '', 
                         loadChildren: () => import('../../pages/products/products.module').then(e => e.ProductsPageModule)
+                    }
+                ]
+            },
+            {
+                path: 'home',
+                children: [
+                    {
+                        path: '', 
+                        loadChildren: () => import('../../pages/main-screen/main-screen.module').then(e => e.MainScreenPageModule)
                     }
                 ]
             },
@@ -36,15 +46,14 @@ const routes: Routes = [
             },
             {
                 path: '',
-                redirectTo: '/main-screen',
+                redirectTo: '/tabs/home',
                 pathMatch: 'full'
             }
         ]
     },
-    
     {
         path: '',
-        redirectTo: '/main-screen',
+        redirectTo: '/tabs/home',
         pathMatch: 'full'
     }
 ];

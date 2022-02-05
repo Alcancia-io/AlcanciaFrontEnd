@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { StorageService } from '../../services/storage.service';
+import { AppCookieService } from '../../services/appcookie.service';
 import { USER_NAME } from 'src/app/guards/auth.guard';
 import { UserModel } from '../../models/userModel';
 import { UserService } from '../../services/user.service';
@@ -28,7 +28,7 @@ export class SignupPage implements OnInit {
     private loadingCtrl: LoadingController,
     private toastr: ToastController,
     private router: Router,
-    private storageService: StorageService,
+    private appCookie: AppCookieService,
     private userService: UserService
   ) { }
 
@@ -59,7 +59,7 @@ export class SignupPage implements OnInit {
           resp.user.sendEmailVerification();
         }).then(() => {
           loading.dismiss();
-          this.storageService.addData({key: USER_NAME, value: `${this.name}`}, USER_NAME);
+          this.appCookie.set(USER_NAME,`${this.name}`);
           this.toast('Se envio un email de confirmacion a su correo electrónico', 'success');
           this.router.navigate(['/login']);
         })

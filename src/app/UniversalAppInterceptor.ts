@@ -10,7 +10,6 @@ export class UniversalAppInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     const token = this.tokenService.getToken(); 
-
     if(req.url.includes(ALCANCIA_SERVER_URL)){
       req = req.clone({
         setHeaders: {

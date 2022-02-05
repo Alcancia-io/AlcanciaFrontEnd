@@ -13,7 +13,7 @@ export class UserService {
     private userRepository: UserRepository
     ){  } 
 
-    async getUser(){
+    async getUser(): Promise<any>{   
       return await this.userRepository.getUser();
     } 
     // async addUserData(theUser: UserModel){

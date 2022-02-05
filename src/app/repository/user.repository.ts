@@ -5,7 +5,7 @@ import { ALCANCIA_SERVER_URL } from "src/environments/environment";
 import { Observable, Subscription } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { AngularFirestore } from '@angular/fire/compat/firestore'; 
-import { StorageService } from '../../app/services/storage.service';
+import { AppCookieService } from '../services/appcookie.service';
 import { USER_NAME } from 'src/app/guards/auth.guard';
 const username = new UserModel();
 
@@ -16,17 +16,23 @@ const username = new UserModel();
 export class UserRepository{
   constructor(
     private firestore: AngularFirestore,
-    private storageService: StorageService,
+    private appCookie: AppCookieService,
   ){}
 
-    async getUser(): Promise<any>{
-      const userName =  await this.storageService.getData(USER_NAME); 
-      this.firestore
-          .collection("users",ref=>ref.where("name","==", userName))
-          .get()
-          .subscribe(data=>data.forEach(user=> {
-            return user.data();   
-          }));
+    async getUser(): Promise<any>{ 
+      const userName =  this.appCookie.get(USER_NAME); 
+      return new Promise((resolver) => {
+        let subscription: Subscription;
+        subscription = this.firestore
+            .collection("users",ref=>ref.where("name","==", userName))
+            .get()
+            .subscribe(data=>data.forEach(user=> {  
+              if (subscription) {
+                  subscription.unsubscribe();
+              } 
+              resolver( Object.assign(user)); 
+            }));
+      });
     }
 
   // async getUser(): Promise<UserModel>{
