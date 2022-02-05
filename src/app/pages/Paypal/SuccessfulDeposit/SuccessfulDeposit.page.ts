@@ -42,7 +42,7 @@ export class SuccessfulComponent implements OnInit {
   }
 
   backToMainMenu() {
-    this.router.navigate(['/main-screen']);
+    this.router.navigate(['/tabbar']);
   }
 
    
