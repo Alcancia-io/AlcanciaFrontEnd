@@ -32,11 +32,11 @@ const routes: Routes = [
   //   redirectTo: '/login',
   //   pathMatch: 'full'
   // },
-  {
-    path: 'swap',
-    loadChildren: () => import('./pages/swap/swap.module').then( m => m.SwapPageModule),
-    canLoad: [SwapGuard,AuthorizeGuard]
-  },
+  // {
+  //   path: 'nav/swap',
+  //   loadChildren: () => import('./pages/swap/swap.module').then( m => m.SwapPageModule),
+  //   canLoad: [SwapGuard,AuthorizeGuard]
+  // },
   {
     path: 'bitcoin-deposit',
     loadChildren: () => import('./pages/bitcoin-deposit/bitcoin-deposit.module').then( m => m.BitcoinDepositPageModule),
@@ -59,7 +59,8 @@ const routes: Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('./pages/sidenav/sidenav.module').then( m => m.SidenavPageModule), canLoad: [AuthorizeGuard]
+    loadChildren: () => import('./pages/sidenav/sidenav.module').then( m => m.SidenavPageModule),
+    canLoad: [AuthorizeGuard]
   }
 
 ];

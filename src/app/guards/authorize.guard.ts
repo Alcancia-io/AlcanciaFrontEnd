@@ -9,26 +9,24 @@ import { map, take, tap } from 'rxjs/operators';
 
 
 let currentUser: string;
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorizeGuard implements CanLoad {
+  isLogIn: Boolean = false;
   constructor(
               private tokenService: TokenService,
               private router: Router,
               private fireAuth: AngularFireAuth) {
   }
-  async canLoad(): Promise<boolean>{
-    this.fireAuth.authState.subscribe(user => {
-      if(user && user.uid){
-        return true;
-      }else {
-        return this.router.navigate(['/login']);
-      }
-    });
 
-    return true;
-
+  
+  async canLoad(): Promise<boolean>{ 
+    const token = this.tokenService.getToken();   
+    if(token !== null){ 
+      return true;
+    }else {this.router.navigate(['/login'])}  
   } 
 }
 
@@ -37,16 +35,12 @@ export class AuthorizeGuard implements CanLoad {
 })
 export class NegateAuthorizeGuard implements CanLoad {
   constructor (private tokenService: TokenService, private router: Router, private fireAuth: AngularFireAuth){}
-
-  async canLoad(): Promise<boolean>{
-    this.fireAuth.authState.subscribe(user => {
-      if(!user && !user.uid){
+   
+  async canLoad(): Promise<boolean>{ 
+      const token = this.tokenService.getToken();   
+      if(token === null){ 
         return true;
-      }else {
-        this.router.navigate(['/tabbar']);
-      }
-    });
-
-    return true;
+      }else {this.router.navigate(['/'])} 
   }
+ 
 }

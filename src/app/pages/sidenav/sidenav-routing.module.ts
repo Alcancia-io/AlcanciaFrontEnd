@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthorizeGuard } from 'src/app/guards/authorize.guard';
 
 import { SidenavPage } from './sidenav.page';
 
@@ -23,14 +24,16 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: '/nav/home',
-        pathMatch: 'full' 
+        pathMatch: 'full',
+        canLoad: [AuthorizeGuard]
       }
     ]
   },
   {
     path: '',
     redirectTo: '/nav/home',
-    pathMatch: 'full' 
+    pathMatch: 'full',
+    canLoad: [AuthorizeGuard] 
   }
 ];
 

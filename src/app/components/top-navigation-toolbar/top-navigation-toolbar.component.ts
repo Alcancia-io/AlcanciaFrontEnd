@@ -37,6 +37,7 @@ export class TopNavigationToolbarComponent implements OnInit {
           text: 'Confirmar',
           handler: async () => {
             await this.authService.logout();
+            sessionStorage.clear();
           }
         }
       ]

@@ -9,7 +9,7 @@ const routes: Routes = [
     component: TabBarPage,
     children: [
       {
-        path: 'home',
+        path: 'fdafadf',
         children: [
           {
             path: '',
@@ -19,7 +19,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'transaction',
+        path: 'sdfsfsdff',
         children: [
           {
             path: '',
@@ -30,14 +30,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'tabs/home',
+        redirectTo: 'tabs/adsfadf',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: 'tabs/home',
+    redirectTo: 'tabs/asdfsd',
     pathMatch: 'full'
   }
 ];
