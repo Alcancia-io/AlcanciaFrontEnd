@@ -13,17 +13,21 @@
          <span class="total-investment-value" >{{aTotalInvestment}}$</span> 
         </div> 
         <div class="btn-container" style="width: 100px; float:right; margin:10px; padding-top: 25px;">
-          <ion-button class="details-btn">Ver</ion-button>
+          <ion-button class="deposit-btn"  (click)="deposit()">Depositar</ion-button>
         </div> 
     </ion-card>
-    <ion-button class="deposit-btn"  (click)="deposit()">Depositar</ion-button>
+   
   </section>
-  <section class="ion-padding">  
+  <ion-content class="ion-padding">  
     <ion-card class=" "> 
-      <ion-item>
-        <ion-label class="last-movement">Últimos movimientos</ion-label>
-        <ion-note slot="end" color="primary" (click)="goToTransactionPage()" ><ion-button class="ver-todos" fill="clear">ver todos <ion-icon name="arrow-forward-outline"></ion-icon></ion-button></ion-note>
-      </ion-item>    
+       
+      <ion-card-subtittle>
+        <ion-item >
+          <ion-label class="last-movement">Últimos movimientos</ion-label>
+          <ion-note slot="end" color="primary" (click)="goToTransactionPage()" ><ion-button class="ver-todos" fill="clear">ver todos <ion-icon name="arrow-forward-outline"></ion-icon></ion-button></ion-note>
+        </ion-item>     
+      </ion-card-subtittle>
+     
           <li style="list-style: none;" *ngFor="let transation  of transationHistory">
             <ion-item>
               <ion-label class="transaction-tittle"><img src="../../../assets/Icon awesome-coins.png"> Depósito<br/><small class="deposit-time">{{transation.create_time}}</small></ion-label>
@@ -31,11 +35,6 @@
             </ion-item>  
           </li>    
     </ion-card> 
-  </section>
-
-  <ion-content>
-   
-   
-     
-    </ion-content>
+  </ion-content>
+ 
 </ion-app>

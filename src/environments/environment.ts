@@ -16,7 +16,7 @@ export const environment = {
 
 };
 
-export const ALCANCIA_SERVER_URL = "https://97ee-2806-2f0-6060-509-22ed-7127-368a-2a16.ngrok.io/api";
+export const ALCANCIA_SERVER_URL = "https://royerdonnetarenas.tech/api";
 export const EXCHANGE_RATE_URL = " https://v6.exchangerate-api.com/v6/460cee64dbd1d3e35cdfcc74";
 /*
  * For easier debugging in development mode, you can import the following file

@@ -27,12 +27,16 @@ export class SignupPage implements OnInit {
     private toastr: ToastController,
     private router: Router,
     private appCookie: AppCookieService,
-    private userService: UserService
+    private userService: UserService,
+    public formBuilder: FormBuilder,
   ) { }
 
   public errorMessages = {
     
     name: [
+      { type: 'required', message: 'Nombre es requerido' }
+    ],
+    email: [
       { type: 'required', message: 'Email es requerido' },
       { type: 'pattern', message: 'El formato de email no es correcto'}
     ],

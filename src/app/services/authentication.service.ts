@@ -78,7 +78,7 @@ export class AuthenticationService {
           (await this.fireAuth.currentUser).getIdToken()
             .then((token => {
               this.tokenService.setToken(token); 
-              this.authenticationRepository.getCookieToken(token);
+              // this.authenticationRepository.getCookieToken(token);
             }));
 
           (await this.fireAuth.authState.subscribe(user => { 

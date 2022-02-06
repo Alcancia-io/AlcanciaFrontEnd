@@ -59,7 +59,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('./pages/sidenav/sidenav.module').then( m => m.SidenavPageModule)
+    loadChildren: () => import('./pages/sidenav/sidenav.module').then( m => m.SidenavPageModule), canLoad: [AuthorizeGuard]
   }
 
 ];
