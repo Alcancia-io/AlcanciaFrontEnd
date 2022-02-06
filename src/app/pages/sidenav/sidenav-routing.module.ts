@@ -10,23 +10,27 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadChildren: () => import('../main-screen/main-screen.module').then(m => m.MainScreenPageModule)
+        loadChildren: () => import('../main-screen/main-screen.module').then(m => m.MainScreenPageModule) 
       },
       {
         path: 'transaction',
-        loadChildren: () => import('../transactions/transactions.module').then(m => m.TransactionsPageModule)
+        loadChildren: () => import('../transactions/transactions.module').then(m => m.TransactionsPageModule) 
+      }, 
+      {
+        path: 'swap',
+        loadChildren: () => import('../swap/swap.module').then(m => m.SwapPageModule) 
       },
       {
         path: '',
         redirectTo: '/nav/home',
-        pathMatch: 'full'
+        pathMatch: 'full' 
       }
     ]
   },
   {
     path: '',
     redirectTo: '/nav/home',
-    pathMatch: 'full'
+    pathMatch: 'full' 
   }
 ];
 

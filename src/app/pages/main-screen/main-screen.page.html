@@ -1,40 +1,63 @@
-<ion-app>
-  <br>
+<ion-app> 
   <ion-header  no-border>
     <app-top-navigation-toolbar></app-top-navigation-toolbar>
   </ion-header>
+  <ion-content> 
+  <ion-grid [fixed]="true">
+      <ion-row>
+        <ion-col>
+          <h1 class="welcome-msg">Bienvenido, {{aUsername}}.</h1>
+        </ion-col>
+        
+      </ion-row>
+      <ion-row> 
+        <ion-col>
+          <ion-card class="investment-card"> 
+            <ion-card-tittle>
+              <h5 class="card-tittle">Ahorro Total</h5>
+            </ion-card-tittle> 
+            <div   style="width: 100px; float:left; margin:10px; padding-top: 25px;">
+             <span class="total-investment-value" >{{aTotalInvestment}}$</span> 
+            </div> 
+            <div class=" " style="width: 100px; float:right; margin:10px; margin-right: 25px; margin-top: 35px">
+              <ion-button class="deposit-btn"  (click)="deposit()">Depositar</ion-button>
+            </div> 
+          </ion-card>
+        </ion-col> 
+    </ion-row>
+    <ion-row>  
+      <ion-col>
+        <ion-card class=" ">   
+          <ion-card-header>
+            <ion-card-subtittle>
+              <ion-item >
+                <ion-label class="last-movement">Últimos movimientos</ion-label>
+                <ion-note slot="end" color="primary" (click)="goToTransactionPage()" ><ion-button class="ver-todos" fill="clear">ver todos <ion-icon name="arrow-forward-outline"></ion-icon></ion-button></ion-note>
+              </ion-item>     
+            </ion-card-subtittle>
+          </ion-card-header>
+          <ion-card-content>
+            
+              <ion-list [scrollEvents]="true" style="list-style: none;" *ngFor="let transation  of transationHistory">
+                <ion-scroll direction="y">
+                  <ion-item>
+                    <ion-label class="transaction-tittle"><img src="../../../assets/Icon awesome-coins.png"> Depósito<br/><small class="deposit-time">{{transation.create_time}}</small></ion-label>
+                    <ion-note class="transaction-amount" slot="end" color="primary">{{transation.gross_amount}}$</ion-note>
+                  </ion-item> 
+                </ion-scroll> 
+              </ion-list>     
+          </ion-card-content> 
+        </ion-card>  
+      </ion-col> 
+  </ion-row>
+  </ion-grid>
+</ion-content>
+  <!--  
   <section class="ion-padding">
-    <h1 class="welcome-msg">Bienvenido, {{aUsername}}</h1>
-    <ion-card class="investment-card"> 
-        <ion-card-tittle>
-          <h5 class="card-tittle">Inversión total</h5>
-        </ion-card-tittle> 
-        <div   style="width: 100px; float:left; margin:10px; padding-top: 25px;">
-         <span class="total-investment-value" >{{aTotalInvestment}}$</span> 
-        </div> 
-        <div class="btn-container" style="width: 100px; float:right; margin:10px; padding-top: 25px;">
-          <ion-button class="deposit-btn"  (click)="deposit()">Depositar</ion-button>
-        </div> 
-    </ion-card>
+  
+   
    
   </section>
-  <ion-content class="ion-padding">  
-    <ion-card class=" "> 
-       
-      <ion-card-subtittle>
-        <ion-item >
-          <ion-label class="last-movement">Últimos movimientos</ion-label>
-          <ion-note slot="end" color="primary" (click)="goToTransactionPage()" ><ion-button class="ver-todos" fill="clear">ver todos <ion-icon name="arrow-forward-outline"></ion-icon></ion-button></ion-note>
-        </ion-item>     
-      </ion-card-subtittle>
-     
-          <li style="list-style: none;" *ngFor="let transation  of transationHistory">
-            <ion-item>
-              <ion-label class="transaction-tittle"><img src="../../../assets/Icon awesome-coins.png"> Depósito<br/><small class="deposit-time">{{transation.create_time}}</small></ion-label>
-              <ion-note class="transaction-amount" slot="end" color="primary">{{transation.gross_amount}}$</ion-note>
-            </ion-item>  
-          </li>    
-    </ion-card> 
-  </ion-content>
  
+  -->
 </ion-app>

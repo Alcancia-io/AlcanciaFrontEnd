@@ -11,15 +11,13 @@ import { AlertController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AppCookieService } from '../../services/appcookie.service';
 import { TransactionService } from '../../services/transaction.service';
-import { SectionStorageService } from '../../services/sectionStorage.service';
-
+import { SectionStorageService } from '../../services/sectionStorage.service';  
 @Component({
   selector: 'app-main-screen',
   templateUrl: './main-screen.page.html',
   styleUrls: ['./main-screen.page.scss'],
 })
-export class MainScreenPage implements OnInit {
-
+export class MainScreenPage implements OnInit { 
   aUsername;
   aTotalInvestment: number = 0;
   transationHistory: Array<any>;
@@ -32,7 +30,7 @@ export class MainScreenPage implements OnInit {
     private alertController: AlertController,
     private appCookie: AppCookieService,
     private transactionService: TransactionService,
-    private sectionStorageService: SectionStorageService
+    private sectionStorageService: SectionStorageService, 
   ) { }
 
   ngOnInit() { 
@@ -50,7 +48,7 @@ export class MainScreenPage implements OnInit {
   }
  
   deposit(){ 
-    this.router.navigate(['/swap']); 
+    this.router.navigate(['/nav/swap']); 
   }
      
     

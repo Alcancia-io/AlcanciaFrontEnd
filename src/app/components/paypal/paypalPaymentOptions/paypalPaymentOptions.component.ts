@@ -4,6 +4,8 @@ import { loadingController } from '@ionic/core';
 import {PaypalService} from 'src/app/services/paypal.service';
 import { Router } from '@angular/router';
 import { ConfirmOrder } from 'src/app/models/paypalOrder';
+import { CreateOrder } from '../../../models/paypalOrder';
+import { ALCANCIA_SERVER_URL } from "src/environments/environment";
 declare var paypal;
 
 @Component({
@@ -28,21 +30,36 @@ export class PaypalPaymentOptionsComponent implements OnInit {
   ngOnInit() {
     paypal
       .Buttons({
-        createOrder: (data, actions) => {   
-           console.log('aqui  servicio de Roger');
-          const orderDetails = actions.order.create({
-            purchase_units: [
-              {
-                description: this.product.description,
-                amount: {
-                  currency_code: 'USD',
-                  value: this.amount
-                }
-              }
-            ]
-          }); 
-          return orderDetails;
+        createOrder: (data, actions) => { 
+          const createorder = new CreateOrder();
+          createorder.amount = this.amount;  
+
+          return fetch(`${ALCANCIA_SERVER_URL}/deposits/create-order`, {
+            method: 'post'
+            }).then(res => {
+              console.log(res);
+              return res.json();
+            })  
+            .then(function(orderData) { 
+                return orderData.id;
+            });
+          // this.paypalService.createOrder(createorder).then(resp => {
+          //   fetch
+          //   return resp.orderId;
           
+          // });
+          // const orderDetails = actions.order.create({
+          //   purchase_units: [
+          //     {
+          //       description: this.product.description,
+          //       amount: {
+          //         currency_code: 'USD',
+          //         value: this.amount
+          //       }
+          //     }
+          //   ]
+          // }); 
+          // 
         },
         onApprove: async (data, orderDetails) => {  
 
@@ -53,8 +70,7 @@ export class PaypalPaymentOptionsComponent implements OnInit {
         });
   
         loading.present();
-
-          await new Promise(r => setTimeout(r, 2000));
+ 
 
           this.orderToken = new ConfirmOrder();
           this.orderToken.orderToken = data.orderID;

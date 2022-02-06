@@ -53,8 +53,7 @@ import { UniversalAppInterceptor } from './UniversalAppInterceptor';
     AuthorizeGuard,
     NegateAuthorizeGuard,
     SwapGuard,
-    { provide: HTTP_INTERCEPTORS, useClass: UniversalAppInterceptor, multi: true,  },
-    { provide: PERSISTENCE, useValue: 'NONE' }
+    { provide: HTTP_INTERCEPTORS, useClass: UniversalAppInterceptor, multi: true,  }
   ],
   bootstrap: [AppComponent],
 })

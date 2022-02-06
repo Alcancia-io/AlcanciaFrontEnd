@@ -2,6 +2,9 @@ ion-content{
   text-align: center;
   width: 100%;
 }
+ion-col { 
+  text-align: center;
+}
 
 .heading{
   margin-top: 10vh;
@@ -38,10 +41,7 @@ ion-content{
 .transaction-amount{
   font-size: 16px; 
 }
-
-.transaction-tittle{ 
-}
-
+ 
 .ver-todos{
   float: right;
   font-size: 14px; 
@@ -71,12 +71,7 @@ ion-list{
     right: 50px;
     width: 10%;
   }
-
-ion-row{
-  display: block;
-  margin: auto;
-  width: 50%;
-}
+ 
 
 
 
@@ -143,10 +138,7 @@ ion-row{
   }
  .p{
    font-size: 60px;
- }
-  ion-row{
-    display: inline;
-  }
+ } 
 }
 
 

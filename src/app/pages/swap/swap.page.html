@@ -29,7 +29,7 @@
      <ion-card class="ion-card-content">
       <ion-select class="dropdown-content" value="brown" okText="Okay" cancelText="Dismiss" [(ngModel)]="ToCurrencyCode" (ionChange)="calculateExchange();">
         <ion-select-option value="USD" [selected]="ToCurrencyCode" >$USDT</ion-select-option>
-      </ion-select>  
+      </ion-select>  <br/>
       <span class="currency-value">{{ExchangeTotal}}</span>   
      </ion-card>
                

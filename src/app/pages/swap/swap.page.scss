@@ -1,5 +1,4 @@
-ion-content{
-    top: 10%;
+ion-content{ 
     width: 50%;
     left: 25%;  
 }
@@ -14,17 +13,18 @@ ion-button{
 }
 
 .inputs-section{
-    width: 100px;
-    margin-left: 25px;
+    margin-left: 92%;
+    width: 20%;
+    margin-top: 3%;
 }
 
 .box-shadow{ 
-    width: 94%;
-    height: 32.5%;
+    width: 96.5%;
+    height: 36%;
     background:  linear-gradient(#1B2A62, #355BC4);
     border-radius: 25px;
-    position: absolute; 
-    left: 3%; 
+    left: 10px;
+    position: absolute;  
     filter: blur(0.1px);
 }
 
@@ -115,8 +115,7 @@ ion-select {
     color: #ffff;
     font-size: 24px;
     padding-right: 15%; 
-    top: -40%;
-    text-align: right;
+    top: -49%; 
     
 }
  
@@ -143,7 +142,40 @@ ion-select::part(icon) {
     }
 }
 
-@media only screen and (max-width: 390px) {
+@media only screen and (max-width: 414px) {
+    ion-content{ 
+        width: 80%;
+        left: 10%;
+    }
+
+    .dropdown-content{
+        width: 100px;
+    }
+    .inputs-section{
+        width: 100px;
+        margin-left: 35px;
+    }
+
+    .box-shadow{ 
+        width: 91%;
+        height: 35.5%;
+        background: linear-gradient(#1B2A62, #355BC4);
+        border-radius: 25px;
+        position: absolute;
+        left: 1.5%; 
+        margin-top: 5px;
+
+       
+    }
+
+    .inputs-section{
+        margin-left: 220px;
+        width: 20%;
+        margin-top: 3%;
+    }
+}
+
+@media only screen and (max-width: 412px) {
     ion-content{ 
         width: 80%;
         left: 10%;
@@ -159,11 +191,188 @@ ion-select::part(icon) {
 
     .box-shadow{ 
         width: 95%;
-        height: 33%;
-        background:  linear-gradient(#1B2A62, #355BC4);
+        height: 33.5%;
+        background: linear-gradient(#1B2A62, #355BC4);
         border-radius: 25px;
-        position: absolute; 
-        left: 3%; 
-        filter: blur(0.1px);
+        position: absolute;
+        left: 1.5%; 
+        margin-top: 5px; 
     }
+
+    .inputs-section{
+        margin-left: 220px;
+        width: 20%;
+        margin-top: 3%;
+    }
+
+    .whattodo-btn{
+        margin-top: 30px;
+    }
+
+    .backMainMenuBtn{
+        margin-top: -25px;
+    }
+
+    .inputs-section{
+        margin-left: 185.5px;
+        width: 20%;
+        margin-top: 3%;
+    }
+    .welcome-msg {
+        padding-left: 5%;
+        font-size: 34px;
+        margin-bottom: 64px;
+    }
+}
+
+@media only screen and (max-width: 393px) {
+    ion-content{ 
+        width: 80%;
+        left: 10%;
+    }
+
+    .dropdown-content{
+        width: 100px;
+    }
+    .inputs-section{
+        margin-left: 192.5px;
+        width: 20%;
+        margin-top: 3%;
+    }
+
+    .box-shadow{ 
+        width: 93.5%;
+        height: 36%;
+        background: linear-gradient(#1B2A62, #355BC4);
+        border-radius: 25px;
+        position: absolute;
+        left: 3%;
+    } 
+ 
+}
+
+@media only screen and (max-width: 390px) {
+    ion-content{ 
+        width: 80%;
+        left: 10%;
+    }
+
+    .dropdown-content{
+        width: 100px;
+    }
+    .inputs-section{
+        width: 100px;
+        margin-left: 35px;
+    }
+
+    .box-shadow{ 
+        width: 89%;
+        height: 41%;
+        background: linear-gradient(#1B2A62, #355BC4);
+        border-radius: 25px;
+        position: absolute;
+        left: 3%; 
+        margin-top: 5px;
+    }
+
+    .inputs-section{
+        margin-left: 202px;
+        width: 20%;
+        margin-top: 3%;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    ion-content{ 
+        width: 80%;
+        left: 10%;
+    }
+
+    .dropdown-content{
+        width: 100px;
+    }
+    .inputs-section{
+        width: 100px;
+        margin-left: 35px;
+    }
+
+    .box-shadow{ 
+        width: 88.5%;
+        height: 53%;
+        background: linear-gradient(#1B2A62, #355BC4);
+        border-radius: 25px;
+        position: absolute;
+        left: 3%;
+        margin-top: -16px;
+   
+    }
+
+    .welcome-msg {
+        padding-left: 5%;
+        font-size: 34px;
+    }
+
+    .inputs-section{
+        margin-left: 191.5px;
+        width: 20%;
+        margin-top: 3%;
+    }
+
+    .ion-card-body{
+        margin-top: -20px;
+    }
+
+    .whattodo-btn{
+        margin-top: -30px;
+    }
+
+    .backMainMenuBtn{
+        margin-top: -125px;
+    }
+ 
+}
+
+
+@media only screen and (max-width: 360px) {
+    ion-content{ 
+        width: 80%;
+        left: 10%;
+    }
+
+    .dropdown-content{
+        width: 100px;
+    }
+    .inputs-section{
+        width: 100px;
+        margin-left: 35px;
+    }
+ 
+    .box-shadow{ 
+        width: 92.5%;
+        height: 46%;
+        background: linear-gradient(#1B2A62, #355BC4);
+        border-radius: 25px;
+        position: absolute;
+        left: 3%;
+    }  
+
+    .whattodo-btn{
+        margin-top: 30px;
+    }
+
+    .backMainMenuBtn{
+        margin-top: -25px;
+    }
+
+    .inputs-section{
+        margin-left: 185.5px;
+        width: 20%;
+        margin-top: 3%;
+    }
+    .welcome-msg {
+        padding-left: 5%;
+        font-size: 34px;
+        margin-bottom: 64px;
+    }
+
 }
