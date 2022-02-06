@@ -10,6 +10,10 @@ import { TokenService } from './token.service';
 
 import { LoginModel } from '../models/login';
 import { UserModel } from '../models/userModel';
+import { SectionStorageService } from './sectionStorage.service';
+import { UserService } from './user.service';
+import { AppCookieService } from './appcookie.service';
+import { AuthenticationRepository } from '../repository/Authentication.repository';
 
 interface User {
   provider?: string;
@@ -39,6 +43,10 @@ export class AuthenticationService {
     private loadingCtrl: LoadingController,
     private toastr: ToastController,
     private tokenService: TokenService,
+    private sectionStorage: SectionStorageService,
+    private userService: UserService,
+    private appCookieService: AppCookieService,
+    private authenticationRepository: AuthenticationRepository
   ) {
     this.user$ = this.fireAuth.authState.pipe(
       switchMap( user => {
@@ -59,7 +67,7 @@ export class AuthenticationService {
       showBackdrop: true
     });
 
-    loading.present();
+    loading.present(); 
     this.fireAuth.signInWithEmailAndPassword(email, password)
       .then(async (data) => {
         if (!data.user.emailVerified) {
@@ -68,10 +76,30 @@ export class AuthenticationService {
           this.logout();
         } else {
           (await this.fireAuth.currentUser).getIdToken()
-            .then((token) => this.tokenService.setToken(token));
+            .then((token => {
+              this.tokenService.setToken(token); 
+              this.authenticationRepository.getCookieToken(token);
+            }));
+
+          (await this.fireAuth.authState.subscribe(user => { 
+            if(user){  
+              this.sectionStorage.saveData("UserId", user.uid);
+              this.userService.getUser().then(user => {
+                this.sectionStorage.saveData("UserEmail", user.email); 
+                this.sectionStorage.saveData("Username", user.name);
+
+                if(!user.swapScreenLoaded || user.swapScreenLoaded === false){
+                  this.router.navigate(['/swap']);
+                }else{
+                  this.router.navigate(['/tabbar']);
+                }
+              });
+             
+            } 
+          }));
           loading.dismiss();
         
-          this.router.navigate(['/swap']);
+          
         }
       }).catch((error) =>{
         console.log(error);

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanLoad, Route, UrlSegment, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TokenService } from '../services/token.service';
 import { AppCookieService } from '../services/appcookie.service';
@@ -12,38 +12,41 @@ let currentUser: string;
 @Injectable({
   providedIn: 'root'
 })
-export class AuthorizeGuard implements CanActivate {
+export class AuthorizeGuard implements CanLoad {
   constructor(
               private tokenService: TokenService,
-              private router: Router) {
+              private router: Router,
+              private fireAuth: AngularFireAuth) {
   }
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<any> | Promise<any> | boolean {
-
-      const token = this.tokenService.getToken();
-      if(token) {
+  async canLoad(): Promise<boolean>{
+    this.fireAuth.authState.subscribe(user => {
+      if(user && user.uid){
         return true;
       }else {
         return this.router.navigate(['/login']);
       }
-    }
+    });
+
+    return true;
+
+  } 
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class NegateAuthorizeGuard implements CanActivate {
-  constructor (private tokenService: TokenService, private router: Router){}
+export class NegateAuthorizeGuard implements CanLoad {
+  constructor (private tokenService: TokenService, private router: Router, private fireAuth: AngularFireAuth){}
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<any> | Promise<any> | boolean {
-      const token = this.tokenService.getToken();
-      if(!token) {
+  async canLoad(): Promise<boolean>{
+    this.fireAuth.authState.subscribe(user => {
+      if(!user && !user.uid){
         return true;
-      } else {
-        return this.router.navigate(['/main-screen']);
+      }else {
+        this.router.navigate(['/tabbar']);
       }
+    });
+
+    return true;
   }
 }

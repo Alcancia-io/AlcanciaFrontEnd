@@ -12,6 +12,45 @@ ion-content{
  
 }
 
+.welcome-msg{
+  left: 12px;
+}
+
+.deposit-btn{
+  text-align: left;
+  float: left;
+  margin-left: 2%;
+  --background: #FFFF;
+  color: #3554C4; 
+}
+
+.deposit-time{
+  color: gray;
+  margin-left: 3%;
+}
+
+.last-movement{
+  float: left;
+  font-size: 22px;
+  color: #ffff;
+  margin-left: 30px;
+}
+
+.transaction-amount{
+  font-size: 16px;
+  margin-right: 100px;
+}
+
+.transaction-tittle{
+  margin-left: 30px;
+}
+
+.ver-todos{
+  float: right;
+  font-size: 18px;
+  margin-right: 30px;
+}
+
 .Tittle{
   font-size: 16px;
 }
@@ -64,11 +103,6 @@ ion-row{
     margin-left: 3%;
     font-size: 18px;
 
-}
-
-.total-investment-value{ 
-  top: -100%;
-  
 } 
 
 .btn-container{
@@ -78,8 +112,7 @@ ion-row{
   left: 5%;
 }
 
-.details-btn{
-  margin-top: -85px;
+.details-btn{ 
   margin-left: 0px;
   width: 100px;
   height: 38px;
@@ -89,8 +122,8 @@ ion-row{
 
 .total-investment-value{
   font-size: 34px;
-  top: -100%;
-  margin-left: -192%;
+  margin-left: -75px;
+  margin-top: 3px;
 }
 
 .content-investment-container{

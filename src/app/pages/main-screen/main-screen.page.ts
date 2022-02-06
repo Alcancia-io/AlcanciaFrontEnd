@@ -10,6 +10,8 @@ import { UserModel } from '../../models/userModel';
 import { AlertController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AppCookieService } from '../../services/appcookie.service';
+import { TransactionService } from '../../services/transaction.service';
+import { SectionStorageService } from '../../services/sectionStorage.service';
 
 @Component({
   selector: 'app-main-screen',
@@ -20,7 +22,7 @@ export class MainScreenPage implements OnInit {
 
   aUsername;
   aTotalInvestment: number = 0;
-
+  transationHistory: Array<any>;
   constructor(
     private authService: AuthenticationService,
     private afAuth: AngularFireAuth,
@@ -28,24 +30,28 @@ export class MainScreenPage implements OnInit {
     private router: Router,
     private userService: UserService,
     private alertController: AlertController,
-    private appCookie: AppCookieService
+    private appCookie: AppCookieService,
+    private transactionService: TransactionService,
+    private sectionStorageService: SectionStorageService
   ) { }
 
   ngOnInit() { 
     this.getUserData(); 
+    this.getUserTransactions();
   }
 
   async getUserData(){
    
-     this.aUsername = this.appCookie.get(USER_NAME);
-      
+     this.aUsername = this.sectionStorageService.getData("Username"); 
       await this.userService.getUser().then(user => {  
-        const userData = user.data();
-        this.aTotalInvestment = userData.balance;
+        this.aTotalInvestment = user.balance;
       });
     
   }
  
+  deposit(){ 
+    this.router.navigate(['/swap']); 
+  }
      
     
   async logout() {
@@ -78,5 +84,23 @@ export class MainScreenPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  goToTransactionPage(){
+    this.router.navigate(['/nav/transaction'])
+  }
+
+
+  getUserTransactions(){
+    this.transactionService.getUserTransactions().then((response) => {
+      console.log(response);
+      response.forEach(function (item) {  
+        const createdDate = new Date(item.create_time);  
+        item.create_time =  createdDate.toString().replace('GMT-0400 (Atlantic Standard Time)',''); 
+      });  
+      this.transationHistory = response;
+    }).catch((error) => {
+      console.log(error);
+    }); 
   }
 }

@@ -15,13 +15,16 @@ export class SwapGuard implements CanLoad {
  
  async canLoad(): Promise<boolean> {
 
-         this.user = this.userService.getUser();
+    this.userService.getUser().then(user => {
         if(this.user.swapScreenLoaded && this.user.swapScreenLoaded === true)
         {
             return this.router.navigate[('/tabbar')];
-
+    
         }else {
             return true;
         }   
+    });
+
+        return true;
  }
 }

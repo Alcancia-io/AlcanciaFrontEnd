@@ -23,29 +23,36 @@
             </ion-col>
             <ion-col size="auto">
               <ion-card-content> 
-                  <ion-item class="item-content"> 
-                    <ion-input position="floating" placeholder="Nombre" type="text" [(ngModel)]="name"></ion-input>
+                <form [formGroup]="exform">
+                  <ion-item class="item-content form-group"> 
+                    <ion-input formControlName="name" position="floating" placeholder="Nombre" type="text" ></ion-input>
                   </ion-item>
                   <br/>
                   <br/>
                   <ion-item class="item-content">
-                    <ion-input position="floating" placeholder="Correo electrónico" type="text" [(ngModel)]="email"></ion-input>
+                    <ion-input formControlName="email" position="floating" placeholder="Correo electrónico" type="text" ></ion-input>
                   </ion-item>
                   <br/>
                   <br/>
                   <ion-item class="item-content">
-                    <ion-input position="floating" placeholder="Contraseña" type="password" [(ngModel)]="password"></ion-input>
+                    <ion-input formControlName="password" position="floating" placeholder="Contraseña" type="password"></ion-input>
                   </ion-item> 
+                  <!-- <div *ngFor="let error of errorMessages.password">
+                    <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
+                      <small class="error-message">{{error.message}}</small>
+                    </ng-container>
+                  </div> -->
                   <br/>
                   <br/>
                   <ion-item class="item-content">
-                    <ion-input position="floating" placeholder="Repite tu contraseña" type="password" [(ngModel)]="confirmPassword" (ionChange)="checkPassword()"></ion-input>
+                    <ion-input  formControlName="confirmPassword" position="floating" placeholder="Repite tu contraseña" type="password"  (ionChange)="checkPassword()"></ion-input>
                   </ion-item> 
+                </form> 
               </ion-card-content>
             </ion-col>
             <ion-col size="auto">
               <div>
-                <ion-text *ngIf="password && !passwordMatch" color="danger" >La constraseña no coincide!</ion-text>
+                <ion-text *ngIf="passwordMatch" color="danger" >La constraseña no coincide!</ion-text>
                 <app-arrow-button class="arrow-btn" expand="block" shape="round" color="warning" (click)="signup()"></app-arrow-button>
               </div>
             </ion-col>

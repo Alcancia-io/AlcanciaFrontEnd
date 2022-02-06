@@ -11,6 +11,7 @@ import { UserModel } from '../../models/userModel';
 import { User } from '../../models/user';
 import { Exchange } from '../../models/exchange';
 import { USER_NAME } from 'src/app/guards/auth.guard';
+import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-swap',
   templateUrl: './swap.page.html',
@@ -40,8 +41,8 @@ export class SwapPage implements OnInit {
     private router: Router,
     private exchangeService: ExchangeService,
     private firestore: AngularFirestore,
-    private fireAuth: AngularFireAuth
-
+    private fireAuth: AngularFireAuth,
+    private userService: UserService
   ) { }
   
   ngOnInit() {
@@ -49,23 +50,13 @@ export class SwapPage implements OnInit {
   }
 
   async updateUserSwapInteraction(){ 
-
-    const userName = 'Sebastian';
-
-    this.firestore
-    .collection("users",ref=>ref.where("name","==", userName))
-    .get()
-    .subscribe(data=>data.forEach(user=> {
-      this.userModel = user.data();   
-      if(!this.userModel.swapScreenLoaded || this.userModel.swapScreenLoaded === false) {
-        this.firestore.collection('users').doc(this.userModel.userId).update({
+    this.userService.getUser().then(user => {
+      if(!user.swapScreenLoaded || user.swapScreenLoaded === false){
+        this.firestore.collection('users').doc(user.userId).update({
           'swapScreenLoaded': true,
         }); 
-      }else{
-        this.router.navigate(['/main-screen']);
-      } 
-    }));
-    
+      }
+    });
   } 
      
   openInNewTab(href) {
@@ -84,6 +75,10 @@ export class SwapPage implements OnInit {
     });
  
     toast.present();
+   }
+
+   backtoMenu(){
+     this.router.navigate(['/']);
    }
 
   async calculateExchange(){

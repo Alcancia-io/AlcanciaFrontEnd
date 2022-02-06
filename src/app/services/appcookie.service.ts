@@ -21,6 +21,7 @@ export class AppCookieService {
   }
 
   get(key: string) {
+      // this.set(key, '');
       this.parseCookies();
       return !!this.cookieStore[key] ? this.cookieStore[key] : null;
   }

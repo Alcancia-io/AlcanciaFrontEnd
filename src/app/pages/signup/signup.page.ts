@@ -7,6 +7,7 @@ import { AppCookieService } from '../../services/appcookie.service';
 import { USER_NAME } from 'src/app/guards/auth.guard';
 import { UserModel } from '../../models/userModel';
 import { UserService } from '../../services/user.service';
+import { FormGroup, Validators,FormBuilder, ReactiveFormsModule, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -15,12 +16,9 @@ import { UserService } from '../../services/user.service';
 })
 export class SignupPage implements OnInit {
 
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  user: UserModel;
   passwordMatch: boolean;
+  
+  exform: FormGroup;
 
   constructor(
     private afs: AngularFirestore,
@@ -32,11 +30,36 @@ export class SignupPage implements OnInit {
     private userService: UserService
   ) { }
 
+  public errorMessages = {
+    
+    name: [
+      { type: 'required', message: 'Email es requerido' },
+      { type: 'pattern', message: 'El formato de email no es correcto'}
+    ],
+    password: [
+      { type: 'required', message: 'Una contraseña es requerida' },
+      { type: 'minlength', message: 'Debe tener una longitud minima de 8 caracteres'}
+    ],
+    confirmPassword: [
+      { type: 'required', message: 'La confirmacion de contraseña es requerida' },
+      { type: 'mustMatch', message: 'La contraseña de confirmacion debe coincidir con la contraseña' }
+
+    ]
+  };
+
   ngOnInit() {
+    
+    this.exform = new FormGroup({
+      'name': new FormControl(null, Validators.required),
+      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'password': new FormControl(null, [Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'), Validators.minLength(8)]),
+      'confirmPassword': new FormControl(null,[Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'), Validators.minLength(8)]),
+    })
   }
 
+  
   async signup(){
-    if (this.name && this.email && this.password) {
+    if (this.exform.value.name && this.exform.value.email && this.exform.value.password) {
       const loading = await this.loadingCtrl.create({
         message: 'Loading...',
         spinner: 'crescent',
@@ -45,12 +68,12 @@ export class SignupPage implements OnInit {
 
       loading.present();
 
-      this.fireAuth.createUserWithEmailAndPassword(this.email, this.password).then((resp) => {
+      this.fireAuth.createUserWithEmailAndPassword(this.exform.value.email, this.exform.value.password).then((resp) => {
 
         this.afs.collection('users').doc(resp.user.uid).set({
           'userId': resp.user.uid,
-          'name': this.name,
-          'email': this.email,  
+          'name': this.exform.value.name,
+          'email': this.exform.value.email,  
           'swapScreenLoaded': false,
           'balance': 0,
           'createdAt': Date.now()
@@ -59,7 +82,7 @@ export class SignupPage implements OnInit {
           resp.user.sendEmailVerification();
         }).then(() => {
           loading.dismiss();
-          this.appCookie.set(USER_NAME,`${this.name}`);
+          this.appCookie.set(USER_NAME,`${this.exform.value.name}`);
           this.toast('Se envio un email de confirmacion a su correo electrónico', 'success');
           this.router.navigate(['/login']);
         })
@@ -76,11 +99,11 @@ export class SignupPage implements OnInit {
   //   await this.userService.addUserData(theUser);
   // }
 
-  checkPassword() {
-    if(this.password == this.confirmPassword) {
-      this.passwordMatch = true;
-    } else {
+  checkPassword() { 
+    if(this.exform.value.password === this.exform.value.confirmPassword) {
       this.passwordMatch = false;
+    } else {
+      this.passwordMatch = true;
     }
   }
 

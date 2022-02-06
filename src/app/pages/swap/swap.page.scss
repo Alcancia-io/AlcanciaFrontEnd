@@ -7,6 +7,7 @@ ion-content{
 ion-button{ 
     --background:#FEDC56;
 }
+
 .welcome-msg{
     padding-left: 5%;
     font-size: 38px;
@@ -57,6 +58,14 @@ ion-button{
 
 span{
     float: right;
+}
+
+.backMainMenuBtn{
+    --background: #3453C3;
+}
+
+.backarrow{
+    height: 100px;
 }
 
 .convert-btn{ 

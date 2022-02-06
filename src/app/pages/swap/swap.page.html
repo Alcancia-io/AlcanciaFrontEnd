@@ -1,4 +1,7 @@
 <ion-app> 
+  <ion-header  no-border>
+    <app-top-navigation-toolbar></app-top-navigation-toolbar>
+  </ion-header>
   <ion-content> 
     <p class="welcome-msg">¡Empecemos!</p> 
     <ion-card class="box-shadow">
@@ -40,6 +43,13 @@
     </ion-card>
     <br/>
     <ion-button fill="clear" class="whattodo-btn"><p>¿Qué me toca hacer aca?</p></ion-button>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <ion-button class="backMainMenuBtn" shape="round" (click)="backtoMenu()" ><ion-icon class="backarrow" name="arrow-back-outline"></ion-icon></ion-button>
   </ion-content>
  
 </ion-app>

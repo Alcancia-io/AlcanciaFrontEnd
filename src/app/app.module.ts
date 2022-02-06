@@ -8,12 +8,12 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //firebase
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule} from '@angular/fire/compat/firestore';
-import {  AngularFireAuthModule } from "@angular/fire/compat/auth";
+import {  AngularFireAuthModule, PERSISTENCE } from "@angular/fire/compat/auth";
 
 //env
 import { environment } from 'src/environments/environment';
@@ -41,6 +41,7 @@ import { UniversalAppInterceptor } from './UniversalAppInterceptor';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    ReactiveFormsModule,
     IonicStorageModule.forRoot({
       name: "AlcanciaLocalStorage"
     })
@@ -52,7 +53,8 @@ import { UniversalAppInterceptor } from './UniversalAppInterceptor';
     AuthorizeGuard,
     NegateAuthorizeGuard,
     SwapGuard,
-    { provide: HTTP_INTERCEPTORS, useClass: UniversalAppInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: UniversalAppInterceptor, multi: true,  },
+    { provide: PERSISTENCE, useValue: 'NONE' }
   ],
   bootstrap: [AppComponent],
 })
