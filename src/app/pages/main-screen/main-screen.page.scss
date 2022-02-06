@@ -141,5 +141,80 @@ ion-list{
    font-size: 60px;
  } 
 }
+@media only screen and (max-width: 414px) {
+  ion-content{
+    font-size: 16px;
+  }
+  .image{
+    width: 90%;
+  }
+ .p{
+   font-size: 60px;
+ } 
+
+ .deposit-btn{
+  text-align: left;
+  float: left; 
+  margin-top: -85px;
+  --background: #FFFF;
+  color: #3554C4; 
+  margin-left: 5px;
+}
+.total-investment-value{
+  font-size: 34px;
+  margin-left: -207px;
+  margin-top: 3px;
+}
+}
+@media only screen and (max-width: 393px) {
+  ion-content{
+    font-size: 16px;
+  }
+  .image{
+    width: 90%;
+  }
+ .p{
+   font-size: 60px;
+ } 
+
+ .deposit-btn{
+  text-align: left;
+  float: left; 
+  margin-top: -82px;
+  --background: #FFFF;
+  color: #3554C4; 
+  margin-left: -12px;
+}
+.total-investment-value{
+  font-size: 34px;
+  margin-left: -207px;
+  margin-top: 3px;
+}
+}
+@media only screen and (max-width: 390px) {
+  ion-content{
+    font-size: 16px;
+  }
+  .image{
+    width: 90%;
+  }
+ .p{
+   font-size: 60px;
+ } 
+
+ .deposit-btn{
+  text-align: left;
+  float: left; 
+  margin-top: -87px;
+  --background: #FFFF;
+  color: #3554C4; 
+  margin-left: 5px;
+}
+.total-investment-value{
+  font-size: 34px;
+  margin-left: -207px;
+  margin-top: 3px;
+}
+}
 
 
