@@ -125,7 +125,7 @@ export class SwapPage implements OnInit {
        this.router.navigate(['/bitcoin-deposit'], { replaceUrl:true });
       
     } else {
-      this.toast('Porfavor seleccionar el tipo de moneda y el monto', 'danger');
+      this.toast('Porfavor seleccionar el tipo de moneda y el monto', 'danger'); 
     }
 
     
