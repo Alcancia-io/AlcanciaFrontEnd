@@ -34,8 +34,7 @@ export class MainScreenPage implements OnInit {
   ) { }
 
   ngOnInit() { 
-    this.getUserData(); 
-    this.getUserTransactions();
+    this.doFetch();
   }
 
   async getUserData(){
@@ -55,6 +54,21 @@ export class MainScreenPage implements OnInit {
   async logout() {
     this.presentAlertConfirm();
     
+  }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.doFetch();
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      
+      event.target.complete();
+    }, 2000);
+  }
+
+  doFetch(){
+    this.getUserData();
+    this.getUserTransactions();
   }
 
   async getUser(){

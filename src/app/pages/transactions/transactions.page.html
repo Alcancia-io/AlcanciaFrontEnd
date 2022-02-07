@@ -4,10 +4,12 @@
  
 <!-- List of Text Items -->
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher> 
   <li style="list-style: none;" *ngFor="let transation  of transationHistory">
     <ion-card>
-      <ion-item>
-       
+      <ion-item> 
           <h3> <img src="../../../assets/Icon awesome-coins.png"> {{transation.id}}  </h3>
         <ion-label></ion-label>
         <!-- <ion-button fill="outline" slot="end">Ver</ion-button> -->

@@ -10,6 +10,20 @@ export class TransactionsPage implements OnInit {
   constructor(private transactionService: TransactionService) { }
   transationHistory: Array<any>;
   ngOnInit() {
+    this.doFetch();
+  }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.doFetch();
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      
+      event.target.complete();
+    }, 2000);
+  }
+
+  doFetch(){
     this.getUserTransactions();
   }
 
