@@ -32,8 +32,9 @@ const routes: Routes = [
   //   redirectTo: '/login',
   //   pathMatch: 'full'
   // },
+  
   // {
-  //   path: 'nav/swap',
+  //   path: 'swap',
   //   loadChildren: () => import('./pages/swap/swap.module').then( m => m.SwapPageModule),
   //   canLoad: [SwapGuard,AuthorizeGuard]
   // },
