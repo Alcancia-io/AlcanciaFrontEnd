@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ConfirmOrder } from 'src/app/models/paypalOrder';
 import { CreateOrder } from '../../../models/paypalOrder';
 import { ALCANCIA_SERVER_URL } from "src/environments/environment";
+import { TokenService } from '../../../services/token.service';
 declare var paypal;
 
 @Component({
@@ -21,7 +22,8 @@ export class PaypalPaymentOptionsComponent implements OnInit {
   constructor(
     private paypalService: PaypalService, 
     private router: Router,
-    private toastr:  ToastController
+    private toastr:  ToastController,
+    private tokenService: TokenService
     ) { }
   
    orderToken: ConfirmOrder;
@@ -34,20 +36,26 @@ export class PaypalPaymentOptionsComponent implements OnInit {
           const createorder = new CreateOrder();
           createorder.amount = this.amount;  
 
-          return fetch(`${ALCANCIA_SERVER_URL}/deposits/create-order`, {
-            method: 'post'
-            }).then(res => {
-              console.log(res);
-              return res.json();
-            })  
-            .then(function(orderData) { 
-                return orderData.id;
-            });
-          // this.paypalService.createOrder(createorder).then(resp => {
-          //   fetch
-          //   return resp.orderId;
-          
+          // return this.paypalService.createOrder(createorder).then(resp => {
+          //   return resp.json();
+          // }).then(function(orderData){
+          //   return orderData.id;
           // });
+          const token = this.tokenService.getToken(); 
+          return fetch(`${ALCANCIA_SERVER_URL}/deposits/create-order`, {
+            method: 'POST', // or 'PUT'
+            body: JSON.stringify(createorder), // data can be `string` or {object}!
+            headers:{
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            }
+          }).then(res => { 
+            return res.json();
+          })  
+          .then(function(orderData) { 
+              return orderData.id;
+          });
+          
           // const orderDetails = actions.order.create({
           //   purchase_units: [
           //     {

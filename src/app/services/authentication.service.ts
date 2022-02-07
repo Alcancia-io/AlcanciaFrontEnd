@@ -91,7 +91,7 @@ export class AuthenticationService {
                 if(!user.swapScreenLoaded || user.swapScreenLoaded === false){
                   this.router.navigate(['/swap']);
                 }else{
-                  this.router.navigate(['/tabbar']);
+                  this.router.navigate(['/']);
                 }
               });
              

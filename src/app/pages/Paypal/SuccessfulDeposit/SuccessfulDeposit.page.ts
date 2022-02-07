@@ -37,12 +37,10 @@ export class SuccessfulComponent implements OnInit {
     this.Name = transactionDetailData.response.payer.name.given_name;
     this.surname = transactionDetailData.response.payer.name.surname;
     this.TotalAmount = transactionDetailData.response.gross_amount;
-    this.NetAmount = transactionDetailData.response.net_amount;
-    this.PaypalFee = transactionDetailData.response.payapal_fee;
   }
 
   backToMainMenu() {
-    this.router.navigate(['/tabbar']);
+    this.router.navigate(['/']);
   }
 
    

@@ -16,13 +16,9 @@ export class PaypalRepository{
 
   async createOrder(theOrder: CreateOrder): Promise<any>{
     return new Promise((resolver) => {
-      let subscription: Subscription;
-      subscription = this.httpClientModule.post(ALCANCIA_SERVER_URL + '/deposits/create-order', theOrder)
+   this.httpClientModule.post(ALCANCIA_SERVER_URL + '/deposits/create-order', theOrder)
           .subscribe(reponse => {
-            if (subscription) {
-              subscription.unsubscribe();
-            }
-            resolver( Object.assign(reponse));
+             
             return reponse;
           });
     });

@@ -114,8 +114,11 @@ export class SwapPage implements OnInit {
       const newPaypalOrder = new CreateOrder();
       newPaypalOrder.amount = Math.round(Number(this.originAmout)).toString();
       newPaypalOrder.currency_code = this.ToCurrencyCode;
-
-      this.router.navigate(['/paypalpaymentoptions'], {state: {data: {newPaypalOrder}}});
+    
+      this.router.navigate(['/nav/paypalpaymentoptions'], {state: {data: {newPaypalOrder}}});
+      this.Amount = 0;
+      this.FromCurrencyCode = ''; 
+      this.ExchangeTotal = ''; 
       loading.dismiss();
     } else if (this.Amount && this.FromCurrencyCode === "BTC" && this.ToCurrencyCode ) {
        this.router.navigate(['/bitcoin-deposit'], { replaceUrl:true });

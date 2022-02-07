@@ -20,6 +20,10 @@ const routes: Routes = [
       {
         path: 'swap',
         loadChildren: () => import('../swap/swap.module').then(m => m.SwapPageModule) 
+      }, 
+      {
+        path: 'paypalpaymentoptions',
+        loadChildren: () => import('../paypalpaymentoptions/paypalpaymentoptions.module').then(m => m.PaypalpaymentoptionsPageModule) 
       },
       {
         path: '',

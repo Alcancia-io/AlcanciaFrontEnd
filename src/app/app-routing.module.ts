@@ -47,11 +47,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/Paypal/SuccessfulDeposit/SuccessfulDeposit-routing.module').then( m => m.SuccefulDepositRoutingModule),
     canLoad: [AuthorizeGuard]
   }, 
-  {
-    path: 'paypalpaymentoptions',
-    loadChildren: () => import('./pages/paypalpaymentoptions/paypalpaymentoptions.module').then( m => m.PaypalpaymentoptionsPageModule),
-    canLoad: [AuthorizeGuard]
-  },
+  // {
+  //   path: 'paypalpaymentoptions',
+  //   loadChildren: () => import('./pages/paypalpaymentoptions/paypalpaymentoptions.module').then( m => m.PaypalpaymentoptionsPageModule),
+  //   canLoad: [AuthorizeGuard]
+  // },
   {
     path: 'tabbar',
     loadChildren: () => import('./pages/tab-bar/tab-bar.module').then(m => m.TabBarPageModule),

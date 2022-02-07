@@ -1,12 +1,18 @@
  
 <ion-app>
-  <ion-header>
-    <h1>Seleccione una de las siguientes opciones: </h1>
+  <ion-header  no-border>
+    <app-top-navigation-toolbar></app-top-navigation-toolbar>
   </ion-header>
   <ion-content>
-    <app-paypalPaymentOptions  [amount]='depositAmount'></app-paypalPaymentOptions>
-    </ion-content>
-    <app-navigation-toolbar>
-    </app-navigation-toolbar>
+    <h1 class="tittle">Seleccione una de las siguientes opciones: </h1><br/>
+    <app-paypalPaymentOptions class="paymentoption" [amount]='depositAmount'></app-paypalPaymentOptions>
+   
+    
+  </ion-content>  
+  <ion-content class="cancel-content">
+    
+    <ion-button class="cancelbtn" shape="round" (click)="backToSwap()" >Cancelar</ion-button>
+  </ion-content>
+  
 </ion-app>
 
