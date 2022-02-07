@@ -89,7 +89,7 @@ export class AuthenticationService {
                 this.sectionStorage.saveData("Username", user.name);
 
                 if(!user.swapScreenLoaded || user.swapScreenLoaded === false){
-                  this.router.navigate(['/swap']);
+                  this.router.navigate(['/nav/swap']);
                 }else{
                   this.router.navigate(['/']);
                 }
