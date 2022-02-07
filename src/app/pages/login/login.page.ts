@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core'; 
 import { Router } from '@angular/router';
 import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -10,6 +9,8 @@ import { USER_NAME } from 'src/app/guards/auth.guard';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { StringLike } from '@firebase/util';
 import { loadingController } from '@ionic/core';
+import { FormGroup, Validators,FormBuilder, ReactiveFormsModule, FormControl } from '@angular/forms';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -17,22 +18,35 @@ import { loadingController } from '@ionic/core';
 })
 
 export class LoginPage implements OnInit {
-
-  email: string;
-  password: string;
+ 
   aUsername: string;
+  exform: FormGroup;
 
-  constructor(
-    private formBuilder: FormBuilder,
+  constructor( 
     private authService: AuthenticationService,
     private alertController: AlertController,
     private router: Router,
     private loadingController: LoadingController,
     private appCookie: AppCookieService,
-    private toastr:  ToastController
+    private toastr:  ToastController,
+    private formBuilder: FormBuilder
   ) { }
 
+  public errorMessages = {
+    email: [
+      { type: 'required', message: 'Email es requerido' },
+      { type: 'pattern', message: 'El formato de email no es correcto'}
+    ],
+    password: [
+      { type: 'required', message: 'Una contraseña es requerida' }
+    ],
+  }
+
   ngOnInit() {
+    this.exform = new FormGroup({
+      'email': new FormControl(null, Validators.required),
+      'password': new FormControl(null,[Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'), Validators.minLength(8)] )
+    })
     this.getUsername();
   }
 
@@ -64,7 +78,7 @@ export class LoginPage implements OnInit {
   }
 
   async login(){
-    if (this.email && this.password) {
+    if (this.exform.value.email && this.exform.value.password) {
       const loading = await loadingController.create({
           message: 'Iniciando Seccion...',
           spinner: 'crescent',
@@ -73,7 +87,7 @@ export class LoginPage implements OnInit {
 
       loading.present();
 
-      this.authService.login(this.email, this.password)
+      this.authService.login(this.exform.value.email, this.exform.value.password)
           .then(() => {
             loading.dismiss();
           })

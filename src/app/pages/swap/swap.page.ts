@@ -12,6 +12,7 @@ import { User } from '../../models/user';
 import { Exchange } from '../../models/exchange';
 import { USER_NAME } from 'src/app/guards/auth.guard';
 import { UserService } from '../../services/user.service';
+import { DecimalPipe } from '@angular/common';
 @Component({
   selector: 'app-swap',
   templateUrl: './swap.page.html',
@@ -89,11 +90,11 @@ export class SwapPage implements OnInit {
       exchange.ToCurrency = this.ToCurrencyCode;
 
       this.exchangeService.exchangeCurrency(exchange).then((response) => {
-        const result = this.Amount * response.conversion_rate; 
+        const result: number = this.Amount * response.conversion_rate; 
         this.originAmout = result.toString();
-        const withFee = result * this.Fee;
-        const finalResult = result;
-        this.ExchangeTotal = Math.round(finalResult).toString();
+        const withFee: number = result * this.Fee;
+        const finalResult = Number.parseFloat(result.toString()).toFixed(3);
+        this.ExchangeTotal =  finalResult.toString();
       }).catch((error) => {
         console.log(error);
       }); 

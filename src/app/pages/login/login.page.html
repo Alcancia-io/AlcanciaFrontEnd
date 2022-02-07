@@ -17,17 +17,27 @@
       </div>
       </ion-card-header>
       <ion-card-content>  
-        <div class="form-content">
-          <ion-item class="item-content">
-          <ion-input position="floating" placeholder="Correo electrónico" type="text" [(ngModel)]="email"></ion-input>
-          </ion-item> 
-          <br/>
-          <ion-item class="item-content">
-            <ion-input position="floating" placeholder="Contraseña" type="password" [(ngModel)]="password"></ion-input>
-          </ion-item> 
-        </div>
-           
-           
+        <form [formGroup]="exform">
+          <div class="form-content">
+            <ion-item class="item-content">
+            <ion-input  formControlName="email" position="floating" placeholder="Correo electrónico" type="text" ></ion-input>
+            </ion-item> 
+            <div *ngFor="let error of errorMessages.email">
+              <ng-container *ngIf="exform.get('email').hasError(error.type) && (exform.get('email').dirty || exform.get('email').touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+            <br/>
+            <ion-item class="item-content">
+              <ion-input formControlName="password" position="floating" placeholder="Contraseña" type="password"></ion-input>
+            </ion-item> 
+            <div *ngFor="let error of errorMessages.password">
+              <ng-container *ngIf="exform.get('password').hasError(error.type) && (exform.get('password').dirty || exform.get('password').touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+        </form> 
        <br>
        <br>
        <br>
