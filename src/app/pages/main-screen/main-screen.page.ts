@@ -37,6 +37,11 @@ export class MainScreenPage implements OnInit {
     this.doFetch();
   }
 
+  //Everytime the page is opened this is runned 
+  ionViewWillEnter() {
+    this.doFetch();
+  }
+
   async getUserData(){
    
      this.aUsername = this.sectionStorageService.getData("Username"); 
