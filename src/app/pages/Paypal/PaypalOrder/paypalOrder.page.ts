@@ -20,9 +20,9 @@ export class PaypalOrderPage implements OnInit {
     let confirmToken = new ConfirmOrder();
 
     confirmToken.orderToken = token;
-    this.paypalService.confirmOrder(confirmToken).then(response =>{
+    // this.paypalService.confirmOrder(confirmToken).then(response =>{
          
-    }); 
+    // }); 
     
   }
    

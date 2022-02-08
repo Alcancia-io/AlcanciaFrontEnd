@@ -7,6 +7,7 @@ import { ConfirmOrder } from 'src/app/models/paypalOrder';
 import { CreateOrder } from '../../../models/paypalOrder';
 import { ALCANCIA_SERVER_URL } from "src/environments/environment";
 import { TokenService } from '../../../services/token.service';
+import { HttpErrorResponse, HttpClient, HttpResponse } from '@angular/common/http';
 declare var paypal;
 
 @Component({
@@ -23,7 +24,8 @@ export class PaypalPaymentOptionsComponent implements OnInit {
     private paypalService: PaypalService, 
     private router: Router,
     private toastr:  ToastController,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private httpClientModule: HttpClient
     ) { }
   
    orderToken: ConfirmOrder;
@@ -50,6 +52,7 @@ export class PaypalPaymentOptionsComponent implements OnInit {
               'Authorization': `Bearer ${token}`
             }
           }).then(res => { 
+            console.log(res.status)
             return res.json();
           })  
           .then(function(orderData) { 
@@ -81,12 +84,21 @@ export class PaypalPaymentOptionsComponent implements OnInit {
  
 
           this.orderToken = new ConfirmOrder();
-          this.orderToken.orderToken = data.orderID;
-          
-          this.paypalService.confirmOrder(this.orderToken).then(response =>{
-            loading.dismiss();
-            this.router.navigate(['/paypalOrder/successfull'],{state: {data: {response}}});
-        });  
+          this.orderToken.orderToken = data.orderID; 
+            let Promise1 = new Promise((resolver) => {
+              this.httpClientModule.post<HttpResponse<any>>(ALCANCIA_SERVER_URL + '/deposits/execute-order', this.orderToken)
+                     .subscribe(response => {
+                    
+                      resolver( Object.assign(response));
+                      loading.dismiss(); 
+                      this.router.navigate(['/paypalOrder/successfull'],{state: {data: {response}}});
+                     },
+                     (err: HttpErrorResponse) => { 
+                      loading.dismiss();
+                      this.router.navigate(['/paymenterror']);
+                        return err;
+                      });
+               });  
           this.paidFor = true; 
         },
         onError: err => {

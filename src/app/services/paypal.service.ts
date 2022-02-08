@@ -17,7 +17,7 @@ export class PaypalService {
         return await this.paypalRespository.createOrder(theOrder);
     }
 
-    async confirmOrder(theConfirmOrder: ConfirmOrder) {
-        return await this.paypalRespository.confirmOrder(theConfirmOrder);
-    } 
+    // async confirmOrder(theConfirmOrder: ConfirmOrder) {
+    //     return await this.paypalRespository.confirmOrder(theConfirmOrder);
+    // } 
 } 
