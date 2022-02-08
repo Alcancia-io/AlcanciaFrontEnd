@@ -93,7 +93,7 @@ export class SwapPage implements OnInit {
         const result: number = this.Amount * response.conversion_rate; 
         this.originAmout = result.toString();
         const withFee: number = result * this.Fee;
-        const finalResult = Number.parseFloat(result.toString()).toFixed(3);
+        const finalResult = Number.parseFloat(result.toString()).toFixed(2);
         this.ExchangeTotal =  finalResult.toString();
       }).catch((error) => {
         console.log(error);
@@ -113,7 +113,8 @@ export class SwapPage implements OnInit {
 
       loading.present();
       const newPaypalOrder = new CreateOrder();
-      newPaypalOrder.amount = Math.round(Number(this.originAmout)).toString();
+      newPaypalOrder.amount = Number.parseFloat(this.originAmout.toString()).toFixed(2);
+      console.log(newPaypalOrder.amount)
       newPaypalOrder.currency_code = this.ToCurrencyCode;
     
       this.router.navigate(['/nav/paypalpaymentoptions'], {state: {data: {newPaypalOrder}}});
