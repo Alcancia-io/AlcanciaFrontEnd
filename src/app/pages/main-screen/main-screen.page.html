@@ -17,15 +17,23 @@
       <ion-row> 
         <ion-col>
           <ion-card class="investment-card"> 
+            <ion-grid>
             <ion-card-tittle>
               <h5 class="card-tittle">Ahorro Total</h5>
             </ion-card-tittle> 
-            <div   style="width: 100px; float:left; margin:10px; padding-top: 25px;">
-             <span class="total-investment-value" >{{aTotalInvestment}}$</span> 
-            </div> 
-            <div class=" " style="width: 100px; float:right; margin:10px; margin-right: 25px; margin-top: 35px">
-              <ion-button class="deposit-btn"  (click)="deposit()">Depositar</ion-button>
-            </div> 
+            <ion-col>
+
+              <div   style="width: 100px; float:left; margin:10px; padding-top: 25px;">
+               <span class="total-investment-value" >{{aTotalInvestment}}$</span> 
+              </div> 
+            </ion-col>
+            <ion-col>
+
+              <div class=" " style="width: 100px; float:right; margin:10px; margin-right: 25px; margin-top: 35px">
+                <ion-button class="deposit-btn"  (click)="deposit()">Depositar</ion-button>
+              </div> 
+            </ion-col>
+          </ion-grid>
           </ion-card>
         </ion-col> 
     </ion-row>
