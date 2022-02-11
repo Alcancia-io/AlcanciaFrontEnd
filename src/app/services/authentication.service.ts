@@ -85,14 +85,20 @@ export class AuthenticationService {
             if(user){  
               this.sectionStorage.saveData("UserId", user.uid);
               this.userService.getUser().then(user => {
-                this.sectionStorage.saveData("UserEmail", user.email); 
-                this.sectionStorage.saveData("Username", user.name);
 
-                if(!user.swapScreenLoaded || user.swapScreenLoaded === false){
-                  this.router.navigate(['/nav/swap']);
-                }else{
-                  this.router.navigate(['/']);
+                if(user.name == undefined || user.surname == undefined){
+                  this.router.navigate(['/recoveruser']);
+                }else {
+                  this.sectionStorage.saveData("UserEmail", user.email); 
+                  this.sectionStorage.saveData("Username", user.name);
+  
+                  if(!user.swapScreenLoaded || user.swapScreenLoaded === false){
+                    this.router.navigate(['/nav/swap']);
+                  }else{
+                    this.router.navigate(['/']);
+                  }
                 }
+                
               });
              
             } 

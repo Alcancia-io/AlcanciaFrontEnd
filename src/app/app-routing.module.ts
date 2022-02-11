@@ -62,14 +62,16 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./pages/sidenav/sidenav.module').then( m => m.SidenavPageModule),
     canLoad: [AuthorizeGuard]
-  },
-  // {
-  //   path: 'recoverusername',
-  //   loadChildren: () => import('./pages/recoverusername/recoverusername.module').then( m => m.RecoverusernamePageModule)
-  // },
+  }, 
   {
     path: 'paymenterror',
-    loadChildren: () => import('./pages/paymenterror/paymenterror.module').then( m => m.PaymenterrorPageModule)
+    loadChildren: () => import('./pages/paymenterror/paymenterror.module').then( m => m.PaymenterrorPageModule),
+    canLoad: [AuthorizeGuard]
+  },
+  {
+    path: 'recoveruser',
+    loadChildren: () => import('./pages/recoveruser/recoveruser.module').then( m => m.RecoveruserPageModule),
+    canLoad: [AuthorizeGuard]
   }
 
 ];

@@ -36,6 +36,9 @@ export class SignupPage implements OnInit {
     name: [
       { type: 'required', message: 'Nombre es requerido' }
     ],
+    surname: [
+      { type: 'required', message: 'Apellidos es requerido' }
+    ],
     email: [
       { type: 'required', message: 'Email es requerido' },
       { type: 'pattern', message: 'El formato de email no es correcto'}
@@ -55,6 +58,7 @@ export class SignupPage implements OnInit {
     
     this.exform = new FormGroup({
       'name': new FormControl(null, Validators.required),
+      'surname': new FormControl(null, Validators.required),
       'email': new FormControl(null, [Validators.required, Validators.email]),
       'password': new FormControl(null, [Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'), Validators.minLength(8)]),
       'confirmPassword': new FormControl(null,[Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'), Validators.minLength(8)]),
@@ -77,6 +81,7 @@ export class SignupPage implements OnInit {
         this.afs.collection('users').doc(resp.user.uid).set({
           'userId': resp.user.uid,
           'name': this.exform.value.name,
+          'surname': this.exform.value.surname,
           'email': this.exform.value.email,  
           'swapScreenLoaded': false,
           'balance': 0,

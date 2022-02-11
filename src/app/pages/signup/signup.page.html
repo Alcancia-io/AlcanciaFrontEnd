@@ -31,6 +31,14 @@
                     <ng-container *ngIf="exform.get('name').hasError(error.type) && (exform.get('name').dirty || exform.get('name').touched)">
                       <small class="error-message">{{error.message}}</small>
                     </ng-container>
+                  </div><br/><br/>
+                  <ion-item class="item-content form-group"> 
+                    <ion-input formControlName="surname" position="floating" placeholder="Apellidos" type="text" ></ion-input>
+                  </ion-item>
+                  <div *ngFor="let error of errorMessages.surname">
+                    <ng-container *ngIf="exform.get('surname').hasError(error.type) && (exform.get('surname').dirty || exform.get('surname').touched)">
+                      <small class="error-message">{{error.message}}</small>
+                    </ng-container>
                   </div>
                   <br/>
                   <br/>

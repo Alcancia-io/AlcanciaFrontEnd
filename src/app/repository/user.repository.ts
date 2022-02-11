@@ -9,6 +9,7 @@ import { AppCookieService } from '../services/appcookie.service';
 import { USER_NAME } from 'src/app/guards/auth.guard';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { SectionStorageService } from '../services/sectionStorage.service';
+import { RecoverUser } from '../models/revocerUserModel';
 const username = new UserModel();
 
 @Injectable({
@@ -60,13 +61,13 @@ export class UserRepository{
     });
   }
 
-  // async addUserData(theUser: UserModel) {
-  //   return this.httpClientModule.post<any>(ALCANCIA_SERVER_URL + '/users', theUser).subscribe(
-  //     user => {
-  //       console.log('user created' + user);
-  //     }, error => {
-  //       console.log('ErrorMessage', error);
-  //     }
-  //   );
-  // }
+  async recoverUserInfo(theUser: RecoverUser) {
+    return this.httpClientModule.put<any>(ALCANCIA_SERVER_URL + '/users', theUser).subscribe(
+      user => {
+        return true;
+      }, error => {
+        console.log('ErrorMessage', error);
+      }
+    );
+  }
 }
