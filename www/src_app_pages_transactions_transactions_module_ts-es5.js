@@ -200,6 +200,7 @@
           _classCallCheck(this, TransactionsPage);
 
           this.transactionService = transactionService;
+          this.transactionAvailable = true;
         }
 
         _createClass(TransactionsPage, [{
@@ -228,12 +229,15 @@
             var _this = this;
 
             this.transactionService.getUserTransactions().then(function (response) {
-              console.log(response);
-              response.forEach(function (item) {
-                var createdDate = new Date(item.create_time);
-                item.create_time = createdDate.toString().replace('GMT-0400 (Atlantic Standard Time)', '');
-              });
-              _this.transationHistory = response;
+              if (response.length == 0) {
+                _this.transactionAvailable == false;
+              } else {
+                response.forEach(function (item) {
+                  var createdDate = new Date(item.create_time);
+                  item.create_time = createdDate.toString().replace('GMT-0400 (Atlantic Standard Time)', '');
+                });
+                _this.transationHistory = response;
+              }
             })["catch"](function (error) {
               console.log(error);
             });
@@ -265,7 +269,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ0cmFuc2FjdGlvbnMucGFnZS5zY3NzIn0= */";
+      __webpack_exports__["default"] = ".notransactionMessage {\n  text-align: center;\n  margin-top: 10%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRyYW5zYWN0aW9ucy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxrQkFBQTtFQUNBLGVBQUE7QUFDSiIsImZpbGUiOiJ0cmFuc2FjdGlvbnMucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm5vdHJhbnNhY3Rpb25NZXNzYWdle1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBtYXJnaW4tdG9wOiAxMCU7XG59Il19 */";
       /***/
     },
 
@@ -277,7 +281,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header> \n    <app-top-navigation-toolbar>Historial Transaciones</app-top-navigation-toolbar> \n</ion-header>\n \n<!-- List of Text Items -->\n<ion-content>\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher> \n  <li style=\"list-style: none;\" *ngFor=\"let transation  of transationHistory\">\n    <ion-card>\n      <ion-item> \n          <h3> <img src=\"../../../assets/Icon awesome-coins.png\"> {{transation.id}}  </h3>\n        <ion-label></ion-label>\n        <!-- <ion-button fill=\"outline\" slot=\"end\">Ver</ion-button> -->\n      </ion-item>\n      <ion-item>\n        Fecha: {{transation.create_time}} <br/>\n        Monto Total: {{transation.gross_amount}} $ <br/>\n        <!-- Monto Neto: {{transation.net_amount}} $ -->\n      </ion-item>\n    \n      <ion-card-content>\n        {{transation.status}}\n      </ion-card-content>\n    </ion-card>\n  </li>\n</ion-content> \n\n\n";
+      __webpack_exports__["default"] = "<ion-header> \n    <app-top-navigation-toolbar>Historial Transaciones</app-top-navigation-toolbar> \n</ion-header>\n \n<!-- List of Text Items -->\n<ion-content>\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher> \n  <li style=\"list-style: none;\" *ngFor=\"let transation  of transationHistory\">\n    <ng-container *ngIf=\"!transactionAvailable\" >\n      <p class=\"notransactionMessage\">No hay transacciones para mostrar</p>\n    </ng-container>\n    <ion-card>\n      <ion-item> \n          <h3> <img src=\"../../../assets/Icon awesome-coins.png\"> {{transation.id}}  </h3>\n        <ion-label></ion-label>\n        <!-- <ion-button fill=\"outline\" slot=\"end\">Ver</ion-button> -->\n      </ion-item>\n      <ion-item>\n        Fecha: {{transation.create_time}} <br/>\n        Monto Total: {{transation.gross_amount}} $ <br/>\n        <!-- Monto Neto: {{transation.net_amount}} $ -->\n      </ion-item>\n    \n      <ion-card-content>\n        {{transation.status}}\n      </ion-card-content>\n    </ion-card>\n  </li>\n</ion-content> \n\n\n";
       /***/
     }
   }]);

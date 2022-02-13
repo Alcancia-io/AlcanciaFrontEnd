@@ -144,13 +144,15 @@ const routes = [
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_sidenav_sidenav_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/sidenav/sidenav.module */ 69145)).then(m => m.SidenavPageModule),
         canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
     },
-    // {
-    //   path: 'recoverusername',
-    //   loadChildren: () => import('./pages/recoverusername/recoverusername.module').then( m => m.RecoverusernamePageModule)
-    // },
     {
         path: 'paymenterror',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_paymenterror_paymenterror_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/paymenterror/paymenterror.module */ 26685)).then(m => m.PaymenterrorPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_paymenterror_paymenterror_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/paymenterror/paymenterror.module */ 26685)).then(m => m.PaymenterrorPageModule),
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
+    },
+    {
+        path: 'recoveruser',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_recoveruser_recoveruser_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/recoveruser/recoveruser.module */ 97233)).then(m => m.RecoveruserPageModule),
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
     }
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -666,6 +668,15 @@ let UserRepository = class UserRepository {
             });
         });
     }
+    recoverUserInfo(theUser) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            return this.httpClientModule.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL + '/users', theUser).subscribe(user => {
+                return true;
+            }, error => {
+                console.log('ErrorMessage', error);
+            });
+        });
+    }
 };
 UserRepository.ctorParameters = () => [
     { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_5__.AngularFirestore },
@@ -822,13 +833,18 @@ let AuthenticationService = class AuthenticationService {
                         if (user) {
                             this.sectionStorage.saveData("UserId", user.uid);
                             this.userService.getUser().then(user => {
-                                this.sectionStorage.saveData("UserEmail", user.email);
-                                this.sectionStorage.saveData("Username", user.name);
-                                if (!user.swapScreenLoaded || user.swapScreenLoaded === false) {
-                                    this.router.navigate(['/nav/swap']);
+                                if (user.name == undefined || user.surname == undefined) {
+                                    this.router.navigate(['/recoveruser']);
                                 }
                                 else {
-                                    this.router.navigate(['/']);
+                                    this.sectionStorage.saveData("UserEmail", user.email);
+                                    this.sectionStorage.saveData("Username", user.name);
+                                    if (!user.swapScreenLoaded || user.swapScreenLoaded === false) {
+                                        this.router.navigate(['/nav/swap']);
+                                    }
+                                    else {
+                                        this.router.navigate(['/']);
+                                    }
                                 }
                             });
                         }
@@ -1006,6 +1022,11 @@ let UserService = class UserService {
     getUser() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
             return yield this.userRepository.getUser();
+        });
+    }
+    recoverUser(theUser) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return yield this.userRepository.recoverUserInfo(theUser);
         });
     }
 };

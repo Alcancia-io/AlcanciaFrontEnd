@@ -271,11 +271,7 @@
           });
         },
         canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
-      }, // {
-      //   path: 'recoverusername',
-      //   loadChildren: () => import('./pages/recoverusername/recoverusername.module').then( m => m.RecoverusernamePageModule)
-      // },
-      {
+      }, {
         path: 'paymenterror',
         loadChildren: function loadChildren() {
           return __webpack_require__.e(
@@ -285,7 +281,20 @@
           26685)).then(function (m) {
             return m.PaymenterrorPageModule;
           });
-        }
+        },
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
+      }, {
+        path: 'recoveruser',
+        loadChildren: function loadChildren() {
+          return __webpack_require__.e(
+          /*! import() */
+          "src_app_pages_recoveruser_recoveruser_module_ts").then(__webpack_require__.bind(__webpack_require__,
+          /*! ./pages/recoveruser/recoveruser.module */
+          97233)).then(function (m) {
+            return m.RecoveruserPageModule;
+          });
+        },
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
       }];
 
       var _AppRoutingModule = function AppRoutingModule() {
@@ -1251,6 +1260,28 @@
               }, _callee5, this);
             }));
           }
+        }, {
+          key: "recoverUserInfo",
+          value: function recoverUserInfo(theUser) {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+              return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                while (1) {
+                  switch (_context6.prev = _context6.next) {
+                    case 0:
+                      return _context6.abrupt("return", this.httpClientModule.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL + '/users', theUser).subscribe(function (user) {
+                        return true;
+                      }, function (error) {
+                        console.log('ErrorMessage', error);
+                      }));
+
+                    case 1:
+                    case "end":
+                      return _context6.stop();
+                  }
+                }
+              }, _callee6, this);
+            }));
+          }
         }]);
 
         return UserRepository;
@@ -1503,15 +1534,15 @@
         _createClass(AuthenticationService, [{
           key: "login",
           value: function login(email, password) {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
               var _this6 = this;
 
               var loading;
-              return regeneratorRuntime.wrap(function _callee7$(_context7) {
+              return regeneratorRuntime.wrap(function _callee8$(_context8) {
                 while (1) {
-                  switch (_context7.prev = _context7.next) {
+                  switch (_context8.prev = _context8.next) {
                     case 0:
-                      _context7.next = 2;
+                      _context8.next = 2;
                       return this.loadingCtrl.create({
                         message: 'Autenticando...',
                         spinner: 'crescent',
@@ -1519,51 +1550,55 @@
                       });
 
                     case 2:
-                      loading = _context7.sent;
+                      loading = _context8.sent;
                       loading.present();
                       this.fireAuth.signInWithEmailAndPassword(email, password).then(function (data) {
-                        return (0, tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(_this6, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+                        return (0, tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(_this6, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
                           var _this7 = this;
 
-                          return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                          return regeneratorRuntime.wrap(function _callee7$(_context7) {
                             while (1) {
-                              switch (_context6.prev = _context6.next) {
+                              switch (_context7.prev = _context7.next) {
                                 case 0:
                                   if (data.user.emailVerified) {
-                                    _context6.next = 6;
+                                    _context7.next = 6;
                                     break;
                                   }
 
                                   loading.dismiss();
                                   this.toast('Porfavor verificar su correo!', 'danger');
                                   this.logout();
-                                  _context6.next = 12;
+                                  _context7.next = 12;
                                   break;
 
                                 case 6:
-                                  _context6.next = 8;
+                                  _context7.next = 8;
                                   return this.fireAuth.currentUser;
 
                                 case 8:
-                                  _context6.sent.getIdToken().then(function (token) {
+                                  _context7.sent.getIdToken().then(function (token) {
                                     _this7.tokenService.setToken(token); // this.authenticationRepository.getCookieToken(token);
 
                                   });
 
-                                  _context6.next = 11;
+                                  _context7.next = 11;
                                   return this.fireAuth.authState.subscribe(function (user) {
                                     if (user) {
                                       _this7.sectionStorage.saveData("UserId", user.uid);
 
                                       _this7.userService.getUser().then(function (user) {
-                                        _this7.sectionStorage.saveData("UserEmail", user.email);
-
-                                        _this7.sectionStorage.saveData("Username", user.name);
-
-                                        if (!user.swapScreenLoaded || user.swapScreenLoaded === false) {
-                                          _this7.router.navigate(['/nav/swap']);
+                                        if (user.name == undefined || user.surname == undefined) {
+                                          _this7.router.navigate(['/recoveruser']);
                                         } else {
-                                          _this7.router.navigate(['/']);
+                                          _this7.sectionStorage.saveData("UserEmail", user.email);
+
+                                          _this7.sectionStorage.saveData("Username", user.name);
+
+                                          if (!user.swapScreenLoaded || user.swapScreenLoaded === false) {
+                                            _this7.router.navigate(['/nav/swap']);
+                                          } else {
+                                            _this7.router.navigate(['/']);
+                                          }
                                         }
                                       });
                                     }
@@ -1574,10 +1609,10 @@
 
                                 case 12:
                                 case "end":
-                                  return _context6.stop();
+                                  return _context7.stop();
                               }
                             }
-                          }, _callee6, this);
+                          }, _callee7, this);
                         }));
                       })["catch"](function (error) {
                         console.log(error);
@@ -1588,47 +1623,47 @@
 
                     case 5:
                     case "end":
-                      return _context7.stop();
+                      return _context8.stop();
                   }
                 }
-              }, _callee7, this);
+              }, _callee8, this);
             }));
           } // end of login
 
         }, {
           key: "logout",
           value: function logout() {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
               var _this8 = this;
 
-              return regeneratorRuntime.wrap(function _callee8$(_context8) {
+              return regeneratorRuntime.wrap(function _callee9$(_context9) {
                 while (1) {
-                  switch (_context8.prev = _context8.next) {
+                  switch (_context9.prev = _context9.next) {
                     case 0:
-                      _context8.next = 2;
+                      _context9.next = 2;
                       return this.fireAuth.signOut().then(function () {
                         _this8.router.navigate(['/login']);
                       });
 
                     case 2:
                     case "end":
-                      return _context8.stop();
+                      return _context9.stop();
                   }
                 }
-              }, _callee8, this);
+              }, _callee9, this);
             }));
           } // end of logout
 
         }, {
           key: "toast",
           value: function toast(message, status) {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
               var toast;
-              return regeneratorRuntime.wrap(function _callee9$(_context9) {
+              return regeneratorRuntime.wrap(function _callee10$(_context10) {
                 while (1) {
-                  switch (_context9.prev = _context9.next) {
+                  switch (_context10.prev = _context10.next) {
                     case 0:
-                      _context9.next = 2;
+                      _context10.next = 2;
                       return this.toastr.create({
                         message: message,
                         position: 'top',
@@ -1637,15 +1672,15 @@
                       });
 
                     case 2:
-                      toast = _context9.sent;
+                      toast = _context10.sent;
                       toast.present();
 
                     case 4:
                     case "end":
-                      return _context9.stop();
+                      return _context10.stop();
                   }
                 }
-              }, _callee9, this);
+              }, _callee10, this);
             }));
           } // end of toast
 
@@ -1808,14 +1843,14 @@
         }, {
           key: "updateToken",
           value: function updateToken() {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
               var _this9 = this;
 
-              return regeneratorRuntime.wrap(function _callee10$(_context10) {
+              return regeneratorRuntime.wrap(function _callee11$(_context11) {
                 while (1) {
-                  switch (_context10.prev = _context10.next) {
+                  switch (_context11.prev = _context11.next) {
                     case 0:
-                      return _context10.abrupt("return", new Promise(function (resolve) {
+                      return _context11.abrupt("return", new Promise(function (resolve) {
                         var subscription;
                         subscription = _this9.fireAuth.idToken.subscribe(function (token) {
                           if (subscription) {
@@ -1829,30 +1864,30 @@
 
                     case 1:
                     case "end":
-                      return _context10.stop();
+                      return _context11.stop();
                   }
                 }
-              }, _callee10);
+              }, _callee11);
             }));
           }
         }, {
           key: "isUserAuthenticated",
           value: function isUserAuthenticated() {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
               var currentUser;
-              return regeneratorRuntime.wrap(function _callee11$(_context11) {
+              return regeneratorRuntime.wrap(function _callee12$(_context12) {
                 while (1) {
-                  switch (_context11.prev = _context11.next) {
+                  switch (_context12.prev = _context12.next) {
                     case 0:
                       currentUser = this.fireAuth.currentUser;
                       console.log(currentUser);
 
                     case 2:
                     case "end":
-                      return _context11.stop();
+                      return _context12.stop();
                   }
                 }
-              }, _callee11, this);
+              }, _callee12, this);
             }));
           }
         }]);
@@ -1918,23 +1953,45 @@
         _createClass(UserService, [{
           key: "getUser",
           value: function getUser() {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
-              return regeneratorRuntime.wrap(function _callee12$(_context12) {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
+              return regeneratorRuntime.wrap(function _callee13$(_context13) {
                 while (1) {
-                  switch (_context12.prev = _context12.next) {
+                  switch (_context13.prev = _context13.next) {
                     case 0:
-                      _context12.next = 2;
+                      _context13.next = 2;
                       return this.userRepository.getUser();
 
                     case 2:
-                      return _context12.abrupt("return", _context12.sent);
+                      return _context13.abrupt("return", _context13.sent);
 
                     case 3:
                     case "end":
-                      return _context12.stop();
+                      return _context13.stop();
                   }
                 }
-              }, _callee12, this);
+              }, _callee13, this);
+            }));
+          }
+        }, {
+          key: "recoverUser",
+          value: function recoverUser(theUser) {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee14() {
+              return regeneratorRuntime.wrap(function _callee14$(_context14) {
+                while (1) {
+                  switch (_context14.prev = _context14.next) {
+                    case 0:
+                      _context14.next = 2;
+                      return this.userRepository.recoverUserInfo(theUser);
+
+                    case 2:
+                      return _context14.abrupt("return", _context14.sent);
+
+                    case 3:
+                    case "end":
+                      return _context14.stop();
+                  }
+                }
+              }, _callee14, this);
             }));
           }
         }]);
