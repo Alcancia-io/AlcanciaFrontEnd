@@ -1,8 +1,4 @@
-ion-content{ 
-    width: 50%;
-    left: 25%;  
-}
-
+ 
 ion-button{ 
     --background:#FEDC56;
 }
@@ -20,11 +16,11 @@ ion-button{
 }
 
 .box-shadow{ 
-    width: 96.5%;
-    height: 36%;
+    width: 98.9%;
+    height: 95%;
     background:  linear-gradient(#1B2A62, #355BC4);
     border-radius: 25px;
-    left: 10px;
+    left: 10px; 
     position: absolute;  
     filter: blur(0.1px);
 }
@@ -32,8 +28,7 @@ ion-button{
 .ion-card-body{ 
     text-align: left;
     border-radius: 25px;
-    --background: #171622;
-    height: 50%;
+    --background: #171622; 
     // box-shadow: 8px 8px  #1B2A62;
 } 
 
@@ -128,240 +123,88 @@ ion-select::part(icon) {
 
 
 @media only screen and (max-width: 960px) {
-    ion-content{ 
-        width: 80%;
-        left: 10%;
-    }
-
     .box-shadow{ 
-        width: 95%;
-        height: 33%;
+        width: 96.5%;
+        height: 95%;
         background:  linear-gradient(#1B2A62, #355BC4);
         border-radius: 25px;
-        position: absolute; 
-        left: 3%; 
+        left: 10px;
+        position: absolute;  
         filter: blur(0.1px);
     }
 }
 
 @media only screen and (max-width: 414px) {
-    ion-content{ 
-        width: 80%;
-        left: 10%;
-    }
-
-    .dropdown-content{
-        width: 100px;
-    } 
-
     .box-shadow{ 
-        width: 91%;
-        height: 35.5%;
-        background: linear-gradient(#1B2A62, #355BC4);
+        width: 90.5%;
+        height: 86%;
+        background:  linear-gradient(#1B2A62, #355BC4);
         border-radius: 25px;
-        position: absolute;
-        left: 1.5%; 
-        margin-top: 5px;
-
-       
-    }
-
-    .inputs-section{
-        margin-left: 166px;
-        width: 34%;
-        margin-top: 3%;
+        left: 10px;
+        position: absolute;  
+        filter: blur(0.1px);
     }
 }
 
 @media only screen and (max-width: 412px) {
-    ion-content{ 
-        width: 80%;
-        left: 10%;
-    }
-
-    .dropdown-content{
-        width: 100px;
-    }
-    .inputs-section{
-        width: 100px;
-        margin-left: 35px;
-    }
-
     .box-shadow{ 
-        width: 95%;
-        height: 33.5%;
-        background: linear-gradient(#1B2A62, #355BC4);
+        width: 90.5%;
+        height: 87%;
+        background:  linear-gradient(#1B2A62, #355BC4);
         border-radius: 25px;
-        position: absolute;
-        left: 1.5%; 
-        margin-top: 5px; 
-    }
-
-    .inputs-section{
-        margin-left: 220px;
-        width: 20%;
-        margin-top: 3%;
-    }
-
-    .whattodo-btn{
-        margin-top: 30px;
-    }
-
-    .backMainMenuBtn{
-        margin-top: -25px;
-    }
-
-    .inputs-section{
-        margin-left: 185.5px;
-        width: 20%;
-        margin-top: 3%;
-    }
-    .welcome-msg {
-        padding-left: 5%;
-        font-size: 34px;
-        margin-bottom: 64px;
+        left: 10px;
+        position: absolute;  
+        filter: blur(0.1px);
     }
 }
 
 @media only screen and (max-width: 393px) {
-    ion-content{ 
-        width: 80%;
-        left: 10%;
-    }
-
-    .dropdown-content{
-        width: 100px;
-    }
-    .inputs-section{
-        margin-left: 192.5px;
-        width: 20%;
-        margin-top: 3%;
-    }
-
     .box-shadow{ 
-        width: 93.5%;
-        height: 36%;
-        background: linear-gradient(#1B2A62, #355BC4);
+        width: 89.5%;
+        height: 87%;
+        background:  linear-gradient(#1B2A62, #355BC4);
         border-radius: 25px;
-        position: absolute;
-        left: 3%;
-    } 
+        left: 10px;
+        position: absolute;  
+        filter: blur(0.1px);
+    }
  
 }
 
 @media only screen and (max-width: 390px) {
-    ion-content{ 
-        width: 80%;
-        left: 10%;
-    }
-
-    .dropdown-content{
-        width: 100px;
-    } 
     .box-shadow{ 
-        width: 89%;
-        height: 41%;
-        background: linear-gradient(#1B2A62, #355BC4);
+        width: 89.5%;
+        height: 86%;
+        background:  linear-gradient(#1B2A62, #355BC4);
         border-radius: 25px;
-        position: absolute;
-        left: 3%; 
-        margin-top: 5px;
-    }
-
-    .inputs-section{
-        margin-left: 140px;
-        width: 41%;
-        margin-top: 3%;
+        left: 10px;
+        position: absolute;  
+        filter: blur(0.1px);
     }
 }
 
 @media only screen and (max-width: 375px) {
-    ion-content{ 
-        width: 80%;
-        left: 10%;
-    }
-
-    .dropdown-content{
-        width: 100px;
-    } 
-
     .box-shadow{ 
-        width: 88.5%;
-        height: 53%;
-        background: linear-gradient(#1B2A62, #355BC4);
+        width: 89.5%;
+        height: 86%;
+        background:  linear-gradient(#1B2A62, #355BC4);
         border-radius: 25px;
-        position: absolute;
-        left: 3%;
-        margin-top: -16px;
-   
+        left: 10px;
+        position: absolute;  
+        filter: blur(0.1px);
     }
-
-    .welcome-msg {
-        padding-left: 5%;
-        font-size: 34px;
-    }
-
-    .inputs-section{
-        margin-left: 141.5px;
-        width: 36%;
-        margin-top: 3%;
-    }
-
-    .ion-card-body{
-        margin-top: -20px;
-    }
-
-    .whattodo-btn{
-        margin-top: -30px;
-    }
-
-    .backMainMenuBtn{
-        margin-top: -125px;
-    }
- 
 }
 
 
 @media only screen and (max-width: 360px) {
-    ion-content{ 
-        width: 80%;
-        left: 10%;
-    }
-
-    .dropdown-content{
-        width: 100px;
-    }
-    .inputs-section{
-        width: 100px;
-        margin-left: 35px;
-    }
- 
     .box-shadow{ 
-        width: 92.5%;
-        height: 46%;
-        background: linear-gradient(#1B2A62, #355BC4);
+        width: 88.5%;
+        height: 86%;
+        background:  linear-gradient(#1B2A62, #355BC4);
         border-radius: 25px;
-        position: absolute;
-        left: 3%;
-    }  
-
-    .whattodo-btn{
-        margin-top: 30px;
-    }
-
-    .backMainMenuBtn{
-        margin-top: -25px;
-    }
-
-    .inputs-section{
-        margin-left: 185.5px;
-        width: 20%;
-        margin-top: 3%;
-    }
-    .welcome-msg {
-        padding-left: 5%;
-        font-size: 34px;
-        margin-bottom: 64px;
+        left: 10px;
+        position: absolute;  
+        filter: blur(0.1px);
     }
 
 }
