@@ -8,6 +8,9 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher> 
   <li style="list-style: none;" *ngFor="let transation  of transationHistory">
+    <ng-container *ngIf="!transactionAvailable" >
+      <p class="notransactionMessage">No hay transacciones para mostrar</p>
+    </ng-container>
     <ion-card>
       <ion-item> 
           <h3> <img src="../../../assets/Icon awesome-coins.png"> {{transation.id}}  </h3>

@@ -9,6 +9,7 @@ export class TransactionsPage implements OnInit {
 
   constructor(private transactionService: TransactionService) { }
   transationHistory: Array<any>;
+  transactionAvailable: boolean = true;
   ngOnInit() {
     this.doFetch();
   }
@@ -28,13 +29,16 @@ export class TransactionsPage implements OnInit {
   }
 
   getUserTransactions(){
-    this.transactionService.getUserTransactions().then((response) => {
-      console.log(response);
-      response.forEach(function (item) {  
-        const createdDate = new Date(item.create_time);  
-        item.create_time =  createdDate.toString().replace('GMT-0400 (Atlantic Standard Time)',''); 
-      });  
-      this.transationHistory = response;
+    this.transactionService.getUserTransactions().then((response) => { 
+      if(response.length == 0){
+        this.transactionAvailable == false;
+      }else{
+        response.forEach(function (item) {  
+          const createdDate = new Date(item.create_time);  
+          item.create_time =  createdDate.toString().replace('GMT-0400 (Atlantic Standard Time)',''); 
+        });  
+        this.transationHistory = response;
+      } 
     }).catch((error) => {
       console.log(error);
     }); 

@@ -21,6 +21,7 @@ export class MainScreenPage implements OnInit {
   aUsername;
   aTotalInvestment: number = 0;
   transationHistory: Array<any>;
+  transactionAvailable: boolean = true;
   constructor(
     private authService: AuthenticationService,
     private afAuth: AngularFireAuth,
@@ -109,13 +110,16 @@ export class MainScreenPage implements OnInit {
 
 
   getUserTransactions(){
-    this.transactionService.getUserTransactions().then((response) => {
-      console.log(response);
-      response.forEach(function (item) {  
-        const createdDate = new Date(item.create_time);  
-        item.create_time =  createdDate.toString().replace('GMT-0400 (Atlantic Standard Time)',''); 
-      });  
-      this.transationHistory = response;
+    this.transactionService.getUserTransactions().then((response) => { 
+      if(response.length == 0){
+        this.transactionAvailable = false;;
+      }else{
+        response.forEach(function (item) {  
+          const createdDate = new Date(item.create_time);  
+          item.create_time =  createdDate.toString().replace('GMT-0400 (Atlantic Standard Time)',''); 
+        });  
+        this.transationHistory = response;
+      } 
     }).catch((error) => {
       console.log(error);
     }); 
