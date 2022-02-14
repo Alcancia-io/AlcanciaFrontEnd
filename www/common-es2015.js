@@ -490,9 +490,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 61855);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 42741);
 /* harmony import */ var _arrow_button_arrow_button_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./arrow-button/arrow-button.component */ 79827);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 34595);
 //NOTES:
 // If adding more than one components and do not want to import the other component in the module where is going to be injected.
 // Please create another component module for it.
+
 
 
 
@@ -500,6 +502,7 @@ let ComponentsModule = class ComponentsModule {
 };
 ComponentsModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.NgModule)({
+        imports: [_ionic_angular__WEBPACK_IMPORTED_MODULE_3__.IonicModule],
         declarations: [_arrow_button_arrow_button_component__WEBPACK_IMPORTED_MODULE_0__.ArrowButtonComponent],
         exports: [_arrow_button_arrow_button_component__WEBPACK_IMPORTED_MODULE_0__.ArrowButtonComponent]
     })
@@ -509,104 +512,155 @@ ComponentsModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
 
 /***/ }),
 
-/***/ 66359:
-/*!***********************************************!*\
-  !*** ./src/app/repository/user.repository.ts ***!
-  \***********************************************/
+/***/ 59913:
+/*!******************************************************!*\
+  !*** ./src/app/repository/transaction.repository.ts ***!
+  \******************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "UserRepository": function() { return /* binding */ UserRepository; }
+/* harmony export */   "TransactionRepository": function() { return /* binding */ TransactionRepository; }
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 61855);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 42741);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 42741);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ 31887);
-/* harmony import */ var _models_userModel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../models/userModel */ 54462);
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/environments/environment */ 24766);
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 24766);
+/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/fire/compat/auth */ 83027);
+/* harmony import */ var _services_sectionStorage_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/sectionStorage.service */ 14314);
 
 
 
 
 
-const username = new _models_userModel__WEBPACK_IMPORTED_MODULE_0__.UserModel();
-let UserRepository = class UserRepository {
-    constructor(httpClientModule) {
+
+let TransactionRepository = class TransactionRepository {
+    constructor(httpClientModule, fireAuth, sectionStorageService) {
         this.httpClientModule = httpClientModule;
+        this.fireAuth = fireAuth;
+        this.sectionStorageService = sectionStorageService;
+        this.CurrentUser = "";
     }
-    getUser() {
+    getUserTransactions() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.httpClientModule.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL + '/users').subscribe(data => {
-                console.log('UserData:' + data);
-            }, error => {
-                console.log('ErrorMessage: ' + error);
-            });
-        });
-    }
-    addUserData(theUser) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            return this.httpClientModule.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL + '/users', theUser).subscribe(user => {
-                console.log('user created' + user);
-            }, error => {
-                console.log('ErrorMessage', error);
+            let userId = this.sectionStorageService.getData("UserId");
+            return new Promise((resolver) => {
+                let subscription;
+                subscription = this.httpClientModule.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.ALCANCIA_SERVER_URL + '/users/' + userId + '/deposits')
+                    .subscribe(reponse => {
+                    if (subscription) {
+                        subscription.unsubscribe();
+                    }
+                    resolver(Object.assign(reponse));
+                    return reponse;
+                });
             });
         });
     }
 };
-UserRepository.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient }
+TransactionRepository.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient },
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_4__.AngularFireAuth },
+    { type: _services_sectionStorage_service__WEBPACK_IMPORTED_MODULE_1__.SectionStorageService }
 ];
-UserRepository = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Injectable)({
+TransactionRepository = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Injectable)({
         providedIn: 'root',
     })
-], UserRepository);
+], TransactionRepository);
 
 
 
 /***/ }),
 
-/***/ 11000:
-/*!******************************************!*\
-  !*** ./src/app/services/user.service.ts ***!
-  \******************************************/
+/***/ 60010:
+/*!*********************************************!*\
+  !*** ./src/app/services/storage.service.ts ***!
+  \*********************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "UserService": function() { return /* binding */ UserService; }
+/* harmony export */   "StorageService": function() { return /* binding */ StorageService; }
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 61855);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ 61855);
+/* harmony import */ var _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/storage-angular */ 72604);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 42741);
-/* harmony import */ var _repository_user_repository__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../repository/user.repository */ 66359);
 
 
 
-let UserService = class UserService {
-    constructor(userRepository) {
-        this.userRepository = userRepository;
+let StorageService = class StorageService {
+    constructor(storage) {
+        this.storage = storage;
+        this.init();
     }
-    getUser() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            return yield this.userRepository.getUser();
+    init() {
+        this.storage.create();
+    }
+    getData(theKey) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, function* () {
+            let data = sessionStorage.getItem(theKey) || [];
+            return data;
         });
     }
-    addUserData(theUser) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            return yield this.userRepository.addUserData(theUser);
+    addData(theItem, theKey) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, function* () {
+            const storedData = (yield this.storage.get(theKey)) || [];
+            storedData.push(theItem);
+            return yield this.storage.set(theKey, storedData);
         });
     }
 };
-UserService.ctorParameters = () => [
-    { type: _repository_user_repository__WEBPACK_IMPORTED_MODULE_0__.UserRepository }
+StorageService.ctorParameters = () => [
+    { type: _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_1__.Storage }
 ];
-UserService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+StorageService = (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
         providedIn: 'root'
     })
-], UserService);
+], StorageService);
+
+
+
+/***/ }),
+
+/***/ 7565:
+/*!*************************************************!*\
+  !*** ./src/app/services/transaction.service.ts ***!
+  \*************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TransactionService": function() { return /* binding */ TransactionService; }
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 61855);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 42741);
+/* harmony import */ var _repository_transaction_repository__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../repository/transaction.repository */ 59913);
+
+
+
+let TransactionService = class TransactionService {
+    constructor(transactionRepository) {
+        this.transactionRepository = transactionRepository;
+    }
+    getUserTransactions() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return yield this.transactionRepository.getUserTransactions();
+        });
+    }
+};
+TransactionService.ctorParameters = () => [
+    { type: _repository_transaction_repository__WEBPACK_IMPORTED_MODULE_0__.TransactionRepository }
+];
+TransactionService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
+        providedIn: 'root'
+    })
+], TransactionService);
 
 
 
@@ -620,7 +674,7 @@ UserService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".arrow-btn {\n  padding: 16px;\n  border-radius: 20px;\n  width: 96px;\n  height: 63px;\n  background: #FECE2F;\n}\n\n.arrow-img {\n  width: 54px;\n  height: 18px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFycm93LWJ1dHRvbi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQztFQUNFLGFBQUE7RUFDQSxtQkFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0VBQ0EsbUJBQUE7QUFDSDs7QUFFQztFQUNFLFdBQUE7RUFDQSxZQUFBO0FBQ0giLCJmaWxlIjoiYXJyb3ctYnV0dG9uLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiIC5hcnJvdy1idG57XG4gICBwYWRkaW5nOiAxNnB4O1xuICAgYm9yZGVyLXJhZGl1czogMjBweDtcbiAgIHdpZHRoOiA5NnB4O1xuICAgaGVpZ2h0OiA2M3B4O1xuICAgYmFja2dyb3VuZDojRkVDRTJGO1xuIH1cblxuIC5hcnJvdy1pbWd7XG4gICB3aWR0aDogNTRweDtcbiAgIGhlaWdodDogMThweDtcbiB9XG4iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".arrow-img {\n  width: 54px;\n  height: 18px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFycm93LWJ1dHRvbi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNHLFdBQUE7RUFDQSxZQUFBO0FBQ0giLCJmaWxlIjoiYXJyb3ctYnV0dG9uLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmFycm93LWltZ3tcbiAgIHdpZHRoOiA1NHB4O1xuICAgaGVpZ2h0OiAxOHB4O1xufVxuIl19 */");
 
 /***/ }),
 
@@ -632,7 +686,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"content\">\n  <button type=\"button\" class=\"arrow-btn\">\n    <img class=\"arrow-img\" src=\"/assets/arrow-alcui.png\" alt=\"arrow-alcui\">\n  </button>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"content\">\n  <ion-button shape=\"round\" size=\"large\">\n    <img class=\"arrow-img\" src=\"/assets/arrow-alcui.png\" alt=\"arrow-alcui\">\n  </ion-button> \n</div>\n\n");
 
 /***/ })
 

@@ -33,9 +33,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "UniversalAppInterceptor": function() { return /* binding */ UniversalAppInterceptor; }
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 61855);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 42741);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 61855);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 42741);
 /* harmony import */ var _services_token_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/token.service */ 65987);
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/environments/environment */ 24766);
+
 
 
 
@@ -45,19 +47,21 @@ let UniversalAppInterceptor = class UniversalAppInterceptor {
     }
     intercept(req, next) {
         const token = this.tokenService.getToken();
-        req = req.clone({
-            setHeaders: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+        if (req.url.includes(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL)) {
+            req = req.clone({
+                setHeaders: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+        }
         return next.handle(req);
     }
 };
 UniversalAppInterceptor.ctorParameters = () => [
     { type: _services_token_service__WEBPACK_IMPORTED_MODULE_0__.TokenService }
 ];
-UniversalAppInterceptor = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)()
+UniversalAppInterceptor = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Injectable)()
 ], UniversalAppInterceptor);
 
 
@@ -78,7 +82,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 61855);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 42741);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 29535);
-/* harmony import */ var _guards_intro_guard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./guards/intro.guard */ 85160);
+/* harmony import */ var _guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./guards/authorize.guard */ 33874);
 
 
 
@@ -86,34 +90,67 @@ __webpack_require__.r(__webpack_exports__);
 const routes = [
     {
         path: 'login',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_login_login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 77641)).then(m => m.LoginPageModule),
-        canLoad: [_guards_intro_guard__WEBPACK_IMPORTED_MODULE_0__.IntroGuard], //Checking if we should show the introduction or forward to inside.
-        // canActivate: [NegateAuthorizeGuard]
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_components_main-components_module_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_pages_login_login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/login/login.module */ 60441)).then(m => m.LoginPageModule),
+        // canLoad: [IntroGuard], //Checking if we should show the introduction or forward to inside.
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.NegateAuthorizeGuard]
     },
     {
         path: 'signup',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_signup_signup_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./signup/signup.module */ 56650)).then(m => m.SignupPageModule),
-        // canActivate: [NegateAuthorizeGuard]
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_pages_signup_signup_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/signup/signup.module */ 5415)).then(m => m.SignupPageModule),
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.NegateAuthorizeGuard]
     },
     {
         path: 'intro',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_intro_intro_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./intro/intro.module */ 45309)).then(m => m.IntroPageModule),
-        // canActivate: [NegateAuthorizeGuard]
-    },
-    {
-        path: 'main-screen',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_main-screen_main-screen_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./main-screen/main-screen.module */ 57226)).then(m => m.MainScreenPageModule),
-        // canActivate: [AuthorizeGuard] //Securing all child pages.
-    },
-    {
-        path: '',
-        redirectTo: '/login',
-        pathMatch: 'full'
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_pages_intro_intro_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/intro/intro.module */ 16104)).then(m => m.IntroPageModule),
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.NegateAuthorizeGuard]
     },
     {
         path: 'forgot-password',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_forgot-password_forgot-password_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./forgot-password/forgot-password.module */ 31129)).then(m => m.ForgotPasswordPageModule),
-        // canActivate: [NegateAuthorizeGuard]
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_pages_forgot-password_forgot-password_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/forgot-password/forgot-password.module */ 42380)).then(m => m.ForgotPasswordPageModule),
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.NegateAuthorizeGuard]
+    },
+    // {
+    //   path: '',
+    //   redirectTo: '/login',
+    //   pathMatch: 'full'
+    // },
+    // {
+    //   path: 'swap',
+    //   loadChildren: () => import('./pages/swap/swap.module').then( m => m.SwapPageModule),
+    //   canLoad: [SwapGuard,AuthorizeGuard]
+    // },
+    {
+        path: 'bitcoin-deposit',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_bitcoin-deposit_bitcoin-deposit_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/bitcoin-deposit/bitcoin-deposit.module */ 68929)).then(m => m.BitcoinDepositPageModule),
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
+    },
+    {
+        path: 'paypalOrder/successfull',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_Paypal_SuccessfulDeposit_SuccessfulDeposit-routing_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/Paypal/SuccessfulDeposit/SuccessfulDeposit-routing.module */ 79054)).then(m => m.SuccefulDepositRoutingModule),
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
+    },
+    // {
+    //   path: 'paypalpaymentoptions',
+    //   loadChildren: () => import('./pages/paypalpaymentoptions/paypalpaymentoptions.module').then( m => m.PaypalpaymentoptionsPageModule),
+    //   canLoad: [AuthorizeGuard]
+    // },
+    {
+        path: 'tabbar',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_tab-bar_tab-bar_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/tab-bar/tab-bar.module */ 58965)).then(m => m.TabBarPageModule),
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
+    },
+    {
+        path: '',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_sidenav_sidenav_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/sidenav/sidenav.module */ 69145)).then(m => m.SidenavPageModule),
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
+    },
+    // {
+    //   path: 'recoverusername',
+    //   loadChildren: () => import('./pages/recoverusername/recoverusername.module').then( m => m.RecoverusernamePageModule)
+    // },
+    {
+        path: 'paymenterror',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_paymenterror_paymenterror_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/paymenterror/paymenterror.module */ 26685)).then(m => m.PaymenterrorPageModule)
     }
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -177,24 +214,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppModule": function() { return /* binding */ AppModule; }
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 61855);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 42741);
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/platform-browser */ 93220);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic/angular */ 34595);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! tslib */ 61855);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 42741);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/platform-browser */ 93220);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic/angular */ 34595);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component */ 20721);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-routing.module */ 70809);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/common/http */ 31887);
-/* harmony import */ var _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @ionic/storage-angular */ 32966);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/forms */ 93324);
-/* harmony import */ var _angular_fire_compat__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/fire/compat */ 49106);
-/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 42045);
-/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/fire/compat/auth */ 83027);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/common/http */ 31887);
+/* harmony import */ var _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @ionic/storage-angular */ 32966);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/forms */ 93324);
+/* harmony import */ var _angular_fire_compat__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/fire/compat */ 49106);
+/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 42045);
+/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/fire/compat/auth */ 83027);
 /* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/environments/environment */ 24766);
 /* harmony import */ var _services_authentication_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/authentication.service */ 9356);
 /* harmony import */ var _guards_auth_guard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./guards/auth.guard */ 47316);
 /* harmony import */ var _services_token_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/token.service */ 65987);
 /* harmony import */ var _guards_authorize_guard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./guards/authorize.guard */ 33874);
-/* harmony import */ var _UniversalAppInterceptor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./UniversalAppInterceptor */ 24294);
+/* harmony import */ var _guards_swap_guard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./guards/swap.guard */ 27956);
+/* harmony import */ var _UniversalAppInterceptor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./UniversalAppInterceptor */ 24294);
 
 
 
@@ -217,22 +255,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 let AppModule = class AppModule {
 };
-AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.NgModule)({
+AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_9__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.NgModule)({
         declarations: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent],
         entryComponents: [],
         imports: [
-            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__.BrowserModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.IonicModule.forRoot(),
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_11__.BrowserModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_12__.IonicModule.forRoot(),
             _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule,
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_12__.HttpClientModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_13__.FormsModule,
-            _angular_fire_compat__WEBPACK_IMPORTED_MODULE_14__.AngularFireModule.initializeApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.firebaseConfig),
-            _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_15__.AngularFireAuthModule,
-            _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_16__.AngularFirestoreModule,
-            _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_17__.IonicStorageModule.forRoot({
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_13__.HttpClientModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_14__.FormsModule,
+            _angular_fire_compat__WEBPACK_IMPORTED_MODULE_15__.AngularFireModule.initializeApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.firebaseConfig),
+            _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_16__.AngularFireAuthModule,
+            _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_17__.AngularFirestoreModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_14__.ReactiveFormsModule,
+            _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_18__.IonicStorageModule.forRoot({
                 name: "AlcanciaLocalStorage"
             })
         ],
@@ -242,7 +282,8 @@ AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
             _guards_auth_guard__WEBPACK_IMPORTED_MODULE_4__.AuthGuard,
             _guards_authorize_guard__WEBPACK_IMPORTED_MODULE_6__.AuthorizeGuard,
             _guards_authorize_guard__WEBPACK_IMPORTED_MODULE_6__.NegateAuthorizeGuard,
-            { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_12__.HTTP_INTERCEPTORS, useClass: _UniversalAppInterceptor__WEBPACK_IMPORTED_MODULE_7__.UniversalAppInterceptor, multi: true }
+            _guards_swap_guard__WEBPACK_IMPORTED_MODULE_7__.SwapGuard,
+            { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_13__.HTTP_INTERCEPTORS, useClass: _UniversalAppInterceptor__WEBPACK_IMPORTED_MODULE_8__.UniversalAppInterceptor, multi: true, }
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent],
     })
@@ -318,19 +359,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "AuthorizeGuard": function() { return /* binding */ AuthorizeGuard; },
 /* harmony export */   "NegateAuthorizeGuard": function() { return /* binding */ NegateAuthorizeGuard; }
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 61855);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 42741);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 29535);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 61855);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 42741);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ 29535);
 /* harmony import */ var _services_token_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/token.service */ 65987);
-/* harmony import */ var _services_appcookie_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/appcookie.service */ 85559);
-/* harmony import */ var _services_authentication_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/authentication.service */ 9356);
-/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/compat/auth */ 83027);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ 59917);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ 88561);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ 14089);
-
-
-
+/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/fire/compat/auth */ 83027);
 
 
 
@@ -338,124 +371,134 @@ __webpack_require__.r(__webpack_exports__);
 
 let currentUser;
 let AuthorizeGuard = class AuthorizeGuard {
-    constructor(authenticationService, appCookieService, fireAuth, tokenService, router) {
-        this.authenticationService = authenticationService;
-        this.appCookieService = appCookieService;
-        this.fireAuth = fireAuth;
+    constructor(tokenService, router, fireAuth) {
         this.tokenService = tokenService;
         this.router = router;
+        this.fireAuth = fireAuth;
+        this.isLogIn = false;
     }
-    canActivate(next, state) {
-        return this.authenticationService.user$.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.take)(1), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(user => user ? true : false), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_5__.tap)(isLoggedIn => {
-            if (isLoggedIn) {
-                if (this.tokenService.isTokenExpired()) {
-                    console.log('token is expired');
-                    return this.router.navigate(['/login']);
-                }
-                else {
-                    console.log('is aunthenticated');
-                    return true;
-                }
+    canLoad() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            const token = this.tokenService.getToken();
+            if (token !== null) {
+                return true;
             }
             else {
-                console.log('is not aunthenticated');
-                return this.router.navigate(['/login']);
+                this.router.navigate(['/login']);
             }
-        }));
+        });
     }
 };
 AuthorizeGuard.ctorParameters = () => [
-    { type: _services_authentication_service__WEBPACK_IMPORTED_MODULE_2__.AuthenticationService },
-    { type: _services_appcookie_service__WEBPACK_IMPORTED_MODULE_1__.AppCookieService },
-    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_6__.AngularFireAuth },
     { type: _services_token_service__WEBPACK_IMPORTED_MODULE_0__.TokenService },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__.Router },
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_3__.AngularFireAuth }
 ];
-AuthorizeGuard = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Injectable)({
+AuthorizeGuard = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Injectable)({
         providedIn: 'root'
     })
 ], AuthorizeGuard);
 
 let NegateAuthorizeGuard = class NegateAuthorizeGuard {
-    constructor(AuthorizeGuard, router) {
-        this.AuthorizeGuard = AuthorizeGuard;
+    constructor(tokenService, router, fireAuth) {
+        this.tokenService = tokenService;
         this.router = router;
+        this.fireAuth = fireAuth;
     }
-    canActivate(next, state) {
-        let userNotAuth = !this.AuthorizeGuard.canActivate(next, state);
-        if (userNotAuth) {
-            console.log('user is not aunthenticated => proceed' + userNotAuth);
-            return true;
-        }
-        else {
-            console.log('user is aunthenticated...Redirecting');
-            return this.router.navigate(['/main-screen']);
-        }
+    canLoad() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            const token = this.tokenService.getToken();
+            if (token === null) {
+                return true;
+            }
+            else {
+                this.router.navigate(['/']);
+            }
+        });
     }
 };
 NegateAuthorizeGuard.ctorParameters = () => [
-    { type: AuthorizeGuard },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router }
+    { type: _services_token_service__WEBPACK_IMPORTED_MODULE_0__.TokenService },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__.Router },
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_3__.AngularFireAuth }
 ];
-NegateAuthorizeGuard = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Injectable)()
+NegateAuthorizeGuard = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Injectable)({
+        providedIn: 'root'
+    })
 ], NegateAuthorizeGuard);
 
 
 
 /***/ }),
 
-/***/ 85160:
-/*!***************************************!*\
-  !*** ./src/app/guards/intro.guard.ts ***!
-  \***************************************/
+/***/ 27956:
+/*!**************************************!*\
+  !*** ./src/app/guards/swap.guard.ts ***!
+  \**************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "INTRO_KEY": function() { return /* binding */ INTRO_KEY; },
-/* harmony export */   "IntroGuard": function() { return /* binding */ IntroGuard; }
+/* harmony export */   "SwapGuard": function() { return /* binding */ SwapGuard; }
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 61855);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 42741);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ 29535);
-/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/storage.service */ 60010);
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/user.service */ 11000);
 
 
 
 //local storage
 
-const INTRO_KEY = 'intro-seen';
-let IntroGuard = class IntroGuard {
-    constructor(router, storageService) {
+let SwapGuard = class SwapGuard {
+    constructor(router, userService) {
         this.router = router;
-        this.storageService = storageService;
+        this.userService = userService;
     }
     canLoad() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            const hasSeenIntro = yield this.storageService.getData(INTRO_KEY);
-            if (hasSeenIntro.length > 0 && (hasSeenIntro[0].value === 'true')) {
-                return true;
-            }
-            else {
-                this.router.navigateByUrl('/intro', { replaceUrl: true });
-                return false;
-            }
+            this.userService.getUser().then(user => {
+                if (this.user.swapScreenLoaded && this.user.swapScreenLoaded === true) {
+                    return this.router.navigate[('/tabbar')];
+                }
+                else {
+                    return true;
+                }
+            });
+            return true;
         });
     }
 };
-IntroGuard.ctorParameters = () => [
+SwapGuard.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__.Router },
-    { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_0__.StorageService }
+    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_0__.UserService }
 ];
-IntroGuard = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+SwapGuard = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Injectable)({
         providedIn: 'root'
     })
-], IntroGuard);
+], SwapGuard);
 
+
+
+/***/ }),
+
+/***/ 74088:
+/*!*************************************!*\
+  !*** ./src/app/models/csrftoken.ts ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CSRFToken": function() { return /* binding */ CSRFToken; }
+/* harmony export */ });
+class CSRFToken {
+}
 
 
 /***/ }),
@@ -473,6 +516,170 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 class UserModel {
 }
+
+
+/***/ }),
+
+/***/ 15088:
+/*!*********************************************************!*\
+  !*** ./src/app/repository/Authentication.repository.ts ***!
+  \*********************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AuthenticationRepository": function() { return /* binding */ AuthenticationRepository; }
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 61855);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 42741);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ 31887);
+/* harmony import */ var _models_userModel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../models/userModel */ 54462);
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/environments/environment */ 24766);
+/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 42045);
+/* harmony import */ var _services_appcookie_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/appcookie.service */ 85559);
+/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/compat/auth */ 83027);
+/* harmony import */ var _services_sectionStorage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/sectionStorage.service */ 14314);
+/* harmony import */ var _models_csrftoken__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../models/csrftoken */ 74088);
+
+
+
+
+
+
+
+
+
+
+const username = new _models_userModel__WEBPACK_IMPORTED_MODULE_0__.UserModel();
+let AuthenticationRepository = class AuthenticationRepository {
+    constructor(firestore, fireAuth, appCookie, sectionStorageService, httpClientModule) {
+        this.firestore = firestore;
+        this.fireAuth = fireAuth;
+        this.appCookie = appCookie;
+        this.sectionStorageService = sectionStorageService;
+        this.httpClientModule = httpClientModule;
+    }
+    getCookieToken(token) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            return new Promise((resolver) => {
+                let subscription;
+                const payload = new _models_csrftoken__WEBPACK_IMPORTED_MODULE_4__.CSRFToken();
+                payload.idToken = token;
+                subscription = this.httpClientModule.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL + '/login/', payload)
+                    .subscribe(user => {
+                    if (subscription) {
+                        subscription.unsubscribe();
+                    }
+                    resolver(Object.assign(user));
+                    return user;
+                });
+            });
+        });
+    }
+};
+AuthenticationRepository.ctorParameters = () => [
+    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_6__.AngularFirestore },
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_7__.AngularFireAuth },
+    { type: _services_appcookie_service__WEBPACK_IMPORTED_MODULE_2__.AppCookieService },
+    { type: _services_sectionStorage_service__WEBPACK_IMPORTED_MODULE_3__.SectionStorageService },
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_8__.HttpClient }
+];
+AuthenticationRepository = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Injectable)({
+        providedIn: 'root',
+    })
+], AuthenticationRepository);
+
+
+
+/***/ }),
+
+/***/ 66359:
+/*!***********************************************!*\
+  !*** ./src/app/repository/user.repository.ts ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "UserRepository": function() { return /* binding */ UserRepository; }
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 61855);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 42741);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ 31887);
+/* harmony import */ var _models_userModel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../models/userModel */ 54462);
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/environments/environment */ 24766);
+/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 42045);
+/* harmony import */ var _services_appcookie_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/appcookie.service */ 85559);
+/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/compat/auth */ 83027);
+/* harmony import */ var _services_sectionStorage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/sectionStorage.service */ 14314);
+
+
+
+
+
+
+
+
+
+const username = new _models_userModel__WEBPACK_IMPORTED_MODULE_0__.UserModel();
+let UserRepository = class UserRepository {
+    constructor(firestore, fireAuth, appCookie, sectionStorageService, httpClientModule) {
+        this.firestore = firestore;
+        this.fireAuth = fireAuth;
+        this.appCookie = appCookie;
+        this.sectionStorageService = sectionStorageService;
+        this.httpClientModule = httpClientModule;
+    }
+    // async getUser(): Promise<any>{ 
+    //   const userName =  this.appCookie.get(USER_NAME); 
+    //   return new Promise((resolver) => {
+    //     let subscription: Subscription;
+    //     this.fireAuth.authState.subscribe(user => {
+    //       subscription = this.firestore
+    //       .collection("users",ref=>ref.where('userId','==', user.uid))
+    //       .get()
+    //       .subscribe(data=>data.forEach(user=> {  
+    //         if (subscription) {
+    //             subscription.unsubscribe();
+    //         }  
+    //         resolver( Object.assign(user)); 
+    //       }));
+    //     }); 
+    //   });
+    // }
+    getUser() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const userId = this.sectionStorageService.getData("UserId");
+            return new Promise((resolver) => {
+                let subscription;
+                subscription = this.httpClientModule.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL + '/users/' + userId)
+                    .subscribe(user => {
+                    if (subscription) {
+                        subscription.unsubscribe();
+                    }
+                    resolver(Object.assign(user));
+                    return user;
+                });
+            });
+        });
+    }
+};
+UserRepository.ctorParameters = () => [
+    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_5__.AngularFirestore },
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_6__.AngularFireAuth },
+    { type: _services_appcookie_service__WEBPACK_IMPORTED_MODULE_2__.AppCookieService },
+    { type: _services_sectionStorage_service__WEBPACK_IMPORTED_MODULE_3__.SectionStorageService },
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_7__.HttpClient }
+];
+UserRepository = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Injectable)({
+        providedIn: 'root',
+    })
+], UserRepository);
+
 
 
 /***/ }),
@@ -509,6 +716,7 @@ let AppCookieService = class AppCookieService {
         }
     }
     get(key) {
+        // this.set(key, '');
         this.parseCookies();
         return !!this.cookieStore[key] ? this.cookieStore[key] : null;
     }
@@ -541,16 +749,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AuthenticationService": function() { return /* binding */ AuthenticationService; }
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 61855);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 42741);
-/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/compat/auth */ 83027);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ 267);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 29535);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 34595);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ 32812);
-/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 42045);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 61855);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/core */ 42741);
+/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/compat/auth */ 83027);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ 267);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/router */ 29535);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic/angular */ 34595);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ 32812);
+/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 42045);
 /* harmony import */ var _token_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./token.service */ 65987);
-/* harmony import */ var _models_userModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../models/userModel */ 54462);
+/* harmony import */ var _sectionStorage_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sectionStorage.service */ 14314);
+/* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user.service */ 11000);
+/* harmony import */ var _appcookie_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./appcookie.service */ 85559);
+/* harmony import */ var _repository_Authentication_repository__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../repository/Authentication.repository */ 15088);
+
+
+
 
 
 
@@ -562,25 +776,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AuthenticationService = class AuthenticationService {
-    constructor(fireAuth, afs, router, loadingCtrl, toastr, tokenService) {
+    constructor(fireAuth, afs, router, loadingCtrl, toastr, tokenService, sectionStorage, userService, appCookieService, authenticationRepository) {
         this.fireAuth = fireAuth;
         this.afs = afs;
         this.router = router;
         this.loadingCtrl = loadingCtrl;
         this.toastr = toastr;
         this.tokenService = tokenService;
+        this.sectionStorage = sectionStorage;
+        this.userService = userService;
+        this.appCookieService = appCookieService;
+        this.authenticationRepository = authenticationRepository;
         this.AccessToken = "";
-        this.user$ = this.fireAuth.authState.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.switchMap)(user => {
+        this.user$ = this.fireAuth.authState.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_5__.switchMap)(user => {
             if (user) {
                 return this.afs.doc(`users/${user.uid}`).valueChanges();
             }
             else {
-                return (0,rxjs__WEBPACK_IMPORTED_MODULE_3__.of)(null);
+                return (0,rxjs__WEBPACK_IMPORTED_MODULE_6__.of)(null);
             }
         }));
     } // end of constructor
     login(email, password) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
             const loading = yield this.loadingCtrl.create({
                 message: 'Autenticando...',
                 spinner: 'crescent',
@@ -588,7 +806,7 @@ let AuthenticationService = class AuthenticationService {
             });
             loading.present();
             this.fireAuth.signInWithEmailAndPassword(email, password)
-                .then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+                .then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
                 if (!data.user.emailVerified) {
                     loading.dismiss();
                     this.toast('Porfavor verificar su correo!', 'danger');
@@ -596,9 +814,26 @@ let AuthenticationService = class AuthenticationService {
                 }
                 else {
                     (yield this.fireAuth.currentUser).getIdToken()
-                        .then((token) => this.tokenService.setToken(token));
+                        .then((token => {
+                        this.tokenService.setToken(token);
+                        // this.authenticationRepository.getCookieToken(token);
+                    }));
+                    (yield this.fireAuth.authState.subscribe(user => {
+                        if (user) {
+                            this.sectionStorage.saveData("UserId", user.uid);
+                            this.userService.getUser().then(user => {
+                                this.sectionStorage.saveData("UserEmail", user.email);
+                                this.sectionStorage.saveData("Username", user.name);
+                                if (!user.swapScreenLoaded || user.swapScreenLoaded === false) {
+                                    this.router.navigate(['/nav/swap']);
+                                }
+                                else {
+                                    this.router.navigate(['/']);
+                                }
+                            });
+                        }
+                    }));
                     loading.dismiss();
-                    this.router.navigate(['/main-screen']);
                 }
             })).catch((error) => {
                 console.log(error);
@@ -607,30 +842,8 @@ let AuthenticationService = class AuthenticationService {
             });
         });
     } // end of login
-    isUserloggedIn() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.fireAuth.onAuthStateChanged((user) => {
-                console.log('service:' + user);
-                if (user && user.uid) {
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            });
-            return false;
-        });
-    }
-    registerUser(userModel) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            const usermodel = new _models_userModel__WEBPACK_IMPORTED_MODULE_1__.UserModel;
-            usermodel.email = "";
-            usermodel.name = "";
-            usermodel.lastname = "";
-        });
-    }
     logout() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
             yield this.fireAuth.signOut()
                 .then(() => {
                 this.router.navigate(['/login']);
@@ -638,7 +851,7 @@ let AuthenticationService = class AuthenticationService {
         });
     } // end of logout
     toast(message, status) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
             const toast = yield this.toastr.create({
                 message: message,
                 position: 'top',
@@ -650,15 +863,19 @@ let AuthenticationService = class AuthenticationService {
     } // end of toast
 };
 AuthenticationService.ctorParameters = () => [
-    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_5__.AngularFireAuth },
-    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_6__.AngularFirestore },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.LoadingController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.ToastController },
-    { type: _token_service__WEBPACK_IMPORTED_MODULE_0__.TokenService }
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_8__.AngularFireAuth },
+    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_9__.AngularFirestore },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_10__.Router },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.LoadingController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.ToastController },
+    { type: _token_service__WEBPACK_IMPORTED_MODULE_0__.TokenService },
+    { type: _sectionStorage_service__WEBPACK_IMPORTED_MODULE_1__.SectionStorageService },
+    { type: _user_service__WEBPACK_IMPORTED_MODULE_2__.UserService },
+    { type: _appcookie_service__WEBPACK_IMPORTED_MODULE_3__.AppCookieService },
+    { type: _repository_Authentication_repository__WEBPACK_IMPORTED_MODULE_4__.AuthenticationRepository }
 ];
-AuthenticationService = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Injectable)({
+AuthenticationService = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_12__.Injectable)({
         providedIn: 'root'
     })
 ], AuthenticationService);
@@ -667,53 +884,37 @@ AuthenticationService = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
-/***/ 60010:
-/*!*********************************************!*\
-  !*** ./src/app/services/storage.service.ts ***!
-  \*********************************************/
+/***/ 14314:
+/*!****************************************************!*\
+  !*** ./src/app/services/sectionStorage.service.ts ***!
+  \****************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "StorageService": function() { return /* binding */ StorageService; }
+/* harmony export */   "SectionStorageService": function() { return /* binding */ SectionStorageService; }
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ 61855);
-/* harmony import */ var _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/storage-angular */ 72604);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 42741);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 42741);
 
 
-
-let StorageService = class StorageService {
-    constructor(storage) {
-        this.storage = storage;
-        this.init();
+let SectionStorageService = class SectionStorageService {
+    constructor() { }
+    saveData(key, value) {
+        sessionStorage.setItem(key, value);
     }
-    init() {
-        this.storage.create();
-    }
-    getData(theKey) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, function* () {
-            let status = (yield this.storage.get(theKey)) || [];
-            return status;
-        });
-    }
-    addData(theItem, theKey) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, function* () {
-            const storedData = (yield this.storage.get(theKey)) || [];
-            storedData.push(theItem);
-            return yield this.storage.set(theKey, storedData);
-        });
+    getData(key) {
+        let data = sessionStorage.getItem(key);
+        return data;
     }
 };
-StorageService.ctorParameters = () => [
-    { type: _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_1__.Storage }
-];
-StorageService = (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
+SectionStorageService.ctorParameters = () => [];
+SectionStorageService = (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.Injectable)({
         providedIn: 'root'
     })
-], StorageService);
+], SectionStorageService);
 
 
 
@@ -730,47 +931,92 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "TokenService": function() { return /* binding */ TokenService; }
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 61855);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 42741);
-/* harmony import */ var _appcookie_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./appcookie.service */ 85559);
-/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/fire/compat/auth */ 83027);
-
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ 61855);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 42741);
+/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/fire/compat/auth */ 83027);
 
 
 
 const TOKEN_KEY = 'the-token';
 let TokenService = class TokenService {
-    constructor(appCookie, fireAuth) {
-        this.appCookie = appCookie;
+    constructor(fireAuth) {
         this.fireAuth = fireAuth;
     }
     setToken(token) {
-        this.appCookie.set(TOKEN_KEY, token);
+        // Save data to sessionStorage
+        sessionStorage.setItem(TOKEN_KEY, token);
     }
     getToken() {
-        return this.appCookie.get(TOKEN_KEY);
+        return sessionStorage.getItem(TOKEN_KEY);
     }
-    isTokenExpired() {
-        let theToken = this.fireAuth.idToken;
-        if (theToken) {
-            return false;
-        }
-        return true;
+    updateToken() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, function* () {
+            return new Promise((resolve) => {
+                let subscription;
+                subscription = this.fireAuth.idToken
+                    .subscribe(token => {
+                    if (subscription) {
+                        subscription.unsubscribe();
+                    }
+                    const tokenUpdated = token ? true : false;
+                    resolve(tokenUpdated);
+                });
+            });
+        });
     }
     isUserAuthenticated() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, function* () {
             let currentUser = this.fireAuth.currentUser;
             console.log(currentUser);
         });
     }
 };
 TokenService.ctorParameters = () => [
-    { type: _appcookie_service__WEBPACK_IMPORTED_MODULE_0__.AppCookieService },
-    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_2__.AngularFireAuth }
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_1__.AngularFireAuth }
 ];
-TokenService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Injectable)()
+TokenService = (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)()
 ], TokenService);
+
+
+
+/***/ }),
+
+/***/ 11000:
+/*!******************************************!*\
+  !*** ./src/app/services/user.service.ts ***!
+  \******************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "UserService": function() { return /* binding */ UserService; }
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 61855);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 42741);
+/* harmony import */ var _repository_user_repository__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../repository/user.repository */ 66359);
+
+
+
+let UserService = class UserService {
+    constructor(userRepository) {
+        this.userRepository = userRepository;
+    }
+    getUser() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return yield this.userRepository.getUser();
+        });
+    }
+};
+UserService.ctorParameters = () => [
+    { type: _repository_user_repository__WEBPACK_IMPORTED_MODULE_0__.UserRepository }
+];
+UserService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
+        providedIn: 'root'
+    })
+], UserService);
 
 
 
@@ -786,7 +1032,8 @@ TokenService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "environment": function() { return /* binding */ environment; },
-/* harmony export */   "ALCANCIA_SERVER_URL": function() { return /* binding */ ALCANCIA_SERVER_URL; }
+/* harmony export */   "ALCANCIA_SERVER_URL": function() { return /* binding */ ALCANCIA_SERVER_URL; },
+/* harmony export */   "EXCHANGE_RATE_URL": function() { return /* binding */ EXCHANGE_RATE_URL; }
 /* harmony export */ });
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
@@ -803,7 +1050,8 @@ const environment = {
         measurementId: "G-SE488C3P75"
     }
 };
-const ALCANCIA_SERVER_URL = "http://localhost:8000";
+const ALCANCIA_SERVER_URL = "https://royerdonnetarenas.tech/api";
+const EXCHANGE_RATE_URL = " https://v6.exchangerate-api.com/v6/460cee64dbd1d3e35cdfcc74";
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
