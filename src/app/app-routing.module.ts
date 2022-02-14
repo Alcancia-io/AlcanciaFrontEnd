@@ -4,6 +4,7 @@ import { PreloadAllModules, RouterModule, Routes, CanActivate } from '@angular/r
 import { IntroGuard } from './guards/intro.guard';
 import { AuthorizeGuard, NegateAuthorizeGuard } from './guards/authorize.guard';
 import { SwapGuard } from './guards/swap.guard';
+import { RecoverUserGuard } from './guards/recoveruser.guard';
 
 const routes: Routes = [
   {
@@ -41,12 +42,12 @@ const routes: Routes = [
   {
     path: 'bitcoin-deposit',
     loadChildren: () => import('./pages/bitcoin-deposit/bitcoin-deposit.module').then( m => m.BitcoinDepositPageModule),
-    canLoad: [AuthorizeGuard]
+    canLoad: [AuthorizeGuard,  RecoverUserGuard]
   },
   {
     path: 'paypalOrder/successfull',
     loadChildren: () => import('./pages/Paypal/SuccessfulDeposit/SuccessfulDeposit-routing.module').then( m => m.SuccefulDepositRoutingModule),
-    canLoad: [AuthorizeGuard]
+    canLoad: [AuthorizeGuard, RecoverUserGuard]
   }, 
   // {
   //   path: 'paypalpaymentoptions',
@@ -56,17 +57,17 @@ const routes: Routes = [
   {
     path: 'tabbar',
     loadChildren: () => import('./pages/tab-bar/tab-bar.module').then(m => m.TabBarPageModule),
-    canLoad: [AuthorizeGuard]
+    canLoad: [AuthorizeGuard, RecoverUserGuard]
   },
   {
     path: '',
     loadChildren: () => import('./pages/sidenav/sidenav.module').then( m => m.SidenavPageModule),
-    canLoad: [AuthorizeGuard]
+    canLoad: [AuthorizeGuard, RecoverUserGuard]
   }, 
   {
     path: 'paymenterror',
     loadChildren: () => import('./pages/paymenterror/paymenterror.module').then( m => m.PaymenterrorPageModule),
-    canLoad: [AuthorizeGuard]
+    canLoad: [AuthorizeGuard, RecoverUserGuard]
   },
   {
     path: 'recoveruser',
