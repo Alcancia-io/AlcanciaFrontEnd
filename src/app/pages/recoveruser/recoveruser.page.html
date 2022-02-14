@@ -33,13 +33,12 @@
             </form>
   
     </ion-row>
-    <ion-row class="button-row">
-      <div>
-        <br/>
-        <br/>
-        <app-arrow-button class="arrow-btn" expand="block" shape="round" color="warning" (click)="recoverUser()" (keyup.enter)="recoverUser()"></app-arrow-button>
-         
-      </div>
+    <br/> 
+    <br/> 
+    <ion-row class="ion-align-items-center"> 
+      <ion-col class="colomn">
+        <ion-button class="ion-button" (click)="recoverUser()" (keyup.enter)="recoverUser()">Guardar</ion-button>
+      </ion-col> 
     </ion-row>
   </ion-grid>  
 </ion-app>
