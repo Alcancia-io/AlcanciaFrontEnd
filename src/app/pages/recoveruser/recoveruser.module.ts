@@ -8,12 +8,15 @@ import { RecoveruserPageRoutingModule } from './recoveruser-routing.module';
 
 import { RecoveruserPage } from './recoveruser.page';
 
+import { ComponentsModule } from '../../components/components.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
+    ComponentsModule,
     RecoveruserPageRoutingModule
   ],
   declarations: [RecoveruserPage]
