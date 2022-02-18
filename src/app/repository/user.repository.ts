@@ -3,13 +3,14 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { UserModel } from "../models/userModel";
 import { ALCANCIA_SERVER_URL } from "src/environments/environment";
 import { Observable, Subscription } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { catchError, subscribeOn } from "rxjs/operators";
 import { AngularFirestore } from '@angular/fire/compat/firestore'; 
 import { AppCookieService } from '../services/appcookie.service';
 import { USER_NAME } from 'src/app/guards/auth.guard';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { SectionStorageService } from '../services/sectionStorage.service';
 import { RecoverUser } from '../models/revocerUserModel';
+import {UserBalance} from '../models/userBalance';
 const username = new UserModel();
 
 @Injectable({
@@ -24,26 +25,6 @@ export class UserRepository{
     private sectionStorageService: SectionStorageService,
     private httpClientModule: HttpClient
   ){}
-
-    // async getUser(): Promise<any>{ 
-    //   const userName =  this.appCookie.get(USER_NAME); 
-    //   return new Promise((resolver) => {
-    //     let subscription: Subscription;
-
-    //     this.fireAuth.authState.subscribe(user => {
-    //       subscription = this.firestore
-    //       .collection("users",ref=>ref.where('userId','==', user.uid))
-    //       .get()
-    //       .subscribe(data=>data.forEach(user=> {  
-    //         if (subscription) {
-    //             subscription.unsubscribe();
-    //         }  
-    //         resolver( Object.assign(user)); 
-    //       }));
-    //     }); 
-       
-    //   });
-    // }
 
   async getUser(): Promise<any>{
 
@@ -69,5 +50,20 @@ export class UserRepository{
         console.log('ErrorMessage', error);
       }
     );
+  } 
+
+  async getUserBalance(userId: string):Promise<UserBalance> {
+    return new Promise((resolver) => {
+      let subscription: Subscription; 
+      return this.httpClientModule.get<UserBalance>(`${ALCANCIA_SERVER_URL }/users/${userId}/balance`).subscribe(balance => {
+        if(subscription){
+          subscription.unsubscribe();
+        }
+
+        resolver(Object.assign(balance));
+        return balance;
+      });
+    });
+   
   }
 }
