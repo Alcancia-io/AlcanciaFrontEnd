@@ -77,13 +77,14 @@ export class SignupPage implements OnInit {
       loading.present();
 
       this.fireAuth.createUserWithEmailAndPassword(this.exform.value.email, this.exform.value.password).then((resp) => {
-
+        const currentDate = new Date(); 
         this.afs.collection('users').doc(resp.user.uid).set({
           'userId': resp.user.uid,
           'name': this.exform.value.name,
           'surname': this.exform.value.surname,
           'email': this.exform.value.email,  
           'swapScreenLoaded': false,
+          'lastDateUpdatedBalance': currentDate.getDate(),
           'balance': 0,
           'createdAt': Date.now()
         });
