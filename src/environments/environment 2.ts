@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyBCcfcDq4NLj-MC7VB_Y4AdKGTZOsQz-iQ",
-    authDomain: "alcancia.firebaseapp.com",
-    projectId: "alcancia",
-    storageBucket: "alcancia.appspot.com",
-    messagingSenderId: "142936855133",
-    appId: "1:142936855133:web:568866aa22b85d2d33b3b4",
-    measurementId: "G-SE488C3P75"
+    apiKey: "AIzaSyBhtFQWqEbuUUBcMig1OqEsfn_hg9Dcshk",
+    authDomain: "alcancia-developers.firebaseapp.com",
+    projectId: "alcancia-developers",
+    storageBucket: "alcancia-developers.appspot.com",
+    messagingSenderId: "8144688564",
+    appId: "1:8144688564:web:be929d3d22dfb0eef00ee1",
+    measurementId: "G-4G4F1NMF4E"
   }
 
 };

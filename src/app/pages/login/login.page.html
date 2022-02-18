@@ -1,0 +1,55 @@
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-card-header>
+        <div class="sign-toolbard">
+          <ion-button fill="clear" color="dark" size="small">
+            <p class="login"><b>Login</b></p>
+          </ion-button>
+          <ion-button fill="clear" color="dark" size="small" (click)="singupPage()">
+             <p>Regístrate</p> 
+          </ion-button>
+          <div class="perfile-pic"></div>
+        </div>
+        <div class="welcome-msg">
+          Qué gusto verte<b><br>{{aUsername}}<b *ngIf="aUsername" >,</b></b>
+      </div>
+      </ion-card-header>
+      <ion-card-content>  
+        <form [formGroup]="exform">
+          <div class="form-content">
+            <ion-item class="item-content">
+            <ion-input  formControlName="email" position="floating" placeholder="Correo electrónico" type="text" (keyup.enter)="login()" ></ion-input>
+            </ion-item> 
+            <div *ngFor="let error of errorMessages.email">
+              <ng-container *ngIf="exform.get('email').hasError(error.type) && (exform.get('email').dirty || exform.get('email').touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+            <br/>
+            <ion-item class="item-content">
+              <ion-input formControlName="password" position="floating" placeholder="Contraseña" type="password" (keyup.enter)="login()"></ion-input>
+            </ion-item> 
+            <div *ngFor="let error of errorMessages.password">
+              <ng-container *ngIf="exform.get('password').hasError(error.type) && (exform.get('password').dirty || exform.get('password').touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+        </form> 
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <div class="action-buttons"> 
+         
+        <ion-button class="forgotpassword-btn" type="button" fill="clear" (click)="forgot()">¿Olvidaste tu contraseña?</ion-button>
+        <app-arrow-button class="arrow-btn" type="submit" expand="block" shape="round"  (click)="login()" (keyup.enter)="login()"></app-arrow-button>
+      </div>
+     </ion-card-content>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,67 @@
+.heading{
+    margin-top: 10vh;
+    text-align: center;
+
+    h1{
+      font-size: 48px;
+      text-align: left;
+      padding-left: 5%;
+      margin-bottom: 30%;
+    }
+
+    p{
+      font-size: 1.0em;
+      color:#707070;
+      padding-top: 3px;
+      margin: 6px;
+      padding-left: 7.5%;
+      text-align: left;
+    }
+
+}
+
+small{
+  font-size: 16px;
+  color: #959595;
+  margin-left: 5%;
+  float: left;
+}
+
+
+
+.start-now{
+  margin-top: 45%;
+  text-align: center;
+
+  ion-button{
+    width: 85%;
+    height: 50px;
+    --background: #3554C4;
+  }
+
+  .start-now-btn{
+    text-transform: none;
+    font-size: 20px;
+    height: 65px;
+    border-radius: 10px;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+
+.heading{
+  h1{
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  p{
+    font-size: 1.0em;
+    color:#707070;
+    padding-top: 3px;
+    margin: 6px;
+    text-align: center;
+  }
+}
+
+}

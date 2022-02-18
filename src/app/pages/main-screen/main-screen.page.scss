@@ -1,0 +1,241 @@
+ion-content{
+  text-align: center;
+  width: 100%;
+}
+ion-col { 
+  text-align: center;
+}
+
+.heading{
+  margin-top: 10vh;
+  text-align: center;
+  .image{
+    width: 30%;
+  }
+ 
+}
+
+.lastDateUpdate{
+  margin-left: -124%;
+}
+
+.notransactionMessage{
+  font-size: 16px; 
+  text-align: center;
+}
+
+.welcome-msg{
+  left: 12px;
+} 
+
+.deposit-btn{
+  text-align: left;
+  float: left; 
+  margin-top: 5px;
+  --background: #FFFF;
+  color: #3554C4; 
+  margin-left: -30px;
+}
+
+.deposit-time{
+  color: gray;
+  margin-left: 3%;
+}
+
+.last-movement{
+  float: left;
+  font-size: 16px;
+  color: #ffff; 
+}
+
+.transaction-amount{
+  font-size: 16px; 
+}
+ 
+.ver-todos{
+  float: right;
+  font-size: 14px; 
+}
+
+.Tittle{
+  font-size: 16px;
+}
+
+.welcome-msg{
+  position: relative;
+  text-align: left;
+  font-size: 30px;
+}
+
+ion-list{
+  text-align: left;
+}
+
+.action-content{
+  background: #3554C4;
+  background-color: aliceblue;
+}
+
+  .insta-icon{
+    float: right;
+    right: 50px;
+    width: 10%;
+  }
+ 
+
+
+
+.investment-card{
+  background: #3554C4;
+  color: white;  
+  height: 100px;   
+  .investment-card-subtitle{
+    padding-top: 2%;
+    padding-left: 2%;
+    float: left;
+    color: white;
+  }
+ 
+}
+
+.card-tittle{
+  float: left;
+    margin-top: 14px;
+    margin-left: 3%;
+    font-size: 18px;
+
+} 
+
+.btn-container{
+  display: flex;
+  margin-top: 20%;
+  margin-left: 10%;
+  left: 5%;
+}
+
+.details-btn{ 
+  margin-left: 0px;
+  width: 100px;
+  height: 38px;
+  --background: #ffff;
+  color: #3554C4;
+}
+
+.total-investment-value{
+  font-size: 34px;
+  margin-left: -115px;
+  margin-top: 3px;
+}
+
+.content-investment-container{
+  display: inline;
+}
+
+.Ver-btn{
+  --background: #ffff;
+  color: #3554C4;
+  float: right;
+}
+
+
+
+@media only screen and (max-width: 960px) {
+  ion-content{
+    font-size: 16px;
+  }
+  .image{
+    width: 90%;
+  }
+ .p{
+   font-size: 60px;
+ } 
+
+ .lastDateUpdate{
+  margin-left: -205%;
+}
+}
+@media only screen and (max-width: 414px) {
+  ion-content{
+    font-size: 16px;
+  }
+  .image{
+    width: 90%;
+  }
+ .p{
+   font-size: 60px;
+ } 
+ .lastDateUpdate{
+  margin-left: -205%;
+}
+ .deposit-btn{
+  text-align: left;
+  float: left; 
+  margin-top: -85px;
+  --background: #FFFF;
+  color: #3554C4; 
+  margin-left: 5px;
+}
+.total-investment-value{
+  font-size: 34px;
+  margin-left: -207px;
+  margin-top: 3px;
+}
+}
+@media only screen and (max-width: 393px) {
+  ion-content{
+    font-size: 16px;
+  }
+  .lastDateUpdate{
+    margin-left: -205%;
+  }
+  .image{
+    width: 90%;
+  }
+ .p{
+   font-size: 60px;
+ } 
+
+ .deposit-btn{
+  text-align: left;
+  float: left; 
+  margin-top: -82px;
+  --background: #FFFF;
+  color: #3554C4; 
+  margin-left: -12px;
+}
+.total-investment-value{
+  font-size: 34px;
+  margin-left: -207px;
+  margin-top: 3px;
+}
+}
+@media only screen and (max-width: 390px) {
+  ion-content{
+    font-size: 16px;
+  }
+  .lastDateUpdate{
+    margin-left: -205%;
+  }
+  .image{
+    width: 90%;
+  }
+ .p{
+   font-size: 60px;
+ } 
+
+ .deposit-btn{
+  text-align: left;
+  float: left; 
+  margin-top: -87px;
+  --background: #FFFF;
+  color: #3554C4; 
+  margin-left: 5px;
+}
+.total-investment-value{
+  font-size: 34px;
+  margin-left: -207px;
+  margin-top: 3px;
+}
+}
+
+

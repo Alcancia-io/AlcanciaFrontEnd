@@ -1,0 +1,210 @@
+ 
+ion-button{ 
+    --background:#FEDC56;
+}
+
+.welcome-msg{
+    padding-left: 5%;
+    font-size: 38px;
+}
+
+.inputs-section{
+    text-align: right;
+    margin-left: 60%;
+    width: 41%;
+    margin-top: 3%;
+}
+
+.box-shadow{ 
+    width: 98.9%;
+    height: 95%;
+    background:  linear-gradient(#1B2A62, #355BC4);
+    border-radius: 25px;
+    left: 10px; 
+    position: absolute;  
+    filter: blur(0.1px);
+}
+
+.ion-card-body{ 
+    text-align: left;
+    border-radius: 25px;
+    --background: #171622; 
+    // box-shadow: 8px 8px  #1B2A62;
+} 
+
+ 
+.ion-card-content{ 
+    height: 75px;
+    border-radius: 25px; 
+    --background: #171622;
+    border: 2px solid #3453C3;
+    margin: -10px 10px;
+}
+
+.dropdown-content{
+    color: #FFFF;
+    font-weight: 800;
+    width: 25%;
+}
+
+.card-tittle p{
+    color: #FFF;
+    text-decoration: solid;
+    font-size: 18px;
+}
+
+span{
+    float: right;
+}
+
+.backMainMenuBtn{
+    --background: #3453C3;
+}
+
+.backarrow{
+    height: 100px;
+}
+
+.convert-btn{ 
+    color: #FFFF;
+    --background: linear-gradient(#355BC4, #1B2A62);
+    float: right;
+    padding-right: 5%; 
+}
+
+.whattodo-btn{
+    color: #FFF; 
+    --background: none;
+}
+.whattodo-btn p { 
+    border-bottom: 1px solid #FFFF; 
+}
+ 
+.elipse-arrow{   
+    z-index: 1;
+    position: relative;
+    width: 21px;
+    height: 21px; 
+    border-radius: 50%;
+    background-color: #3554C4;    
+    left: 50%; 
+  } 
+
+  ion-icon{
+      color: #FFFF;
+      padding-top: 15%;
+      padding-left: 16%;
+  }
+ion-select {
+    display: flex;
+    width: 18%;  
+    justify-content: center; 
+    border-radius: 15px !important;
+    padding-left: 10px;
+    padding-right: 10px;  
+    background-color: #3554C4;
+    left: 5%;
+    top: 20.5%;
+}  
+
+.currency-value{    
+    position: relative;
+    color: #ffff;
+    font-size: 24px;
+    padding-right: 15%; 
+    top: -49%; 
+    
+}
+ 
+ion-select::part(icon) {
+    color: #ffff;
+    opacity: 1;
+  }
+
+
+@media only screen and (max-width: 960px) {
+    .box-shadow{ 
+        width: 96.5%;
+        height: 95%;
+        background:  linear-gradient(#1B2A62, #355BC4);
+        border-radius: 25px;
+        left: 10px;
+        position: absolute;  
+        filter: blur(0.1px);
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    .box-shadow{ 
+        width: 90.5%;
+        height: 86%;
+        background:  linear-gradient(#1B2A62, #355BC4);
+        border-radius: 25px;
+        left: 10px;
+        position: absolute;  
+        filter: blur(0.1px);
+    }
+}
+
+@media only screen and (max-width: 412px) {
+    .box-shadow{ 
+        width: 90.5%;
+        height: 87%;
+        background:  linear-gradient(#1B2A62, #355BC4);
+        border-radius: 25px;
+        left: 10px;
+        position: absolute;  
+        filter: blur(0.1px);
+    }
+}
+
+@media only screen and (max-width: 393px) {
+    .box-shadow{ 
+        width: 89.5%;
+        height: 87%;
+        background:  linear-gradient(#1B2A62, #355BC4);
+        border-radius: 25px;
+        left: 10px;
+        position: absolute;  
+        filter: blur(0.1px);
+    }
+ 
+}
+
+@media only screen and (max-width: 390px) {
+    .box-shadow{ 
+        width: 89.5%;
+        height: 86%;
+        background:  linear-gradient(#1B2A62, #355BC4);
+        border-radius: 25px;
+        left: 10px;
+        position: absolute;  
+        filter: blur(0.1px);
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .box-shadow{ 
+        width: 89.5%;
+        height: 86%;
+        background:  linear-gradient(#1B2A62, #355BC4);
+        border-radius: 25px;
+        left: 10px;
+        position: absolute;  
+        filter: blur(0.1px);
+    }
+}
+
+
+@media only screen and (max-width: 360px) {
+    .box-shadow{ 
+        width: 88.5%;
+        height: 86%;
+        background:  linear-gradient(#1B2A62, #355BC4);
+        border-radius: 25px;
+        left: 10px;
+        position: absolute;  
+        filter: blur(0.1px);
+    }
+
+}

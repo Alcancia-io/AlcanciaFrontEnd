@@ -786,7 +786,13 @@
 
       var _arrow_button_arrow_button_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! ./arrow-button/arrow-button.component */
-      79827); //NOTES:
+      79827);
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @ionic/angular */
+      34595); //NOTES:
       // If adding more than one components and do not want to import the other component in the module where is going to be injected.
       // Please create another component module for it.
 
@@ -796,6 +802,7 @@
       };
 
       _ComponentsModule = (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_2__.NgModule)({
+        imports: [_ionic_angular__WEBPACK_IMPORTED_MODULE_3__.IonicModule],
         declarations: [_arrow_button_arrow_button_component__WEBPACK_IMPORTED_MODULE_0__.ArrowButtonComponent],
         exports: [_arrow_button_arrow_button_component__WEBPACK_IMPORTED_MODULE_0__.ArrowButtonComponent]
       })], _ComponentsModule);
@@ -803,7 +810,7 @@
     },
 
     /***/
-    66359: function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+    59913: function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
@@ -812,10 +819,10 @@
 
       __webpack_require__.d(__webpack_exports__, {
         /* harmony export */
-        "UserRepository": function UserRepository() {
+        "TransactionRepository": function TransactionRepository() {
           return (
             /* binding */
-            _UserRepository
+            _TransactionRepository
           );
         }
         /* harmony export */
@@ -830,7 +837,7 @@
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/core */
       42741);
       /* harmony import */
@@ -842,39 +849,55 @@
       /* harmony import */
 
 
-      var _models_userModel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! ../models/userModel */
-      54462);
+      var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! src/environments/environment */
+      24766);
       /* harmony import */
 
 
-      var src_environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! src/environments/environment */
-      24766);
+      var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @angular/fire/compat/auth */
+      83027);
+      /* harmony import */
 
-      var username = new _models_userModel__WEBPACK_IMPORTED_MODULE_0__.UserModel();
 
-      var _UserRepository = /*#__PURE__*/function () {
-        function UserRepository(httpClientModule) {
-          _classCallCheck(this, UserRepository);
+      var _services_sectionStorage_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! ../services/sectionStorage.service */
+      14314);
+
+      var _TransactionRepository = /*#__PURE__*/function () {
+        function TransactionRepository(httpClientModule, fireAuth, sectionStorageService) {
+          _classCallCheck(this, TransactionRepository);
 
           this.httpClientModule = httpClientModule;
+          this.fireAuth = fireAuth;
+          this.sectionStorageService = sectionStorageService;
+          this.CurrentUser = "";
         }
 
-        _createClass(UserRepository, [{
-          key: "getUser",
-          value: function getUser() {
+        _createClass(TransactionRepository, [{
+          key: "getUserTransactions",
+          value: function getUserTransactions() {
             return (0, tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+              var _this = this;
+
+              var userId;
               return regeneratorRuntime.wrap(function _callee3$(_context3) {
                 while (1) {
                   switch (_context3.prev = _context3.next) {
                     case 0:
-                      _context3.next = 2;
-                      return this.httpClientModule.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL + '/users').subscribe(function (data) {
-                        console.log('UserData:' + data);
-                      }, function (error) {
-                        console.log('ErrorMessage: ' + error);
-                      });
+                      userId = this.sectionStorageService.getData("UserId");
+                      return _context3.abrupt("return", new Promise(function (resolver) {
+                        var subscription;
+                        subscription = _this.httpClientModule.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.ALCANCIA_SERVER_URL + '/users/' + userId + '/deposits').subscribe(function (reponse) {
+                          if (subscription) {
+                            subscription.unsubscribe();
+                          }
+
+                          resolver(Object.assign(reponse));
+                          return reponse;
+                        });
+                      }));
 
                     case 2:
                     case "end":
@@ -884,47 +907,29 @@
               }, _callee3, this);
             }));
           }
-        }, {
-          key: "addUserData",
-          value: function addUserData(theUser) {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-              return regeneratorRuntime.wrap(function _callee4$(_context4) {
-                while (1) {
-                  switch (_context4.prev = _context4.next) {
-                    case 0:
-                      return _context4.abrupt("return", this.httpClientModule.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL + '/users', theUser).subscribe(function (user) {
-                        console.log('user created' + user);
-                      }, function (error) {
-                        console.log('ErrorMessage', error);
-                      }));
-
-                    case 1:
-                    case "end":
-                      return _context4.stop();
-                  }
-                }
-              }, _callee4, this);
-            }));
-          }
         }]);
 
-        return UserRepository;
+        return TransactionRepository;
       }();
 
-      _UserRepository.ctorParameters = function () {
+      _TransactionRepository.ctorParameters = function () {
         return [{
           type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient
+        }, {
+          type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_4__.AngularFireAuth
+        }, {
+          type: _services_sectionStorage_service__WEBPACK_IMPORTED_MODULE_1__.SectionStorageService
         }];
       };
 
-      _UserRepository = (0, tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_4__.Injectable)({
+      _TransactionRepository = (0, tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_5__.Injectable)({
         providedIn: 'root'
-      })], _UserRepository);
+      })], _TransactionRepository);
       /***/
     },
 
     /***/
-    11000: function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+    60010: function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
@@ -933,10 +938,137 @@
 
       __webpack_require__.d(__webpack_exports__, {
         /* harmony export */
-        "UserService": function UserService() {
+        "StorageService": function StorageService() {
           return (
             /* binding */
-            _UserService
+            _StorageService
+          );
+        }
+        /* harmony export */
+
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      61855);
+      /* harmony import */
+
+
+      var _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @ionic/storage-angular */
+      72604);
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/core */
+      42741);
+
+      var _StorageService = /*#__PURE__*/function () {
+        function StorageService(storage) {
+          _classCallCheck(this, StorageService);
+
+          this.storage = storage;
+          this.init();
+        }
+
+        _createClass(StorageService, [{
+          key: "init",
+          value: function init() {
+            this.storage.create();
+          }
+        }, {
+          key: "getData",
+          value: function getData(theKey) {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+              var data;
+              return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                while (1) {
+                  switch (_context4.prev = _context4.next) {
+                    case 0:
+                      data = sessionStorage.getItem(theKey) || [];
+                      return _context4.abrupt("return", data);
+
+                    case 2:
+                    case "end":
+                      return _context4.stop();
+                  }
+                }
+              }, _callee4);
+            }));
+          }
+        }, {
+          key: "addData",
+          value: function addData(theItem, theKey) {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+              var storedData;
+              return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                while (1) {
+                  switch (_context5.prev = _context5.next) {
+                    case 0:
+                      _context5.next = 2;
+                      return this.storage.get(theKey);
+
+                    case 2:
+                      _context5.t0 = _context5.sent;
+
+                      if (_context5.t0) {
+                        _context5.next = 5;
+                        break;
+                      }
+
+                      _context5.t0 = [];
+
+                    case 5:
+                      storedData = _context5.t0;
+                      storedData.push(theItem);
+                      _context5.next = 9;
+                      return this.storage.set(theKey, storedData);
+
+                    case 9:
+                      return _context5.abrupt("return", _context5.sent);
+
+                    case 10:
+                    case "end":
+                      return _context5.stop();
+                  }
+                }
+              }, _callee5, this);
+            }));
+          }
+        }]);
+
+        return StorageService;
+      }();
+
+      _StorageService.ctorParameters = function () {
+        return [{
+          type: _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_1__.Storage
+        }];
+      };
+
+      _StorageService = (0, tslib__WEBPACK_IMPORTED_MODULE_0__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
+        providedIn: 'root'
+      })], _StorageService);
+      /***/
+    },
+
+    /***/
+    7565: function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+
+
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */
+        "TransactionService": function TransactionService() {
+          return (
+            /* binding */
+            _TransactionService
           );
         }
         /* harmony export */
@@ -957,49 +1089,27 @@
       /* harmony import */
 
 
-      var _repository_user_repository__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! ../repository/user.repository */
-      66359);
+      var _repository_transaction_repository__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! ../repository/transaction.repository */
+      59913);
 
-      var _UserService = /*#__PURE__*/function () {
-        function UserService(userRepository) {
-          _classCallCheck(this, UserService);
+      var _TransactionService = /*#__PURE__*/function () {
+        function TransactionService(transactionRepository) {
+          _classCallCheck(this, TransactionService);
 
-          this.userRepository = userRepository;
+          this.transactionRepository = transactionRepository;
         }
 
-        _createClass(UserService, [{
-          key: "getUser",
-          value: function getUser() {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-              return regeneratorRuntime.wrap(function _callee5$(_context5) {
-                while (1) {
-                  switch (_context5.prev = _context5.next) {
-                    case 0:
-                      _context5.next = 2;
-                      return this.userRepository.getUser();
-
-                    case 2:
-                      return _context5.abrupt("return", _context5.sent);
-
-                    case 3:
-                    case "end":
-                      return _context5.stop();
-                  }
-                }
-              }, _callee5, this);
-            }));
-          }
-        }, {
-          key: "addUserData",
-          value: function addUserData(theUser) {
+        _createClass(TransactionService, [{
+          key: "getUserTransactions",
+          value: function getUserTransactions() {
             return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
               return regeneratorRuntime.wrap(function _callee6$(_context6) {
                 while (1) {
                   switch (_context6.prev = _context6.next) {
                     case 0:
                       _context6.next = 2;
-                      return this.userRepository.addUserData(theUser);
+                      return this.transactionRepository.getUserTransactions();
 
                     case 2:
                       return _context6.abrupt("return", _context6.sent);
@@ -1014,18 +1124,18 @@
           }
         }]);
 
-        return UserService;
+        return TransactionService;
       }();
 
-      _UserService.ctorParameters = function () {
+      _TransactionService.ctorParameters = function () {
         return [{
-          type: _repository_user_repository__WEBPACK_IMPORTED_MODULE_0__.UserRepository
+          type: _repository_transaction_repository__WEBPACK_IMPORTED_MODULE_0__.TransactionRepository
         }];
       };
 
-      _UserService = (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
+      _TransactionService = (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
         providedIn: 'root'
-      })], _UserService);
+      })], _TransactionService);
       /***/
     },
 
@@ -1037,7 +1147,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = ".arrow-btn {\n  padding: 16px;\n  border-radius: 20px;\n  width: 96px;\n  height: 63px;\n  background: #FECE2F;\n}\n\n.arrow-img {\n  width: 54px;\n  height: 18px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFycm93LWJ1dHRvbi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQztFQUNFLGFBQUE7RUFDQSxtQkFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0VBQ0EsbUJBQUE7QUFDSDs7QUFFQztFQUNFLFdBQUE7RUFDQSxZQUFBO0FBQ0giLCJmaWxlIjoiYXJyb3ctYnV0dG9uLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiIC5hcnJvdy1idG57XG4gICBwYWRkaW5nOiAxNnB4O1xuICAgYm9yZGVyLXJhZGl1czogMjBweDtcbiAgIHdpZHRoOiA5NnB4O1xuICAgaGVpZ2h0OiA2M3B4O1xuICAgYmFja2dyb3VuZDojRkVDRTJGO1xuIH1cblxuIC5hcnJvdy1pbWd7XG4gICB3aWR0aDogNTRweDtcbiAgIGhlaWdodDogMThweDtcbiB9XG4iXX0= */";
+      __webpack_exports__["default"] = ".arrow-img {\n  width: 54px;\n  height: 18px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFycm93LWJ1dHRvbi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNHLFdBQUE7RUFDQSxZQUFBO0FBQ0giLCJmaWxlIjoiYXJyb3ctYnV0dG9uLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmFycm93LWltZ3tcbiAgIHdpZHRoOiA1NHB4O1xuICAgaGVpZ2h0OiAxOHB4O1xufVxuIl19 */";
       /***/
     },
 
@@ -1049,7 +1159,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"content\">\n  <button type=\"button\" class=\"arrow-btn\">\n    <img class=\"arrow-img\" src=\"/assets/arrow-alcui.png\" alt=\"arrow-alcui\">\n  </button>\n</div>\n";
+      __webpack_exports__["default"] = "<div class=\"content\">\n  <ion-button shape=\"round\" size=\"large\">\n    <img class=\"arrow-img\" src=\"/assets/arrow-alcui.png\" alt=\"arrow-alcui\">\n  </ion-button> \n</div>\n\n";
       /***/
     }
   }]);

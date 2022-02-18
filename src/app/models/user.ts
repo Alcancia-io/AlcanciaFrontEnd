@@ -1,8 +1,9 @@
 export interface User
 {
-  UID:string;
+  userId:string;
   name:string;
   email:string;
+  swapScreenLoaded:boolean;
   createdAt:string;
 }
 

@@ -18,9 +18,8 @@ export class IntroGuard implements CanLoad {
       const hasSeenIntro = await this.storageService.getData(INTRO_KEY);      
       if (hasSeenIntro.length > 0 && (hasSeenIntro[0].value === 'true')) {
         return true;
-      } else {
-        this.router.navigateByUrl('/intro', { replaceUrl:true });
-        return false;
+      } else { 
+        return this.router.navigate[('/login')];
       }
  }
 }

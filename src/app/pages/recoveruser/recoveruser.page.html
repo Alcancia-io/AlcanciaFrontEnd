@@ -1,0 +1,44 @@
+<ion-app>
+  <ion-grid>
+    <ion-row> 
+          <div  class="welcome-msg ion-align-items-center">
+            <!-- class="welcome-msg" -->
+            Hola <b>Usuario,</b> <br>
+            <small>Recuerdanos tu nombre y apellidos</small>
+          </div>  
+    </ion-row>
+    <ion-row class="ion-align-items-center"> 
+            <form [formGroup]="exform" class="form">
+              <br/> 
+              <br/>
+              <ion-item class="item-content">
+                <ion-input formControlName="name" position="floating" placeholder="Nombre" type="text"></ion-input>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.name">
+                <ng-container *ngIf="exform.get('name').hasError(error.type) && (exform.get('name').dirty || exform.get('name').touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+              <br/>
+              <br/> 
+              <br/>
+              <ion-item class="item-content"> 
+                <ion-input formControlName="surname" position="floating" placeholder="Apellidos" type="text"></ion-input>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.surname">
+                <ng-container *ngIf="exform.get('surname').hasError(error.type) && (exform.get('surname').dirty || exform.get('surname').touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div> 
+            </form>
+  
+    </ion-row>
+    <br/> 
+    <br/> 
+    <ion-row class="ion-align-items-center"> 
+      <ion-col class="colomn">
+        <ion-button class="ion-button" (click)="recoverUser()" (keyup.enter)="recoverUser()">Guardar</ion-button>
+      </ion-col> 
+    </ion-row>
+  </ion-grid>  
+</ion-app>

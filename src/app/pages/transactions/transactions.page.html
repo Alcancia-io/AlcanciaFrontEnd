@@ -1,0 +1,33 @@
+<ion-header> 
+    <app-top-navigation-toolbar>Historial Transaciones</app-top-navigation-toolbar> 
+</ion-header>
+ 
+<!-- List of Text Items -->
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher> 
+  <li style="list-style: none;" *ngFor="let transation  of transationHistory">
+    <ng-container *ngIf="!transactionAvailable" >
+      <p class="notransactionMessage">No hay transacciones para mostrar</p>
+    </ng-container>
+    <ion-card>
+      <ion-item> 
+          <h3> <img src="../../../assets/Icon awesome-coins.png"> {{transation.id}}  </h3>
+        <ion-label></ion-label>
+        <!-- <ion-button fill="outline" slot="end">Ver</ion-button> -->
+      </ion-item>
+      <ion-item>
+        Fecha: {{transation.create_time}} <br/>
+        Monto Total: {{transation.gross_amount}} $ <br/>
+        <!-- Monto Neto: {{transation.net_amount}} $ -->
+      </ion-item>
+    
+      <ion-card-content>
+        {{transation.status}}
+      </ion-card-content>
+    </ion-card>
+  </li>
+</ion-content> 
+
+
