@@ -79,10 +79,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppRoutingModule": function() { return /* binding */ AppRoutingModule; }
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 61855);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 42741);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 29535);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 61855);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 42741);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 29535);
 /* harmony import */ var _guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./guards/authorize.guard */ 33874);
+/* harmony import */ var _guards_recoveruser_guard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./guards/recoveruser.guard */ 15331);
+
 
 
 
@@ -122,12 +124,12 @@ const routes = [
     {
         path: 'bitcoin-deposit',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_bitcoin-deposit_bitcoin-deposit_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/bitcoin-deposit/bitcoin-deposit.module */ 68929)).then(m => m.BitcoinDepositPageModule),
-        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard, _guards_recoveruser_guard__WEBPACK_IMPORTED_MODULE_1__.RecoverUserGuard]
     },
     {
         path: 'paypalOrder/successfull',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_Paypal_SuccessfulDeposit_SuccessfulDeposit-routing_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/Paypal/SuccessfulDeposit/SuccessfulDeposit-routing.module */ 79054)).then(m => m.SuccefulDepositRoutingModule),
-        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard, _guards_recoveruser_guard__WEBPACK_IMPORTED_MODULE_1__.RecoverUserGuard]
     },
     // {
     //   path: 'paypalpaymentoptions',
@@ -137,32 +139,32 @@ const routes = [
     {
         path: 'tabbar',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_tab-bar_tab-bar_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/tab-bar/tab-bar.module */ 58965)).then(m => m.TabBarPageModule),
-        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard, _guards_recoveruser_guard__WEBPACK_IMPORTED_MODULE_1__.RecoverUserGuard]
     },
     {
         path: '',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_sidenav_sidenav_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/sidenav/sidenav.module */ 69145)).then(m => m.SidenavPageModule),
-        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard, _guards_recoveruser_guard__WEBPACK_IMPORTED_MODULE_1__.RecoverUserGuard]
     },
     {
         path: 'paymenterror',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_paymenterror_paymenterror_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/paymenterror/paymenterror.module */ 26685)).then(m => m.PaymenterrorPageModule),
-        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard, _guards_recoveruser_guard__WEBPACK_IMPORTED_MODULE_1__.RecoverUserGuard]
     },
     {
         path: 'recoveruser',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_recoveruser_recoveruser_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/recoveruser/recoveruser.module */ 97233)).then(m => m.RecoveruserPageModule),
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_pages_recoveruser_recoveruser_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/recoveruser/recoveruser.module */ 97233)).then(m => m.RecoveruserPageModule),
         canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
     }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
-AppRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.NgModule)({
+AppRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.NgModule)({
         imports: [
-            _angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule.forRoot(routes, { preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_3__.PreloadAllModules })
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule.forRoot(routes, { preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_4__.PreloadAllModules })
         ],
-        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule]
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule]
     })
 ], AppRoutingModule);
 
@@ -435,6 +437,59 @@ NegateAuthorizeGuard = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
 
 /***/ }),
 
+/***/ 15331:
+/*!*********************************************!*\
+  !*** ./src/app/guards/recoveruser.guard.ts ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RecoverUserGuard": function() { return /* binding */ RecoverUserGuard; }
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 61855);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 42741);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ 29535);
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/user.service */ 11000);
+
+
+
+//local storage
+
+let RecoverUserGuard = class RecoverUserGuard {
+    constructor(router, userService) {
+        this.router = router;
+        this.userService = userService;
+    }
+    canLoad() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            this.userService.getUser().then(user => {
+                if (user.name == undefined || user.surname == undefined) {
+                    this.router.navigate(['/recoveruser']);
+                }
+                else {
+                    return true;
+                }
+            });
+            return true;
+        });
+    }
+};
+RecoverUserGuard.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__.Router },
+    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_0__.UserService }
+];
+RecoverUserGuard = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Injectable)({
+        providedIn: 'root'
+    })
+], RecoverUserGuard);
+
+
+
+/***/ }),
+
 /***/ 27956:
 /*!**************************************!*\
   !*** ./src/app/guards/swap.guard.ts ***!
@@ -635,23 +690,6 @@ let UserRepository = class UserRepository {
         this.sectionStorageService = sectionStorageService;
         this.httpClientModule = httpClientModule;
     }
-    // async getUser(): Promise<any>{ 
-    //   const userName =  this.appCookie.get(USER_NAME); 
-    //   return new Promise((resolver) => {
-    //     let subscription: Subscription;
-    //     this.fireAuth.authState.subscribe(user => {
-    //       subscription = this.firestore
-    //       .collection("users",ref=>ref.where('userId','==', user.uid))
-    //       .get()
-    //       .subscribe(data=>data.forEach(user=> {  
-    //         if (subscription) {
-    //             subscription.unsubscribe();
-    //         }  
-    //         resolver( Object.assign(user)); 
-    //       }));
-    //     }); 
-    //   });
-    // }
     getUser() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const userId = this.sectionStorageService.getData("UserId");
@@ -674,6 +712,20 @@ let UserRepository = class UserRepository {
                 return true;
             }, error => {
                 console.log('ErrorMessage', error);
+            });
+        });
+    }
+    getUserBalance(userId) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            return new Promise((resolver) => {
+                let subscription;
+                return this.httpClientModule.get(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL}/users/${userId}/balance`).subscribe(balance => {
+                    if (subscription) {
+                        subscription.unsubscribe();
+                    }
+                    resolver(Object.assign(balance));
+                    return balance;
+                });
             });
         });
     }
@@ -1027,6 +1079,11 @@ let UserService = class UserService {
     recoverUser(theUser) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
             return yield this.userRepository.recoverUserInfo(theUser);
+        });
+    }
+    getUserBalance(userId) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return yield this.userRepository.getUserBalance(userId);
         });
     }
 };
