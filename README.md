@@ -12,3 +12,17 @@ Ways to run it with Capacitor (Native)
 ```ionic capacitor run android```
 - Andorid 
 ```ionic capacitor run android -l --external```
+
+## Firebase Deploy
+
+Change environment
+```firebase use stage```
+```firebase use production```
+
+Add new project
+```firebase use --add```
+
+Firebase Deploy
+```firebase deploy```
+
+```firebase deploy -P staging # deploy to staging alias```

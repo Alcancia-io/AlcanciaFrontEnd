@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "alcancia-frontend"
-  }
+    "stage": "alcancia-frontend",
+    "production": "alcancia"
+  },
+  "targets": {}
 }
