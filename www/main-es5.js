@@ -137,19 +137,19 @@
       /* harmony import */
 
 
-      var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! tslib */
       61855);
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/core */
       42741);
       /* harmony import */
 
 
-      var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
       29535);
       /* harmony import */
@@ -158,6 +158,12 @@
       var _guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! ./guards/authorize.guard */
       33874);
+      /* harmony import */
+
+
+      var _guards_recoveruser_guard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! ./guards/recoveruser.guard */
+      15331);
 
       var routes = [{
         path: 'login',
@@ -229,7 +235,7 @@
             return m.BitcoinDepositPageModule;
           });
         },
-        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard, _guards_recoveruser_guard__WEBPACK_IMPORTED_MODULE_1__.RecoverUserGuard]
       }, {
         path: 'paypalOrder/successfull',
         loadChildren: function loadChildren() {
@@ -241,7 +247,7 @@
             return m.SuccefulDepositRoutingModule;
           });
         },
-        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard, _guards_recoveruser_guard__WEBPACK_IMPORTED_MODULE_1__.RecoverUserGuard]
       }, // {
       //   path: 'paypalpaymentoptions',
       //   loadChildren: () => import('./pages/paypalpaymentoptions/paypalpaymentoptions.module').then( m => m.PaypalpaymentoptionsPageModule),
@@ -258,7 +264,7 @@
             return m.TabBarPageModule;
           });
         },
-        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard, _guards_recoveruser_guard__WEBPACK_IMPORTED_MODULE_1__.RecoverUserGuard]
       }, {
         path: '',
         loadChildren: function loadChildren() {
@@ -270,7 +276,7 @@
             return m.SidenavPageModule;
           });
         },
-        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard, _guards_recoveruser_guard__WEBPACK_IMPORTED_MODULE_1__.RecoverUserGuard]
       }, {
         path: 'paymenterror',
         loadChildren: function loadChildren() {
@@ -282,13 +288,13 @@
             return m.PaymenterrorPageModule;
           });
         },
-        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard]
+        canLoad: [_guards_authorize_guard__WEBPACK_IMPORTED_MODULE_0__.AuthorizeGuard, _guards_recoveruser_guard__WEBPACK_IMPORTED_MODULE_1__.RecoverUserGuard]
       }, {
         path: 'recoveruser',
         loadChildren: function loadChildren() {
-          return __webpack_require__.e(
+          return Promise.all(
           /*! import() */
-          "src_app_pages_recoveruser_recoveruser_module_ts").then(__webpack_require__.bind(__webpack_require__,
+          [__webpack_require__.e("common"), __webpack_require__.e("src_app_pages_recoveruser_recoveruser_module_ts")]).then(__webpack_require__.bind(__webpack_require__,
           /*! ./pages/recoveruser/recoveruser.module */
           97233)).then(function (m) {
             return m.RecoveruserPageModule;
@@ -301,11 +307,11 @@
         _classCallCheck(this, AppRoutingModule);
       };
 
-      _AppRoutingModule = (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_2__.NgModule)({
-        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule.forRoot(routes, {
-          preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_3__.PreloadAllModules
+      _AppRoutingModule = (0, tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_3__.NgModule)({
+        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule.forRoot(routes, {
+          preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_4__.PreloadAllModules
         })],
-        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule]
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule]
       })], _AppRoutingModule);
       /***/
     },
@@ -822,6 +828,105 @@
     },
 
     /***/
+    15331: function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+
+
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */
+        "RecoverUserGuard": function RecoverUserGuard() {
+          return (
+            /* binding */
+            _RecoverUserGuard
+          );
+        }
+        /* harmony export */
+
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! tslib */
+      61855);
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/core */
+      42741);
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/router */
+      29535);
+      /* harmony import */
+
+
+      var _services_user_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! ../services/user.service */
+      11000); //local storage
+
+
+      var _RecoverUserGuard = /*#__PURE__*/function () {
+        function RecoverUserGuard(router, userService) {
+          _classCallCheck(this, RecoverUserGuard);
+
+          this.router = router;
+          this.userService = userService;
+        }
+
+        _createClass(RecoverUserGuard, [{
+          key: "canLoad",
+          value: function canLoad() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+              var _this2 = this;
+
+              return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                while (1) {
+                  switch (_context3.prev = _context3.next) {
+                    case 0:
+                      this.userService.getUser().then(function (user) {
+                        if (user.name == undefined || user.surname == undefined) {
+                          _this2.router.navigate(['/recoveruser']);
+                        } else {
+                          return true;
+                        }
+                      });
+                      return _context3.abrupt("return", true);
+
+                    case 2:
+                    case "end":
+                      return _context3.stop();
+                  }
+                }
+              }, _callee3, this);
+            }));
+          }
+        }]);
+
+        return RecoverUserGuard;
+      }();
+
+      _RecoverUserGuard.ctorParameters = function () {
+        return [{
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_2__.Router
+        }, {
+          type: _services_user_service__WEBPACK_IMPORTED_MODULE_0__.UserService
+        }];
+      };
+
+      _RecoverUserGuard = (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_3__.Injectable)({
+        providedIn: 'root'
+      })], _RecoverUserGuard);
+      /***/
+    },
+
+    /***/
     27956: function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
@@ -877,28 +982,28 @@
         _createClass(SwapGuard, [{
           key: "canLoad",
           value: function canLoad() {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-              var _this2 = this;
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+              var _this3 = this;
 
-              return regeneratorRuntime.wrap(function _callee3$(_context3) {
+              return regeneratorRuntime.wrap(function _callee4$(_context4) {
                 while (1) {
-                  switch (_context3.prev = _context3.next) {
+                  switch (_context4.prev = _context4.next) {
                     case 0:
                       this.userService.getUser().then(function (user) {
-                        if (_this2.user.swapScreenLoaded && _this2.user.swapScreenLoaded === true) {
-                          return _this2.router.navigate['/tabbar'];
+                        if (_this3.user.swapScreenLoaded && _this3.user.swapScreenLoaded === true) {
+                          return _this3.router.navigate['/tabbar'];
                         } else {
                           return true;
                         }
                       });
-                      return _context3.abrupt("return", true);
+                      return _context4.abrupt("return", true);
 
                     case 2:
                     case "end":
-                      return _context3.stop();
+                      return _context4.stop();
                   }
                 }
-              }, _callee3, this);
+              }, _callee4, this);
             }));
           }
         }]);
@@ -1070,18 +1175,18 @@
         _createClass(AuthenticationRepository, [{
           key: "getCookieToken",
           value: function getCookieToken(token) {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-              var _this3 = this;
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+              var _this4 = this;
 
-              return regeneratorRuntime.wrap(function _callee4$(_context4) {
+              return regeneratorRuntime.wrap(function _callee5$(_context5) {
                 while (1) {
-                  switch (_context4.prev = _context4.next) {
+                  switch (_context5.prev = _context5.next) {
                     case 0:
-                      return _context4.abrupt("return", new Promise(function (resolver) {
+                      return _context5.abrupt("return", new Promise(function (resolver) {
                         var subscription;
                         var payload = new _models_csrftoken__WEBPACK_IMPORTED_MODULE_4__.CSRFToken();
                         payload.idToken = token;
-                        subscription = _this3.httpClientModule.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL + '/login/', payload).subscribe(function (user) {
+                        subscription = _this4.httpClientModule.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL + '/login/', payload).subscribe(function (user) {
                           if (subscription) {
                             subscription.unsubscribe();
                           }
@@ -1093,10 +1198,10 @@
 
                     case 1:
                     case "end":
-                      return _context4.stop();
+                      return _context5.stop();
                   }
                 }
-              }, _callee4);
+              }, _callee5);
             }));
           }
         }]);
@@ -1209,40 +1314,23 @@
           this.appCookie = appCookie;
           this.sectionStorageService = sectionStorageService;
           this.httpClientModule = httpClientModule;
-        } // async getUser(): Promise<any>{ 
-        //   const userName =  this.appCookie.get(USER_NAME); 
-        //   return new Promise((resolver) => {
-        //     let subscription: Subscription;
-        //     this.fireAuth.authState.subscribe(user => {
-        //       subscription = this.firestore
-        //       .collection("users",ref=>ref.where('userId','==', user.uid))
-        //       .get()
-        //       .subscribe(data=>data.forEach(user=> {  
-        //         if (subscription) {
-        //             subscription.unsubscribe();
-        //         }  
-        //         resolver( Object.assign(user)); 
-        //       }));
-        //     }); 
-        //   });
-        // }
-
+        }
 
         _createClass(UserRepository, [{
           key: "getUser",
           value: function getUser() {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-              var _this4 = this;
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+              var _this5 = this;
 
               var userId;
-              return regeneratorRuntime.wrap(function _callee5$(_context5) {
+              return regeneratorRuntime.wrap(function _callee6$(_context6) {
                 while (1) {
-                  switch (_context5.prev = _context5.next) {
+                  switch (_context6.prev = _context6.next) {
                     case 0:
                       userId = this.sectionStorageService.getData("UserId");
-                      return _context5.abrupt("return", new Promise(function (resolver) {
+                      return _context6.abrupt("return", new Promise(function (resolver) {
                         var subscription;
-                        subscription = _this4.httpClientModule.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL + '/users/' + userId).subscribe(function (user) {
+                        subscription = _this5.httpClientModule.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL + '/users/' + userId).subscribe(function (user) {
                           if (subscription) {
                             subscription.unsubscribe();
                           }
@@ -1254,21 +1342,21 @@
 
                     case 2:
                     case "end":
-                      return _context5.stop();
+                      return _context6.stop();
                   }
                 }
-              }, _callee5, this);
+              }, _callee6, this);
             }));
           }
         }, {
           key: "recoverUserInfo",
           value: function recoverUserInfo(theUser) {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-              return regeneratorRuntime.wrap(function _callee6$(_context6) {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+              return regeneratorRuntime.wrap(function _callee7$(_context7) {
                 while (1) {
-                  switch (_context6.prev = _context6.next) {
+                  switch (_context7.prev = _context7.next) {
                     case 0:
-                      return _context6.abrupt("return", this.httpClientModule.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL + '/users', theUser).subscribe(function (user) {
+                      return _context7.abrupt("return", this.httpClientModule.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL + '/users', theUser).subscribe(function (user) {
                         return true;
                       }, function (error) {
                         console.log('ErrorMessage', error);
@@ -1276,10 +1364,40 @@
 
                     case 1:
                     case "end":
-                      return _context6.stop();
+                      return _context7.stop();
                   }
                 }
-              }, _callee6, this);
+              }, _callee7, this);
+            }));
+          }
+        }, {
+          key: "getUserBalance",
+          value: function getUserBalance(userId) {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+              var _this6 = this;
+
+              return regeneratorRuntime.wrap(function _callee8$(_context8) {
+                while (1) {
+                  switch (_context8.prev = _context8.next) {
+                    case 0:
+                      return _context8.abrupt("return", new Promise(function (resolver) {
+                        var subscription;
+                        return _this6.httpClientModule.get("".concat(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.ALCANCIA_SERVER_URL, "/users/").concat(userId, "/balance")).subscribe(function (balance) {
+                          if (subscription) {
+                            subscription.unsubscribe();
+                          }
+
+                          resolver(Object.assign(balance));
+                          return balance;
+                        });
+                      }));
+
+                    case 1:
+                    case "end":
+                      return _context8.stop();
+                  }
+                }
+              }, _callee8);
             }));
           }
         }]);
@@ -1506,7 +1624,7 @@
 
       var _AuthenticationService = /*#__PURE__*/function () {
         function AuthenticationService(fireAuth, afs, router, loadingCtrl, toastr, tokenService, sectionStorage, userService, appCookieService, authenticationRepository) {
-          var _this5 = this;
+          var _this7 = this;
 
           _classCallCheck(this, AuthenticationService);
 
@@ -1523,7 +1641,7 @@
           this.AccessToken = "";
           this.user$ = this.fireAuth.authState.pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_5__.switchMap)(function (user) {
             if (user) {
-              return _this5.afs.doc("users/".concat(user.uid)).valueChanges();
+              return _this7.afs.doc("users/".concat(user.uid)).valueChanges();
             } else {
               return (0, rxjs__WEBPACK_IMPORTED_MODULE_6__.of)(null);
             }
@@ -1534,15 +1652,15 @@
         _createClass(AuthenticationService, [{
           key: "login",
           value: function login(email, password) {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
-              var _this6 = this;
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+              var _this8 = this;
 
               var loading;
-              return regeneratorRuntime.wrap(function _callee8$(_context8) {
+              return regeneratorRuntime.wrap(function _callee10$(_context10) {
                 while (1) {
-                  switch (_context8.prev = _context8.next) {
+                  switch (_context10.prev = _context10.next) {
                     case 0:
-                      _context8.next = 2;
+                      _context10.next = 2;
                       return this.loadingCtrl.create({
                         message: 'Autenticando...',
                         spinner: 'crescent',
@@ -1550,54 +1668,54 @@
                       });
 
                     case 2:
-                      loading = _context8.sent;
+                      loading = _context10.sent;
                       loading.present();
                       this.fireAuth.signInWithEmailAndPassword(email, password).then(function (data) {
-                        return (0, tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(_this6, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
-                          var _this7 = this;
+                        return (0, tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(_this8, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+                          var _this9 = this;
 
-                          return regeneratorRuntime.wrap(function _callee7$(_context7) {
+                          return regeneratorRuntime.wrap(function _callee9$(_context9) {
                             while (1) {
-                              switch (_context7.prev = _context7.next) {
+                              switch (_context9.prev = _context9.next) {
                                 case 0:
                                   if (data.user.emailVerified) {
-                                    _context7.next = 6;
+                                    _context9.next = 6;
                                     break;
                                   }
 
                                   loading.dismiss();
                                   this.toast('Porfavor verificar su correo!', 'danger');
                                   this.logout();
-                                  _context7.next = 12;
+                                  _context9.next = 12;
                                   break;
 
                                 case 6:
-                                  _context7.next = 8;
+                                  _context9.next = 8;
                                   return this.fireAuth.currentUser;
 
                                 case 8:
-                                  _context7.sent.getIdToken().then(function (token) {
-                                    _this7.tokenService.setToken(token); // this.authenticationRepository.getCookieToken(token);
+                                  _context9.sent.getIdToken().then(function (token) {
+                                    _this9.tokenService.setToken(token); // this.authenticationRepository.getCookieToken(token);
 
                                   });
 
-                                  _context7.next = 11;
+                                  _context9.next = 11;
                                   return this.fireAuth.authState.subscribe(function (user) {
                                     if (user) {
-                                      _this7.sectionStorage.saveData("UserId", user.uid);
+                                      _this9.sectionStorage.saveData("UserId", user.uid);
 
-                                      _this7.userService.getUser().then(function (user) {
+                                      _this9.userService.getUser().then(function (user) {
                                         if (user.name == undefined || user.surname == undefined) {
-                                          _this7.router.navigate(['/recoveruser']);
+                                          _this9.router.navigate(['/recoveruser']);
                                         } else {
-                                          _this7.sectionStorage.saveData("UserEmail", user.email);
+                                          _this9.sectionStorage.saveData("UserEmail", user.email);
 
-                                          _this7.sectionStorage.saveData("Username", user.name);
+                                          _this9.sectionStorage.saveData("Username", user.name);
 
                                           if (!user.swapScreenLoaded || user.swapScreenLoaded === false) {
-                                            _this7.router.navigate(['/nav/swap']);
+                                            _this9.router.navigate(['/nav/swap']);
                                           } else {
-                                            _this7.router.navigate(['/']);
+                                            _this9.router.navigate(['/']);
                                           }
                                         }
                                       });
@@ -1609,61 +1727,61 @@
 
                                 case 12:
                                 case "end":
-                                  return _context7.stop();
+                                  return _context9.stop();
                               }
                             }
-                          }, _callee7, this);
+                          }, _callee9, this);
                         }));
                       })["catch"](function (error) {
                         console.log(error);
                         loading.dismiss();
 
-                        _this6.toast('Correo electrónico o contraseña incorrecta', 'danger');
+                        _this8.toast('Correo electrónico o contraseña incorrecta', 'danger');
                       });
 
                     case 5:
                     case "end":
-                      return _context8.stop();
+                      return _context10.stop();
                   }
                 }
-              }, _callee8, this);
+              }, _callee10, this);
             }));
           } // end of login
 
         }, {
           key: "logout",
           value: function logout() {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
-              var _this8 = this;
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
+              var _this10 = this;
 
-              return regeneratorRuntime.wrap(function _callee9$(_context9) {
+              return regeneratorRuntime.wrap(function _callee11$(_context11) {
                 while (1) {
-                  switch (_context9.prev = _context9.next) {
+                  switch (_context11.prev = _context11.next) {
                     case 0:
-                      _context9.next = 2;
+                      _context11.next = 2;
                       return this.fireAuth.signOut().then(function () {
-                        _this8.router.navigate(['/login']);
+                        _this10.router.navigate(['/login']);
                       });
 
                     case 2:
                     case "end":
-                      return _context9.stop();
+                      return _context11.stop();
                   }
                 }
-              }, _callee9, this);
+              }, _callee11, this);
             }));
           } // end of logout
 
         }, {
           key: "toast",
           value: function toast(message, status) {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
               var toast;
-              return regeneratorRuntime.wrap(function _callee10$(_context10) {
+              return regeneratorRuntime.wrap(function _callee12$(_context12) {
                 while (1) {
-                  switch (_context10.prev = _context10.next) {
+                  switch (_context12.prev = _context12.next) {
                     case 0:
-                      _context10.next = 2;
+                      _context12.next = 2;
                       return this.toastr.create({
                         message: message,
                         position: 'top',
@@ -1672,15 +1790,15 @@
                       });
 
                     case 2:
-                      toast = _context10.sent;
+                      toast = _context12.sent;
                       toast.present();
 
                     case 4:
                     case "end":
-                      return _context10.stop();
+                      return _context12.stop();
                   }
                 }
-              }, _callee10, this);
+              }, _callee12, this);
             }));
           } // end of toast
 
@@ -1843,16 +1961,16 @@
         }, {
           key: "updateToken",
           value: function updateToken() {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
-              var _this9 = this;
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
+              var _this11 = this;
 
-              return regeneratorRuntime.wrap(function _callee11$(_context11) {
+              return regeneratorRuntime.wrap(function _callee13$(_context13) {
                 while (1) {
-                  switch (_context11.prev = _context11.next) {
+                  switch (_context13.prev = _context13.next) {
                     case 0:
-                      return _context11.abrupt("return", new Promise(function (resolve) {
+                      return _context13.abrupt("return", new Promise(function (resolve) {
                         var subscription;
-                        subscription = _this9.fireAuth.idToken.subscribe(function (token) {
+                        subscription = _this11.fireAuth.idToken.subscribe(function (token) {
                           if (subscription) {
                             subscription.unsubscribe();
                           }
@@ -1864,30 +1982,30 @@
 
                     case 1:
                     case "end":
-                      return _context11.stop();
+                      return _context13.stop();
                   }
                 }
-              }, _callee11);
+              }, _callee13);
             }));
           }
         }, {
           key: "isUserAuthenticated",
           value: function isUserAuthenticated() {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee14() {
               var currentUser;
-              return regeneratorRuntime.wrap(function _callee12$(_context12) {
+              return regeneratorRuntime.wrap(function _callee14$(_context14) {
                 while (1) {
-                  switch (_context12.prev = _context12.next) {
+                  switch (_context14.prev = _context14.next) {
                     case 0:
                       currentUser = this.fireAuth.currentUser;
                       console.log(currentUser);
 
                     case 2:
                     case "end":
-                      return _context12.stop();
+                      return _context14.stop();
                   }
                 }
-              }, _callee12, this);
+              }, _callee14, this);
             }));
           }
         }]);
@@ -1953,45 +2071,67 @@
         _createClass(UserService, [{
           key: "getUser",
           value: function getUser() {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
-              return regeneratorRuntime.wrap(function _callee13$(_context13) {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee15() {
+              return regeneratorRuntime.wrap(function _callee15$(_context15) {
                 while (1) {
-                  switch (_context13.prev = _context13.next) {
+                  switch (_context15.prev = _context15.next) {
                     case 0:
-                      _context13.next = 2;
+                      _context15.next = 2;
                       return this.userRepository.getUser();
 
                     case 2:
-                      return _context13.abrupt("return", _context13.sent);
+                      return _context15.abrupt("return", _context15.sent);
 
                     case 3:
                     case "end":
-                      return _context13.stop();
+                      return _context15.stop();
                   }
                 }
-              }, _callee13, this);
+              }, _callee15, this);
             }));
           }
         }, {
           key: "recoverUser",
           value: function recoverUser(theUser) {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee14() {
-              return regeneratorRuntime.wrap(function _callee14$(_context14) {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee16() {
+              return regeneratorRuntime.wrap(function _callee16$(_context16) {
                 while (1) {
-                  switch (_context14.prev = _context14.next) {
+                  switch (_context16.prev = _context16.next) {
                     case 0:
-                      _context14.next = 2;
+                      _context16.next = 2;
                       return this.userRepository.recoverUserInfo(theUser);
 
                     case 2:
-                      return _context14.abrupt("return", _context14.sent);
+                      return _context16.abrupt("return", _context16.sent);
 
                     case 3:
                     case "end":
-                      return _context14.stop();
+                      return _context16.stop();
                   }
                 }
-              }, _callee14, this);
+              }, _callee16, this);
+            }));
+          }
+        }, {
+          key: "getUserBalance",
+          value: function getUserBalance(userId) {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee17() {
+              return regeneratorRuntime.wrap(function _callee17$(_context17) {
+                while (1) {
+                  switch (_context17.prev = _context17.next) {
+                    case 0:
+                      _context17.next = 2;
+                      return this.userRepository.getUserBalance(userId);
+
+                    case 2:
+                      return _context17.abrupt("return", _context17.sent);
+
+                    case 3:
+                    case "end":
+                      return _context17.stop();
+                  }
+                }
+              }, _callee17, this);
             }));
           }
         }]);

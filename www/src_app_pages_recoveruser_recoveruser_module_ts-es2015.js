@@ -66,13 +66,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RecoveruserPageModule": function() { return /* binding */ RecoveruserPageModule; }
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 61855);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 42741);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 16274);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 93324);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 34595);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 61855);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 42741);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 16274);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 93324);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 34595);
 /* harmony import */ var _recoveruser_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./recoveruser-routing.module */ 95380);
 /* harmony import */ var _recoveruser_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./recoveruser.page */ 38402);
+/* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/components.module */ 39258);
+
 
 
 
@@ -82,13 +84,14 @@ __webpack_require__.r(__webpack_exports__);
 
 let RecoveruserPageModule = class RecoveruserPageModule {
 };
-RecoveruserPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.NgModule)({
+RecoveruserPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.NgModule)({
         imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_4__.CommonModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormsModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.IonicModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_5__.ReactiveFormsModule,
+            _angular_common__WEBPACK_IMPORTED_MODULE_5__.CommonModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormsModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.IonicModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__.ReactiveFormsModule,
+            _components_components_module__WEBPACK_IMPORTED_MODULE_2__.ComponentsModule,
             _recoveruser_routing_module__WEBPACK_IMPORTED_MODULE_0__.RecoveruserPageRoutingModule
         ],
         declarations: [_recoveruser_page__WEBPACK_IMPORTED_MODULE_1__.RecoveruserPage]
@@ -188,7 +191,7 @@ RecoveruserPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("ion-input {\n  width: 100%;\n}\n\n.form {\n  width: 375px;\n}\n\n.button-row {\n  float: right;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJlY292ZXJ1c2VyLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFdBQUE7QUFDSjs7QUFFQTtFQUNJLFlBQUE7QUFDSjs7QUFFQTtFQUNJLFlBQUE7QUFDSiIsImZpbGUiOiJyZWNvdmVydXNlci5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24taW5wdXR7XG4gICAgd2lkdGg6IDEwMCU7XG59XG5cbi5mb3JteyBcbiAgICB3aWR0aDogMzc1cHg7XG59XG5cbi5idXR0b24tcm93e1xuICAgIGZsb2F0OiByaWdodDtcbn0iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = ("ion-input {\n  width: 100%;\n}\n\n.form {\n  width: 375px;\n}\n\n.button-row {\n  float: right;\n}\n\n.arrow-btn {\n  float: right;\n  margin: 25px;\n}\n\n.welcome-msg {\n  position: relative;\n  text-align: left;\n  margin-top: 10%;\n  font-size: 20px;\n}\n\n.colomn {\n  text-align: center;\n}\n\n.item-content {\n  --ion-item-background:#121212;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJlY292ZXJ1c2VyLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFdBQUE7QUFDSjs7QUFFQTtFQUNJLFlBQUE7QUFDSjs7QUFFQTtFQUNJLFlBQUE7QUFDSjs7QUFDQTtFQUNJLFlBQUE7RUFDQSxZQUFBO0FBRUo7O0FBRUU7RUFDRSxrQkFBQTtFQUNBLGdCQUFBO0VBQ0EsZUFBQTtFQUNBLGVBQUE7QUFDSjs7QUFFRTtFQUNJLGtCQUFBO0FBQ047O0FBQ0E7RUFDSSw2QkFBQTtBQUVKIiwiZmlsZSI6InJlY292ZXJ1c2VyLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1pbnB1dHtcbiAgICB3aWR0aDogMTAwJTtcbn1cblxuLmZvcm17IFxuICAgIHdpZHRoOiAzNzVweDtcbn1cblxuLmJ1dHRvbi1yb3d7XG4gICAgZmxvYXQ6IHJpZ2h0O1xufVxuLmFycm93LWJ0bntcbiAgICBmbG9hdDogcmlnaHQ7XG4gICAgbWFyZ2luOiAyNXB4O1xuICB9XG5cblxuICAud2VsY29tZS1tc2d7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgIHRleHQtYWxpZ246IGxlZnQ7XG4gICAgbWFyZ2luLXRvcDogMTAlO1xuICAgIGZvbnQtc2l6ZTogMjBweDtcbiAgfVxuXG4gIC5jb2xvbW57XG4gICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIH1cbi5pdGVtLWNvbnRlbnR7XG4gICAgLS1pb24taXRlbS1iYWNrZ3JvdW5kOiMxMjEyMTI7XG4gICAgXG4gIH0iXX0= */");
 
 /***/ }),
 
@@ -200,7 +203,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (" \n    <ion-grid>\n      <h2>¿Como quieres que te llamemos?</h2>\n      <ion-row class=\"ion-align-items-center\"> \n              <form [formGroup]=\"exform\" class=\"form\">\n                <br/>\n                <ion-label>\n                  Nombre\n                </ion-label>\n                <br/>\n                <ion-item class=\"item-content\">\n                  <ion-input formControlName=\"name\" position=\"floating\" aria-placeholder=\"Nombre\" type=\"text\"></ion-input>\n                </ion-item>\n                <div *ngFor=\"let error of errorMessages.name\">\n                  <ng-container *ngIf=\"exform.get('name').hasError(error.type) && (exform.get('name').dirty || exform.get('name').touched)\">\n                    <small class=\"error-message\">{{error.message}}</small>\n                  </ng-container>\n                </div>\n                <br/>\n                <br/>\n                <ion-label>\n                  Apellidos\n                </ion-label>\n                <br/>\n                <ion-item class=\"item-content\"> \n                  <ion-input formControlName=\"surname\" position=\"floating\" aria-placeholder=\"Apellidos\" type=\"text\"></ion-input>\n                </ion-item>\n                <div *ngFor=\"let error of errorMessages.surname\">\n                  <ng-container *ngIf=\"exform.get('surname').hasError(error.type) && (exform.get('surname').dirty || exform.get('surname').touched)\">\n                    <small class=\"error-message\">{{error.message}}</small>\n                  </ng-container>\n                </div> \n              </form>\n    \n      </ion-row>\n      <ion-row class=\"button-row\">\n        <div>\n          <br/>\n          <br/>\n          <ion-button class=\"ion-button\" (click)=\"recoverUser()\">Guardar</ion-button>\n        </div>\n      </ion-row>\n      </ion-grid>  ");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\n  <ion-grid>\n    <ion-row> \n          <div  class=\"welcome-msg ion-align-items-center\">\n            <!-- class=\"welcome-msg\" -->\n            Hola <b>Usuario,</b> <br>\n            <small>Recuerdanos tu nombre y apellidos</small>\n          </div>  \n    </ion-row>\n    <ion-row class=\"ion-align-items-center\"> \n            <form [formGroup]=\"exform\" class=\"form\">\n              <br/> \n              <br/>\n              <ion-item class=\"item-content\">\n                <ion-input formControlName=\"name\" position=\"floating\" placeholder=\"Nombre\" type=\"text\"></ion-input>\n              </ion-item>\n              <div *ngFor=\"let error of errorMessages.name\">\n                <ng-container *ngIf=\"exform.get('name').hasError(error.type) && (exform.get('name').dirty || exform.get('name').touched)\">\n                  <small class=\"error-message\">{{error.message}}</small>\n                </ng-container>\n              </div>\n              <br/>\n              <br/> \n              <br/>\n              <ion-item class=\"item-content\"> \n                <ion-input formControlName=\"surname\" position=\"floating\" placeholder=\"Apellidos\" type=\"text\"></ion-input>\n              </ion-item>\n              <div *ngFor=\"let error of errorMessages.surname\">\n                <ng-container *ngIf=\"exform.get('surname').hasError(error.type) && (exform.get('surname').dirty || exform.get('surname').touched)\">\n                  <small class=\"error-message\">{{error.message}}</small>\n                </ng-container>\n              </div> \n            </form>\n  \n    </ion-row>\n    <br/> \n    <br/> \n    <ion-row class=\"ion-align-items-center\"> \n      <ion-col class=\"colomn\">\n        <ion-button class=\"ion-button\" (click)=\"recoverUser()\" (keyup.enter)=\"recoverUser()\">Guardar</ion-button>\n      </ion-col> \n    </ion-row>\n  </ion-grid>  \n</ion-app>");
 
 /***/ })
 
