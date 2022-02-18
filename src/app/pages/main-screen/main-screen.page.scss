@@ -15,6 +15,9 @@ ion-col {
  
 }
 
+.lastDateUpdate{
+  margin-left: -124%;
+}
 
 .notransactionMessage{
   font-size: 16px; 
@@ -146,6 +149,10 @@ ion-list{
  .p{
    font-size: 60px;
  } 
+
+ .lastDateUpdate{
+  margin-left: -205%;
+}
 }
 @media only screen and (max-width: 414px) {
   ion-content{
@@ -157,7 +164,9 @@ ion-list{
  .p{
    font-size: 60px;
  } 
-
+ .lastDateUpdate{
+  margin-left: -205%;
+}
  .deposit-btn{
   text-align: left;
   float: left; 
@@ -175,6 +184,9 @@ ion-list{
 @media only screen and (max-width: 393px) {
   ion-content{
     font-size: 16px;
+  }
+  .lastDateUpdate{
+    margin-left: -205%;
   }
   .image{
     width: 90%;
@@ -200,6 +212,9 @@ ion-list{
 @media only screen and (max-width: 390px) {
   ion-content{
     font-size: 16px;
+  }
+  .lastDateUpdate{
+    margin-left: -205%;
   }
   .image{
     width: 90%;

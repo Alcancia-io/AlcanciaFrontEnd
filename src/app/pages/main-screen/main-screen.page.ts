@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Data, Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { StorageService } from '../../services/storage.service';
 import { UserService } from '../../services/user.service';
@@ -19,9 +19,12 @@ import { SectionStorageService } from '../../services/sectionStorage.service';
 })
 export class MainScreenPage implements OnInit { 
   aUsername;
+  userId;
   aTotalInvestment: number = 0;
+  lastBalance: string;
   transationHistory: Array<any>;
   transactionAvailable: boolean = true;
+  
   constructor(
     private authService: AuthenticationService,
     private afAuth: AngularFireAuth,
@@ -46,10 +49,13 @@ export class MainScreenPage implements OnInit {
   async getUserData(){
    
      this.aUsername = this.sectionStorageService.getData("Username"); 
-      await this.userService.getUser().then(user => {  
-        this.aTotalInvestment = user.balance;
-      });
-    
+     this.userId =  this.sectionStorageService.getData("UserId");
+     await this.userService.getUserBalance(this.userId).then(userBalance => {
+       console.log(userBalance);
+       this.aTotalInvestment = userBalance.balance; 
+       const lastUpdate = new Date(userBalance.lastUpdate);
+       this.lastBalance = lastUpdate.toString().replace('GMT-0400 (Atlantic Standard Time)','');
+     }); 
   }
  
   deposit(){ 
