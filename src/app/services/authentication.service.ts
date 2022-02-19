@@ -72,7 +72,7 @@ export class AuthenticationService {
       .then(async (data) => {
         if (!data.user.emailVerified) {
           loading.dismiss();
-          this.toast('Porfavor verificar su correo!', 'danger');
+          this.toast('Su cuenta aún no ha sido confirmada, porfavor revise su correo!', 'danger');
           this.logout();
         } else {
           (await this.fireAuth.currentUser).getIdToken()

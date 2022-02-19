@@ -1684,7 +1684,7 @@
                                   }
 
                                   loading.dismiss();
-                                  this.toast('Porfavor verificar su correo!', 'danger');
+                                  this.toast('Su cuenta aún no ha sido confirmada, porfavor revise su correo!', 'danger');
                                   this.logout();
                                   _context9.next = 12;
                                   break;

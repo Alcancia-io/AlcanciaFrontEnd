@@ -872,7 +872,7 @@ let AuthenticationService = class AuthenticationService {
                 .then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
                 if (!data.user.emailVerified) {
                     loading.dismiss();
-                    this.toast('Porfavor verificar su correo!', 'danger');
+                    this.toast('Su cuenta aún no ha sido confirmada, porfavor revise su correo!', 'danger');
                     this.logout();
                 }
                 else {
