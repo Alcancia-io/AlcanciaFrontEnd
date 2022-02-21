@@ -118,7 +118,7 @@ export class MainScreenPage implements OnInit {
   getUserTransactions(){
     this.transactionService.getUserTransactions().then((response) => { 
       if(response.length == 0){
-        this.transactionAvailable = false;;
+        this.transactionAvailable = false;
       }else{
         response.forEach(function (item) {  
           const createdDate = new Date(item.create_time);  

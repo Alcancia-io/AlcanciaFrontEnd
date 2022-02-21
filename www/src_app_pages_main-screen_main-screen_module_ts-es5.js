@@ -427,7 +427,6 @@
             this.transactionService.getUserTransactions().then(function (response) {
               if (response.length == 0) {
                 _this3.transactionAvailable = false;
-                ;
               } else {
                 response.forEach(function (item) {
                   var createdDate = new Date(item.create_time);
