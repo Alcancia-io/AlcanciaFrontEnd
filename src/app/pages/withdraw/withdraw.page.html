@@ -1,0 +1,88 @@
+<ion-app>
+  <br/>
+  <br/>
+  <ion-header  no-border>
+    <app-top-navigation-toolbar></app-top-navigation-toolbar>
+  </ion-header>
+  <ion-grid>
+    <ion-row> 
+          <div  class="welcome-msg ion-align-items-center">
+            <!-- class="welcome-msg" -->
+            Hola <b>Usuario,</b> <br>
+            <small>Completa los siguientes datos para realizar el retiro.</small>
+          </div>  
+    </ion-row>
+    <ion-row class="ion-align-items-center"> 
+            <form [formGroup]="exform" class="form">
+              <br/> 
+              <br/>
+              <ion-item class="item-content">
+                <ion-select class="dropdown-content"  value="brown" okText="Okay" cancelText="Cancelar" formControlName="country"  >
+                  <ion-select-option value="MXN">MXN 🇲🇽</ion-select-option>  
+                  <ion-select-option value="DOP">DOP 🇩🇴</ion-select-option>  
+                  <!-- <ion-select-option value="BTC">$BTC ₿</ion-select-option>  -->
+                </ion-select>  
+               
+              </ion-item>
+              <div *ngFor="let error of errorMessages.country"> 
+                <ng-container *ngIf="exform.get('country').hasError(error.type) && (exform.get('country').dirty || exform.get('country').touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+              <br/> 
+              <ion-item class="item-content"> 
+                <ion-input formControlName="bank" position="floating" placeholder="Banco" type="text"></ion-input>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.bank">
+                <ng-container *ngIf="exform.get('bank').hasError(error.type) && (exform.get('bank').dirty || exform.get('bank').touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div> 
+              <br/> 
+              <ion-item class="item-content"> 
+                <ion-input formControlName="bankAccount" position="floating" placeholder="No. Cuenta/CLABE" type="text"></ion-input>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.bankAccount">
+                <ng-container *ngIf="exform.get('bankAccount').hasError(error.type) && (exform.get('bankAccount').dirty || exform.get('bankAccount').touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div> 
+              <br/> 
+              <ion-item class="item-content"> 
+                <ion-input formControlName="identificationNumber" position="floating" placeholder="INE/CEDULA" type="text"></ion-input>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.identificationNumber">
+                <ng-container *ngIf="exform.get('identificationNumber').hasError(error.type) && (exform.get('identificationNumber').dirty || exform.get('identificationNumber').touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div> 
+              <br/>
+              <ion-item class="item-content"> 
+                <ion-input formControlName="beneficiaryName" position="floating" placeholder="Nombre del beneficiario" type="text"></ion-input>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.beneficiaryName">
+                <ng-container *ngIf="exform.get('beneficiaryName').hasError(error.type) && (exform.get('beneficiaryName').dirty || exform.get('beneficiaryName').touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div> 
+              <br/> 
+              <ion-item class="item-content"> 
+                <ion-input formControlName="withdrawAmount" position="floating" placeholder="Monto a Retirar" type="text"></ion-input>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.withdrawAmount">
+                <ng-container *ngIf="exform.get('withdrawAmount').hasError(error.type) && (exform.get('withdrawAmount').dirty || exform.get('withdrawAmount').touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>  
+            </form> 
+    </ion-row>
+    <br/> 
+    <br/> 
+    <ion-row class="ion-align-items-center"> 
+      <ion-col class="colomn">
+        <ion-text *ngIf="amountExceededMessage" color="danger" >El monto a retirar excede el monto disponible!</ion-text>
+        <app-arrow-button class="arrow-btn" expand="block" shape="round" color="warning" (click)="requestWithdraw()" (keyup.enter)="requestWithdraw()"></app-arrow-button>
+      </ion-col> 
+    </ion-row>
+  </ion-grid>  
+</ion-app>

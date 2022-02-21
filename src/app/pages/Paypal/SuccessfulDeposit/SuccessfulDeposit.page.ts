@@ -27,7 +27,6 @@ export class SuccessfulComponent implements OnInit {
     options =  { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   ngOnInit() {
     const transactionDetailData = history.state.data;
-    console.log(transactionDetailData);
 
     const createdDate = new Date(transactionDetailData.response.create_time);
 

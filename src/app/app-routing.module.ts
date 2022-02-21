@@ -73,6 +73,14 @@ const routes: Routes = [
     path: 'recoveruser',
     loadChildren: () => import('./pages/recoveruser/recoveruser.module').then( m => m.RecoveruserPageModule),
     canLoad: [AuthorizeGuard]
+  },
+  // {
+  //   path: 'withdraw',
+  //   loadChildren: () => import('./pages/withdraw/withdraw.module').then( m => m.WithdrawPageModule)
+  // },
+  {
+    path: 'withdraw/successfull',
+    loadChildren: () => import('./pages/withdraw/successfulrequest/successfulrequest.module').then( m => m.SuccessfulrequestPageModule)
   }
 
 ];

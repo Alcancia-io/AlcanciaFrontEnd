@@ -4,6 +4,7 @@ import { ALCANCIA_SERVER_URL } from "src/environments/environment";
 import { Observable, Subscription } from "rxjs";  
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { SectionStorageService } from '../services/sectionStorage.service';
+import { WithDrawModel } from '../models/withdraw';
  
 
 @Injectable({
@@ -38,5 +39,19 @@ export class TransactionRepository{
      });
     
   } 
+
+  async requestWithdraw(withdrawData: WithDrawModel): Promise<any>{
+    return new Promise((resolver) => {
+      let subscription: Subscription;
+      subscription = this.httpClientModule.post(ALCANCIA_SERVER_URL+'/withdraws', withdrawData).subscribe(response => {
+        if(subscription){
+          subscription.unsubscribe();
+        }
+
+        resolver(Object.assign(response));
+        return response;
+      })
+    })
+  }
    
 }

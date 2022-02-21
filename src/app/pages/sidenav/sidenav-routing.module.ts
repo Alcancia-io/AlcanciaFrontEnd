@@ -26,6 +26,10 @@ const routes: Routes = [
         loadChildren: () => import('../paypalpaymentoptions/paypalpaymentoptions.module').then(m => m.PaypalpaymentoptionsPageModule) 
       },
       {
+        path: 'withdraw',
+        loadChildren: () => import('../withdraw/withdraw.module').then(m => m.WithdrawPageModule) 
+      },
+      {
         path: '',
         redirectTo: '/nav/home',
         pathMatch: 'full',

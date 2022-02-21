@@ -111,7 +111,11 @@ export class MainScreenPage implements OnInit {
   }
 
   goToTransactionPage(){
-    this.router.navigate(['/nav/transaction'])
+    this.router.navigate(['/nav/transaction']);
+  }
+
+  requestWithdraw(){
+    this.router.navigate(['/nav/withdraw']);
   }
 
 

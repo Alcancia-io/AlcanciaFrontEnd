@@ -1,5 +1,4 @@
 <ion-app>  
-   
   <ion-header  no-border>
     <app-top-navigation-toolbar></app-top-navigation-toolbar>
   </ion-header>
@@ -36,7 +35,7 @@
             <ion-col>
 
               <div class=" " style="width: 100px; float:right; margin:10px; margin-right: 25px; margin-top: 28px">
-                <ion-button fill="outline"  disabled='true' class="deposit-btn">Retirar<ion-icon slot="end" name="lock-closed-outline"></ion-icon></ion-button>
+                <ion-button fill="outline" (click)="requestWithdraw()"  class="deposit-btn">Retirar<ion-icon slot="end" name="lock-closed-outline"></ion-icon></ion-button>
               </div> 
             </ion-col>
           </ion-grid>
@@ -45,7 +44,6 @@
     </ion-row>
     <ion-row class="ion-align-items-center">
       <ion-col class="ion-text-center">
-        
       </ion-col>
     </ion-row>
     

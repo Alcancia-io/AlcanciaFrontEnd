@@ -63,6 +63,13 @@ ion-col {
   font-size: 14px; 
 }
 
+.withdraw-btn{
+  --background: #FFFFFF;
+  color: #3554C4;
+  width: 152px;  
+  font-size: 14px;
+}
+
 .Tittle{
   font-size: 16px;
 }
@@ -220,7 +227,7 @@ ion-list{
     font-size: 16px;
   }
   .lastDateUpdate{
-    margin-left: -205%;
+    margin-left: -150%;
   }
   .image{
     width: 90%;
@@ -239,7 +246,7 @@ ion-list{
 }
 .total-investment-value{
   font-size: 34px;
-  margin-left: -207px;
+  margin-left: -150px;
   margin-top: 3px;
 }
 }
