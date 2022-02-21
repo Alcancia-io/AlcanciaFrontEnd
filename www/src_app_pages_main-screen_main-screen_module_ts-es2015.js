@@ -210,7 +210,6 @@ let MainScreenPage = class MainScreenPage {
         this.transactionService.getUserTransactions().then((response) => {
             if (response.length == 0) {
                 this.transactionAvailable = false;
-                ;
             }
             else {
                 response.forEach(function (item) {

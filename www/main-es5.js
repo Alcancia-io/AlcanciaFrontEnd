@@ -508,7 +508,13 @@
 
       var _UniversalAppInterceptor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ./UniversalAppInterceptor */
-      24294); //firebase
+      24294);
+      /* harmony import */
+
+
+      var _angular_service_worker__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
+      /*! @angular/service-worker */
+      47699); //firebase
       //env
       // services
       // guards
@@ -523,6 +529,11 @@
         entryComponents: [],
         imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_11__.BrowserModule, _ionic_angular__WEBPACK_IMPORTED_MODULE_12__.IonicModule.forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_13__.HttpClientModule, _angular_forms__WEBPACK_IMPORTED_MODULE_14__.FormsModule, _angular_fire_compat__WEBPACK_IMPORTED_MODULE_15__.AngularFireModule.initializeApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.firebaseConfig), _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_16__.AngularFireAuthModule, _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_17__.AngularFirestoreModule, _angular_forms__WEBPACK_IMPORTED_MODULE_14__.ReactiveFormsModule, _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_18__.IonicStorageModule.forRoot({
           name: "AlcanciaLocalStorage"
+        }), _angular_service_worker__WEBPACK_IMPORTED_MODULE_19__.ServiceWorkerModule.register('ngsw-worker.js', {
+          enabled: src_environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.production,
+          // Register the ServiceWorker as soon as the app is stable
+          // or after 30 seconds (whichever comes first).
+          registrationStrategy: 'registerWhenStable:30000'
         })],
         providers: [_services_authentication_service__WEBPACK_IMPORTED_MODULE_3__.AuthenticationService, _services_token_service__WEBPACK_IMPORTED_MODULE_5__.TokenService, _guards_auth_guard__WEBPACK_IMPORTED_MODULE_4__.AuthGuard, _guards_authorize_guard__WEBPACK_IMPORTED_MODULE_6__.AuthorizeGuard, _guards_authorize_guard__WEBPACK_IMPORTED_MODULE_6__.NegateAuthorizeGuard, _guards_swap_guard__WEBPACK_IMPORTED_MODULE_7__.SwapGuard, {
           provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_13__.HTTP_INTERCEPTORS,
@@ -1684,7 +1695,7 @@
                                   }
 
                                   loading.dismiss();
-                                  this.toast('Porfavor verificar su correo!', 'danger');
+                                  this.toast('Su cuenta aún no ha sido confirmada, porfavor revise su correo!', 'danger');
                                   this.logout();
                                   _context9.next = 12;
                                   break;
@@ -1786,7 +1797,7 @@
                         message: message,
                         position: 'top',
                         color: status,
-                        duration: 2000
+                        duration: 3000
                       });
 
                     case 2:
@@ -2203,7 +2214,7 @@
         }
       };
       var _ALCANCIA_SERVER_URL = "https://royerdonnetarenas.tech/api";
-      var _EXCHANGE_RATE_URL = " https://v6.exchangerate-api.com/v6/460cee64dbd1d3e35cdfcc74";
+      var _EXCHANGE_RATE_URL = "https://v6.exchangerate-api.com/v6/460cee64dbd1d3e35cdfcc74";
       /*
        * For easier debugging in development mode, you can import the following file
        * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
