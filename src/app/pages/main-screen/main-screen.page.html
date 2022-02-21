@@ -10,7 +10,7 @@
   <ion-grid [fixed]="true">
       <ion-row>
         <ion-col>
-          <h1 class="welcome-msg">Bienvenido, {{aUsername}}.</h1>
+          <h1 class="welcome-msg">Bienvenido, {{aUsername}}</h1>
         </ion-col>
         
       </ion-row>
@@ -35,17 +35,21 @@
             </ion-col>
             <ion-col>
 
-              <div class=" " style="width: 100px; float:right; margin:10px; margin-right: 25px; margin-top: 35px">
-                <ion-button class="deposit-btn"  (click)="deposit()">Depositar</ion-button>
+              <div class=" " style="width: 100px; float:right; margin:10px; margin-right: 25px; margin-top: 28px">
+                <ion-button fill="outline"  disabled='true' class="deposit-btn">Retirar<ion-icon slot="end" name="lock-closed-outline"></ion-icon></ion-button>
               </div> 
             </ion-col>
           </ion-grid>
-          </ion-card>
-        </ion-col> 
+        </ion-card>
+      </ion-col> 
     </ion-row>
-
-      <ion-button fill="outline" disabled='true' expand='block'>Retirar<ion-icon slot="end" name="lock-closed-outline"></ion-icon></ion-button>
-
+    <ion-row class="ion-align-items-center">
+      <ion-col class="ion-text-center">
+        
+      </ion-col>
+    </ion-row>
+    
+    <ion-button class="retirar_btn"  (click)="deposit()">Depositar <ion-icon slot="end" name="card-outline"></ion-icon></ion-button>
     <ion-row>  
       <ion-col>
         <ion-card>   
@@ -61,11 +65,11 @@
             
               <ion-list [scrollEvents]="true" style="list-style: none;" *ngFor="let transation  of transationHistory">
                 <ion-scroll direction="y">
-                  <ng-container *ngIf="!transactionAvailable" >
-                    <p class="notransactionMessage">No hay transacciones para mostrar</p>
+                  <ng-container *ngIf="transactionAvailable" >
+                    <p *ngIf="!transactionAvailable" class="notransactionMessage">No hay transacciones para mostrar</p>
                   </ng-container>
                   <ion-item>
-                    <ion-label class="transaction-tittle"><img src="../../../assets/Icon awesome-coins.png"> Depósito<br/><small class="deposit-time">{{transation.create_time}}</small></ion-label>
+                    <ion-label class="transaction-tittle"><ion-icon name="cash-outline" slot="start"></ion-icon> Depósito<br/><small class="deposit-time">{{transation.create_time}}</small></ion-label>
                     <ion-note class="transaction-amount" slot="end" color="primary">{{transation.gross_amount}}$</ion-note>
                   </ion-item> 
                 </ion-scroll> 
