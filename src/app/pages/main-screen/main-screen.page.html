@@ -2,88 +2,82 @@
   <ion-header  no-border>
     <app-top-navigation-toolbar></app-top-navigation-toolbar>
   </ion-header>
-  <ion-content> 
+  <ion-content force-overscroll=true > 
+
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher> 
-  <ion-grid [fixed]="true">
+    <ion-grid [fixed]="true">
       <ion-row>
         <ion-col>
-          <h1 class="welcome-msg">Bienvenido, {{aUsername}}</h1>
+          <h1 class="welcome-msg">Bienvenido/a, {{aUsername}}</h1>
         </ion-col>
         
-      </ion-row>
-
+      </ion-row> 
       
-
       <ion-row> 
         <ion-col>
           <ion-card class="investment-card"> 
-            <ion-grid>
-            <ion-card-tittle>
-              <h5 class="card-tittle">Ahorro Total</h5>
-            </ion-card-tittle> 
-            <ion-col>
-              <div style="width: 100px; float:left; margin:10px; padding-top: 25px;">
-               <span class="total-investment-value" >{{aTotalInvestment}}$</span> 
-               <br/>
-               <!-- <div>
-                <small class="lastDateUpdate">{{this.lastBalance}}</small>
-              </div> -->
-              </div> 
-            </ion-col>
-            <ion-col>
-
-              <div class=" " style="width: 100px; float:right; margin:10px; margin-right: 25px; margin-top: 28px">
-                <ion-button fill="outline" (click)="requestWithdraw()"  class="deposit-btn">Retirar<ion-icon slot="end" name="lock-closed-outline"></ion-icon></ion-button>
-              </div> 
-            </ion-col>
-          </ion-grid>
-        </ion-card>
-      </ion-col> 
-    </ion-row>
-    <ion-row class="ion-align-items-center">
-      <ion-col class="ion-text-center">
-      </ion-col>
-    </ion-row>
-    
-    <ion-button class="retirar_btn"  (click)="deposit()">Depositar <ion-icon slot="end" name="card-outline"></ion-icon></ion-button>
-    <ion-row>  
-      <ion-col>
-        <ion-card>   
-          <ion-card-header>
-            <ion-card-subtittle>
-              <ion-item >
-                <ion-label class="last-movement">Últimos movimientos</ion-label>
-                <ion-note slot="end" color="primary" (click)="goToTransactionPage()" ><ion-button class="ver-todos" fill="clear">ver todos <ion-icon name="arrow-forward-outline"></ion-icon></ion-button></ion-note>
-              </ion-item>     
-            </ion-card-subtittle>
-          </ion-card-header>
-          <ion-card-content> 
             
-              <ion-list [scrollEvents]="true" style="list-style: none;" *ngFor="let transation  of transationHistory">
-                <ion-scroll direction="y">
-                  <ng-container *ngIf="transactionAvailable" >
-                    <p *ngIf="!transactionAvailable" class="notransactionMessage">No hay transacciones para mostrar</p>
-                  </ng-container>
-                  <ion-item>
-                    <ion-label class="transaction-tittle"><ion-icon name="cash-outline" slot="start"></ion-icon> Depósito<br/><small class="deposit-time">{{transation.create_time}}</small></ion-label>
-                    <ion-note class="transaction-amount" slot="end" color="primary">{{transation.gross_amount}}$</ion-note>
-                  </ion-item> 
-                </ion-scroll> 
-              </ion-list>     
-          </ion-card-content> 
-        </ion-card>  
-      </ion-col> 
-  </ion-row>
-  </ion-grid>
-</ion-content>
-  <!--  
-  <section class="ion-padding">
-  
-   
-   
-  </section>
+            <!-- <ion-card-tittle> -->
+              <h5 class="card-tittle">Ahorro Total</h5>
+              <!-- </ion-card-tittle>  -->
+              <ion-grid>
+                <ion-col>
+                  <div style="width: 100px; float:left; margin:10px; padding-top: 25px;">
+                    <span class="total-investment-value" >{{aTotalInvestment}}$</span> 
+                    <br/>
+                    <!-- <div>
+                      <small class="lastDateUpdate">{{this.lastBalance}}</small>
+                    </div> -->
+                  </div> 
+                </ion-col>
+                <ion-col>
+                  
+                  <div class=" " style="width: 100px; float:right; margin:10px; margin-right: 25px; margin-top: 28px">
+                    <ion-button fill="outline"  (click)="requestWithdraw()" class="deposit-btn">Retirar<ion-icon slot="end" name="lock-closed-outline"></ion-icon></ion-button>
+                  </div> 
+                </ion-col>
+              </ion-grid>
+            </ion-card>
+          </ion-col> 
+        </ion-row>
+        <ion-row class="ion-align-items-center">
+          <ion-col class="ion-text-center">
+            
+          </ion-col>
+        </ion-row>
+        
+        <ion-button class="retirar_btn"  (click)="deposit()">Depositar <ion-icon slot="end" name="card-outline"></ion-icon></ion-button>
+        <ion-row>  
+          <ion-col>
+            <ion-card>   
+              <ion-card-header>
+                <!-- <ion-card-subtittle> -->
+                  <ion-item >
+                    <ion-label class="last-movement">Últimos movimientos</ion-label>
+                    <ion-note slot="end" color="primary" (click)="goToTransactionPage()" ><ion-button class="ver-todos" fill="clear">ver todos <ion-icon name="arrow-forward-outline"></ion-icon></ion-button></ion-note>
+                  </ion-item>     
+                  <!-- </ion-card-subtittle> -->
+                </ion-card-header>
+                <ion-card-content> 
+                  <!-- [scrollEvents]="true" -->
+                  <ion-list  style="list-style: none;" *ngFor="let transation  of transationHistory">
+                    <!-- <ion-scroll direction="y"> -->
+                      <ng-container *ngIf="transactionAvailable" >
+                        <p *ngIf="!transactionAvailable" class="notransactionMessage">No hay transacciones para mostrar</p>
+                      </ng-container>
+                      <ion-item>
+                        <ion-label class="transaction-tittle"><ion-icon name="cash-outline" slot="start"></ion-icon> Depósito<br/><small class="deposit-time">{{transation.create_time}}</small></ion-label>
+                        <ion-note class="transaction-amount" slot="end" color="primary">{{transation.gross_amount}}$</ion-note>
+                      </ion-item> 
+                      <!-- </ion-scroll>  -->
+                    </ion-list>     
+                  </ion-card-content> 
+                </ion-card>  
+              </ion-col> 
+            </ion-row>
+          </ion-grid>
+        </ion-content>
  
-  -->
-</ion-app>
+      </ion-app>
