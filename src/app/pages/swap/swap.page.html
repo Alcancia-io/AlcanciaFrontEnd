@@ -27,7 +27,7 @@
                     <ion-select-option value="DOP">$DOP 🇩🇴</ion-select-option>  
                     <!-- <ion-select-option value="BTC">$BTC ₿</ion-select-option>  -->
                   </ion-select>  
-                  <span class="currency-value" ><ion-input class="inputs-section" position="floating" placeholder="0" type="number"  [(ngModel)]="Amount" (ionChange)="calculateExchange();" (keyup.enter)="createPaypalOrder()" ></ion-input></span>   
+                  <span class="currency-value" ><ion-input class="inputs-section" position="floating" placeholder="0" type="decimal" inputmode="decimal" [(ngModel)]="Amount" (ionChange)="calculateExchange();" (keyup.enter)="createPaypalOrder()" ></ion-input></span>   
                 </ion-card>     
               </div>
                   

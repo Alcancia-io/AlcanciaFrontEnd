@@ -237,6 +237,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _guards_authorize_guard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./guards/authorize.guard */ 33874);
 /* harmony import */ var _guards_swap_guard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./guards/swap.guard */ 27956);
 /* harmony import */ var _UniversalAppInterceptor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./UniversalAppInterceptor */ 24294);
+/* harmony import */ var _angular_service_worker__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/service-worker */ 47699);
 
 
 
@@ -260,6 +261,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 let AppModule = class AppModule {
 };
 AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_9__.__decorate)([
@@ -278,6 +280,12 @@ AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_9__.__decorate)([
             _angular_forms__WEBPACK_IMPORTED_MODULE_14__.ReactiveFormsModule,
             _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_18__.IonicStorageModule.forRoot({
                 name: "AlcanciaLocalStorage"
+            }),
+            _angular_service_worker__WEBPACK_IMPORTED_MODULE_19__.ServiceWorkerModule.register('ngsw-worker.js', {
+                enabled: src_environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.production,
+                // Register the ServiceWorker as soon as the app is stable
+                // or after 30 seconds (whichever comes first).
+                registrationStrategy: 'registerWhenStable:30000'
             })
         ],
         providers: [
@@ -924,7 +932,7 @@ let AuthenticationService = class AuthenticationService {
                 message: message,
                 position: 'top',
                 color: status,
-                duration: 2000
+                duration: 3000
             });
             toast.present();
         });
@@ -1129,7 +1137,7 @@ const environment = {
     }
 };
 const ALCANCIA_SERVER_URL = "https://royerdonnetarenas.tech/api";
-const EXCHANGE_RATE_URL = " https://v6.exchangerate-api.com/v6/460cee64dbd1d3e35cdfcc74";
+const EXCHANGE_RATE_URL = "https://v6.exchangerate-api.com/v6/460cee64dbd1d3e35cdfcc74";
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

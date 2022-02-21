@@ -127,7 +127,7 @@ export class AuthenticationService {
       message:message,
       position: 'top',
       color: status,
-      duration: 2000
+      duration: 3000
     });
 
     toast.present();

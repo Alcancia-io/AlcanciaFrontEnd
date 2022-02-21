@@ -27,6 +27,7 @@ import { TokenService } from './services/token.service';
 import { AuthorizeGuard, NegateAuthorizeGuard } from './guards/authorize.guard';
 import { SwapGuard } from './guards/swap.guard';
 import { UniversalAppInterceptor } from './UniversalAppInterceptor';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 @NgModule({
@@ -44,6 +45,12 @@ import { UniversalAppInterceptor } from './UniversalAppInterceptor';
     ReactiveFormsModule,
     IonicStorageModule.forRoot({
       name: "AlcanciaLocalStorage"
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
     })
   ],
   providers: [
