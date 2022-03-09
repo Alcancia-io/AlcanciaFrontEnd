@@ -11,7 +11,7 @@ import { NavigationToolbarComponent } from "./navigation-toolbar.component";
     imports: [
         CommonModule,
         FormsModule,
-        IonicModule,,
+        IonicModule,
         NavigationToolbarRoutingModule
     ],
     declarations: [NavigationToolbarComponent]

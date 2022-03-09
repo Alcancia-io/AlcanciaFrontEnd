@@ -72,7 +72,9 @@
                       </ng-container>
                       <ion-item>
                         <ion-label class="transaction-tittle"><ion-icon name="cash-outline" slot="start"></ion-icon> Depósito<br/><small class="deposit-time">{{transation.create_time}}</small></ion-label>
-                        <ion-note class="transaction-amount" slot="end" color="primary">{{transation.gross_amount}}$</ion-note>
+                        <ion-note class="transaction-amount" slot="end" color="primary">{{transation.gross_amount}}$</ion-note><br/>  
+                        <ion-note class="transaction-amount" slot="end" color="success" *ngIf="transation.status == 'COMPLETED'">{{transation.status}}</ion-note>
+                        <ion-note class="transaction-amount" slot="end" color="gray" *ngIf="transation.status != 'COMPLETED'">{{transation.status}}</ion-note>
                       </ion-item> 
                       <!-- </ion-scroll>  -->
                     </ion-list>     
