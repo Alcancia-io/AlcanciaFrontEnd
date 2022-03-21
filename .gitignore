@@ -1,1 +1,5 @@
 node_modules
+.firebase
+.idea
+.vscode
+www
