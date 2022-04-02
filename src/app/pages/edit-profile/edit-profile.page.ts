@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditProfilePage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private userService: UserService
+  ) { }
 
   ngOnInit() {
+    this.doFetch();
+  }
+
+  /**
+   * Retrieves the user information and balance
+   */
+  async getUserData () {
+    let user = await this.userService.getUser();
+    console.debug(user);
+  }
+
+  /**
+   * Perform all the initial async retrieval
+   */
+  async doFetch() {
+    await this.getUserData();
   }
 
 }
