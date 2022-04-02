@@ -81,6 +81,10 @@ const routes: Routes = [
   {
     path: 'withdraw/successfull',
     loadChildren: () => import('./pages/withdraw/successfulrequest/successfulrequest.module').then( m => m.SuccessfulrequestPageModule)
+  },
+  {
+    path: 'whitepaper',
+    loadChildren: () => import('./pages/whitepaper/whitepaper.module').then( m => m.WhitepaperPageModule)
   }
 
 ];
