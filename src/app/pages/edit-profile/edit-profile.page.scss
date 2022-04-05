@@ -1,0 +1,53 @@
+/* VARIABLES */
+$horizontal-padding: 1em;
+
+ion-card {
+  margin-top: 0;
+}
+ion-icon {
+  color: var(--ion-color-medium);
+}
+.alc-profile {
+  padding-top: 2em;
+  display: flex;
+  flex-direction: column;
+}
+.alc-profile-item {
+  --background: none;
+  --background-activated: none;
+  --background-hover: none;
+  > ion-label {
+    margin-bottom: 0;
+    font-size: 0.75em;
+  }
+  > ion-input {
+    --padding-top: 0;
+    font-weight: 700;
+    font-size: 1.25em;
+  }
+}
+.alc-profile-label {
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ion-color-medium);
+}
+.alc-profile-header {
+  padding-left: $horizontal-padding;
+  padding-right: $horizontal-padding;
+  align-items: baseline;
+  display: flex;
+  > h1 {
+    font-weight: 700;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-size: 2em;
+  }
+  > button {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 0;
+    background-color: transparent;
+    font-size: 1.5em;
+  }
+}

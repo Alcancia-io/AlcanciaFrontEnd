@@ -4,5 +4,61 @@
 </ion-header>
 
 <ion-content>
-
+    <div class="alc-profile">
+        <div class="alc-profile-header">
+            <h1>Perfil</h1>
+            <button>
+                <ion-icon name="create-outline"></ion-icon>
+            </button>
+        </div>
+        <ion-card>
+            <ion-card-content>
+                <ion-item
+                    class="alc-profile-item"
+                    lines="none">
+                    <ion-label
+                        class="alc-profile-label"
+                        position="stacked">Nombre</ion-label>
+                    <ion-input
+                        class="alc-profile-input"
+                        value="Juan"
+                        readonly="true"></ion-input>
+                </ion-item>
+                <ion-item
+                    class="alc-profile-item"
+                    lines="none">
+                    <ion-label
+                        class="alc-profile-label"
+                        position="stacked">Apellidos</ion-label>
+                    <ion-input
+                        class="alc-profile-input"
+                        value="Alcántara Minaya"
+                        readonly="true"></ion-input>
+                </ion-item>
+                <ion-item
+                    class="alc-profile-item"
+                    lines="none">
+                    <ion-label
+                        class="alc-profile-label"
+                        position="stacked">Correo</ion-label>
+                    <ion-input
+                        class="alc-profile-input"
+                        value="minaya@alcancia.io"
+                        readonly="true"></ion-input>
+                </ion-item>
+                <ion-item
+                    class="alc-profile-item"
+                    lines="none">
+                    <ion-label
+                        class="alc-profile-label"
+                        position="stacked">Telefono</ion-label>
+                    <ion-input
+                        class="alc-profile-input"
+                        value="+524421231234"
+                        type="tel"
+                        readonly="false"></ion-input>
+                </ion-item>
+            </ion-card-content>
+        </ion-card>
+    </div>
 </ion-content>
