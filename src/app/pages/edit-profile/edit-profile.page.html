@@ -7,8 +7,17 @@
     <div class="alc-profile">
         <div class="alc-profile-header">
             <h1>Perfil</h1>
-            <button>
-                <ion-icon name="create-outline"></ion-icon>
+            <!-- EDIT BUTTON -->
+            <button *ngIf="!isEditing">
+                <ion-icon
+                    (click)="enableEditing()"
+                    name="create-outline"></ion-icon>
+            </button>
+            <!-- CLOSE BUTTON -->
+            <button *ngIf="isEditing">
+                <ion-icon
+                    (click)="disableEditing()"
+                    name="close-circle-outline"></ion-icon>
             </button>
         </div>
         <ion-card>
@@ -18,47 +27,67 @@
                     lines="none">
                     <ion-label
                         class="alc-profile-label"
-                        position="stacked">Nombre</ion-label>
+                        position="stacked">{{form.name.label}}</ion-label>
                     <ion-input
+                        [(ngModel)]="form.name.value"
                         class="alc-profile-input"
-                        value="Juan"
-                        readonly="true"></ion-input>
+                        [ngClass]="{editable: isEditing}"
+                        [placeholder]="form.name.placeholder"
+                        [readonly]="!isEditing"></ion-input>
                 </ion-item>
                 <ion-item
                     class="alc-profile-item"
                     lines="none">
                     <ion-label
                         class="alc-profile-label"
-                        position="stacked">Apellidos</ion-label>
+                        position="stacked">{{form.lastName.label}}</ion-label>
                     <ion-input
+                        [(ngModel)]="form.lastName.value"
                         class="alc-profile-input"
-                        value="Alcántara Minaya"
-                        readonly="true"></ion-input>
+                        [ngClass]="{editable: isEditing}"
+                        [placeholder]="form.lastName.placeholder"
+                        [readonly]="!isEditing"></ion-input>
                 </ion-item>
                 <ion-item
                     class="alc-profile-item"
                     lines="none">
                     <ion-label
                         class="alc-profile-label"
-                        position="stacked">Correo</ion-label>
+                        position="stacked">{{form.email.label}}</ion-label>
                     <ion-input
+                        [(ngModel)]="form.email.value"
                         class="alc-profile-input"
+                        [ngClass]="{editable: isEditing}"
                         value="minaya@alcancia.io"
-                        readonly="true"></ion-input>
+                        [placeholder]="form.email.placeholder"
+                        [readonly]="!isEditing"></ion-input>
                 </ion-item>
                 <ion-item
                     class="alc-profile-item"
                     lines="none">
                     <ion-label
                         class="alc-profile-label"
-                        position="stacked">Telefono</ion-label>
+                        position="stacked">{{form.phone.label}}</ion-label>
                     <ion-input
+                        [(ngModel)]="form.phone.value"
                         class="alc-profile-input"
+                        [ngClass]="{editable: isEditing}"
                         value="+524421231234"
+                        inputmode="tel"
                         type="tel"
-                        readonly="false"></ion-input>
+                        [placeholder]="form.phone.placeholder"
+                        [readonly]="!isEditing"></ion-input>
                 </ion-item>
             </ion-card-content>
         </ion-card>
+        <div
+            *ngIf="isEditing"
+            class="alc-profile-edit-controls">
+            <ion-button
+                fill="clear"
+                expand="block"
+                (click)="disableEditing()">Cancel</ion-button>
+            <ion-button expand="block">Confirm</ion-button>
+        </div>
     </div>
 </ion-content>

@@ -3,9 +3,10 @@ $horizontal-padding: 1em;
 
 ion-card {
   margin-top: 0;
+  margin-bottom: 0;
 }
 ion-icon {
-  color: var(--ion-color-medium);
+  color: var(--ion-color-light);
 }
 .alc-profile {
   padding-top: 2em;
@@ -16,15 +17,22 @@ ion-icon {
   --background: none;
   --background-activated: none;
   --background-hover: none;
-  > ion-label {
+  margin-bottom: 1em;
+}
+.alc-profile-label {
     margin-bottom: 0;
     font-size: 0.75em;
-  }
-  > ion-input {
+}
+.alc-profile-input {
     --padding-top: 0;
+    --padding-bottom: 0;
     font-weight: 700;
     font-size: 1.25em;
-  }
+}
+.alc-profile-input.editable {
+  border-bottom-width: 0.1em;
+  border-bottom-style: solid;
+  border-bottom-color: var(--ion-color-light);
 }
 .alc-profile-label {
   text-transform: uppercase;
@@ -49,5 +57,16 @@ ion-icon {
     padding-bottom: 0;
     background-color: transparent;
     font-size: 1.5em;
+  }
+}
+.alc-profile-edit-controls {
+  margin-top: 0.5em;
+  padding-right: $horizontal-padding;
+  padding-left: $horizontal-padding;
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  > ion-button {
+    flex-basis: 50%;
   }
 }
