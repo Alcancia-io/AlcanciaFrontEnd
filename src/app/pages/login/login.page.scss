@@ -46,14 +46,13 @@ ion-item{ --highlight-color-valid: #3554C4; }
 
 .forgotpassword-btn{
   color: #ffff;
-  font-size: 16px;
+  font-size: 1rem;
   float: left;
   cursor: pointer;
 }
 
 .forgotpassword-btn:hover{
-  color: rgb(171, 171, 171);
-  font-size: 16px;
+  color: rgb(171, 171, 171); 
   float: left;
 }
 
@@ -84,6 +83,13 @@ ion-row{
  }
   ion-row{
     display: inline;
+  }
+
+  .forgotpassword-btn{
+    color: #ffff;
+    font-size: 0.8rem;
+    float: left;
+    cursor: pointer;
   }
 }
 

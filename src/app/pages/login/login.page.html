@@ -43,10 +43,15 @@
        <br>
        <br>
        <br>
-       <br>
-       <div class="action-buttons"> 
-         
+       <br> 
+       <div class="action-buttons">   
+        <ion-button class="forgotpassword-btn" *ngIf="resendEmailVerificationButton" type="button" fill="clear" (click)="resendEmailVerification()">¿Reenviar Correo de Verificacion?</ion-button>
+        <br/>
+        <br/>
+        <br/>
         <ion-button class="forgotpassword-btn" type="button" fill="clear" (click)="forgot()">¿Olvidaste tu contraseña?</ion-button>
+        <br/>
+        <br/>
         <app-arrow-button class="arrow-btn" type="submit" expand="block" shape="round"  (click)="login()" (keyup.enter)="login()"></app-arrow-button>
       </div>
      </ion-card-content>
