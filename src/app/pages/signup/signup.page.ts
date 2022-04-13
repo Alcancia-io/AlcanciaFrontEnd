@@ -84,7 +84,7 @@ export class SignupPage implements OnInit {
           'surname': this.exform.value.surname,
           'email': this.exform.value.email,  
           'swapScreenLoaded': false,
-          'lastDateUpdatedBalance': currentDate.getDate(),
+          'lastDateUpdatedBalance': new Date(),
           'balance': 0,
           'createdAt': Date.now()
         });
