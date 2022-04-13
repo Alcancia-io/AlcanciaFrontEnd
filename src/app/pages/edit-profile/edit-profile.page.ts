@@ -1,39 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { User} from  '../../models/user';
+import { User } from  '../../models/user';
+import { LoadingController } from '@ionic/angular';
 
 @Component({ selector: 'app-edit-profile',
   templateUrl: './edit-profile.page.html',
   styleUrls: ['./edit-profile.page.scss'],
 })
-export class EditProfilePage implements OnInit {
+export class EditProfilePage {
 /* VARIABLES */
   isEditing = false;
   form = {
     name: {
-      label: "Nombre",
-      placeholder: "",
-      value: "Juan"
+      label: 'Nombre',
+      placeholder: '',
+      value: 'Juan'
     },
     surname: {
-      label: "Apellidos",
-      placeholder: "",
-      value: "Alcántara Minaya"
+      label: 'Apellidos',
+      placeholder: '',
+      value: 'Alcántara Minaya'
     },
     email: {
-      label: "Correo",
-      placeholder: "",
-      value: "minaya@alcancia.io"
+      label: 'Correo',
+      placeholder: '',
+      value: 'minaya@alcancia.io'
     }
   }
   userData?: User = null;
 
   /* METHODS */
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private loadingController: LoadingController
   ) { }
-
-  ngOnInit() {}
 
   ionViewWillEnter () {
     this.doFetch();
@@ -58,10 +58,16 @@ export class EditProfilePage implements OnInit {
    * Update user information
    */
   async updateUserData () {
-    const response = await this.userService.updateCurrentUser(
+    const loading = await this.loadingController.create({
+      message: 'Actualizando perfil...'
+    });
+    await loading.present();
+    const user = await this.userService.updateCurrentUser(
       {name: this.form.name.value, surname: this.form.surname.value}
     );
-    console.log(response);
+    this.fillForm(user);
+    this.isEditing = false;
+    await loading.dismiss();
   }
 
 
@@ -72,6 +78,7 @@ export class EditProfilePage implements OnInit {
     this.userData = await this.getUserData();
     this.fillForm(this.userData);
   }
+
 
   /**
    * Enables the editing of the profile data
