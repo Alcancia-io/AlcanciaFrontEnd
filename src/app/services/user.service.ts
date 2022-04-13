@@ -4,6 +4,7 @@ import { UserModel } from "../models/userModel";
 import { UserRepository } from "../repository/user.repository";
 import { RecoverUser } from '../models/revocerUserModel';
 import { UserBalance } from '../models/userBalance';
+import { UserUpdate } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,10 @@ export class UserService {
     async getUser(): Promise<any>{   
       return await this.userRepository.getUser();
     } 
+
+    async updateCurrentUser(update: UserUpdate): Promise<any> { 
+      return await this.userRepository.updateCurrentUser(update);
+    }
 
     async recoverUser(theUser: RecoverUser): Promise<any>{
       return await this.userRepository.recoverUserInfo(theUser);

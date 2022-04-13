@@ -40,12 +40,12 @@
                     lines="none">
                     <ion-label
                         class="alc-profile-label"
-                        position="stacked">{{form.lastName.label}}</ion-label>
+                        position="stacked">{{form.surname.label}}</ion-label>
                     <ion-input
-                        [(ngModel)]="form.lastName.value"
+                        [(ngModel)]="form.surname.value"
                         class="alc-profile-input"
                         [ngClass]="{editable: isEditing}"
-                        [placeholder]="form.lastName.placeholder"
+                        [placeholder]="form.surname.placeholder"
                         [readonly]="!isEditing"></ion-input>
                 </ion-item>
                 <ion-item
@@ -57,26 +57,10 @@
                     <ion-input
                         [(ngModel)]="form.email.value"
                         class="alc-profile-input"
-                        [ngClass]="{editable: isEditing}"
+                        [ngClass]="{editable: false}"
                         value="minaya@alcancia.io"
                         [placeholder]="form.email.placeholder"
-                        [readonly]="!isEditing"></ion-input>
-                </ion-item>
-                <ion-item
-                    class="alc-profile-item"
-                    lines="none">
-                    <ion-label
-                        class="alc-profile-label"
-                        position="stacked">{{form.phone.label}}</ion-label>
-                    <ion-input
-                        [(ngModel)]="form.phone.value"
-                        class="alc-profile-input"
-                        [ngClass]="{editable: isEditing}"
-                        value="+524421231234"
-                        inputmode="tel"
-                        type="tel"
-                        [placeholder]="form.phone.placeholder"
-                        [readonly]="!isEditing"></ion-input>
+                        [readonly]="true"></ion-input>
                 </ion-item>
             </ion-card-content>
         </ion-card>
@@ -86,8 +70,8 @@
             <ion-button
                 fill="clear"
                 expand="block"
-                (click)="disableEditing()">Cancel</ion-button>
-            <ion-button expand="block">Confirm</ion-button>
+                (click)="disableEditing()">Cancelar</ion-button>
+            <ion-button expand="block">Guardar</ion-button>
         </div>
     </div>
 </ion-content>
