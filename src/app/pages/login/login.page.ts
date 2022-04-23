@@ -93,10 +93,8 @@ export class LoginPage implements OnInit {
       loading.present();
 
       this.authService.login(this.exform.value.email, this.exform.value.password)
-          .then((response) => { 
-            if (!response.user.emailVerified) {  
-              this.resendEmailVerificationButton = true;
-            }  
+          .then((response) => {  
+            this.resendEmailVerificationButton = !response.user.emailVerified; 
             loading.dismiss();
           })
           .catch((error) => {
