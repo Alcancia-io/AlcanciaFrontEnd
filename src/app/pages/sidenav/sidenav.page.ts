@@ -22,6 +22,11 @@ export class SidenavPage implements OnInit {
       name: 'Movimientos',
       link: '/nav/transaction',
       icon: 'swap-horizontal-outline'
+    },
+    {
+      name: 'Perfil',
+      link: '/nav/edit-profile',
+      icon: 'person'
     }
   ]
 

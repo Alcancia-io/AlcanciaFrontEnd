@@ -30,6 +30,11 @@ const routes: Routes = [
         loadChildren: () => import('../withdraw/withdraw.module').then(m => m.WithdrawPageModule) 
       },
       {
+        path: 'edit-profile',
+        loadChildren: () => import('../edit-profile/edit-profile.module').then( m => m.EditProfilePageModule),
+        canLoad: [AuthorizeGuard]
+      },
+      {
         path: '',
         redirectTo: '/nav/home',
         pathMatch: 'full',

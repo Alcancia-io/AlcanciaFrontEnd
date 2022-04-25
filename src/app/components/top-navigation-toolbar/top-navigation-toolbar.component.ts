@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from "@angular/router";
 import { AlertController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
@@ -11,16 +12,19 @@ export class TopNavigationToolbarComponent implements OnInit {
 
   constructor(
     private alertController: AlertController,
-   private authService: AuthenticationService,
+    private authService: AuthenticationService,
+    private router: Router
     ) { }
 
   ngOnInit() {}
 
   async logout() {
     this.presentAlertConfirm();
-    
   }
 
+  goToProfile () {
+    this.router.navigate(["/nav/edit-profile"]);
+  }
 
   async presentAlertConfirm() {
     const alert = await this.alertController.create({

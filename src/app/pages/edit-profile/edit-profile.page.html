@@ -1,0 +1,80 @@
+<ion-header no-border>
+    <app-top-navigation-toolbar>
+    </app-top-navigation-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="alc-profile">
+        <div class="alc-profile-header">
+            <h1>Perfil</h1>
+            <!-- EDIT BUTTON -->
+            <button *ngIf="!isEditing">
+                <ion-icon
+                    (click)="enableEditing()"
+                    name="create-outline"></ion-icon>
+            </button>
+            <!-- CLOSE BUTTON -->
+            <button *ngIf="isEditing">
+                <ion-icon
+                    (click)="disableEditing()"
+                    name="close-circle-outline"></ion-icon>
+            </button>
+        </div>
+        <ion-card>
+            <ion-card-content>
+                <ion-item
+                    class="alc-profile-item"
+                    lines="none">
+                    <ion-label
+                        class="alc-profile-label"
+                        position="stacked">{{form.name.label}}</ion-label>
+                    <ion-input
+                        [(ngModel)]="form.name.value"
+                        class="alc-profile-input"
+                        [ngClass]="{editable: isEditing}"
+                        [placeholder]="form.name.placeholder"
+                        [readonly]="!isEditing"></ion-input>
+                </ion-item>
+                <ion-item
+                    class="alc-profile-item"
+                    lines="none">
+                    <ion-label
+                        class="alc-profile-label"
+                        position="stacked">{{form.surname.label}}</ion-label>
+                    <ion-input
+                        [(ngModel)]="form.surname.value"
+                        class="alc-profile-input"
+                        [ngClass]="{editable: isEditing}"
+                        [placeholder]="form.surname.placeholder"
+                        [readonly]="!isEditing"></ion-input>
+                </ion-item>
+                <ion-item
+                    class="alc-profile-item"
+                    lines="none">
+                    <ion-label
+                        class="alc-profile-label"
+                        position="stacked">{{form.email.label}}</ion-label>
+                    <ion-input
+                        [(ngModel)]="form.email.value"
+                        class="alc-profile-input"
+                        [ngClass]="{editable: false}"
+                        value="minaya@alcancia.io"
+                        [placeholder]="form.email.placeholder"
+                        [readonly]="true"></ion-input>
+                </ion-item>
+            </ion-card-content>
+        </ion-card>
+        <div
+            *ngIf="isEditing"
+            class="alc-profile-edit-controls">
+            <ion-button
+                fill="clear"
+                expand="block"
+                (click)="disableEditing()">Cancelar</ion-button>
+            <ion-button
+                expand="block"
+                (click)="updateUserData()"
+                >Guardar</ion-button>
+        </div>
+    </div>
+</ion-content>

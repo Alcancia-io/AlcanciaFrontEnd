@@ -11,6 +11,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { SectionStorageService } from '../services/sectionStorage.service';
 import { RecoverUser } from '../models/revocerUserModel';
 import {UserBalance} from '../models/userBalance';
+import { UserUpdate } from '../models/user';
 const username = new UserModel();
 
 @Injectable({
@@ -25,6 +26,17 @@ export class UserRepository{
     private sectionStorageService: SectionStorageService,
     private httpClientModule: HttpClient
   ){}
+
+  async updateCurrentUser(update: UserUpdate): Promise<any> {
+    const userId = this.sectionStorageService.getData("UserId");
+    return new Promise((res) => {
+      this.httpClientModule.patch(
+        `${ALCANCIA_SERVER_URL}/users/${userId}`,
+        update
+      )
+      .subscribe(response => res(response))
+    });
+  }
 
   async getUser(): Promise<any>{
 
