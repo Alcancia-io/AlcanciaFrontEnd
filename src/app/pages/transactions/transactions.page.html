@@ -7,24 +7,24 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher> 
-  <li style="list-style: none;" *ngFor="let transation  of transationHistory">
+  <li style="list-style: none;" *ngFor="let transaction  of transactionHistory">
     <ng-container *ngIf="!transactionAvailable" >
       <p class="notransactionMessage">No hay transacciones para mostrar</p>
     </ng-container>
     <ion-card>
       <ion-item> 
-          <h3> <img src="../../../assets/Icon awesome-coins.png"> {{transation.id}}  </h3>
+          <h3> <img src="../../../assets/Icon awesome-coins.png"> {{transaction.id}}  </h3>
         <ion-label></ion-label>
         <!-- <ion-button fill="outline" slot="end">Ver</ion-button> -->
       </ion-item>
       <ion-item>
-        Fecha: {{transation.create_time}} <br/>
-        Monto Total: {{transation.gross_amount}} $ <br/>
-        <!-- Monto Neto: {{transation.net_amount}} $ -->
+        Fecha: {{transaction.create_time}} <br/>
+        Monto Total: ${{transaction.net_amount}}<br/>
+        <!-- Monto Neto: {{transaction.net_amount}} $ -->
       </ion-item>
     
       <ion-card-content>
-        {{transation.status}}
+        {{transaction.status}}
       </ion-card-content>
     </ion-card>
   </li>

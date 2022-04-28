@@ -22,7 +22,7 @@ export class MainScreenPage implements OnInit {
   userId;
   aTotalInvestment: number = 0;
   lastBalance: string;
-  transationHistory: Array<any>;
+  transactionHistory: Array<any>;
   transactionAvailable: boolean = true;
   
   constructor(
@@ -128,7 +128,7 @@ export class MainScreenPage implements OnInit {
           const createdDate = new Date(item.create_time);  
           item.create_time =  createdDate.toString().replace('GMT-0400 (Atlantic Standard Time)',''); 
         });  
-        this.transationHistory = response;
+        this.transactionHistory = response;
       } 
     }).catch((error) => {
       console.log(error);
