@@ -5,14 +5,14 @@ import { NavigationToolbarComponent } from "./navigation-toolbar/navigation-tool
 import { TopNavigationToolbarComponent } from "./top-navigation-toolbar/top-navigation-toolbar.component";
 import { SuccessfullComponent } from "./successfull/successfull";
 import { PaypalPaymentOptionsComponent } from "./paypal/paypalPaymentOptions/paypalPaymentOptions.component";
-
+import { TooltipComponent } from "./tooltip/tooltip.component"; 
 
 @NgModule({
     imports: [
         IonicModule
       ],
-  declarations: [NavigationToolbarComponent, TopNavigationToolbarComponent, SuccessfullComponent, PaypalPaymentOptionsComponent],
-  exports: [NavigationToolbarComponent, TopNavigationToolbarComponent, SuccessfullComponent, PaypalPaymentOptionsComponent]
+  declarations: [NavigationToolbarComponent, TopNavigationToolbarComponent, SuccessfullComponent, PaypalPaymentOptionsComponent, TooltipComponent],
+  exports: [NavigationToolbarComponent, TopNavigationToolbarComponent, SuccessfullComponent, PaypalPaymentOptionsComponent, TooltipComponent]
 })
 
 

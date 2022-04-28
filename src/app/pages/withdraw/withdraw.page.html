@@ -48,14 +48,19 @@
                 </ng-container>
               </div> 
               <br/> 
-              <ion-item class="item-content"> 
-                <ion-input formControlName="identificationNumber" position="floating" placeholder="INE/CEDULA" type="text"></ion-input>
-              </ion-item>
-              <div *ngFor="let error of errorMessages.identificationNumber">
-                <ng-container *ngIf="exform.get('identificationNumber').hasError(error.type) && (exform.get('identificationNumber').dirty || exform.get('identificationNumber').touched)">
-                  <small class="error-message">{{error.message}}</small>
-                </ng-container>
-              </div> 
+              <ion-grid>
+                <ion-row>  
+                    <ion-item class="item-content"> 
+                      <ion-input formControlName="identificationNumber" position="floating" placeholder="INE/CEDULA" type="text"></ion-input> 
+                    </ion-item> 
+                    <div *ngFor="let error of errorMessages.identificationNumber">
+                      <ng-container *ngIf="exform.get('identificationNumber').hasError(error.type) && (exform.get('identificationNumber').dirty || exform.get('identificationNumber').touched)">
+                        <small class="error-message">{{error.message}}</small>
+                      </ng-container>
+                    </div> 
+                     <app-tooltip [tooltipMessage]="documentInformationMessage"></app-tooltip> 
+                </ion-row>
+              </ion-grid>  
               <br/>
               <ion-item class="item-content"> 
                 <ion-input formControlName="beneficiaryName" position="floating" placeholder="Nombre del beneficiario" type="text"></ion-input>
