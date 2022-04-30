@@ -15,13 +15,14 @@ export class WithdrawPage implements OnInit {
   exform: FormGroup;
   userId;
   amountExceededMessage: boolean = false;
+  documentInformationMessage = "<strong>INE:</strong>  Documento de Identidad Mexicana <br/><br/> <strong>CEDULA:</strong> Documento de Identidad Dominicana";
 
   constructor(private userService: UserService, private transactionService: TransactionService, private sectionStorageService: SectionStorageService, private router: Router) { }
 
   public errorMessages = {
     country: [{type: 'required', message: "El pais es requerido"}],
     bank: [{type: 'required', message: 'El banco es requerido'}],
-    bankAccount: [{type: 'required', meesage: 'El No. Cuenta/ CLABE es requerido'}],
+    bankAccount: [{type: 'required', message: 'El No. Cuenta/ CLABE es requerido'}],
     withdrawAmount: [{type: 'required', message: 'El monto a retirar es requerido'}],
     identificationNumber: [{type: 'required', message: 'El INE/CEDULA es requerido'}],
     beneficiaryName: [{type: 'required', message: 'El nombre del beneficiario es requerido'}]
