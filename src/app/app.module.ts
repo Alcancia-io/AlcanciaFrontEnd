@@ -22,7 +22,6 @@ import { environment } from 'src/environments/environment';
 import { AuthenticationService } from './services/authentication.service';
 
 // guards
-import { AuthGuard } from './guards/auth.guard';
 import { TokenService } from './services/token.service';
 import { AuthorizeGuard, NegateAuthorizeGuard } from './guards/authorize.guard';
 import { SwapGuard } from './guards/swap.guard';
@@ -58,7 +57,6 @@ import { GraphQLModule } from './graphql.module';
   providers: [
     AuthenticationService,
     TokenService,
-    AuthGuard,
     AuthorizeGuard,
     NegateAuthorizeGuard,
     SwapGuard,

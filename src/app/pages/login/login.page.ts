@@ -5,7 +5,6 @@ import { AuthenticationService } from '../../services/authentication.service';
 
 //Local storage
 import { AppCookieService } from '../../services/appcookie.service';
-import { USER_NAME } from 'src/app/guards/auth.guard';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { StringLike } from '@firebase/util';
 import { loadingController } from '@ionic/core';
@@ -47,15 +46,8 @@ export class LoginPage implements OnInit {
       'email': new FormControl(null, Validators.required),
       'password': new FormControl(null,[Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'), Validators.minLength(8)] )
     })
-    this.getUsername();
   }
 
-  async getUsername(){
-    const username =  await this.appCookie.get(USER_NAME); 
-    if (username.length > 0 && username[0]) {
-      this.aUsername = username[0].value;
-    }
-  }
 
   forgot() {
     this.router.navigate(['/forgot-password']);

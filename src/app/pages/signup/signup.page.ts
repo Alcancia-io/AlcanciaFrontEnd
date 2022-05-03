@@ -4,7 +4,6 @@ import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/f
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { AppCookieService } from '../../services/appcookie.service';
-import { USER_NAME } from 'src/app/guards/auth.guard';
 import { UserModel } from '../../models/userModel';
 import { UserService } from '../../services/user.service';
 import { FormGroup, Validators,FormBuilder, ReactiveFormsModule, FormControl } from '@angular/forms';
@@ -92,7 +91,6 @@ export class SignupPage implements OnInit {
           resp.user.sendEmailVerification();
         }).then(() => {
           loading.dismiss();
-          this.appCookie.set(USER_NAME,`${this.exform.value.name}`);
           this.toast('Se envio un email de confirmacion a su correo electrónico', 'success');
           this.router.navigate(['/login']);
         })

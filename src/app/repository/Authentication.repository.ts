@@ -6,7 +6,6 @@ import { Observable, Subscription } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { AngularFirestore } from '@angular/fire/compat/firestore'; 
 import { AppCookieService } from '../services/appcookie.service';
-import { USER_NAME } from 'src/app/guards/auth.guard';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { SectionStorageService } from '../services/sectionStorage.service';
 import { CSRFToken } from "../models/csrftoken";

@@ -1,4 +1,3 @@
-import { AuthGuard } from './guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes, CanActivate } from '@angular/router';
 import { IntroGuard } from './guards/intro.guard';
@@ -81,6 +80,11 @@ const routes: Routes = [
   {
     path: 'whitepaper',
     loadChildren: () => import('./pages/whitepaper/whitepaper.module').then( m => m.WhitepaperPageModule)
+  },
+  {
+    path: 'welcome',
+    loadChildren: () => import('./pages/welcome/welcome.module').then( m => m.WelcomePageModule),
+    canLoad: [NegateAuthorizeGuard]
   }
 ];
 

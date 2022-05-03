@@ -4,7 +4,6 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { StorageService } from '../../services/storage.service';
 import { UserService } from '../../services/user.service';
 
-import { USER_NAME } from 'src/app/guards/auth.guard';
 import { User } from '../../models/user';
 import { UserModel } from '../../models/userModel';
 import { AlertController } from '@ionic/angular';
