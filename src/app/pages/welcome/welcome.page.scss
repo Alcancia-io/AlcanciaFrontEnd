@@ -1,0 +1,36 @@
+ion-content {
+  --background: 
+  url("/assets/backdrops/TerraOPC.png") center 41vw/110% auto no-repeat,
+  linear-gradient(180deg,
+    #0F2346,
+    #1C3466,
+    #476DD3 75%,
+    #4368C9,
+    #395AB0,
+    #4E76E5
+  );
+}
+ion-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 2.9em;
+  animation: slide-up .3s ease-in-out backwards;
+  > ion-card-header {
+    animation: slide-up .3s .1s ease-in-out backwards;
+  }
+}
+ion-card-content {
+  padding-bottom: 0;
+  > ion-button {
+    animation: slide-up .3s .2s ease-in-out backwards;
+  }
+}
+ion-button + span {
+  margin-top: 1em;
+  margin-bottom: 0;
+  animation: slide-up .3s .3s ease-in-out backwards;
+}
+span {
+  color: var(--ion-color-light);
+}

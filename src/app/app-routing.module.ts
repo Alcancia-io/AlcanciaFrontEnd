@@ -21,10 +21,15 @@ const routes: Routes = [
     path: 'intro',
     loadChildren: () => import('./pages/intro/intro.module').then( m => m.IntroPageModule),
     canLoad: [NegateAuthorizeGuard]
-  },  
+  },
   {
     path: 'forgot-password',
     loadChildren: () => import('./pages/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule),
+    canLoad: [NegateAuthorizeGuard]
+  },
+  {
+    path: 'welcome',
+    loadChildren: () => import('./pages/welcome/welcome.module').then( m => m.WelcomePageModule),
     canLoad: [NegateAuthorizeGuard]
   },
   // {
@@ -59,11 +64,6 @@ const routes: Routes = [
     canLoad: [AuthorizeGuard, RecoverUserGuard]
   },
   {
-    path: '',
-    loadChildren: () => import('./pages/sidenav/sidenav.module').then( m => m.SidenavPageModule),
-    canLoad: [AuthorizeGuard, RecoverUserGuard]
-  }, 
-  {
     path: 'paymenterror',
     loadChildren: () => import('./pages/paymenterror/paymenterror.module').then( m => m.PaymenterrorPageModule),
     canLoad: [AuthorizeGuard, RecoverUserGuard]
@@ -82,9 +82,9 @@ const routes: Routes = [
     loadChildren: () => import('./pages/whitepaper/whitepaper.module').then( m => m.WhitepaperPageModule)
   },
   {
-    path: 'welcome',
-    loadChildren: () => import('./pages/welcome/welcome.module').then( m => m.WelcomePageModule),
-    canLoad: [NegateAuthorizeGuard]
+    path: '',
+    loadChildren: () => import('./pages/sidenav/sidenav.module').then( m => m.SidenavPageModule),
+    canLoad: [AuthorizeGuard, RecoverUserGuard]
   }
 ];
 
