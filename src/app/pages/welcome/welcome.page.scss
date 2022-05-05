@@ -1,5 +1,5 @@
 ion-content {
-  --background: 
+  --background:
   url("/assets/backdrops/TerraOPC.png") center 41vw/110% auto no-repeat,
   linear-gradient(180deg,
     #0F2346,
@@ -15,7 +15,6 @@ ion-card {
   flex-direction: column;
   justify-content: space-between;
   padding-bottom: 2.9em;
-  animation: slide-up .3s ease-in-out backwards;
   > ion-card-header {
     animation: slide-up .3s .1s ease-in-out backwards;
   }
