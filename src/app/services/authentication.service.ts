@@ -59,8 +59,25 @@ export class AuthenticationService {
     );
   }// end of constructor
 
+  async resendEmailConfirmation(email:string, password: string){
+    const loading = await this.loadingCtrl.create({
+      message: 'Enviando Correo de Verificacion...',
+      spinner: 'crescent',
+      showBackdrop: true
+    });
 
-  async login(email:string, password:string) {
+    loading.present(); 
+    this.fireAuth.signInWithEmailAndPassword(email, password).then(async  (data) => {
+      if(!data.user.emailVerified){
+        data.user.sendEmailVerification();
+        loading.dismiss();
+        this.toast('Se envio un email de confirmacion a su correo electrónico', 'sucess');
+      }
+    });
+  }
+
+
+  async login(email:string, password:string):  Promise<any> {
     const loading = await this.loadingCtrl.create({
       message: 'Autenticando...',
       spinner: 'crescent',
@@ -68,12 +85,13 @@ export class AuthenticationService {
     });
 
     loading.present(); 
-    this.fireAuth.signInWithEmailAndPassword(email, password)
+    return this.fireAuth.signInWithEmailAndPassword(email, password)
       .then(async (data) => {
-        if (!data.user.emailVerified) {
-          loading.dismiss();
+        if (!data.user.emailVerified) { 
+          loading.dismiss(); 
           this.toast('Su cuenta aún no ha sido confirmada, porfavor revise su correo!', 'danger');
           this.logout();
+          return data;
         } else {
           (await this.fireAuth.currentUser).getIdToken()
             .then((token => {

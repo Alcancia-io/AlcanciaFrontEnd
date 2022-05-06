@@ -20,6 +20,7 @@ export class LoginPage implements OnInit {
  
   aUsername: string;
   exform: FormGroup;
+  resendEmailVerificationButton: boolean = false;
 
   constructor( 
     private authService: AuthenticationService,
@@ -69,6 +70,10 @@ export class LoginPage implements OnInit {
    toast.present();
   }
 
+  async resendEmailVerification(){
+    this.authService.resendEmailConfirmation(this.exform.value.email, this.exform.value.password);
+  }
+
   async login(){
     if (this.exform.value.email && this.exform.value.password) {
       const loading = await loadingController.create({
@@ -80,7 +85,8 @@ export class LoginPage implements OnInit {
       loading.present();
 
       this.authService.login(this.exform.value.email, this.exform.value.password)
-          .then(() => {
+          .then((response) => {  
+            this.resendEmailVerificationButton = !response.user.emailVerified; 
             loading.dismiss();
           })
           .catch((error) => {
