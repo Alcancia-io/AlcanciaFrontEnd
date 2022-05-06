@@ -84,7 +84,8 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./pages/sidenav/sidenav.module').then( m => m.SidenavPageModule),
-    canLoad: [AuthorizeGuard, RecoverUserGuard]
+    // TODO: Toggle comment below to reenable guard
+    //canLoad: [AuthorizeGuard, RecoverUserGuard]
   }
 ];
 

@@ -1,6 +1,8 @@
 <ion-content>
   <div
-    class="oink-fullscreen ion-justify-content-end">
+    slot="fixed"
+    class="oink-fullscreen ion-justify-content-between">
+    <img class="oink-logo" src="/assets/Alcancia White.png"/>
     <ion-card
       class="
         oink-card
@@ -18,7 +20,7 @@
         </ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <ion-button>Registrate</ion-button>
+        <ion-button routerLink="/signup">Registrate</ion-button>
         <span class="ion-text-center">
           ¿Ya tienes una cuenta?
           <a routerLink="/login">

@@ -46,6 +46,14 @@
     transform: none;
   }
 }
+@keyframes slide-down {
+  from {
+    transform: translateY(-100vw);
+  }
+  to {
+    transform: none;
+  }
+}
 /* GLOBAL STYLES */
 ion-button {
   $vertical-margin: 1rem;
@@ -53,8 +61,7 @@ ion-button {
   --padding-top: 1.375rem;
   --padding-bottom: 1.3125rem;
   margin-top: $vertical-margin;
-  margin-bottom: $vertical-margin;
-  font-family: "Gotham", sans-serif;
+  margin-bottom: $vertical-margin; font-family: "Gotham", sans-serif;
   font-weight: normal;
   font-size: 1.125rem;
   height: auto;
@@ -115,5 +122,8 @@ ion-card-subtitle {
 }
 .oink-backdrop {
   position: absolute;
+}
+.oink-logo {
+  object-fit: cover;
 }
 
