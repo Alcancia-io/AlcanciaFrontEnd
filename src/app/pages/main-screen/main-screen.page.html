@@ -62,14 +62,14 @@
                 </ion-card-header>
                 <ion-card-content> 
                   <!-- [scrollEvents]="true" -->
-                  <ion-list  style="list-style: none;" *ngFor="let transation  of transationHistory">
+                  <ion-list  style="list-style: none;" *ngFor="let transaction  of transactionHistory">
                     <!-- <ion-scroll direction="y"> -->
                       <ng-container *ngIf="transactionAvailable" >
                         <p *ngIf="!transactionAvailable" class="notransactionMessage">No hay transacciones para mostrar</p>
                       </ng-container>
                       <ion-item>
-                        <ion-label class="transaction-tittle"><ion-icon name="cash-outline" slot="start"></ion-icon> Depósito<br/><small class="deposit-time">{{transation.create_time}}</small></ion-label>
-                        <ion-note class="transaction-amount" slot="end" color="primary">{{transation.gross_amount}}$</ion-note>
+                        <ion-label class="transaction-tittle"><ion-icon name="cash-outline" slot="start"></ion-icon> Depósito<br/><small class="deposit-time">{{transaction.create_time}}</small></ion-label>
+                        <ion-note class="transaction-amount" slot="end" color="primary">{{transaction.gross_amount}}$</ion-note>
                       </ion-item> 
                       <!-- </ion-scroll>  -->
                     </ion-list>     

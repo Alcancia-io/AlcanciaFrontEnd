@@ -22,12 +22,12 @@ import { environment } from 'src/environments/environment';
 import { AuthenticationService } from './services/authentication.service';
 
 // guards
-import { AuthGuard } from './guards/auth.guard';
 import { TokenService } from './services/token.service';
 import { AuthorizeGuard, NegateAuthorizeGuard } from './guards/authorize.guard';
 import { SwapGuard } from './guards/swap.guard';
 import { UniversalAppInterceptor } from './UniversalAppInterceptor';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { GraphQLModule } from './graphql.module';
 
 
 @NgModule({
@@ -51,12 +51,12 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    GraphQLModule
   ],
   providers: [
     AuthenticationService,
     TokenService,
-    AuthGuard,
     AuthorizeGuard,
     NegateAuthorizeGuard,
     SwapGuard,

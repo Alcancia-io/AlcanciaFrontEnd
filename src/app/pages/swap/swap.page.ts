@@ -10,7 +10,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { UserModel } from '../../models/userModel';
 import { User } from '../../models/user';
 import { Exchange } from '../../models/exchange';
-import { USER_NAME } from 'src/app/guards/auth.guard';
 import { UserService } from '../../services/user.service';
 import { DecimalPipe } from '@angular/common';
 @Component({
