@@ -1,29 +1,46 @@
 <ion-content>
-  <div
-    class="oink-fullscreen ion-justify-content-end">
-    <ion-card
-      class="
-        oink-card
-        oink-full-width
-        oink-half-height
-        oink-rounded-top
-        oink-no-rounded-bottom
-      ">
-      <ion-card-header>
-        <ion-card-title>
-          Descubre una nueva forma de ahorrar
-        </ion-card-title>
-        <ion-card-subtitle>
-        Construye tu portafolio de ahorro basado en Crypto
-        </ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-button>Registrate</ion-button>
-        <span class="ion-text-center">
-          ¿Ya tienes una cuenta?
-          <ion-nav-link>Inicia sesión</ion-nav-link>
-        </span>
-      </ion-card-content>
-    </ion-card>
+  <div slot="fixed" class="oink-fullscreen ion-justify-content-between">
+    <img class="oink-icon-logo" src="/assets/alcancia_white_icon.png"/>
+
+    <div>
+      <div>
+        <h1>¡Hola!<br>Bienvenido</h1>
+      </div>
+      <div>
+        <ion-item mode="ios" lines="none" class="oink-item">
+          <ion-label position="stacked">
+            <span class="oink-label">Correo electrónico</span>
+          </ion-label>
+          <ion-input type="text" class="oink-input"></ion-input>
+        </ion-item>
+        <ion-item mode="md" lines="none" class="oink-subitem">
+          <ion-checkbox class="oink-checkbox"></ion-checkbox>
+          <ion-label>
+            <span class="oink-sublabel">Recordar usuario</span>
+          </ion-label>
+        </ion-item>
+        <ion-item mode="ios" lines="none" class="oink-item">
+          <ion-label position="stacked">
+            <span class="oink-label">Contraseña</span>
+          </ion-label>
+          <ion-input class="oink-input" type="password"></ion-input>
+        </ion-item>
+        <ion-item class="oink-subitem ion-float-end" lines="none">
+          <a class="oink-link" href="/password-reset">
+            <ion-icon name="help-circle-outline"></ion-icon>
+            Olvidé mi contraseña
+          </a>
+        </ion-item>
+      </div>
+    </div>
+
+    <div>
+      <ion-button class="oink-button">Iniciar sesión</ion-button>
+      <span class="oink-text ion-text-center">
+      No tengo cuenta.
+      <a routerLink="/signup">Registrarme</a>
+      </span>
+    </div>
+
   </div>
 </ion-content>
