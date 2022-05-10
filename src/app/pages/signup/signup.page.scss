@@ -6,6 +6,10 @@ ion-content{
 ion-grid{
   width: 100%;
 }
+
+.input-title{
+  text-align: left;
+}
 .welcome-msg{
   position: relative;
   text-align: left;
@@ -26,9 +30,13 @@ ion-grid{
  
 ion-item{ --highlight-color-valid: #3554C4; }
 .item-content{
-  --ion-item-background:#121212; 
+  --ion-item-background: #051634; 
+  --ion-item-border: 1px solid #051634;
 }
  
+ion-icon{
+  color: #ffff;
+}
 
 .arrow-btn{
   float: right;

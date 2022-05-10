@@ -16,7 +16,10 @@ import { FormGroup, Validators,FormBuilder, ReactiveFormsModule, FormControl } f
 export class SignupPage implements OnInit {
 
   passwordMatch: boolean;
-  
+  showPassword = false;
+  showConfirmPassword = false;
+  passwordInputType = 'password';
+  confirmPasswordInputType = 'password';
   exform: FormGroup;
 
   constructor(
@@ -30,26 +33,27 @@ export class SignupPage implements OnInit {
     public formBuilder: FormBuilder,
   ) { }
 
-  public errorMessages = {
-    
+  public errorMessages = { 
     name: [
-      { type: 'required', message: 'Nombre es requerido' }
+      { type: 'required', message: 'Este campo es obligatorio' }
     ],
     surname: [
-      { type: 'required', message: 'Apellidos es requerido' }
+      { type: 'required', message: 'Este campo es obligatorio' }
+    ],
+    phoneNumber: [
+      { type: 'required', message: '¿Estas seguro?, verifica tu número de celular' }
     ],
     email: [
-      { type: 'required', message: 'Email es requerido' },
+      { type: 'required', message: '¿Estas seguro?, verifica tu correo' },
       { type: 'pattern', message: 'El formato de email no es correcto'}
     ],
     password: [
-      { type: 'required', message: 'Una contraseña es requerida' },
+      { type: 'required', message: 'Recuerda que tu contraseña debe ser de mínimo 8 caracteres y debes usar al menos: una mayúsculas, una minúsculas, un número y un símbolo' },
       { type: 'minlength', message: 'Debe tener una longitud minima de 8 caracteres'}
     ],
     confirmPassword: [
       { type: 'required', message: 'La confirmacion de contraseña es requerida' },
-      { type: 'mustMatch', message: 'La contraseña de confirmacion debe coincidir con la contraseña' }
-
+      { type: 'mustMatch', message: '¡Ops! Las contraseña no coinciden' } 
     ]
   };
 
@@ -58,13 +62,24 @@ export class SignupPage implements OnInit {
     this.exform = new FormGroup({
       'name': new FormControl(null, Validators.required),
       'surname': new FormControl(null, Validators.required),
+      'phoneNumber': new FormControl(null, Validators.required),
+      'phoneExtension': new FormControl(null, Validators.required),
       'email': new FormControl(null, [Validators.required, Validators.email]),
       'password': new FormControl(null, [Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'), Validators.minLength(8)]),
       'confirmPassword': new FormControl(null,[Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'), Validators.minLength(8)]),
     })
   }
 
-  
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+    this.passwordInputType = this.showPassword ? 'text' : 'password';
+  }
+
+  toggleShowConfirmPassword() {
+    this.showConfirmPassword = !this.showConfirmPassword;
+    this.confirmPasswordInputType = this.showConfirmPassword ? 'text' : 'password';
+  }
+
   async signup(){
     if (this.exform.value.name && this.exform.value.email && this.exform.value.password) {
       const loading = await this.loadingCtrl.create({

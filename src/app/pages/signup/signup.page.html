@@ -1,39 +1,30 @@
 <ion-content class="ion-padding">
         <ion-grid>
-          <ion-row >
-            <ion-col size="auto">
-              <div class="button-action">
-                <ion-button fill="clear" color="dark" size="small" name="login" (click)="loginPage()">
-                  <p>Login</p>
-                </ion-button>
-                <ion-button fill="clear" color="dark" size="small" name="register">
-                   <p class="register"><b>Regístrate</b></p> 
-                </ion-button>
-                <div class="perfile-pic"></div>
-              </div>
-            </ion-col>
+          <ion-row > 
             <ion-col size="auto">
               <ion-card-header class="welcome-msg">
                 <div>
                   <!-- class="welcome-msg" -->
-                  Hola <b>Usuario,</b> <br>
-                  <small>Ingresa la información que se pide en los campos debajo.</small>
+                  <strong>¡Hola!,</strong><br/>
+                  <small>Completa la siguiente información para crear tu cuenta:</small>
                 </div>
               </ion-card-header>
             </ion-col>
             <ion-col size="auto">
               <ion-card-content> 
                 <form [formGroup]="exform">
-                  <ion-item class="item-content form-group"> 
-                    <ion-input formControlName="name" position="floating" placeholder="Nombre" type="text" (keyup.enter)="signup()"></ion-input>
+                  <p class="input-title">Nombre(s)</p>
+                  <ion-item class="item-content form-group">  
+                    <ion-input formControlName="name" position="floating" type="text" (keyup.enter)="signup()"></ion-input>
                   </ion-item>
                   <div *ngFor="let error of errorMessages.name">
                     <ng-container *ngIf="exform.get('name').hasError(error.type) && (exform.get('name').dirty || exform.get('name').touched)">
                       <small class="error-message">{{error.message}}</small>
                     </ng-container>
                   </div><br/><br/>
+                  <p class="input-title">Apellido(s)</p>
                   <ion-item class="item-content form-group"> 
-                    <ion-input formControlName="surname" position="floating" placeholder="Apellidos" type="text" (keyup.enter)="signup()"></ion-input>
+                    <ion-input formControlName="surname" position="floating" type="text" (keyup.enter)="signup()"></ion-input>
                   </ion-item>
                   <div *ngFor="let error of errorMessages.surname">
                     <ng-container *ngIf="exform.get('surname').hasError(error.type) && (exform.get('surname').dirty || exform.get('surname').touched)">
@@ -41,9 +32,34 @@
                     </ng-container>
                   </div>
                   <br/>
+                  <br/> 
+                  <p class="input-title">Celular</p> 
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col  size="auto">
+                          <ion-select class="dropdown-content" okText="Okay" cancelText="Cancelar" formControlName="phoneExtension" >
+                            <ion-select-option value="MXN">🇲🇽 +52</ion-select-option>  
+                            <ion-select-option value="DOP">🇩🇴 +809</ion-select-option>  
+                            <!-- <ion-select-option value="BTC">$BTC ₿</ion-select-option>  -->
+                          </ion-select>     
+                        </ion-col>
+                        <ion-col  size="auto">
+                          <ion-item class="item-content form-group"> 
+                            <ion-input formControlName="phoneNumber" position="floating" type="text" (keyup.enter)="signup()"></ion-input>
+                          </ion-item>
+                          <div *ngFor="let error of errorMessages.phoneNumber">
+                            <ng-container *ngIf="exform.get('phoneNumber').hasError(error.type) && (exform.get('phoneNumber').dirty || exform.get('phoneNumber').touched)">
+                              <small class="error-message">{{error.message}}</small>
+                            </ng-container>
+                          </div>
+                        </ion-col> 
+                      </ion-row>
+                    </ion-grid> 
                   <br/>
+                  <br/>
+                  <p class="input-title">Correo electrónico</p>
                   <ion-item class="item-content">
-                    <ion-input formControlName="email" position="floating" placeholder="Correo electrónico" type="text" (keyup.enter)="signup()"></ion-input>
+                    <ion-input formControlName="email" position="floating" type="text" (keyup.enter)="signup()"></ion-input>
                   </ion-item>
                   <div *ngFor="let error of errorMessages.email">
                     <ng-container *ngIf="exform.get('email').hasError(error.type) && (exform.get('email').dirty || exform.get('email').touched)">
@@ -52,19 +68,30 @@
                   </div>
                   <br/>
                   <br/>
+                  <p class="input-title">Contraseña</p>
                   <ion-item class="item-content">
-                    <ion-input formControlName="password" position="floating" placeholder="Contraseña" type="password" (keyup.enter)="signup()"></ion-input>
+                    <ion-input formControlName="password" position="floating" type={{passwordInputType}} (keyup.enter)="signup()"></ion-input>
+                    <ng-content></ng-content>
+                    <a class="type-toggle" (click)="toggleShowPassword()">
+                       <ion-icon class="show-option" [hidden]="showPassword" name="eye-off-outline"></ion-icon>
+                       <ion-icon class="hide-option" [hidden]="!showPassword" name="eye-outline"></ion-icon>
+                    </a>
                   </ion-item> 
                   <div *ngFor="let error of errorMessages.password">
                     <ng-container *ngIf="exform.get('password').hasError(error.type) && (exform.get('password').dirty || exform.get('password').touched)">
                       <small class="error-message">{{error.message}}</small>
                     </ng-container>
-                  </div>
-                   
+                  </div> 
                   <br/>
                   <br/>
+                  <p class="input-title">Confirmar contraseña</p>
                   <ion-item class="item-content">
-                    <ion-input  formControlName="confirmPassword" position="floating" placeholder="Repite tu contraseña" type="password"  (ionChange)="checkPassword()" (keyup.enter)="signup()"></ion-input>
+                    <ion-input  formControlName="confirmPassword" position="floating" type={{confirmPasswordInputType}} (ionChange)="checkPassword()" (keyup.enter)="signup()"></ion-input>
+                    <ng-content></ng-content>
+                    <a class="type-toggle" (click)="toggleShowConfirmPassword()">
+                       <ion-icon class="show-option" [hidden]="showConfirmPassword" name="eye-off-outline"></ion-icon>
+                       <ion-icon class="hide-option" [hidden]="!showConfirmPassword" name="eye-outline"></ion-icon>
+                    </a>
                   </ion-item> 
                   <div *ngFor="let error of errorMessages.confirmPassword">
                     <ng-container *ngIf="exform.get('confirmPassword').hasError(error.type) && (exform.get('confirmPassword').dirty || exform.get('confirmPassword').touched)">
@@ -77,9 +104,12 @@
             <ion-col size="auto">
               <div>
                 <ion-text *ngIf="passwordMatch" color="danger" >La constraseña no coincide!</ion-text>
-                <app-arrow-button class="arrow-btn" expand="block" shape="round" color="warning" (click)="signup()" (keyup.enter)="signup()"></app-arrow-button>
+                <ion-button style="width: 20rem; font-size: 1.2rem;">
+                  Continua
+                </ion-button>
+                <!-- <app-arrow-button   expand="block" shape="round" color="warning" (click)="signup()" (keyup.enter)="signup()"></app-arrow-button> -->
               </div>
             </ion-col>
           </ion-row>
-        </ion-grid>
-</ion-content>
+        </ion-grid> 
+</ion-content> 
