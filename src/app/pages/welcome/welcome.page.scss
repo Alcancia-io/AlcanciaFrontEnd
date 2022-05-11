@@ -1,6 +1,13 @@
+@mixin slide-up {
+  animation-name: slide-up;
+  animation-delay: 0s;
+  animation-duration: .3s;
+  animation-fill-mode: backwards;
+  animation-timing-function: ease-out;
+}
 ion-content {
   --background:
-  url("/assets/backdrops/TerraOPC.png") center 41vw/110% auto no-repeat,
+  url("/assets/backdrops/TerraOPC.png") center 22vh/110% auto no-repeat,
   linear-gradient(180deg,
     #0F2346,
     #1C3466,
@@ -16,19 +23,23 @@ ion-card {
   justify-content: space-between;
   padding-bottom: 2.9em;
   > ion-card-header {
-    animation: slide-up .3s .1s ease-in-out backwards;
+    @include slide-up;
+    animation-delay: .1s;
   }
+  height: auto;
 }
 ion-card-content {
   padding-bottom: 0;
   > ion-button {
-    animation: slide-up .3s .2s ease-in-out backwards;
+    @include slide-up;
+    animation-delay: .2s;
   }
 }
 ion-button + span {
   margin-top: 1em;
   margin-bottom: 0;
-  animation: slide-up .3s .3s ease-in-out backwards;
+  @include slide-up;
+  animation-delay: .3s;
 }
 span {
   color: var(--ion-color-light);
@@ -36,5 +47,5 @@ span {
 .oink-logo {
   width: 50vw;
   margin: 0 auto;
-  animation: slide-down .3s ease-in-out backwards;
+  @include slide-up;
 }
