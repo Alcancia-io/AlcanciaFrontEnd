@@ -4,14 +4,36 @@
 
     <div>
       <div>
-        <h1>¡Hola!<br>Bienvenido</h1>
+        <h1 i18n>¡Hola!<br>Bienvenido</h1>
       </div>
-      <div>
+      <form [formGroup]="loginForm">
         <ion-item mode="ios" lines="none" class="oink-item">
           <ion-label position="stacked">
             <span class="oink-label">Correo electrónico</span>
           </ion-label>
-          <ion-input type="text" class="oink-input"></ion-input>
+          <ion-input
+            formControlName="email"
+            type="text"
+            [ngClass]="{
+              'oink-error':
+                !loginForm.get('email').valid
+                && loginForm.get('email').touched
+            }"
+            class="oink-input"></ion-input>
+          <ion-note 
+          slot="error"
+          *ngIf="!loginForm.get('email').valid">
+            <span i18n *ngIf="
+              loginForm.get('email').errors.required
+              && loginForm.get('email').touched">
+              Este campo es obligatorio
+            </span>
+            <span i18n *ngIf="
+              loginForm.get('email').errors.email
+              && loginForm.get('email').touched">
+              Hmmm... este correo parece ser inválido
+            </span>
+          </ion-note>
         </ion-item>
         <ion-item mode="md" lines="none" class="oink-subitem">
           <ion-checkbox class="oink-checkbox"></ion-checkbox>
@@ -23,7 +45,24 @@
           <ion-label position="stacked">
             <span class="oink-label">Contraseña</span>
           </ion-label>
-          <ion-input class="oink-input" type="password"></ion-input>
+          <ion-input
+            formControlName="password"
+            type="password"
+            [ngClass]="{
+              'oink-error':
+                !loginForm.get('password').valid
+                && loginForm.get('password').touched
+            }"
+            class="oink-input"></ion-input>
+          <ion-note
+          slot="error"
+          *ngIf="!loginForm.get('password').valid">
+            <span i18n *ngIf="
+              loginForm.get('password').errors.required
+              && loginForm.get('password').touched">
+              Este campo es obligatorio
+            </span>
+          </ion-note>
         </ion-item>
         <ion-item class="oink-subitem ion-float-end" lines="none">
           <a class="oink-link" href="/password-reset">
@@ -31,16 +70,17 @@
             Olvidé mi contraseña
           </a>
         </ion-item>
-      </div>
+      </form>
     </div>
 
     <div>
-      <ion-button class="oink-button">Iniciar sesión</ion-button>
+      <ion-button
+      [disabled]="!loginForm.valid"
+      class="oink-button">Iniciar sesión</ion-button>
       <span class="oink-text ion-text-center">
       No tengo cuenta.
       <a routerLink="/signup">Registrarme</a>
       </span>
     </div>
-
   </div>
 </ion-content>

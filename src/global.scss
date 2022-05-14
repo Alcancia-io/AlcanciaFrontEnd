@@ -106,14 +106,20 @@ h1 {
 }
 .oink-input {
   $vertical-margin: .2em;
-  $horizontal-padding: 10vw;
   --background: var(--oink-input-background);
-  --padding-start: $horizontal-padding;
-  --padding-end: $horizontal-padding;
   margin-top: $vertical-margin;
   margin-bottom: $vertical-margin;
   border-radius: 0.25rem;
   box-shadow: 0 0 0.375rem #313131A3;
+
+  &.sc-ion-input-ios-h {
+    --padding-start: 1em;
+    --padding-end: 1em;
+  }
+
+  &.oink-error {
+    border: 2px var(--ion-color-danger) solid;
+  }
 
 }
 .oink-checkbox {
