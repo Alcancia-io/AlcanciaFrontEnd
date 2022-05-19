@@ -35,7 +35,7 @@
            
            <ion-card class="ion-card-content">
             <ion-select class="dropdown-content" value="brown" okText="Okay" cancelText="Dismiss" [(ngModel)]="ToCurrencyCode" (keyup.enter)="createPaypalOrder()" (ionChange)="calculateExchange();">
-              <ion-select-option value="USD" [selected]="ToCurrencyCode" >$USDT</ion-select-option>
+              <ion-select-option value="USD" [selected]="ToCurrencyCode" >$USDC</ion-select-option>
             </ion-select>  
             <span class="currency-value"><ion-input class="inputs-section" position="floating" placeholder="0" type="text" value={{ExchangeTotal}} readonly></ion-input></span>   
            </ion-card>
