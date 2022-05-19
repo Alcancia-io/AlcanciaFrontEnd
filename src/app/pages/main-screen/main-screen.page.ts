@@ -3,6 +3,7 @@ import { Data, Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { StorageService } from '../../services/storage.service';
 import { UserService } from '../../services/user.service';
+import { Apollo } from 'apollo-angular';
 
 import { User } from '../../models/user';
 import { UserModel } from '../../models/userModel';
@@ -11,12 +12,21 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AppCookieService } from '../../services/appcookie.service';
 import { TransactionService } from '../../services/transaction.service';
 import { SectionStorageService } from '../../services/sectionStorage.service';  
+import { Transaction, UserTransactionResponse } from '../../models/Transaction.model';
+import { getUserTransaction } from '../../graphql/queries';
+import { Subscription } from 'rxjs';
+
+
 @Component({
   selector: 'app-main-screen',
   templateUrl: './main-screen.page.html',
   styleUrls: ['./main-screen.page.scss'],
 })
+
 export class MainScreenPage implements OnInit { 
+	testTransaction: Transaction;
+  private querySubscription: Subscription
+
   aUsername;
   userId;
   aTotalInvestment: number = 0;
@@ -34,11 +44,27 @@ export class MainScreenPage implements OnInit {
     private appCookie: AppCookieService,
     private transactionService: TransactionService,
     private sectionStorageService: SectionStorageService, 
+		private apollo: Apollo
   ) { }
 
   ngOnInit() { 
     this.doFetch();
-  }
+		this.fetchUserTransactions();
+	}
+
+	fetchUserTransactions() {
+		this.querySubscription = this.apollo.watchQuery<UserTransactionResponse>({
+			query: getUserTransaction,
+			variables: {
+				transactionId: "FmwiRyMThaEtejAHwMlG",
+				userId: "MMHoNsa1JxhB4hWN2sHGRb4ir4m2"
+			}
+		}).valueChanges.subscribe(({ data, loading}) => {
+      this.testTransaction = data.getUserTransaction;
+      console.log(data.getUserTransaction);
+      console.log(this.testTransaction.sourceAmount)
+    });
+	}
 
   //Everytime the page is opened this is runned 
   ionViewWillEnter() {
@@ -46,7 +72,6 @@ export class MainScreenPage implements OnInit {
   }
 
   async getUserData(){
-   
      this.aUsername = this.sectionStorageService.getData("Username"); 
      this.userId =  this.sectionStorageService.getData("UserId");
      await this.userService.getUserBalance(this.userId).then(userBalance => {

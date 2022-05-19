@@ -1,9 +1,9 @@
 <ion-app>  
+	<app-transaction-detail [transaction]="testTransaction" ></app-transaction-detail>
   <ion-header  no-border>
     <app-top-navigation-toolbar></app-top-navigation-toolbar>
   </ion-header>
   <ion-content force-overscroll=true > 
-
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher> 
@@ -12,9 +12,7 @@
         <ion-col>
           <h1 class="welcome-msg">Bienvenido/a, {{aUsername}}</h1>
         </ion-col>
-        
       </ion-row> 
-      
       <ion-row> 
         <ion-col>
           <ion-card class="investment-card"> 

@@ -1,0 +1,30 @@
+h2 {
+	margin-bottom: 4rem;
+	font-size: 20px;
+}
+
+.detail-transaction {
+	background-color: #0F2346;
+	padding: 1rem;
+	margin: 2rem;
+	border-radius: 0.5rem;
+	color: white;
+  font-family: "Gotham", sans-serif;
+}
+
+.detail-transaction__item {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 2.5rem;
+}
+
+a {
+	display: inline-block;
+	margin-top: 2rem;
+}
+
+ion-button {
+	margin-top: 5rem;
+}
+
+
