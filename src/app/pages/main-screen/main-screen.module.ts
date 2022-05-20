@@ -8,7 +8,8 @@ import { MainScreenPageRoutingModule } from './main-screen-routing.module';
 
 import { MainScreenPage } from './main-screen.page';
 import { MainComponentsModule } from '../../components/main-components.module';
-import { TransactionDetailComponent } from '../../components/transaction-detail/transaction-detail.component';
+import { ComponentsModule } from '../../components/components.module';
+import { TransactionDetailPage } from '../transaction-detail/transaction-detail.page';
 
 @NgModule({
   imports: [
@@ -16,8 +17,9 @@ import { TransactionDetailComponent } from '../../components/transaction-detail/
     FormsModule,
     IonicModule,
     MainComponentsModule,
-    MainScreenPageRoutingModule
+    MainScreenPageRoutingModule,
+    ComponentsModule,
   ],
-  declarations: [MainScreenPage, TransactionDetailComponent]
+  declarations: [MainScreenPage, TransactionDetailPage]
 })
 export class MainScreenPageModule {}

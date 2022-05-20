@@ -4,12 +4,13 @@
 
 import { NgModule } from "@angular/core";
 import { ArrowButtonComponent } from "./arrow-button/arrow-button.component";
+import { OinkButtonComponent } from "./oink-button/oink-button.component";
 import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   imports: [IonicModule],
-  declarations: [ArrowButtonComponent],
-  exports: [ArrowButtonComponent]
+  declarations: [ArrowButtonComponent, OinkButtonComponent],
+  exports: [ArrowButtonComponent, OinkButtonComponent]
 })
 
 export class ComponentsModule {}

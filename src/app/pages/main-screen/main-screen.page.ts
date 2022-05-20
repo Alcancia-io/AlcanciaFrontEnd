@@ -24,8 +24,8 @@ import { Subscription } from 'rxjs';
 })
 
 export class MainScreenPage implements OnInit { 
+  private querySubscription
 	testTransaction: Transaction;
-  private querySubscription: Subscription
 
   aUsername;
   userId;
@@ -56,13 +56,11 @@ export class MainScreenPage implements OnInit {
 		this.querySubscription = this.apollo.watchQuery<UserTransactionResponse>({
 			query: getUserTransaction,
 			variables: {
-				transactionId: "FmwiRyMThaEtejAHwMlG",
+				transactionId: "Jr2VkUVyfDfy5c8fNkdy",
 				userId: "MMHoNsa1JxhB4hWN2sHGRb4ir4m2"
 			}
 		}).valueChanges.subscribe(({ data, loading}) => {
       this.testTransaction = data.getUserTransaction;
-      console.log(data.getUserTransaction);
-      console.log(this.testTransaction.sourceAmount)
     });
 	}
 

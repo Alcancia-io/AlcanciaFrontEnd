@@ -86,7 +86,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/sidenav/sidenav.module').then( m => m.SidenavPageModule),
     // TODO: Toggle comment below to reenable guard
     //canLoad: [AuthorizeGuard, RecoverUserGuard]
-  }
+  },
+  {
+    path: 'transaction-detail',
+    loadChildren: () => import('./pages/transaction-detail/transaction-detail.module').then( m => m.TransactionDetailPageModule)
+  },
+  
 ];
 
 @NgModule({
