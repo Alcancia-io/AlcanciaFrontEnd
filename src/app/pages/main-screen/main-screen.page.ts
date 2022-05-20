@@ -3,7 +3,6 @@ import { Data, Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { StorageService } from '../../services/storage.service';
 import { UserService } from '../../services/user.service';
-import { Apollo } from 'apollo-angular';
 
 import { User } from '../../models/user';
 import { UserModel } from '../../models/userModel';
@@ -13,8 +12,6 @@ import { AppCookieService } from '../../services/appcookie.service';
 import { TransactionService } from '../../services/transaction.service';
 import { SectionStorageService } from '../../services/sectionStorage.service';  
 import { Transaction, UserTransactionResponse } from '../../models/Transaction.model';
-import { getUserTransaction } from '../../graphql/queries';
-import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -24,7 +21,7 @@ import { Subscription } from 'rxjs';
 })
 
 export class MainScreenPage implements OnInit { 
-  private querySubscription
+  private querySubscription;
 	testTransaction: Transaction;
 
   aUsername;
@@ -44,7 +41,6 @@ export class MainScreenPage implements OnInit {
     private appCookie: AppCookieService,
     private transactionService: TransactionService,
     private sectionStorageService: SectionStorageService, 
-		private apollo: Apollo
   ) { }
 
   ngOnInit() { 
@@ -53,15 +49,9 @@ export class MainScreenPage implements OnInit {
 	}
 
 	fetchUserTransactions() {
-		this.querySubscription = this.apollo.watchQuery<UserTransactionResponse>({
-			query: getUserTransaction,
-			variables: {
-				transactionId: "Jr2VkUVyfDfy5c8fNkdy",
-				userId: "MMHoNsa1JxhB4hWN2sHGRb4ir4m2"
-			}
-		}).valueChanges.subscribe(({ data, loading}) => {
-      this.testTransaction = data.getUserTransaction;
-    });
+		this.transactionService.getUserTransaction().subscribe(({ data, loading }) => {
+			this.testTransaction = data.getUserTransaction;
+		});
 	}
 
   //Everytime the page is opened this is runned 
