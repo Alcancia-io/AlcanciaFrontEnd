@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 //Local storage
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { UserService } from "../../services/user.service";
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginPage implements OnInit {
   resendEmailVerificationButton: boolean = false;
 
   constructor( 
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -26,5 +28,13 @@ export class LoginPage implements OnInit {
         "", [Validators.required]
       )
     });
+  }
+
+  async submit() {
+    if (!this.loginForm.valid) return;
+    const user = await this.userService.login(
+      this.loginForm.get("email").value,
+      this.loginForm.get("password").value
+    );
   }
 }

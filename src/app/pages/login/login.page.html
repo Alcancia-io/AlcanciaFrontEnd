@@ -76,6 +76,7 @@
     <div>
       <ion-button
       [disabled]="!loginForm.valid"
+      (click)="submit()"
       class="oink-button">Iniciar sesión</ion-button>
       <span class="oink-text ion-text-center">
       No tengo cuenta.

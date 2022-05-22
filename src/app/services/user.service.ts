@@ -22,10 +22,12 @@ export class UserService {
 
     login(email: string, password: string): Promise<UserLogin> {
       return new Promise((res, rej) => {
-        this.apollo.watchQuery({query: loginQuery}).
-          valueChanges.subscribe(({data, error}) => {
+        this.apollo.watchQuery({
+          query: loginQuery,
+          variables: { email, password }
+        }).valueChanges.subscribe(({data, error}) => {
           if (error) return rej(error);
-          return res({ ...data as UserLogin });
+          return res({ ...data["login"] as UserLogin });
         }) ;
       });
 
