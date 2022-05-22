@@ -4,7 +4,9 @@ import { UserModel } from "../models/userModel";
 import { UserRepository } from "../repository/user.repository";
 import { RecoverUser } from '../models/revocerUserModel';
 import { UserBalance } from '../models/userBalance';
-import { UserUpdate } from '../models/user';
+import { UserUpdate, UserLogin } from '../models/user';
+import { Apollo } from "apollo-angular";
+import { loginQuery } from "../graphql/queries";
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +15,23 @@ import { UserUpdate } from '../models/user';
 export class UserService { 
   
   constructor(
-    private userRepository: UserRepository
-    ){  } 
+    private userRepository: UserRepository,
+    private apollo: Apollo
+    ) {  
+    } 
 
-    async getUser(): Promise<any>{   
+    login(email: string, password: string): Promise<UserLogin> {
+      return new Promise((res, rej) => {
+        this.apollo.watchQuery({query: loginQuery}).
+          valueChanges.subscribe(({data, error}) => {
+          if (error) return rej(error);
+          return res({ ...data as UserLogin });
+        }) ;
+      });
+
+    }
+
+    async getUser(): Promise<any>{
       return await this.userRepository.getUser();
     } 
 
