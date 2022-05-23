@@ -3,7 +3,7 @@ import { Subscription } from "rxjs";
 import { CreateOrder, ConfirmOrder } from "../models/paypalOrder";
 import { TransactionRepository } from "../repository/transaction.repository";
 import { WithDrawModel } from '../models/withdraw';
-import { Apollo, gql } from 'apollo-angular';
+import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 
 import { Transaction, UserTransactionResponse } from '../models/Transaction.model';
