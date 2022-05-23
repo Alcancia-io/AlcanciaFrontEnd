@@ -9,7 +9,6 @@ import { MainScreenPageRoutingModule } from './main-screen-routing.module';
 import { MainScreenPage } from './main-screen.page';
 import { MainComponentsModule } from '../../components/main-components.module';
 import { ComponentsModule } from '../../components/components.module';
-import { TransactionDetailPage } from '../transaction-detail/transaction-detail.page';
 
 @NgModule({
   imports: [
@@ -20,6 +19,6 @@ import { TransactionDetailPage } from '../transaction-detail/transaction-detail.
     MainScreenPageRoutingModule,
     ComponentsModule,
   ],
-  declarations: [MainScreenPage, TransactionDetailPage]
+  declarations: [MainScreenPage]
 })
 export class MainScreenPageModule {}

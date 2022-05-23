@@ -9,15 +9,15 @@
 	<div class="detail-transaction__item">
 		<span>Valor de depósito</span>
 		<span
-			>$ {{ transaction.sourceAmount | number: '1.2-2' }} {{
-			transaction.sourceAsset }}</span
+			>$ {{ transaction.sourceAmount | number: '1.2-2' }}
+			{{ transaction.sourceAsset }}</span
 		>
 	</div>
 	<div class="detail-transaction__item">
 		<span>Valor USDC</span>
 		<span
-			>{{ transaction.amount | number: '1.2-2' }} {{ transaction.targetAsset
-			}}</span
+			>{{ transaction.amount | number: '1.2-2' }}
+			{{ transaction.targetAsset }}</span
 		>
 	</div>
 	<div class="detail-transaction__item">

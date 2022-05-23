@@ -3,14 +3,13 @@ import { Transaction } from 'src/app/models/Transaction.model';
 
 @Component({
   selector: 'app-transaction-detail',
-  templateUrl: './transaction-detail.page.html',
-  styleUrls: ['./transaction-detail.page.scss'],
+  templateUrl: './transaction-detail.component.html',
+  styleUrls: ['./transaction-detail.component.scss'],
 })
-export class TransactionDetailPage implements OnInit {
+export class TransactionDetailComponent implements OnInit {
 	@Input() transaction: Transaction;
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }
