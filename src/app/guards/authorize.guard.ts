@@ -1,46 +1,67 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanLoad, Route, UrlSegment, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-import { TokenService } from '../services/token.service';
-import { AppCookieService } from '../services/appcookie.service';
+import {
+  UrlTree,
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  Router,
+  CanLoad,
+  Route
+} from '@angular/router';
+
+import { DateTime, Interval } from "luxon";
+
+import { StorageService } from "../services/storage.service";
 import { AuthenticationService } from '../services/authentication.service';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { map, take, tap } from 'rxjs/operators';
 
 
-let currentUser: string;
+const LOGIN_MAX_DAYS = 2;
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthorizeGuard implements CanLoad {
-  isLogIn: Boolean = false;
+class AbstractAuthGuard {
   constructor(
-              private tokenService: TokenService,
-              private router: Router,
-              private fireAuth: AngularFireAuth) {
-  }
-
-  
-  async canLoad(): Promise<boolean>{ 
-    const token = this.tokenService.getToken();   
-    if(token !== null){ 
+    private storage: StorageService
+  ){}
+  async isAuthenticated() {
+      const _loginTimestamp = await this.storage.get("loginTimestamp");
+      if (_loginTimestamp == null) return false;
+      const loginTimestamp = DateTime.fromISO(_loginTimestamp);
+      const elapsedTime = Interval.fromDateTimes(
+        loginTimestamp, DateTime.now()
+      );
+      if (elapsedTime.length("days") > LOGIN_MAX_DAYS) {
+        this.storage.remove("loginTimestamp");
+        return false;
+      }
       return true;
-    }else {this.router.navigate(['/login'])}  
-  } 
+  }
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class NegateAuthorizeGuard implements CanLoad {
-  constructor (private tokenService: TokenService, private router: Router, private fireAuth: AngularFireAuth){}
-   
-  async canLoad(): Promise<boolean>{ 
-      const token = this.tokenService.getToken();   
-      if(token === null){ 
-        return true;
-      }else {this.router.navigate(['/'])} 
+export class AuthorizeGuard extends AbstractAuthGuard implements CanActivate {
+  constructor(
+    storage: StorageService,
+    private router: Router
+  ){super(storage)}
+
+  async canActivate(): Promise<boolean|UrlTree> {
+    if (await this.isAuthenticated()) return true;
+    return this.router.createUrlTree(["/welcome"]);
+    return false;
+   }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class NegateAuthorizeGuard extends AbstractAuthGuard implements CanActivate {
+  constructor (
+    storage: StorageService,
+    private router: Router
+  ){super(storage)}
+  async canActivate(): Promise<boolean|UrlTree> {
+    if (!(await this.isAuthenticated())) return true;
+    return this.router.createUrlTree(["/welcome"]);
   }
- 
 }

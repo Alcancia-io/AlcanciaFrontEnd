@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-//Local storage
+import { Router } from "@angular/router";
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { DateTime } from "luxon";
+
 import { UserService } from "../../services/user.service";
 import { StorageService } from "../../services/storage.service";
 
@@ -18,7 +19,8 @@ export class LoginPage implements OnInit {
 
   constructor(
     private userService: UserService,
-    private storage: StorageService
+    private storage: StorageService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -39,9 +41,10 @@ export class LoginPage implements OnInit {
         this.loginForm.get("email").value,
         this.loginForm.get("password").value
       );
-      this.storage.set("loggedIn", true);
+      this.storage.set("loginTimestamp", DateTime.now().toISO());
       this.storage.set("name", user.name);
       this.storage.set("surname", user.surname);
+      this.router.navigate(["/"]);
     } catch (err) {
       // TODO: Add element with error messages
       console.error(err);
