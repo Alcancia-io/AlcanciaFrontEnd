@@ -23,12 +23,14 @@ class AbstractAuthGuard {
   ){}
   async isAuthenticated() {
       const _loginTimestamp = await this.storage.get("loginTimestamp");
-      if (_loginTimestamp == null) return false;
+      console.debug(_loginTimestamp);
+      if (!_loginTimestamp) return false;
+      const rememberMe = await this.storage.get("rememberMe");
       const loginTimestamp = DateTime.fromISO(_loginTimestamp);
       const elapsedTime = Interval.fromDateTimes(
         loginTimestamp, DateTime.now()
       );
-      if (elapsedTime.length("days") > LOGIN_MAX_DAYS) {
+      if (!rememberMe && elapsedTime.length("days") > LOGIN_MAX_DAYS) {
         this.storage.remove("loginTimestamp");
         return false;
       }
@@ -46,10 +48,10 @@ export class AuthorizeGuard extends AbstractAuthGuard implements CanActivate {
   ){super(storage)}
 
   async canActivate(): Promise<boolean|UrlTree> {
-    if (await this.isAuthenticated()) return true;
-    return this.router.createUrlTree(["/welcome"]);
-    return false;
-   }
+    const authenticated = await this.isAuthenticated();
+    if (authenticated) return true;
+    return this.router.parseUrl("/welcome");
+  }
 }
 
 @Injectable({
@@ -61,7 +63,8 @@ export class NegateAuthorizeGuard extends AbstractAuthGuard implements CanActiva
     private router: Router
   ){super(storage)}
   async canActivate(): Promise<boolean|UrlTree> {
-    if (!(await this.isAuthenticated())) return true;
-    return this.router.createUrlTree(["/welcome"]);
+    const authenticated = await this.isAuthenticated();
+    if (!authenticated) return true;
+    return this.router.parseUrl("/nav/home");
   }
 }

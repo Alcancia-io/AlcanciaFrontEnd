@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { LoadingController } from "@ionic/angular";
+
 import { DateTime } from "luxon";
 
 import { UserService } from "../../services/user.service";
@@ -20,7 +22,8 @@ export class LoginPage implements OnInit {
   constructor(
     private userService: UserService,
     private storage: StorageService,
-    private router: Router
+    private router: Router,
+    private loadingController: LoadingController
   ) { }
 
   ngOnInit() {
@@ -30,23 +33,32 @@ export class LoginPage implements OnInit {
       ),
       password: new FormControl(
         "", [Validators.required]
-      )
+      ),
+      rememberMe: new FormControl(false)
     });
   }
 
   async submit() {
+    const loading = await this.loadingController.create({
+      message: "Iniciando sesión..."
+    });
+    await loading.present();
+
     if (!this.loginForm.valid) return;
     try {
       const user = await this.userService.login(
         this.loginForm.get("email").value,
         this.loginForm.get("password").value
       );
-      this.storage.set("loginTimestamp", DateTime.now().toISO());
+      await this.storage.set("loginTimestamp", DateTime.now().toISO());
       this.storage.set("name", user.name);
       this.storage.set("surname", user.surname);
-      this.router.navigate(["/"]);
+      this.storage.set("rememberMe", this.loginForm.get("rememberMe").value);
+      await loading.dismiss();
+      this.router.navigate([""]);
     } catch (err) {
       // TODO: Add element with error messages
+      await loading.dismiss();
       console.error(err);
     }
   }

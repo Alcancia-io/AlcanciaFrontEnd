@@ -25,17 +25,20 @@ export class UserService {
         this.apollo.watchQuery({
           query: loginQuery,
           variables: { email, password }
-        }).valueChanges.subscribe(({data, error}) => {
-          if (error) return rej(error);
-          return res({ ...data["login"] as UserLogin });
-        }) ;
+        }).valueChanges.subscribe(
+          ({data, error}) => {
+            if (error) rej(error);
+            else res({ ...data["login"] as UserLogin });
+          },
+          error => rej(error)
+        ) ;
       });
 
     }
 
     async getUser(): Promise<any>{
       return await this.userRepository.getUser();
-    } 
+    }
 
     async updateCurrentUser(update: UserUpdate): Promise<any> { 
       return await this.userRepository.updateCurrentUser(update);
