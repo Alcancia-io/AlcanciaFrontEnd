@@ -1,0 +1,31 @@
+<div class="detail-transaction" *ngIf="transaction">
+	<h2>Detalle de la actividad</h2>
+	<div class="detail-transaction__item">
+		<span>Fecha</span><span>{{ transaction.createdAt }}</span>
+	</div>
+	<div class="detail-transaction__item">
+		<span>Id transacción</span><span>{{ transaction.transactionID }}</span>
+	</div>
+	<div class="detail-transaction__item">
+		<span>Valor de depósito</span>
+		<span
+			>$ {{ transaction.sourceAmount | number: '1.2-2' }}
+			{{ transaction.sourceAsset }}</span
+		>
+	</div>
+	<div class="detail-transaction__item">
+		<span>Valor USDC</span>
+		<span
+			>{{ transaction.amount | number: '1.2-2' }}
+			{{ transaction.targetAsset }}</span
+		>
+	</div>
+	<div class="detail-transaction__item">
+		<span>Comisión</span><span>To-do</span>
+	</div>
+	<div class="detail-transaction__item">
+		<span>Tipo de TXN</span><span>{{ transaction.type }}</span>
+	</div>
+	<a href="">Descargar detalle de la Actividad</a>
+	<app-oink-button buttonText="Cerrar" expand="block"></app-oink-button>
+</div>

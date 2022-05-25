@@ -11,12 +11,19 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AppCookieService } from '../../services/appcookie.service';
 import { TransactionService } from '../../services/transaction.service';
 import { SectionStorageService } from '../../services/sectionStorage.service';  
+import { Transaction, UserTransactionResponse } from '../../models/Transaction.model';
+
+
 @Component({
   selector: 'app-main-screen',
   templateUrl: './main-screen.page.html',
   styleUrls: ['./main-screen.page.scss'],
 })
+
 export class MainScreenPage implements OnInit { 
+  private querySubscription;
+	testTransaction: Transaction;
+
   aUsername;
   userId;
   aTotalInvestment: number = 0;
@@ -38,7 +45,14 @@ export class MainScreenPage implements OnInit {
 
   ngOnInit() { 
     this.doFetch();
-  }
+		this.fetchUserTransactions();
+	}
+
+	fetchUserTransactions() {
+		this.transactionService.getUserTransaction().subscribe(({ data, loading }) => {
+			this.testTransaction = data.getUserTransaction;
+		});
+	}
 
   //Everytime the page is opened this is runned 
   ionViewWillEnter() {
@@ -46,7 +60,6 @@ export class MainScreenPage implements OnInit {
   }
 
   async getUserData(){
-   
      this.aUsername = this.sectionStorageService.getData("Username"); 
      this.userId =  this.sectionStorageService.getData("UserId");
      await this.userService.getUserBalance(this.userId).then(userBalance => {
