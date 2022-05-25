@@ -32,13 +32,13 @@ const routes: Routes = [
       {
         path: 'edit-profile',
         loadChildren: () => import('../edit-profile/edit-profile.module').then( m => m.EditProfilePageModule),
-        canLoad: [AuthorizeGuard]
+        canActivate: [AuthorizeGuard]
       },
       {
         path: '',
         redirectTo: '/nav/home',
         pathMatch: 'full',
-        canLoad: [AuthorizeGuard]
+        canActivate: [AuthorizeGuard]
       }
     ]
   },
@@ -46,7 +46,7 @@ const routes: Routes = [
     path: '',
     redirectTo: '/nav/home',
     pathMatch: 'full',
-    canLoad: [AuthorizeGuard] 
+    canActivate: [AuthorizeGuard] 
   }
 ];
 

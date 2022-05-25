@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core'; 
-import { Router } from '@angular/router';
-import { AlertController, LoadingController, ToastController } from '@ionic/angular';
-import { AuthenticationService } from '../../services/authentication.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { LoadingController } from "@ionic/angular";
 
-//Local storage
-import { AppCookieService } from '../../services/appcookie.service';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
-import { StringLike } from '@firebase/util';
-import { loadingController } from '@ionic/core';
-import { FormGroup, Validators,FormBuilder, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { DateTime } from "luxon";
+
+import { UserService } from "../../services/user.service";
+import { StorageService } from "../../services/storage.service";
 
 @Component({
   selector: 'app-login',
@@ -17,85 +15,51 @@ import { FormGroup, Validators,FormBuilder, ReactiveFormsModule, FormControl } f
 })
 
 export class LoginPage implements OnInit {
- 
-  aUsername: string;
-  exform: FormGroup;
+
+  loginForm: FormGroup;
   resendEmailVerificationButton: boolean = false;
 
-  constructor( 
-    private authService: AuthenticationService,
-    private alertController: AlertController,
+  constructor(
+    private userService: UserService,
+    private storage: StorageService,
     private router: Router,
-    private loadingController: LoadingController,
-    private appCookie: AppCookieService,
-    private toastr:  ToastController,
-    private formBuilder: FormBuilder
+    private loadingController: LoadingController
   ) { }
 
-  public errorMessages = {
-    email: [
-      { type: 'required', message: 'Email es requerido' },
-      { type: 'pattern', message: 'El formato de email no es correcto'}
-    ],
-    password: [
-      { type: 'required', message: 'Una contraseña es requerida' }
-    ],
-  }
-
   ngOnInit() {
-    this.exform = new FormGroup({
-      'email': new FormControl(null, Validators.required),
-      'password': new FormControl(null,[Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'), Validators.minLength(8)] )
-    })
+    this.loginForm = new FormGroup({
+      email: new FormControl(
+        "", [Validators.required, Validators.email]
+      ),
+      password: new FormControl(
+        "", [Validators.required]
+      ),
+      rememberMe: new FormControl(false)
+    });
   }
 
+  async submit() {
+    const loading = await this.loadingController.create({
+      message: "Iniciando sesión..."
+    });
+    await loading.present();
 
-  forgot() {
-    this.router.navigate(['/forgot-password']);
-  }
-
-  singupPage() {
-    this.router.navigate(['/signup']);
-  }
-
-  async toast(message, status) {
-
-   const toast = await this.toastr.create({
-      message: message,
-      position: 'top',
-      color: status,
-      duration: 2000
-   });
-
-   toast.present();
-  }
-
-  async resendEmailVerification(){
-    this.authService.resendEmailConfirmation(this.exform.value.email, this.exform.value.password);
-  }
-
-  async login(){
-    if (this.exform.value.email && this.exform.value.password) {
-      const loading = await loadingController.create({
-          message: 'Iniciando Seccion...',
-          spinner: 'crescent',
-          showBackdrop: true
-      });
-
-      loading.present();
-
-      this.authService.login(this.exform.value.email, this.exform.value.password)
-          .then((response) => {  
-            this.resendEmailVerificationButton = !response.user.emailVerified; 
-            loading.dismiss();
-          })
-          .catch((error) => {
-            loading.dismiss();
-            this.toast(error.message, 'danger');
-          });
-    } else {
-      this.toast('Porfavor ingresar tu correo y contraseña', 'danger');
+    if (!this.loginForm.valid) return;
+    try {
+      const user = await this.userService.login(
+        this.loginForm.get("email").value,
+        this.loginForm.get("password").value
+      );
+      await this.storage.set("loginTimestamp", DateTime.now().toISO());
+      this.storage.set("name", user.name);
+      this.storage.set("surname", user.surname);
+      this.storage.set("rememberMe", this.loginForm.get("rememberMe").value);
+      await loading.dismiss();
+      this.router.navigate([""]);
+    } catch (err) {
+      // TODO: Add element with error messages
+      await loading.dismiss();
+      console.error(err);
     }
   }
-
 }
