@@ -4,12 +4,15 @@
 
 import { NgModule } from "@angular/core";
 import { ArrowButtonComponent } from "./arrow-button/arrow-button.component";
+import { OinkButtonComponent } from "./oink-button/oink-button.component";
 import { IonicModule } from '@ionic/angular';
+import { CommonModule } from "@angular/common";
+import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
 
 @NgModule({
-  imports: [IonicModule],
-  declarations: [ArrowButtonComponent],
-  exports: [ArrowButtonComponent]
+  imports: [IonicModule, CommonModule],
+  declarations: [ArrowButtonComponent, OinkButtonComponent, TransactionDetailComponent],
+  exports: [ArrowButtonComponent, OinkButtonComponent, TransactionDetailComponent]
 })
 
 export class ComponentsModule {}

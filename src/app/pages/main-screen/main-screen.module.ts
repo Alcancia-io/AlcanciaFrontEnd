@@ -8,6 +8,7 @@ import { MainScreenPageRoutingModule } from './main-screen-routing.module';
 
 import { MainScreenPage } from './main-screen.page';
 import { MainComponentsModule } from '../../components/main-components.module';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { MainComponentsModule } from '../../components/main-components.module';
     FormsModule,
     IonicModule,
     MainComponentsModule,
-    MainScreenPageRoutingModule
+    MainScreenPageRoutingModule,
+    ComponentsModule,
   ],
   declarations: [MainScreenPage]
 })
