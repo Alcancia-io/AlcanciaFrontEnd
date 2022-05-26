@@ -5,12 +5,12 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: 'oink-button.component.html',
   styleUrls: ['oink-button.component.scss'],
 })
-export class OinkButtonComponent implements OnInit {
-  @Input() expand: String;
-  @Input() routerLink: String;
+export class OinkButtonComponent {
+  @Input() expand: string;
+  @Input() disabled: boolean;
+  @Input() routerLink: string;
 
-  constructor() { }
-
-  ngOnInit() {
+  public onClick(event: Event) {
+    if (this.disabled) return event.stopPropagation();
   }
 }

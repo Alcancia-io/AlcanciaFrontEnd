@@ -8,6 +8,11 @@ import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
 
+/* COMPONENTS */
+import {
+  OinkButtonComponent
+} from "../../components/oink-button/oink-button.component";
+
 @NgModule({
   imports: [
     CommonModule,
@@ -16,6 +21,9 @@ import { LoginPage } from './login.page';
     LoginPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [LoginPage]
+  declarations: [
+    LoginPage,
+    OinkButtonComponent
+  ]
 })
 export class LoginPageModule {}

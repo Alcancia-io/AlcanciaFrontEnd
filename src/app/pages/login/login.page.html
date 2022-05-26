@@ -76,6 +76,11 @@
     </div>
 
     <div>
+      <oink-button
+      [disabled]="!loginForm.valid"
+      expand="block"
+      (click)="submit()"
+      class="oink-button">Iniciar sesión</oink-button>
       <ion-button
       [disabled]="!loginForm.valid"
       (click)="submit()"

@@ -22,10 +22,6 @@ const routes: Routes = [
         loadChildren: () => import('../swap/swap.module').then(m => m.SwapPageModule) 
       }, 
       {
-        path: 'paypalpaymentoptions',
-        loadChildren: () => import('../paypalpaymentoptions/paypalpaymentoptions.module').then(m => m.PaypalpaymentoptionsPageModule) 
-      },
-      {
         path: 'withdraw',
         loadChildren: () => import('../withdraw/withdraw.module').then(m => m.WithdrawPageModule) 
       },

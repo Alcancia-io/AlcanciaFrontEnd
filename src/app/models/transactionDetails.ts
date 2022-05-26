@@ -1,4 +1,5 @@
 export interface TransactionDetail
+
 {
     transactionId:string;
     Name:string;
@@ -6,6 +7,5 @@ export interface TransactionDetail
     Date:string;
     TotalAmount:number;
     NetAmount:number;
-    PaypalFee:number;
 }
 

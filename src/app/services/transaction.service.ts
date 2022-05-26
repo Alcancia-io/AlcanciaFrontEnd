@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { Subscription } from "rxjs";
-import { CreateOrder, ConfirmOrder } from "../models/paypalOrder";
 import { TransactionRepository } from "../repository/transaction.repository";
 import { WithDrawModel } from '../models/withdraw';
 import { Apollo } from 'apollo-angular';

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PaypalService } from 'src/app/services/paypal.service';  
 import { AlertController, LoadingController, ToastController } from '@ionic/angular';
-import { CreateOrder } from 'src/app/models/paypalOrder';
 import { Router } from '@angular/router';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { ExchangeService } from 'src/app/services/exchange.service'; 
@@ -37,7 +35,6 @@ export class SwapPage implements OnInit {
     private toastr:  ToastController,
     private alertController: AlertController, 
     private loadingController: LoadingController,
-    private PaypalService: PaypalService,
     private router: Router,
     private exchangeService: ExchangeService,
     private firestore: AngularFirestore,
@@ -100,36 +97,4 @@ export class SwapPage implements OnInit {
 
     }
   }
-
-  async createPaypalOrder( ){  
-    if (this.Amount && this.FromCurrencyCode !== "BTC" && this.ToCurrencyCode === "USD" && this.ExchangeTotal !== '0') {
- 
-      const loading = await this.loadingController.create({
-          message: 'Realizando Deposito!',
-          spinner: 'crescent',
-          showBackdrop: true
-      });
-
-      loading.present();
-      const newPaypalOrder = new CreateOrder();
-      newPaypalOrder.amount = Number.parseFloat(this.originAmout.toString()).toFixed(2);
-      console.log(newPaypalOrder.amount)
-      newPaypalOrder.currency_code = this.ToCurrencyCode;
-    
-      this.router.navigate(['/nav/paypalpaymentoptions'], {state: {data: {newPaypalOrder}}});
-      this.Amount = 0;
-      this.FromCurrencyCode = ''; 
-      this.ExchangeTotal = ''; 
-      loading.dismiss();
-    } else if (this.Amount && this.FromCurrencyCode === "BTC" && this.ToCurrencyCode ) {
-       this.router.navigate(['/bitcoin-deposit'], { replaceUrl:true });
-      
-    } else {
-      this.toast('Porfavor seleccionar el tipo de moneda y el monto', 'danger'); 
-    }
-
-    
-  }
-
-
 }
