@@ -8,6 +8,11 @@ import { WelcomePageRoutingModule } from './welcome-routing.module';
 
 import { WelcomePage } from './welcome.page';
 
+/* COMPONENTS */
+import { 
+  OinkButtonComponent 
+} from "../../components/oink-button/oink-button.component";
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +20,9 @@ import { WelcomePage } from './welcome.page';
     IonicModule,
     WelcomePageRoutingModule
   ],
-  declarations: [WelcomePage]
+  declarations: [
+    WelcomePage,
+    OinkButtonComponent
+  ]
 })
 export class WelcomePageModule {}
