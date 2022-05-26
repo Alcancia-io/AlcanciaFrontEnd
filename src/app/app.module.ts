@@ -30,6 +30,9 @@ import { UniversalAppInterceptor } from './UniversalAppInterceptor';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { GraphQLModule } from './graphql.module';
 
+/* COMPONENTS */
+import { ComponentsModule } from "./components/components.module";
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,6 +40,7 @@ import { GraphQLModule } from './graphql.module';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    ComponentsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

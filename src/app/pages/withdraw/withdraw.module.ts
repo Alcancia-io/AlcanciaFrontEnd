@@ -7,8 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { WithdrawPageRoutingModule } from './withdraw-routing.module';
 
 import { WithdrawPage } from './withdraw.page';
-import { ComponentsModule } from 'src/app/components/components.module';
-import { MainComponentsModule } from 'src/app/components/main-components.module';
 
 @NgModule({
   imports: [
@@ -16,8 +14,6 @@ import { MainComponentsModule } from 'src/app/components/main-components.module'
     FormsModule,
     IonicModule, 
     ReactiveFormsModule,
-    MainComponentsModule,
-    ComponentsModule,
     WithdrawPageRoutingModule
   ],
   declarations: [WithdrawPage]

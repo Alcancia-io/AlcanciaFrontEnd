@@ -8,15 +8,12 @@ import { PaypalpaymentoptionsPageRoutingModule } from './paypalpaymentoptions-ro
 
 import { PaypalpaymentoptionsPage } from './paypalpaymentoptions.page';
 
-import { MainComponentsModule } from 'src/app/components/main-components.module';
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PaypalpaymentoptionsPageRoutingModule,
-    MainComponentsModule
+    PaypalpaymentoptionsPageRoutingModule
   ],
   declarations: [PaypalpaymentoptionsPage]
 })

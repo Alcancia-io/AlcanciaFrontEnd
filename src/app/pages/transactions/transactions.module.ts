@@ -8,15 +8,12 @@ import { TransactionsPageRoutingModule } from './transactions-routing.module';
 
 import { TransactionsPage } from './transactions.page';
 
-import { MainComponentsModule } from 'src/app/components/main-components.module';
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TransactionsPageRoutingModule,
-    MainComponentsModule
+    TransactionsPageRoutingModule
   ],
   declarations: [TransactionsPage]
 })

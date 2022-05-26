@@ -1,2 +1,3 @@
-<ion-button [expand]="expand" class="oink-button">{{ buttonText }}</ion-button>
-<app-transaction></app-transaction>
+<ion-button [expand]="expand" class="oink-button">
+  <ng-content></ng-content>
+</ion-button>
