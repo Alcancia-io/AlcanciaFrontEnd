@@ -1,0 +1,34 @@
+<div class="txn-list-item">
+	<div class="txn-list-item__flex-container">
+		<span class="txn-list-item__icon">
+			<img
+				src="../../../assets/alcancia-icons/withdraw.svg"
+				alt="deposito"
+				*ngIf="transaction.type == 'WITHDRAW'; else depositIcon"
+			/>
+			<ng-template #depositIcon>
+				<img src="../../../assets/alcancia-icons/deposit.svg" alt="retiro" />
+			</ng-template>
+		</span>
+		<div class="ion-text-left">
+			<p>{{ transaction.type | transactionType }}</p>
+			<p>{{ transaction.createdAt }}</p>
+		</div>
+	</div>
+	<div class="txn-list-item__flex-container">
+		<div class="ion-text-right">
+			<p>
+				<ng-container *ngIf="transaction.type === 'WITHDRAW'; else minusSymbol">-</ng-container>
+				<ng-template #minusSymbol>+</ng-template>
+				{{ transaction.amount | number: '1.2-2' | currency }}
+			</p>
+			<p>{{ transaction.sourceAmount | number: '1.2-2' | currency }} {{ transaction.sourceAsset }}</p>
+		</div>
+		<span class="txn-list-item__arrow-icon">
+			<img
+				src="../../../assets/alcancia-icons/vertical-arrow.svg"
+				alt="retiro"
+			/>
+		</span>
+	</div>
+</div>

@@ -9,6 +9,7 @@ import { MainScreenPageRoutingModule } from './main-screen-routing.module';
 import { MainScreenPage } from './main-screen.page';
 import { MainComponentsModule } from '../../components/main-components.module';
 import { ComponentsModule } from '../../components/components.module';
+import { TabsBarPage } from '../../pages/tabs-bar/tabs-bar.page';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { ComponentsModule } from '../../components/components.module';
     MainScreenPageRoutingModule,
     ComponentsModule,
   ],
-  declarations: [MainScreenPage]
+  declarations: [MainScreenPage, TabsBarPage]
 })
 export class MainScreenPageModule {}

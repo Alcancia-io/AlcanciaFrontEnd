@@ -59,11 +59,6 @@ const routes: Routes = [
   //   canLoad: [AuthorizeGuard]
   // },
   {
-    path: 'tabbar',
-    loadChildren: () => import('./pages/tab-bar/tab-bar.module').then(m => m.TabBarPageModule),
-    canLoad: [AuthorizeGuard, RecoverUserGuard]
-  },
-  {
     path: 'paymenterror',
     loadChildren: () => import('./pages/paymenterror/paymenterror.module').then( m => m.PaymenterrorPageModule),
     canLoad: [AuthorizeGuard, RecoverUserGuard]
@@ -81,12 +76,17 @@ const routes: Routes = [
     path: 'whitepaper',
     loadChildren: () => import('./pages/whitepaper/whitepaper.module').then( m => m.WhitepaperPageModule)
   },
+  //{
+  //  path: '',
+  //  loadChildren: () => import('./pages/sidenav/sidenav.module').then( m => m.SidenavPageModule),
+  //  // TODO: Toggle comment below to reenable guard
+  //  //canLoad: [AuthorizeGuard, RecoverUserGuard]
+  //},
   {
     path: '',
-    loadChildren: () => import('./pages/sidenav/sidenav.module').then( m => m.SidenavPageModule),
-    // TODO: Toggle comment below to reenable guard
-    //canLoad: [AuthorizeGuard, RecoverUserGuard]
-  }
+    loadChildren: () => import('./pages/tabs-bar/tabs-bar.module').then( m => m.TabsBarPageModule),
+    canLoad: [NegateAuthorizeGuard]
+  },
 ];
 
 @NgModule({

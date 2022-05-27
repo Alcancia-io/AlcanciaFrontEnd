@@ -1,8 +1,8 @@
 import { gql } from 'apollo-angular';
 
-export const getUserTransaction = gql`
-	query($transactionId: ID!, $userId: ID!){
-		getUserTransaction(transactionId: $transactionId, userId,: $userId) {
+export const getAllUserTransactions = gql`
+	query($userId: ID!){
+		getAllUserTransactions(userId: $userId) {
 			createdAt,
 			transactionID,
 			sourceAmount,

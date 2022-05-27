@@ -24,7 +24,7 @@
 		<span>Comisión</span><span>To-do</span>
 	</div>
 	<div class="detail-transaction__item">
-		<span>Tipo de TXN</span><span>{{ transaction.type }}</span>
+		<span>Tipo de TXN</span><span>{{ transaction.type | transactionType }}</span>
 	</div>
 	<a href="">Descargar detalle de la Actividad</a>
 	<app-oink-button buttonText="Cerrar" expand="block"></app-oink-button>
