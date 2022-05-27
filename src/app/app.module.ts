@@ -7,6 +7,7 @@ import { AngularDelegate, IonicModule, IonicRouteStrategy } from '@ionic/angular
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Drivers } from "@ionic/storage";
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -44,7 +45,8 @@ import { GraphQLModule } from './graphql.module';
     AngularFirestoreModule,
     ReactiveFormsModule,
     IonicStorageModule.forRoot({
-      name: "AlcanciaLocalStorage"
+      name: "AlcanciaLocalStorage",
+      driverOrder: [Drivers.IndexedDB, Drivers.LocalStorage]
     }),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,

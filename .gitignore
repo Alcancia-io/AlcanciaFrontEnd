@@ -27,3 +27,4 @@ plugins/ios.json
 temp/
 tmp/
 www/
+.angular/cache

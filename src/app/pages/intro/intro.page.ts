@@ -25,7 +25,7 @@ export class IntroPage implements OnInit {
   }
  
   async start() {
-    await this.storageService.addData({key: INTRO_KEY, value: 'true'}, INTRO_KEY);
+    await this.storageService.set(INTRO_KEY, true);
     this.router.navigateByUrl('/signup', { replaceUrl:true });
   }
 }

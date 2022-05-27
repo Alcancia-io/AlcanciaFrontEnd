@@ -13,3 +13,10 @@ export interface UserUpdate {
   surname: string;
 }
 
+export interface UserLogin {
+  name: string;
+  surname: string;
+  onboarded?: boolean;
+}
+
+

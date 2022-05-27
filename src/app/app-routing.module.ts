@@ -7,42 +7,10 @@ import { RecoverUserGuard } from './guards/recoveruser.guard';
 
 const routes: Routes = [
   {
-    path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
-    // canLoad: [IntroGuard], //Checking if we should show the introduction or forward to inside.
-    canLoad: [NegateAuthorizeGuard]
-  },
-  {
-    path: 'signup',
-    loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule),
-    canLoad: [NegateAuthorizeGuard]
-  },
-  {
-    path: 'intro',
-    loadChildren: () => import('./pages/intro/intro.module').then( m => m.IntroPageModule),
-    canLoad: [NegateAuthorizeGuard]
-  },
-  {
-    path: 'forgot-password',
-    loadChildren: () => import('./pages/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule),
-    canLoad: [NegateAuthorizeGuard]
-  },
-  {
     path: 'welcome',
     loadChildren: () => import('./pages/welcome/welcome.module').then( m => m.WelcomePageModule),
-    canLoad: [NegateAuthorizeGuard]
+    canActivate: [NegateAuthorizeGuard]
   },
-  // {
-  //   path: '',
-  //   redirectTo: '/login',
-  //   pathMatch: 'full'
-  // },
-  
-  // {
-  //   path: 'swap',
-  //   loadChildren: () => import('./pages/swap/swap.module').then( m => m.SwapPageModule),
-  //   canLoad: [SwapGuard,AuthorizeGuard]
-  // },
   {
     path: 'bitcoin-deposit',
     loadChildren: () => import('./pages/bitcoin-deposit/bitcoin-deposit.module').then( m => m.BitcoinDepositPageModule),
@@ -73,8 +41,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/withdraw/successfulrequest/successfulrequest.module').then( m => m.SuccessfulrequestPageModule)
   },
   {
-    path: 'whitepaper',
-    loadChildren: () => import('./pages/whitepaper/whitepaper.module').then( m => m.WhitepaperPageModule)
+    path: 'signup',
+    loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule),
+    canActivate: [NegateAuthorizeGuard]
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
+    canActivate: [NegateAuthorizeGuard]
   },
   //{
   //  path: '',
@@ -85,7 +59,6 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./pages/tabs-bar/tabs-bar.module').then( m => m.TabsBarPageModule),
-    canLoad: [NegateAuthorizeGuard]
   },
 ];
 
