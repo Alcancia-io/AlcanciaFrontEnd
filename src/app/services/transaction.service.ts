@@ -6,8 +6,8 @@ import { WithDrawModel } from '../models/withdraw';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 
-import { Transaction, UserTransactionResponse } from '../models/Transaction.model';
-import { getUserTransaction } from '../graphql/queries';
+import { Transaction } from '../models/Transaction.model';
+import { getAllUserTransactions } from '../graphql/queries';
 
 
 @Injectable({
@@ -20,11 +20,10 @@ export class TransactionService {
 		private apollo: Apollo
     ){  }
 
-		getUserTransaction() {
-			return this.apollo.watchQuery<UserTransactionResponse>({
-				query: getUserTransaction,
+		getAllUserTransactions() {
+			return this.apollo.watchQuery<Transaction>({
+				query: getAllUserTransactions,
 				variables: {
-					transactionId: "Np9zDuxc9BJAIOChTSo3",
 					userId: "MMHoNsa1JxhB4hWN2sHGRb4ir4m2"
 				}
 			}).valueChanges;

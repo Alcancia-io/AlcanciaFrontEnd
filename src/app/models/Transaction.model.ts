@@ -7,7 +7,3 @@ export interface Transaction {
 	amount: number;
 	type: string;
 }
-
-export interface UserTransactionResponse {
-	getUserTransaction: Transaction;
-}

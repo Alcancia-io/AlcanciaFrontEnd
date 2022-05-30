@@ -1,0 +1,19 @@
+<ng-container *ngIf="userTransactions">
+	<ion-content>
+		<div *ngIf="showTransactionModal else transactionList">
+			<app-transaction-detail [transaction]="currentTransaction"></app-transaction-detail>
+		</div>
+		<ng-template #transactionList>
+			<ion-infinite-scroll>
+				<ion-list class="ion-margin">
+					<app-transaction-list-item
+						*ngFor="let transaction of userTransactions"
+						[transaction]="transaction"
+						(click)="toggleTransactionModal(transaction)"
+					>
+					</app-transaction-list-item>
+				</ion-list>
+			</ion-infinite-scroll>
+		</ng-template>
+	</ion-content>
+</ng-container>

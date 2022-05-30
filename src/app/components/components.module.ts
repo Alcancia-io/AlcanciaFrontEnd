@@ -8,11 +8,24 @@ import { OinkButtonComponent } from "./oink-button/oink-button.component";
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from "@angular/common";
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
+import { TransactionListItemComponent } from './transaction-list-item/transaction-list-item.component';
+import { TransactionTypePipe } from '../pipes/transaction-type.pipe';
 
 @NgModule({
   imports: [IonicModule, CommonModule],
-  declarations: [ArrowButtonComponent, OinkButtonComponent, TransactionDetailComponent],
-  exports: [ArrowButtonComponent, OinkButtonComponent, TransactionDetailComponent]
+  declarations: [
+		ArrowButtonComponent,
+		OinkButtonComponent,
+		TransactionDetailComponent,
+		TransactionListItemComponent,
+		TransactionTypePipe
+	],
+  exports: [
+		ArrowButtonComponent,
+		OinkButtonComponent,
+		TransactionDetailComponent,
+		TransactionListItemComponent
+	]
 })
 
 export class ComponentsModule {}
