@@ -1,8 +1,11 @@
-<ion-button
-  [routerLink]="routerLink"
+<button
   [expand]="expand"
   [disabled]="disabled"
-  (click)="onClick($event)"
+  [routerLink]="routerLink"
+  [ngClass]="{
+    'expand-block': expandLower() === 'block',
+    'expand-full': expandLower() === 'full'
+  }"
   class="oink-button">
   <ng-content></ng-content>
-</ion-button>
+</button>

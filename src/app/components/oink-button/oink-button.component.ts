@@ -1,4 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  EventEmitter,
+  Component,
+  OnInit,
+  Input,
+  Output,
+  HostListener
+} from '@angular/core';
 
 @Component({
   selector: 'oink-button',
@@ -6,11 +13,11 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['oink-button.component.scss'],
 })
 export class OinkButtonComponent {
-  @Input() expand: string;
   @Input() disabled: boolean;
+  @Input() expand: string;
   @Input() routerLink: string;
 
-  public onClick(event: Event) {
-    if (this.disabled) return event.stopPropagation();
+  expandLower() {
+    return this.expand.toLowerCase();
   }
 }

@@ -23,7 +23,6 @@ class AbstractAuthGuard {
   ){}
   async isAuthenticated() {
       const _loginTimestamp = await this.storage.get("loginTimestamp");
-      console.debug(_loginTimestamp);
       if (!_loginTimestamp) return false;
       const rememberMe = await this.storage.get("rememberMe");
       const loginTimestamp = DateTime.fromISO(_loginTimestamp);
