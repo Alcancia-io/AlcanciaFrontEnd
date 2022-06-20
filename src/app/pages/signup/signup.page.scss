@@ -1,53 +1,19 @@
-ion-content{
-  position: absolute;
-  text-align: center;
+@mixin fade-down {
+  animation-name: fade-down;
+  animation-delay: 0s;
+  animation-duration: .4s;
+  animation-fill-mode: backwards;
+  animation-timing-function: ease-in-out;
 }
-
-ion-grid{
-  width: 100%;
+.oink-fullscreen {
+  $horizontal-padding: 2.7rem;
+  padding-top: 1.25rem;
+  padding-bottom: 2.1875rem;
+  padding-right: $horizontal-padding;
+  padding-left: $horizontal-padding;
 }
-.welcome-msg{
-  position: relative;
-  text-align: left;
-  font-size: 30px;
+.oink-icon-logo {
+  width: 25.64vw;
+  margin-right: auto;
+  margin-left: auto;
 }
-.button-action{
-  position: relative;
-  text-align: left;
-}
-
-.perfile-pic{
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color:#3554C4;
-  float: right; 
-}
- 
-ion-item{ --highlight-color-valid: #3554C4; }
-.item-content{
-  --ion-item-background:#121212; 
-}
- 
-
-.arrow-btn{
-  float: right;
-  margin: 25px;
-}
-
-ion-row{
-  display: block;
-  margin: auto;
-  width: 50%;
-}
-
-.register{ 
-  border-bottom: solid 3.5px #3554C4;
-} 
-
-@media only screen and (max-width: 960px) {
-  ion-row{
-    display: inline;
-  }
-}
-

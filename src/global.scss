@@ -25,6 +25,11 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+/* Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: "Gotham";
   font-style: normal;
@@ -111,13 +116,16 @@ h2 {
   --inner-padding-top: $vertical-padding;
   --inner-padding-bottom: $vertical-padding;
 }
-.oink-input {
+.oink-input, .oink-select {
   $vertical-margin: .2em;
   --background: var(--oink-input-background);
+  background: var(--oink-input-background);
   margin-top: $vertical-margin;
   margin-bottom: $vertical-margin;
   border-radius: 0.25rem;
   box-shadow: 0 0 0.375rem #313131A3;
+  padding-left: 1em;
+  padding-right: 1em;
 
   &.sc-ion-input-ios-h {
     --padding-start: 1em;
@@ -126,6 +134,11 @@ h2 {
 
   &.oink-error {
     border: 2px var(--ion-color-danger) solid;
+  }
+
+  &.square {
+    width: 2em;
+    height: 2em;
   }
 
 }

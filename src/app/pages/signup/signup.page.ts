@@ -15,9 +15,8 @@ import { FormGroup, Validators,FormBuilder, ReactiveFormsModule, FormControl } f
 })
 export class SignupPage implements OnInit {
 
+  signupForm: FormGroup;
   passwordMatch: boolean;
-  
-  exform: FormGroup;
 
   constructor(
     private afs: AngularFirestore,
@@ -55,9 +54,9 @@ export class SignupPage implements OnInit {
 
   ngOnInit() {
     
-    this.exform = new FormGroup({
-      'name': new FormControl(null, Validators.required),
-      'surname': new FormControl(null, Validators.required),
+    this.signupForm = new FormGroup({
+      'name': new FormControl("", Validators.required),
+      'surname': new FormControl("", Validators.required),
       'email': new FormControl(null, [Validators.required, Validators.email]),
       'password': new FormControl(null, [Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'), Validators.minLength(8)]),
       'confirmPassword': new FormControl(null,[Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'), Validators.minLength(8)]),
@@ -66,7 +65,7 @@ export class SignupPage implements OnInit {
 
   
   async signup(){
-    if (this.exform.value.name && this.exform.value.email && this.exform.value.password) {
+    if (this.signupForm.value.name && this.signupForm.value.email && this.signupForm.value.password) {
       const loading = await this.loadingCtrl.create({
         message: 'Loading...',
         spinner: 'crescent',
@@ -75,13 +74,13 @@ export class SignupPage implements OnInit {
 
       loading.present();
 
-      this.fireAuth.createUserWithEmailAndPassword(this.exform.value.email, this.exform.value.password).then((resp) => {
+      this.fireAuth.createUserWithEmailAndPassword(this.signupForm.value.email, this.signupForm.value.password).then((resp) => {
         const currentDate = new Date(); 
         this.afs.collection('users').doc(resp.user.uid).set({
           'userId': resp.user.uid,
-          'name': this.exform.value.name,
-          'surname': this.exform.value.surname,
-          'email': this.exform.value.email,  
+          'name': this.signupForm.value.name,
+          'surname': this.signupForm.value.surname,
+          'email': this.signupForm.value.email,  
           'swapScreenLoaded': false,
           'lastDateUpdatedBalance': new Date(),
           'balance': 0,
@@ -108,7 +107,7 @@ export class SignupPage implements OnInit {
   // }
 
   checkPassword() { 
-    if(this.exform.value.password === this.exform.value.confirmPassword) {
+    if(this.signupForm.value.password === this.signupForm.value.confirmPassword) {
       this.passwordMatch = false;
     } else {
       this.passwordMatch = true;

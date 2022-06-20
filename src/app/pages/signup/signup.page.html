@@ -1,85 +1,157 @@
-<ion-content class="ion-padding">
-        <ion-grid>
-          <ion-row >
-            <ion-col size="auto">
-              <div class="button-action">
-                <ion-button fill="clear" color="dark" size="small" name="login" (click)="loginPage()">
-                  <p>Login</p>
-                </ion-button>
-                <ion-button fill="clear" color="dark" size="small" name="register">
-                   <p class="register"><b>Regístrate</b></p> 
-                </ion-button>
-                <div class="perfile-pic"></div>
-              </div>
-            </ion-col>
-            <ion-col size="auto">
-              <ion-card-header class="welcome-msg">
-                <div>
-                  <!-- class="welcome-msg" -->
-                  Hola <b>Usuario,</b> <br>
-                  <small>Ingresa la información que se pide en los campos debajo.</small>
-                </div>
-              </ion-card-header>
-            </ion-col>
-            <ion-col size="auto">
-              <ion-card-content> 
-                <form [formGroup]="exform">
-                  <ion-item class="item-content form-group"> 
-                    <ion-input formControlName="name" position="floating" placeholder="Nombre" type="text" (keyup.enter)="signup()"></ion-input>
-                  </ion-item>
-                  <div *ngFor="let error of errorMessages.name">
-                    <ng-container *ngIf="exform.get('name').hasError(error.type) && (exform.get('name').dirty || exform.get('name').touched)">
-                      <small class="error-message">{{error.message}}</small>
-                    </ng-container>
-                  </div><br/><br/>
-                  <ion-item class="item-content form-group"> 
-                    <ion-input formControlName="surname" position="floating" placeholder="Apellidos" type="text" (keyup.enter)="signup()"></ion-input>
-                  </ion-item>
-                  <div *ngFor="let error of errorMessages.surname">
-                    <ng-container *ngIf="exform.get('surname').hasError(error.type) && (exform.get('surname').dirty || exform.get('surname').touched)">
-                      <small class="error-message">{{error.message}}</small>
-                    </ng-container>
-                  </div>
-                  <br/>
-                  <br/>
-                  <ion-item class="item-content">
-                    <ion-input formControlName="email" position="floating" placeholder="Correo electrónico" type="text" (keyup.enter)="signup()"></ion-input>
-                  </ion-item>
-                  <div *ngFor="let error of errorMessages.email">
-                    <ng-container *ngIf="exform.get('email').hasError(error.type) && (exform.get('email').dirty || exform.get('email').touched)">
-                      <small class="error-message">{{error.message}}</small>
-                    </ng-container>
-                  </div>
-                  <br/>
-                  <br/>
-                  <ion-item class="item-content">
-                    <ion-input formControlName="password" position="floating" placeholder="Contraseña" type="password" (keyup.enter)="signup()"></ion-input>
-                  </ion-item> 
-                  <div *ngFor="let error of errorMessages.password">
-                    <ng-container *ngIf="exform.get('password').hasError(error.type) && (exform.get('password').dirty || exform.get('password').touched)">
-                      <small class="error-message">{{error.message}}</small>
-                    </ng-container>
-                  </div>
-                   
-                  <br/>
-                  <br/>
-                  <ion-item class="item-content">
-                    <ion-input  formControlName="confirmPassword" position="floating" placeholder="Repite tu contraseña" type="password"  (ionChange)="checkPassword()" (keyup.enter)="signup()"></ion-input>
-                  </ion-item> 
-                  <div *ngFor="let error of errorMessages.confirmPassword">
-                    <ng-container *ngIf="exform.get('confirmPassword').hasError(error.type) && (exform.get('confirmPassword').dirty || exform.get('confirmPassword').touched)">
-                      <small class="error-message">{{error.message}}</small>
-                    </ng-container>
-                  </div>
-                </form> 
-              </ion-card-content>
-            </ion-col>
-            <ion-col size="auto">
-              <div>
-                <ion-text *ngIf="passwordMatch" color="danger" >La constraseña no coincide!</ion-text>
-                <app-arrow-button class="arrow-btn" expand="block" shape="round" color="warning" (click)="signup()" (keyup.enter)="signup()"></app-arrow-button>
-              </div>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+<ion-content>
+  <div class="oink-fullscreen ion-justify-content-between">
+    <img class="oink-icon-logo" src="/assets/alcancia_white_icon.png"/>
+
+    <div>
+      <div>
+        <h1 i18n>¡Hola!</h1>
+        <p>Completa la siguiente información para crear tu cuenta:</p>
+      </div>
+      <form [formGroup]="signupForm">
+        <ion-item mode="ios" lines="none" class="oink-item">
+          <ion-label position="stacked">
+            <span class="oink-label">Nombre(s)</span>
+          </ion-label>
+          <ion-input
+            formControlName="name"
+            type="text"
+            [ngClass]="{
+              'oink-error':
+                !signupForm.get('name').valid
+                && signupForm.get('name').touched
+            }"
+            class="oink-input"></ion-input>
+          <ion-note
+          slot="error"
+          *ngIf="!signupForm.get('name').valid">
+            <span i18n *ngIf="
+              signupForm.get('name').errors.required
+              && signupForm.get('name').touched">
+              Este campo es obligatorio
+            </span>
+          </ion-note>
+        </ion-item>
+        <ion-item mode="ios" lines="none" class="oink-item">
+          <ion-label position="stacked">
+            <span class="oink-label">Apellido(s)</span>
+          </ion-label>
+          <ion-input
+            formControlName="surname"
+            type="text"
+            [ngClass]="{
+              'oink-error':
+                !signupForm.get('surname').valid
+                && signupForm.get('surname').touched
+            }"
+            class="oink-input"></ion-input>
+          <ion-note
+          slot="error"
+          *ngIf="!signupForm.get('surname').valid">
+            <span i18n *ngIf="
+              signupForm.get('surname').errors.required
+              && signupForm.get('surname').touched">
+              Este campo es obligatorio
+            </span>
+          </ion-note>
+        </ion-item>
+        <ion-item mode="ios" lines="none" class="oink-item">
+          <ion-label position="stacked">
+            <span class="oink-label">Celular</span>
+          </ion-label>
+          <div class="flex">
+            <ion-select class="oink-select square flex-none">
+              <ion-select-option value="52">🇲🇽 +52</ion-select-option>
+              <ion-select-option value="1">🇩🇴 +1</ion-select-option>
+              <ion-select-option value="1">🇨🇴 +57</ion-select-option>
+            </ion-select>
+            <ion-input
+              class="flex-initial"
+              formControlName="surname"
+              type="tel"
+              [ngClass]="{
+                'oink-error':
+                  !signupForm.get('surname').valid
+                  && signupForm.get('surname').touched
+              }"
+              class="oink-input"></ion-input>
+            <ion-note
+              class="flex-none"
+            slot="error"
+            *ngIf="!signupForm.get('surname').valid">
+              <span i18n *ngIf="
+                signupForm.get('surname').errors.required
+                && signupForm.get('surname').touched">
+                Este campo es obligatorio
+              </span>
+            </ion-note>
+          </div>
+        </ion-item>
+        <ion-item mode="ios" lines="none" class="oink-item">
+          <ion-label position="stacked">
+            <span class="oink-label">Género</span>
+          </ion-label>
+          <ion-select class="oink-select">
+            <ion-select-option value="female">Mujer</ion-select-option>
+            <ion-select-option value="male">Hombre</ion-select-option>
+            <ion-select-option value="nonbinary">No binario</ion-select-option>
+            <ion-select-option value="other">Otro</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item mode="ios" lines="none" class="oink-item">
+          <ion-label position="stacked">
+            <span class="oink-label">Contraseña</span>
+          </ion-label>
+          <ion-input
+            formControlName="password"
+            type="password"
+            [ngClass]="{
+              'oink-error':
+                !signupForm.get('password').valid
+                && signupForm.get('password').touched
+            }"
+            class="oink-input"></ion-input>
+          <ion-note
+          slot="error"
+          *ngIf="!signupForm.get('password').valid">
+            <span i18n *ngIf="
+              signupForm.get('password').errors.required
+              && signupForm.get('password').touched">
+              Este campo es obligatorio
+            </span>
+          </ion-note>
+        </ion-item>
+        <ion-item mode="ios" lines="none" class="oink-item">
+          <ion-label position="stacked">
+            <span class="oink-label">Confirmar Contraseña</span>
+          </ion-label>
+          <ion-input
+            formControlName="confirmPassword"
+            type="password"
+            [ngClass]="{
+              'oink-error':
+                !signupForm.get('confirmPassword').valid
+                && signupForm.get('confirmPassword').touched
+            }"
+            class="oink-input"></ion-input>
+          <ion-note
+          slot="error"
+          *ngIf="!signupForm.get('confirmPassword').valid">
+            <span i18n *ngIf="
+              signupForm.get('confirmPassword').errors.required
+              && signupForm.get('confirmPassword').touched">
+              Este campo es obligatorio
+            </span>
+          </ion-note>
+        </ion-item>
+      </form>
+    </div>
+
+    <div>
+      <oink-button
+      [disabled]="!signupForm.valid"
+      expand="block"
+      (click)="submit()"
+      >Siguiente</oink-button>
+    </div>
+  </div>
 </ion-content>
